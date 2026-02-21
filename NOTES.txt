@@ -1,0 +1,4 @@
+- archived/: Completed work
+- published/: Final versions
+- project_ideas/: Exploring new ideas
+- outbound/: Content ready to share
