@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dungeon Dash — UI harness</title>
+<!-- Local copies of the Google Fonts (written by tests/ui.shot.mjs; empty file when offline). -->
+<link rel="stylesheet" href="out/ui-fonts.css">
+<link rel="stylesheet" href="../src/style.css">
+</head>
+<body>
+<div id="app"></div>
+<script src="../src/js/core.js"></script>
+<script src="../src/js/data.js"></script>
+<script src="../src/js/state.js"></script>
+<script src="../src/js/sprites.js"></script>
+<script src="ui.stubs.js"></script>
+<script>
+  // ?render=0 skips the real renderer (the stub then paints a plain backdrop).
+  if (!/[?&]render=0/.test(location.search)) document.write('<script src="../src/js/render.js"><\/script>');
+</script>
+<script src="../src/js/ui.js"></script>
+<script>
+  (function () {
+    'use strict';
+    const DD = window.DD;
+    const params = new URLSearchParams(location.search);
+    try {
+      localStorage.removeItem('dungeon-dash-save-v1');
+    } catch {
+      /* storage blocked */
+    }
+    if (DD.sprites && DD.sprites.init) DD.sprites.init();
+    UIH.scenario(params.get('scenario') || 'mid');
+    DD.ui.init(document.getElementById('app'));
+    if (DD.render && DD.render.init) DD.render.init(document.getElementById('battle-canvas'));
+    UIH.scenario(params.get('scenario') || 'mid');
+    let last = performance.now();
+    function loop(ts) {
+      const dt = Math.min(0.1, Math.max(0, (ts - last) / 1000));
+      last = ts;
+      try {
+        DD.battle.update(dt);
+        if (DD.render && DD.render.draw) DD.render.draw(DD.battle.frozen ? 0.0001 : dt);
+        DD.ui.frame(dt);
+      } catch (err) {
+        console.error('[harness] frame failed', err);
+      }
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+    window.__ready = true;
+  })();
+</script>
+</body>
+</html>

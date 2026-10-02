@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>render harness</title>
+<link rel="icon" href="data:,">
+<style>
+  @font-face { font-family: 'Pixelify Sans'; src: url('out/pixelify.woff2') format('woff2'); font-weight: 400 700; }
+  html, body { margin: 0; background: #0b0710; color: #ddd; font: 12px ui-monospace, monospace; }
+  #wrap { width: 100%; max-width: 960px; margin: 0 auto; }
+  canvas { display: block; width: 100%; aspect-ratio: 360 / 200; touch-action: manipulation; }
+</style>
+</head>
+<body>
+<div id="wrap"><canvas id="battle-canvas"></canvas></div>
+<script>
+  // Harness bookkeeping: sprites.js is written in parallel; record (don't surface) its load errors.
+  window.__spriteLoadError = null;
+  window.addEventListener('error', function (e) {
+    if (e && e.filename && /sprites\.js/.test(e.filename)) {
+      window.__spriteLoadError = String(e.message);
+      e.preventDefault();
+    }
+  }, true);
+</script>
+<script src="../src/js/core.js"></script>
+<script src="../src/js/sprites.js" onerror="window.__spriteLoadError = 'missing'"></script>
+<script>
+(function (DD) {
+  'use strict';
+  const Q = new URLSearchParams(location.search);
+  const LIVE = Q.get('live') === '1';
+
+  // ---------------------------------------------------------------- sprites stub (only if needed)
+  if (!DD.sprites || typeof DD.sprites.anim !== 'function') {
+    const cache = {};
+    DD.sprites = {
+      init() {},
+      size() { return { w: 16, h: 16 }; },
+      anim(name) {
+        if (cache[name]) return cache[name];
+        const c = document.createElement('canvas');
+        c.width = 16; c.height = 18;
+        const g = c.getContext('2d');
+        let h = 0; for (const ch of String(name)) h = (h * 31 + ch.charCodeAt(0)) % 360;
+        g.fillStyle = 'hsl(' + h + ',55%,50%)'; g.fillRect(1, 2, 14, 16);
+        g.fillStyle = '#fff'; g.fillRect(3, 6, 2, 2); g.fillRect(11, 6, 2, 2);
+        return (cache[name] = c);
+      },
+      flashed(c) { return c; },
+    };
+    window.__spriteStub = true;
+  }
+  try { DD.sprites.init(); } catch (e) { window.__spriteLoadError = 'init: ' + e.message; }
+
+  if (LIVE) return; // the live mode loads the real data/state/battle below
+
+  // ---------------------------------------------------------------- fake data
+  const BIOMES = [
+    { id: 'crypt', name: 'The Crypt', enemies: ['skeleton', 'bat', 'slime'], boss: 'lich', colors: { accent: '#5dff8a' } },
+    { id: 'fungal', name: 'Fungal Hollows', enemies: ['mushroom', 'spider', 'sporeling'], boss: 'myconid_king', colors: { accent: '#c77dff' } },
+    { id: 'forge', name: 'Magma Forge', enemies: ['imp', 'magma_golem', 'fire_hound'], boss: 'infernal', colors: { accent: '#ff7b2e' } },
+    { id: 'clockwork', name: 'Clockwork Depths', enemies: ['cog_knight', 'steam_bot', 'gear_rat'], boss: 'brass_colossus', colors: { accent: '#e0b04a' } },
+    { id: 'neon', name: 'Neon Grid', enemies: ['drone', 'cyber_ninja', 'mech'], boss: 'ai_core', colors: { accent: '#21e6ff' } },
+    { id: 'void', name: 'Void Rift', enemies: ['alien', 'void_eye', 'tentacle'], boss: 'void_titan', colors: { accent: '#b98bff' } },
+  ];
+  const E = (name, w, h, o) => Object.assign({ name, w, h, flying: false, ranged: false, projectile: null, boss: false }, o || {});
+  const ENEMIES = {
+    skeleton: E('Skeleton', 16, 22), bat: E('Crypt Bat', 18, 16, { flying: true }), slime: E('Bog Slime', 20, 16),
+    lich: E('Lich Lord', 40, 48, { boss: true }),
+    mushroom: E('Shroomling', 18, 20), spider: E('Cave Spider', 22, 16), sporeling: E('Sporeling', 16, 18, { ranged: true, projectile: 'spit' }),
+    myconid_king: E('Myconid King', 44, 50, { boss: true }),
+    imp: E('Fire Imp', 16, 18, { ranged: true, projectile: 'fireball' }), magma_golem: E('Magma Golem', 24, 24), fire_hound: E('Fire Hound', 24, 16),
+    infernal: E('The Infernal', 48, 56, { boss: true }),
+    cog_knight: E('Cog Knight', 18, 22), steam_bot: E('Steam Bot', 18, 20, { ranged: true, projectile: 'bolt' }), gear_rat: E('Gear Rat', 18, 16),
+    brass_colossus: E('Brass Colossus', 50, 56, { boss: true }),
+    drone: E('Hunter Drone', 18, 16, { flying: true, ranged: true, projectile: 'laser' }), cyber_ninja: E('Cyber Ninja', 16, 22), mech: E('Battle Mech', 24, 24),
+    ai_core: E('A.I. Core', 44, 48, { boss: true }),
+    alien: E('Grey Alien', 16, 22), void_eye: E('Void Eye', 18, 18, { flying: true, ranged: true, projectile: 'orb' }), tentacle: E('Void Tentacle', 20, 24),
+    void_titan: E('Void Titan', 52, 56, { boss: true }),
+    dragon: E('Ancient Dragon', 64, 56, { boss: true, ranged: true, projectile: 'fireball' }), zombie: E('Zombie', 16, 22),
+    stone_golem: E('Stone Golem', 52, 54, { boss: true }), overlord: E('Alien Overlord', 60, 64, { boss: true, ranged: true, projectile: 'laser' }),
+  };
+  const DUNGEONS = {
+    dragon: { id: 'dragon', name: "Dragon's Lair", enemy: 'dragon', color: '#ff5a3c' },
+    horde: { id: 'horde', name: 'Zombie Horde', enemy: 'zombie', color: '#7dff6a' },
+    vault: { id: 'vault', name: 'Golem Vault', enemy: 'stone_golem', color: '#e0b04a' },
+    mothership: { id: 'mothership', name: 'Mothership', enemy: 'overlord', color: '#21e6ff' },
+  };
+  DD.data = {
+    BIOMES, ENEMIES, DUNGEONS, WAVES_PER_FLOOR: 5,
+    ALLIES: { wolf: {}, fairy: {}, drone_ally: {}, golem_ally: {} },
+    biomeForFloor: (f) => BIOMES[Math.floor((Math.max(1, f) - 1) / 10) % 6],
+  };
+  DD.state = {
+    s: {
+      equipped: { weapon: { era: 2, rarity: 4 }, armor: { rarity: 3 } },
+      settings: { sound: true, speed: 1, autoSkill: true },
+    },
+  };
+})(globalThis.DD);
+</script>
+<script>
+  // live mode: the real economy + battle modules drive the scene
+  if (new URLSearchParams(location.search).get('live') === '1') {
+    for (const f of ['data.js', 'state.js', 'battle.js']) document.write('<script src="../src/js/' + f + '"><\/script>');
+  }
+</script>
+<script src="../src/js/render.js"></script>
+<script src="../src/js/audio.js"></script>
+<script>
+(function (DD) {
+  'use strict';
+  const Q = new URLSearchParams(location.search);
+  const W = DD.WORLD.W;
+  const GROUND = DD.WORLD.GROUND;
+  const HERO_X = DD.WORLD.HERO_X;
+  const STEP = 1 / 60;
+  const emit = (e, p) => DD.bus.emit(e, p);
+  let seed = 12345;
+  const R = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  Math.random = R; // deterministic screenshots
+
+  if (Q.get('reduced') === '1') DD.render.setReducedMotion(true);
+
+  // ================================================================ live mode
+  if (Q.get('live') === '1') {
+    DD.state.reset();
+    const s = DD.state.s;
+    s.campaign.floor = Math.max(1, Number(Q.get('floor')) || 1);
+    s.campaign.highestFloor = s.campaign.floor;
+    s.skills.owned = { bomb: 5, lightning: 5, frost: 5, meteor: 5 };
+    s.skills.equipped = ['bomb', 'lightning', 'frost', 'meteor'];
+    s.settings.sound = false;
+    DD.render.init(document.getElementById('battle-canvas'));
+    DD.audio.init();
+    DD.battle.init();
+    let t = 0;
+    const speed = Math.max(1, Math.min(3, Number(Q.get('speed')) || 1));
+    window.__events = {};
+    for (const ev of ['wave:start', 'floor:cleared', 'boss:failed', 'hero:died', 'skill:cast', 'enemy:killed', 'flyingChest:spawn', 'levelup']) {
+      DD.bus.on(ev, () => (window.__events[ev] = (window.__events[ev] || 0) + 1));
+    }
+    window.advanceTo = function (target) {
+      while (t < target) {
+        for (let i = 0; i < speed; i++) DD.battle.update(STEP);
+        DD.state.tick(STEP);
+        DD.render.draw(STEP);
+        t += STEP;
+      }
+      const st = DD.render.stats();
+      st.events = window.__events;
+      st.floor = DD.battle.floor;
+      return st;
+    };
+    window.__ready = true;
+    return;
+  }
+
+  // ================================================================ fake battle view
+  let uid = 0;
+  const B = (DD.battle = {
+    mode: 'campaign', floor: 1, wave: 1, isBossWave: false, farming: false,
+    bossTimer: 0, bossTimeLimit: 0, dungeon: null,
+    hero: { x: HERO_X, y: GROUND, hp: 800, maxHp: 1000, shield: 0, anim: 'idle', animTime: 0, attackAnim: 0, buffs: { warcry: 0, blades: 0, shield: 0 } },
+    enemies: [], projectiles: [], allies: [], flyingChest: null, moving: false, scroll: 0, deadTimer: 0, phase: 'fight',
+    skillSlots: [],
+    tapAt(wx, wy) {
+      const fc = B.flyingChest;
+      if (!fc || Math.hypot(wx - fc.x, wy - fc.y) > 22) return false;
+      B.flyingChest = null;
+      emit('flyingChest:collected', { x: fc.x, y: fc.y, reward: { type: 'gems', amount: 25, label: '+25 Gems' } });
+      window.__tapped = (window.__tapped || 0) + 1;
+      return true;
+    },
+  });
+  function enemy(type, x, o) {
+    const d = DD.data.ENEMIES[type];
+    const e = Object.assign({
+      id: 'e' + (++uid), type, x, y: d.flying ? GROUND - 28 : GROUND, w: d.w, h: d.h, hp: 100, maxHp: 100,
+      isBoss: d.boss, flying: d.flying, anim: 'walk', animTime: R() * 0.5, stun: 0, frozen: 0, flash: 0, dead: false,
+      deadTime: 0, facing: -1, ranged: d.ranged, projectile: d.projectile, stopX: x, speed: 30,
+    }, o || {});
+    B.enemies.push(e);
+    return e;
+  }
+  const front = () => B.enemies.filter((e) => !e.dead).sort((a, b) => a.x - b.x)[0];
+
+  // scripted timeline helpers
+  const timeline = [];
+  const at = (t, fn) => timeline.push({ t, fn });
+  function heroHits(from, to, every, critEvery) {
+    let n = 0;
+    for (let t = from; t < to; t += every) {
+      at(t, () => {
+        const e = front();
+        if (!e) return;
+        n++;
+        const crit = critEvery && n % critEvery === 0;
+        const amount = (crit ? 2.6 : 1) * (e.isBoss ? 1840 : 420) * (0.9 + R() * 0.2);
+        e.hp = Math.max(1, e.hp - (e.isBoss ? 2 : 18));
+        e.flash = 0.12;
+        emit('hero:attack', { x: B.hero.x + 14, y: B.hero.y - 14, crit });
+        emit('hit', { target: 'enemy', id: e.id, x: e.x, y: e.y - e.h, amount, crit, miss: false, kind: 'attack' });
+      });
+    }
+  }
+  function enemyHits(from, to, every) {
+    let n = 0;
+    for (let t = from; t < to; t += every) {
+      at(t, () => {
+        n++;
+        if (n % 4 === 0) emit('hit', { target: 'hero', x: B.hero.x, y: B.hero.y - 26, amount: 0, crit: false, miss: true, kind: 'enemy' });
+        else emit('hit', { target: 'hero', x: B.hero.x, y: B.hero.y - 26, amount: 37 + n * 3, crit: false, miss: false, kind: 'enemy', absorbed: B.hero.shield > 0 ? 40 + n * 3 : 0 });
+      });
+    }
+  }
+  function kill(t, pick) {
+    at(t, () => {
+      const e = pick ? pick() : front();
+      if (!e) return;
+      e.dead = true; e.deadTime = 0; e.anim = 'dead'; e.animTime = 0; e.hp = 0;
+      emit('enemy:killed', { id: e.id, type: e.type, x: e.x, y: e.y - e.h / 2, isBoss: e.isBoss, gold: 120, xp: 30, chest: !e.isBoss && R() < 0.6 });
+    });
+  }
+  function allyAttacks(from, to) {
+    for (let t = from; t < to; t += 0.55) {
+      at(t, () => {
+        for (const a of B.allies) {
+          const e = front();
+          if (!e) return;
+          if (a.id === 'fairy') emit('ally:attack', { id: a.id, x: a.x, y: a.y - 8, tx: B.hero.x, ty: B.hero.y - 16 });
+          else {
+            emit('ally:attack', { id: a.id, x: a.x, y: a.y - 8, tx: e.x, ty: e.y - e.h / 2 });
+            emit('hit', { target: 'enemy', id: e.id, x: e.x, y: e.y - e.h, amount: 96, crit: false, miss: false, kind: 'ally' });
+          }
+          a.anim = 'attack'; a.animTime = 0;
+        }
+      });
+    }
+  }
+  function setAllies(ids) {
+    B.allies = ids.map((id, i) => ({ id, x: HERO_X - 24 - i * 22, y: id === 'fairy' || id === 'drone_ally' ? GROUND - 34 : GROUND, anim: 'idle', animTime: 0, hover: id === 'fairy' || id === 'drone_ally' }));
+  }
+  function chest(t0) {
+    at(t0, () => {
+      B.flyingChest = { x: 60, y: 40, t: 0, life: 8, x0: 60, x1: W + 14, baseY: 38, phase: 1 };
+      emit('flyingChest:spawn', {});
+    });
+  }
+  function skill(t, id, pickTargets) {
+    at(t, () => {
+      const list = (pickTargets ? pickTargets() : B.enemies.filter((e) => !e.dead)).slice(0, 6);
+      const targets = list.map((e) => ({ x: e.x, y: e.y - e.h / 2 }));
+      if (id === 'shield') { B.hero.shield = 300; B.hero.buffs.shield = 8; }
+      if (id === 'warcry') B.hero.buffs.warcry = 6;
+      if (id === 'blades') B.hero.buffs.blades = 5;
+      emit('skill:cast', { id, slot: 0, x: B.hero.x, y: B.hero.y - 14, targets });
+      if (id === 'heal') emit('heal', { x: B.hero.x, y: B.hero.y - 30, amount: 250 });
+      if (['bomb', 'lightning', 'frost', 'meteor'].includes(id)) {
+        for (const e of list) {
+          const crit = R() < 0.3;
+          e.hp = Math.max(1, e.hp - 25);
+          e.flash = 0.12;
+          emit('hit', { target: 'enemy', id: e.id, x: e.x, y: e.y - e.h, amount: 2400 * (crit ? 2.5 : 1), crit, miss: false, kind: 'skill' });
+          if (id === 'frost') e.frozen = 2.5;
+          if (id === 'meteor') e.stun = 1.5;
+        }
+      }
+    });
+  }
+
+  // ================================================================ scenarios
+  const SC = {
+    crypt() {
+      B.floor = 3;
+      enemy('skeleton', 124, { hp: 64 }); enemy('bat', 152); enemy('slime', 178, { hp: 80 }); enemy('skeleton', 206);
+      setAllies(['wolf', 'fairy']);
+      at(0.02, () => emit('wave:start', { floor: 3, wave: 1, isBoss: false, mode: 'campaign' }));
+      heroHits(0.1, 3, 0.42, 3); enemyHits(0.3, 3, 0.7); allyAttacks(0.2, 3); kill(1.0); chest(0.2);
+      at(0.9, () => emit('heal', { x: B.hero.x, y: B.hero.y - 30, amount: 64 }));
+    },
+    fungal() {
+      B.floor = 13;
+      enemy('mushroom', 124, { hp: 55, stun: 3 }); enemy('spider', 154, { frozen: 3, hp: 70 }); enemy('sporeling', 196); enemy('sporeling', 226);
+      setAllies(['golem_ally']);
+      at(0.02, () => emit('wave:start', { floor: 13, wave: 2, isBoss: false, mode: 'campaign' }));
+      heroHits(0.1, 3, 0.4, 4); enemyHits(0.3, 3, 0.8); allyAttacks(0.5, 3);
+      B.__shooters = true;
+    },
+    forge() {
+      B.floor = 23;
+      enemy('magma_golem', 128, { hp: 40 }); enemy('fire_hound', 162); enemy('imp', 204); enemy('imp', 232);
+      setAllies(['wolf']);
+      B.hero.shield = 300; B.hero.buffs.shield = 8; B.hero.buffs.warcry = 6;
+      at(0.02, () => emit('wave:start', { floor: 23, wave: 3, isBoss: false, mode: 'campaign' }));
+      heroHits(0.1, 3, 0.35, 3); enemyHits(0.25, 3, 0.6); allyAttacks(0.4, 3); kill(1.1);
+      B.__shooters = true;
+    },
+    clockwork() {
+      B.floor = 33;
+      enemy('cog_knight', 126, { hp: 70 }); enemy('gear_rat', 156); enemy('steam_bot', 198); enemy('cog_knight', 230);
+      setAllies(['drone_ally', 'wolf']);
+      B.hero.buffs.blades = 5;
+      at(0.02, () => emit('wave:start', { floor: 33, wave: 2, isBoss: false, mode: 'campaign' }));
+      heroHits(0.1, 3, 0.4, 3); enemyHits(0.3, 3, 0.8); allyAttacks(0.15, 3); chest(0.1);
+      B.__shooters = true;
+    },
+    neon() {
+      B.floor = 43;
+      enemy('cyber_ninja', 124, { hp: 60 }); enemy('mech', 160); enemy('drone', 198); enemy('drone', 236);
+      setAllies(['golem_ally', 'fairy']);
+      at(0.02, () => emit('wave:start', { floor: 41, wave: 1, isBoss: false, mode: 'campaign' }));
+      heroHits(0.1, 3, 0.4, 3); enemyHits(0.3, 3, 0.7); allyAttacks(0.3, 3);
+      B.__shooters = true;
+    },
+    void() {
+      B.floor = 53;
+      enemy('alien', 124, { hp: 50 }); enemy('tentacle', 158); enemy('void_eye', 196); enemy('void_eye', 234);
+      setAllies(['drone_ally']);
+      at(0.02, () => emit('wave:start', { floor: 53, wave: 4, isBoss: false, mode: 'campaign' }));
+      heroHits(0.1, 3, 0.4, 3); enemyHits(0.3, 3, 0.8); allyAttacks(0.3, 3);
+      at(0.7, () => emit('levelup', { level: 27 }));
+      B.__shooters = true;
+    },
+    boss() {
+      B.floor = 30; B.isBossWave = true; B.wave = 5; B.bossTimeLimit = 30; B.bossTimer = 21.4;
+      enemy('infernal', 150, { hp: 62, maxHp: 100 }); enemy('imp', 214); enemy('fire_hound', 240);
+      setAllies(['wolf', 'drone_ally']);
+      B.hero.buffs.warcry = 6;
+      at(0.02, () => emit('wave:start', { floor: 30, wave: 5, isBoss: true, mode: 'campaign' }));
+      heroHits(0.1, 4, 0.3, 2); enemyHits(0.25, 4, 0.6); allyAttacks(0.2, 4);
+      B.__shooters = true;
+    },
+    skills() {
+      B.floor = 45;
+      enemy('cyber_ninja', 126, { hp: 90 }); enemy('mech', 156); enemy('cyber_ninja', 186); enemy('drone', 214); enemy('mech', 246); enemy('drone', 276);
+      setAllies(['wolf', 'fairy']);
+      B.hero.buffs.blades = 5;
+      heroHits(0.1, 3, 0.35, 3);
+      skill(0.05, 'meteor'); skill(0.35, 'lightning'); skill(0.55, 'frost'); skill(0.7, 'bomb'); skill(0.8, 'warcry'); skill(0.85, 'shield');
+      B.__shooters = true;
+    },
+    dungeon() {
+      B.mode = 'dungeon'; B.floor = 12; B.isBossWave = true;
+      B.dungeon = { id: 'dragon', level: 3, timer: 33, timeLimit: 45, killed: 0, target: 1 };
+      B.bossTimer = 33; B.bossTimeLimit = 45;
+      enemy('dragon', 170, { hp: 80 });
+      setAllies(['wolf']);
+      at(0.02, () => emit('dungeon:start', { id: 'dragon', level: 3 }));
+      heroHits(0.1, 3, 0.35, 3); enemyHits(0.3, 3, 0.7);
+      B.__shooters = true;
+    },
+    horde() {
+      B.mode = 'dungeon'; B.floor = 12;
+      B.dungeon = { id: 'horde', level: 2, timer: 28, timeLimit: 45, killed: 9, target: 25 };
+      B.bossTimer = 28; B.bossTimeLimit = 45;
+      for (let i = 0; i < 6; i++) enemy('zombie', 124 + i * 24, { hp: 60 + i * 7 });
+      at(0.02, () => emit('wave:start', { floor: 12, wave: 1, isBoss: false, mode: 'dungeon', dungeon: 'horde' }));
+      heroHits(0.1, 3, 0.35, 3); kill(0.6); kill(1.2);
+      skill(0.4, 'lightning');
+    },
+    vault() {
+      B.mode = 'dungeon'; B.floor = 12; B.isBossWave = true;
+      B.dungeon = { id: 'vault', level: 1, timer: 40, timeLimit: 45, killed: 0, target: 1 };
+      B.bossTimer = 40; B.bossTimeLimit = 45;
+      enemy('stone_golem', 160, { hp: 90 });
+      heroHits(0.1, 3, 0.4, 3);
+    },
+    mothership() {
+      B.mode = 'dungeon'; B.floor = 12; B.isBossWave = true;
+      B.dungeon = { id: 'mothership', level: 1, timer: 8, timeLimit: 45, killed: 0, target: 1 };
+      B.bossTimer = 8; B.bossTimeLimit = 45;
+      enemy('overlord', 170, { hp: 30 });
+      setAllies(['drone_ally']);
+      heroHits(0.1, 3, 0.4, 3);
+      B.__shooters = true;
+    },
+    dead() {
+      B.floor = 17; B.phase = 'dead'; B.deadTimer = 2; B.hero.anim = 'dead'; B.hero.hp = 0;
+      enemy('spider', 210, { dead: true, fled: true, facing: 1 }); enemy('mushroom', 240, { dead: true, fled: true, facing: 1 });
+      at(0.0, () => emit('hero:died', {}));
+      at(0.05, () => emit('boss:failed', { reason: 'death' }));
+    },
+    clear() {
+      B.floor = 9;
+      enemy('lich', 140, { hp: 3 });
+      kill(0.1);
+      at(0.2, () => emit('floor:cleared', { floor: 9, rewards: { chests: 3, gold: 1520, gems: 5 } }));
+    },
+  };
+
+  const name = Q.get('scenario') || 'crypt';
+  (SC[name] || SC.crypt)();
+  timeline.sort((a, b) => a.t - b.t);
+
+  // ================================================================ tiny animation sim for the fake view
+  let simT = 0;
+  let shotTimer = 0.4;
+  function step(dt) {
+    simT += dt;
+    while (timeline.length && timeline[0].t <= simT) timeline.shift().fn();
+    const h = B.hero;
+    if (B.phase === 'dead') {
+      B.deadTimer = Math.max(0, B.deadTimer - dt);
+      h.animTime += dt;
+    } else {
+      const f = front();
+      const near = f && f.x - f.w / 2 - h.x < 50;
+      const swingT = (simT * 2.6) % 1;
+      if (near) {
+        if (h.anim !== 'attack') { h.anim = 'attack'; h.animTime = 0; }
+        h.attackAnim = swingT < 0.4 ? swingT / 0.4 : 0;
+        if (h.attackAnim === 0) h.anim = 'idle';
+      } else {
+        h.anim = f ? 'idle' : 'run';
+      }
+      h.animTime += dt;
+    }
+    for (const k of ['warcry', 'blades', 'shield']) h.buffs[k] = Math.max(0, h.buffs[k] - dt * 0.2);
+    for (let i = 0; i < B.enemies.length; ) {
+      const e = B.enemies[i];
+      e.animTime += dt;
+      e.flash = Math.max(0, e.flash - dt);
+      if (e.dead) {
+        e.deadTime += dt;
+        if (e.fled) e.x += 120 * dt;
+        if (e.deadTime >= 0.4) { B.enemies.splice(i, 1); continue; }
+      } else {
+        e.stun = Math.max(0, e.stun - dt * 0.3);
+        e.frozen = Math.max(0, e.frozen - dt * 0.3);
+        if (e.flying) e.y = GROUND - 28 + Math.sin(simT * 3.2 + e.x) * 2;
+        const busy = e.stun > 0 || e.frozen > 0;
+        const a = busy ? 'idle' : (Math.floor(simT * 1.3 + e.x) % 3 === 0 ? 'attack' : 'idle');
+        if (a !== e.anim && e.anim !== 'walk') { e.anim = a; e.animTime = 0; }
+        if (e.anim === 'walk' && e.animTime > 0.6) { e.anim = 'idle'; e.animTime = 0; }
+      }
+      i++;
+    }
+    // ranged enemies shoot
+    if (B.__shooters && B.phase !== 'dead') {
+      shotTimer -= dt;
+      if (shotTimer <= 0) {
+        shotTimer = 0.45;
+        const shooters = B.enemies.filter((e) => !e.dead && e.ranged);
+        if (shooters.length) {
+          const e = shooters[Math.floor(R() * shooters.length)];
+          const sx = e.x - e.w / 2;
+          const sy = e.y - e.h * 0.55;
+          const tx = h.x + 4;
+          const ty = h.y - 14;
+          const d = Math.hypot(tx - sx, ty - sy);
+          B.projectiles.push({ id: 'p' + (++uid), kind: e.projectile, x: sx, y: sy, vx: ((tx - sx) / d) * 140, vy: ((ty - sy) / d) * 140 });
+          emit('enemy:attack', { id: e.id, type: e.type, x: sx, y: sy, ranged: true });
+        }
+      }
+    }
+    for (let i = 0; i < B.projectiles.length; ) {
+      const p = B.projectiles[i];
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+      if (p.x <= h.x + 6) {
+        B.projectiles.splice(i, 1);
+        emit('projectile:hit', { kind: p.kind, x: p.x, y: p.y });
+        continue;
+      }
+      i++;
+    }
+    for (const a of B.allies) {
+      a.animTime += dt;
+      if (a.anim === 'attack' && a.animTime > 0.3) { a.anim = 'idle'; a.animTime = 0; }
+      if (a.hover) a.y = GROUND - 34 + Math.sin(simT * 3 + a.x) * 3;
+    }
+    const fc = B.flyingChest;
+    if (fc) {
+      fc.t += dt;
+      fc.x = fc.x0 + (fc.x1 - fc.x0) * (fc.t / fc.life);
+      fc.y = fc.baseY + Math.sin(fc.t * 2.3 + fc.phase) * 9;
+      if (fc.t >= fc.life) B.flyingChest = null;
+    }
+    B.scroll += (h.anim === 'run' ? 90 : 6) * dt;
+  }
+
+  DD.render.init(document.getElementById('battle-canvas'));
+  DD.audio.init();
+  window.advanceTo = function (target) {
+    while (simT < target) {
+      step(STEP);
+      DD.render.draw(STEP);
+    }
+    return DD.render.stats();
+  };
+  window.__ready = true;
+})(globalThis.DD);
+</script>
+</body>
+</html>
