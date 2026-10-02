@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sprites harness</title>
+<style>
+  html, body { margin: 0; background: #14101c; color: #e8e0f0; font: 12px ui-monospace, monospace; }
+  canvas { image-rendering: pixelated; display: block; }
+</style>
+</head>
+<body>
+<script src="../src/js/core.js"></script>
+<script src="../src/js/sprites.js"></script>
+<script>
+  // Contact-sheet helpers driven by tests/sprites.sheet.mjs
+  window.SHEET = (function () {
+    const BG = '#1b1626';
+    function sheetSprites(names, opts) {
+      opts = opts || {};
+      const S = DD.sprites;
+      const scale = opts.scale || 3;
+      const pad = 10;
+      const label = 14;
+      const rows = [];
+      for (const name of names) {
+        for (const an of S.anims(name)) {
+          const n = S.frameCount(name, an);
+          const sz = S.size(name);
+          rows.push({ name, an, n, w: sz.w * scale, h: sz.h * scale, look: opts.look });
+        }
+      }
+      const width = opts.width || 1800;
+      // flow rows into lines
+      let x = pad;
+      let y = pad;
+      let lineH = 0;
+      const placed = [];
+      for (const r of rows) {
+        const bw = Math.max(r.n * (r.w + 4) - 4, 90);
+        if (x + bw > width - pad) {
+          x = pad;
+          y += lineH + label + pad;
+          lineH = 0;
+        }
+        placed.push({ r, x, y });
+        x += bw + pad * 2;
+        lineH = Math.max(lineH, r.h);
+      }
+      const height = y + lineH + label + pad;
+      const c = document.createElement('canvas');
+      c.width = width;
+      c.height = height;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, width, height);
+      ctx.imageSmoothingEnabled = false;
+      for (const { r, x, y } of placed) {
+        ctx.fillStyle = '#c8bce0';
+        ctx.font = '11px monospace';
+        ctx.fillText(r.name + ' · ' + r.an + ' ×' + r.n, x, y + 10);
+        for (let i = 0; i < r.n; i++) {
+          const fx = x + i * (r.w + 4);
+          const fy = y + label;
+          ctx.fillStyle = '#231d31';
+          ctx.fillRect(fx, fy, r.w, r.h);
+          ctx.fillStyle = '#3a3150';
+          ctx.fillRect(fx, fy + r.h - 1, r.w, 1);
+          const fr = DD.sprites.frame(r.name, r.an, i, r.look);
+          ctx.drawImage(fr, fx, fy, fr.width * scale, fr.height * scale);
+        }
+      }
+      return c.toDataURL('image/png');
+    }
+    function sheetIcons(groups, opts) {
+      opts = opts || {};
+      const width = opts.width || 1800;
+      const pad = 10;
+      const label = 14;
+      const loaded = [];
+      for (const g of groups) for (const it of g.items) loaded.push(it);
+      return Promise.all(
+        loaded.map(
+          (it) =>
+            new Promise((res) => {
+              const img = new Image();
+              img.onload = () => { it.img = img; res(); };
+              img.onerror = () => { it.img = null; res(); };
+              img.src = it.url;
+            }),
+        ),
+      ).then(() => {
+        const scale = opts.scale || 2;
+        let y = pad;
+        const layout = [];
+        for (const g of groups) {
+          layout.push({ title: g.title, y });
+          y += 18;
+          let x = pad;
+          let lineH = 0;
+          for (const it of g.items) {
+            const w = (it.img ? it.img.width : 48) * scale;
+            const h = (it.img ? it.img.height : 48) * scale;
+            const bw = Math.max(w, 70);
+            if (x + bw > width - pad) {
+              x = pad;
+              y += lineH + label + 6;
+              lineH = 0;
+            }
+            layout.push({ it, x, y, w, h });
+            x += bw + 8;
+            lineH = Math.max(lineH, h);
+          }
+          y += lineH + label + 16;
+        }
+        const c = document.createElement('canvas');
+        c.width = width;
+        c.height = y;
+        const ctx = c.getContext('2d');
+        ctx.fillStyle = BG;
+        ctx.fillRect(0, 0, width, y);
+        ctx.imageSmoothingEnabled = false;
+        for (const L of layout) {
+          if (L.title) {
+            ctx.fillStyle = '#ffd27a';
+            ctx.font = 'bold 13px monospace';
+            ctx.fillText(L.title, pad, L.y + 12);
+            continue;
+          }
+          ctx.fillStyle = '#231d31';
+          ctx.fillRect(L.x, L.y, L.w, L.h);
+          if (L.it.img) ctx.drawImage(L.it.img, L.x, L.y, L.w, L.h);
+          ctx.fillStyle = '#b8acd0';
+          ctx.font = '10px monospace';
+          ctx.fillText(String(L.it.label).slice(0, 14), L.x, L.y + L.h + 11);
+        }
+        return c.toDataURL('image/png');
+      });
+    }
+    return { sheetSprites, sheetIcons };
+  })();
+</script>
+</body>
+</html>

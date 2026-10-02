@@ -33,7 +33,7 @@ Source facts about Dungeon Rush we are reproducing:
 
 ### Core loop
 1. Battle view runs continuously: Floor F has waves 1–4 (normal) and wave 5 (**boss**, 30 s timer).
-2. Killing the boss → next floor (+3 chests, gold, gems on every 5th floor).
+2. Killing the boss → next floor (+3 chests, gold, 4 gems — 10 on every 5th floor, 25 on every 10th).
 3. Hero dies in waves 1–4 → revive after 2 s, restart wave 1 of the same floor.
 4. Hero dies vs boss or the timer runs out → **farming mode**: loop waves 1–4 of the floor forever,
    earning loot. "Challenge Boss" button retries; with `settings.autoBoss` on, the game retries the
@@ -48,6 +48,27 @@ Source facts about Dungeon Rush we are reproducing:
   around floors 6–8, 12–15, 20+.
 * A purely idle player (never opens chests) stalls at about floor 5–7.
 * No NaN/Infinity anywhere; numbers grow exponentially and are formatted with suffixes.
+
+Measured with `node tests/sim.mjs` (the real core/data/state/battle in a Node vm at a fixed 1/60 s
+step; policies `idle` = never opens a chest, `active` = every 10 s opens every chest, equips CP
+upgrades, sells the rest, claims quests, buys skills/allies/mastery/chest levels/ally levels and runs a
+dungeon with each key, taps every flying chest; `casual` = the same every 5 min), mean of seeded runs
+(seeds 1–3 and 11–15):
+
+| | 2 min | 5 min | 10 min | 20 min | 40 min | 60 min | 120 min |
+|---|---|---|---|---|---|---|---|
+| idle floor | 3 | 4 | 5 | 6 | 6 | 6 | 7 |
+| casual floor | 4 | 6 | 8 | 10–11 | 13–14 | 16 | 21 |
+| active floor | 3 | 6 | 10–11 | 13–14 | 19 | 23 | 31–32 |
+
+Fresh save clears floor 1 in ~40 s (idle 42 s). Active reaches floor 10 at ~9 min, 20 at ~40–44 min,
+30 at ~100 min (41 at 240 min); its slowest floors are 12 (~6–7 min), 16–18 (~4–7 min), 21 (~10 min)
+and 26–27 (~6–16 min); no floor takes longer than ~17 min. The 6–8 wall stops an idle hero at floor 6
+(it dies to the boss and farms there) and costs a casual player 2–10 min per floor; the active
+player's power spike from its first chests, quests and dungeons carries it through to 11–12.
+Every upgrade type matters (`--ablate`, active floor at 120 min without it: chest levels −8, mastery −9,
+skills −6, allies −3 to −4, dungeons −2 to −3, flying chest −10). Knobs: `BALANCE.enemy.{hpGrowth, atkGrowth,
+walls, wallAtkExp, biomeStep}`, `item.growth`, `hero.growth`, `xp`, the reward tables.
 
 ---
 
@@ -64,7 +85,7 @@ src/js/battle.js      combat simulation, no drawing                        (BATT
 src/js/render.js      canvas scene drawing, VFX, tap hit-testing           (RENDER author)
 src/js/audio.js       WebAudio sfx driven by bus events                    (RENDER author)
 src/js/ui.js          DOM UI: HUD, panels, modals, toasts                  (UI author)
-src/js/main.js        boot + game loop + hot-reload hooks                  (pre-written, read-only)
+src/js/main.js        boot + game loop + hot-reload hooks                  (pre-written; integrator-owned)
 build.mjs             inlines everything into dist/                        (pre-written)
 ```
 
@@ -86,6 +107,12 @@ build.mjs             inlines everything into dist/                        (pre-
 `DD.fmtTime(seconds)` → "1h 05m" / "4m 12s" / "38s"; `DD.fmtTimer(seconds)` → "0:23".
 `DD.clamp, DD.lerp, DD.rand(min,max), DD.randInt(min,maxInclusive), DD.chance(p), DD.pick(arr),
  DD.weightedIndex(weights), DD.uid(prefix), DD.easeOutCubic(t)`.
+
+### main.js
+Boots (load → sprites → ui → render → audio → battle → AFK modal), then runs one rAF loop: battle in
+fixed 1/60 s steps (× `settings.speed`), `state.tick`, `render.draw`, `ui.frame`. AFK rewards are
+collected on load, when the tab comes back after ≥ 60 s hidden, and when two frames are ≥ 60 s apart
+while visible (a device that slept with the tab open fires no `visibilitychange`).
 
 ---
 
@@ -169,11 +196,11 @@ by `(1 + stats.skillDmg)`. 4 equip slots; slots unlock at floor 1, 5, 12, 25 (`h
 ### Allies (`DD.data.ALLIES`)
 | id | name | behaviour (level L) | unlock |
 |---|---|---|---|
-| wolf | Dire Wolf | bite nearest enemy every 1.2s for 40% hero ATK (+5%/L) | 100 gems |
-| fairy | Pixie | heals hero 3% max HP (+0.3%/L) every 2s | 200 gems |
-| drone_ally | Battle Drone | shoots nearest enemy every 0.6s for 25% ATK (+3%/L) | 400 gems |
-| golem_ally | Ember Golem | slam all enemies within 90px every 3s for 80% ATK (+8%/L) | 600 gems |
-Allies never take damage. Upgrade costs gold: `Math.floor(800 * 1.6^(L-1))`, max level 50.
+| wolf | Dire Wolf | bite nearest enemy every 1.2s for 60% hero ATK (+6%/L) | 100 gems |
+| fairy | Pixie | heals hero 4% max HP (+0.4%/L) every 2s | 200 gems |
+| drone_ally | Battle Drone | shoots nearest enemy every 0.6s for 35% ATK (+4%/L) | 400 gems |
+| golem_ally | Ember Golem | slam all enemies within 90px every 3s for 120% ATK (+12%/L) | 600 gems |
+Allies never take damage. Upgrade costs gold: `Math.floor(500 * 1.5^(L-1))`, max level 50.
 2 ally slots; slot 1 unlocks at floor 4, slot 2 at floor 20.
 
 ### Mastery (`DD.data.MASTERY`, bought with gems)
@@ -195,6 +222,9 @@ Cost (gems) of level L→L+1: `10 + 6 * L` (might/vitality), others `20 + 10 * L
 | vault | Golem Vault | 10 | one `stone_golem` boss, 45s | Premium chests (min Rare, chest Lv +3) |
 | mothership | Mothership | 20 | one `overlord` boss, 45s | Gold (≈ 3 min of income) + Scrolls |
 Dungeon enemy strength equals campaign floor `2 + level * 3`. Winning raises that dungeon's level by 1.
+Rewards at level L: dragon `10 + 4L` scrolls; horde `40 + 20L` gems; vault `2 + floor(L/2)` premium
+chests; mothership 180 s of reference income (`refKillsPerSec` × kill gold) at floor `2 + 3L + 15`, plus
+`3 + L` scrolls.
 Keys: max 5, start with 3, +1 every 30 min real time (also while offline), flying chest may give one.
 
 ### Currencies & counters (state fields)
@@ -297,8 +327,19 @@ claimQuest() → boolean
 collectOffline(nowMs) → null | { seconds, cappedSeconds, gold, chests, xp, keys }  // applies rewards; null if < 60s away
 setSetting(path, value)  // e.g. setSetting('autoLoot.stopRarity', 5)
 ```
-Offline income estimate: kills/sec ≈ `min(1.2, dps / avgEnemyHp)` on the current floor (waves only),
-gold/chests/xp from that, × 0.75 efficiency, capped by `8h + patience`.
+Offline income estimate (`estimateIncome`): on the current floor (waves 1–4 only), with `n` = average
+wave size, kills/sec = `min(1.2, n / (waveOverhead + killTime + deathOverhead))`.
+`killTime = n × avgEnemyHp / (dpsMult × kitDps)`: the kit DPS is the auto-attack DPS (atk × crit ×
+atkSpeed × combo) plus every equipped skill at its cooldown (× `skillUptime` 0.8; area skills hit
+`aoeTargets` 2.5 enemies) and every equipped ally, so skill and ally upgrades raise AFK income too.
+`deathOverhead = deathCost (8 s) / wavesPerLife`, where a wave costs the hero `threat (0.2) × the DPS of
+the enemies in reach (front melee per lane + every shooter, less dodge) × killTime` HP minus what
+regen, lifesteal, the Pixie and Healing Light heal over the wave; a hero that never runs out of HP pays
+nothing. `waveOverhead` 5.5 s and `dpsMult` 1.1 are calibrated against live farming in
+`tests/sim.mjs` (the estimate lands at ~0.7–0.9 of the live kill rate, including heroes that keep
+dying). Gold and chests × 0.75, xp × 0.5 (`offlineXpEfficiency`), capped by `8h + patience`. The flying
+chest's gold reward (150 s of estimated income, at least 30 kills' gold) uses the same estimate;
+`goldIncomeRate` uses `refKillsPerSec` 0.5.
 
 ---
 
@@ -314,8 +355,10 @@ Sizes: normal ≈ 16–24 px tall, bosses 40–56 px tall, dragon/overlord up to
 Pure functions:
 ```
 biomeForFloor(f) → BIOMES[i]
-enemyStats(floor, typeId, { isBoss }) → { hp, atk, atkSpeed, gold, xp }
+wallMult(f) → number                                 // biomeStep per biome passed × every wall reached
+enemyStats(floor, typeId, { isBoss }) → { hp, atk, atkSpeed, gold, xp }  // hp × wallMult, atk × wallMult^0.7
 waveComposition(floor, wave) → typeId[]          // wave 1–4: 3–6 normals; wave 5: [boss, ...0–2 normals]
+                                                 // (boss minions only from types with hp mult ≤ 1.3)
 heroBaseStats(level) → { atk, hp }
 xpToNext(level) → number
 rollItem({ ilvl, chestLevel, premium }) → Item     // uses rarityOdds; premium: min rare, chestLevel+3
@@ -354,6 +397,7 @@ update(dt)                  // fixed step (main calls it at 1/60 s, many times w
 castSkill(slot) → boolean   // manual cast if ready and enemies present
 tapAt(wx, wy) → boolean     // world coords; true if it collected the flying chest
 challengeBoss()             // leave farming, jump to wave 5 of current floor
+spawnFlyingChest() → boolean // extra (tests / debugging): send a flying chest across now
 startDungeon(id) → boolean  // spends key via DD.state.useKey(); false if locked/no key/already in dungeon
 leaveDungeon()              // forfeit; back to campaign wave 1
 onStatsChanged()            // re-read hero stats (keep hp ratio); state calls this via bus 'stats:changed'
@@ -475,6 +519,10 @@ ui.frame(dt)          // cheap per-frame updates (HP bar, timers, cooldown sweep
 ui.showOffline(sum)   // AFK rewards modal
 ui.toast(text, kind)
 ```
+Toasts drop in over the top HUD, never over the battle canvas (its top band holds the flying chest and
+the boss bar). Battle moments the canvas already celebrates with a banner (level-up, floor cleared,
+dungeon won/failed, boss escaped, flying-chest reward) are toasted only while a sheet or modal covers
+the canvas.
 Layout (portrait column, max-width 480 px, centered on desktop over a dark backdrop; height 100%):
 1. **Top HUD**: hero portrait + level + XP bar, CP, currency pills (gold, gems, keys with regen timer, scrolls).
 2. **Stage strip**: "Floor 12 · The Crypt", wave pips 1–5 (5 = skull), boss timer bar, "Challenge Boss" button while farming, dungeon status while in a dungeon (with "Leave").
