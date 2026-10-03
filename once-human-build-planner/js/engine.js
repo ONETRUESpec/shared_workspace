@@ -196,7 +196,11 @@
    */
   function weaponAttackAtStar(weapon, star, starTable) {
     if (!weapon) return 0;
-    if (weapon.attackByStar && weapon.attackByStar[star] != null) return Number(weapon.attackByStar[star]);
+    if (weapon.attackByStar) {
+      const max = weapon.maxStars || 6;
+      const s = Math.min(max, Math.max(1, Math.round(star || 1)));
+      if (weapon.attackByStar[s] != null) return Number(weapon.attackByStar[s]);
+    }
     const base = Number(weapon.attack) || 0;
     const refStar = weapon.attackStar || 1;
     const ref = starMultiplier(refStar, starTable);
@@ -207,13 +211,17 @@
   // Damage computation
   // ---------------------------------------------------------------------------
   const DEFAULT_OPTIONS = {
-    critWeakspotModel: 'multiplicative',   // or 'additive' (1 + crit + weakspot)
-    elementalAffectsBullets: false,       // unverified: apply matching Elemental DMG% to direct hits
-    attackAndWeaponDmgSeparate: true,     // false: one additive bucket
+    critWeakspotModel: 'additive',        // 1 + crit + weakspot (community-observed); or 'multiplicative'
+    elementalAffectsBullets: true,        // matching Elemental DMG% also multiplies the weapon's own bullets (elemental weapons only)
+    attackAndWeaponDmgSeparate: true,     // false: Attack% and Weapon DMG% form one additive bucket
+    statusKeywordSeparate: false,         // true: (1+Status%)×(1+Keyword%) instead of one additive pool
+    damagePoolModel: 'multiplicative',    // 'additive': Weapon DMG%, Elemental%, DMG-vs-type%, Vulnerability%, All DMG% form ONE additive pool (datamined formula graph)
+    weakspotZoneMult: 1,                  // enemy body-part multiplier on weakspot hits (unknown, default 1)
     mitigation: 1,                        // target damage taken multiplier (level gap / armor) – unknown, default 1
     falloff: 1,                           // range falloff multiplier
     critRateCapPct: 100,
   };
+  const ELEMENTAL_BULLET_ELEMENTS = ['blaze', 'frost', 'blast', 'shock'];
 
   /**
    * @param {object} weapon  normalised weapon { name, class, element, keyword, attack, attackStar, attackByStar,
@@ -259,12 +267,20 @@
     const critDmgPct = (Number(weapon.critDmgPct) || 0) + flat(totals, 'critDmgPct');
     const weakspotPct = (Number(weapon.weakspotDmgPct) || 0) + flat(totals, 'weakspotDmgPct');
     const critMult = 1 + critDmgPct / 100;
-    const weakMult = 1 + weakspotPct / 100;
-    const critWeakMult = opts.critWeakspotModel === 'additive' ? (1 + critDmgPct / 100 + weakspotPct / 100) : critMult * weakMult;
+    const zone = Number(opts.weakspotZoneMult) || 1;
+    const weakMult = (1 + weakspotPct / 100) * zone;
+    const critWeakMult = (opts.critWeakspotModel === 'additive' ? (1 + critDmgPct / 100 + weakspotPct / 100) : critMult * (1 + weakspotPct / 100)) * zone;
 
-    const directBase = attack * weaponDmgMult
-      * (opts.elementalAffectsBullets ? (1 + elementalPct / 100) : 1)
-      * (1 + weaponVulnPct / 100) * commonMult * opts.falloff;
+    const elementalOnBullets = opts.elementalAffectsBullets && element && ELEMENTAL_BULLET_ELEMENTS.includes(element);
+    let directBase;
+    if (opts.damagePoolModel === 'additive') {
+      const pool = weaponDmgPct + (elementalOnBullets ? elementalPct : 0) + dmgVsPct + weaponVulnPct + allDmgPct;
+      directBase = attack * (1 + pool / 100) * opts.mitigation * opts.falloff;
+    } else {
+      directBase = attack * weaponDmgMult
+        * (elementalOnBullets ? (1 + elementalPct / 100) : 1)
+        * (1 + weaponVulnPct / 100) * commonMult * opts.falloff;
+    }
 
     const pellets = Number(weapon.pellets) || 1;
     const hits = {
@@ -315,15 +331,17 @@
           note: def.notes || null,
         };
       } else if (factor != null) {
-        const proc = psi * factor * (1 + (statusDmgPct + keywordPct) / 100) * (1 + kwElementalPct / 100) * (1 + finalPct / 100)
+        const factorPool = opts.statusKeywordSeparate ? (1 + statusDmgPct / 100) * (1 + keywordPct / 100) : (1 + (statusDmgPct + keywordPct) / 100);
+        const proc = psi * factor * factorPool * (1 + kwElementalPct / 100) * (1 + finalPct / 100)
           * (1 + statusVulnPct / 100) * commonMult;
         const ticks = def.tickSeconds && def.durationSeconds ? Math.round(def.durationSeconds / def.tickSeconds) : 1;
+        const maxStacks = def.maxStacks || 1;
         status = {
           keyword, model: 'psi', element: kwElement, factor, chancePct: chance,
-          perProc: proc, expected: proc, canCrit: false, canWeakspot: false,
+          perProc: proc, expected: proc, canCrit: !!def.canCrit, canWeakspot: !!def.canWeakspot,
           tickSeconds: def.tickSeconds || null, durationSeconds: def.durationSeconds || null, ticksPerApplication: ticks,
-          perApplication: proc * ticks,
-          note: def.notes || null,
+          perApplication: proc * ticks, maxStacks, perTickAtMaxStacks: proc * maxStacks,
+          note: def.notes || null, trigger: def.trigger || null,
         };
       } else {
         status = { keyword, model: 'unknown', chancePct: chance, perProc: null, expected: null, note: def.notes || 'No damage formula available for this keyword.' };
@@ -359,7 +377,7 @@
       inputs: { star, targetType, options: opts, pellets },
       attack: { base1Star: weaponAttackAtStar(weapon, 1, ctx && ctx.starTable), atStar: attackBase, starMultiplier: starMultiplier(star, ctx && ctx.starTable), flat: attackFlat, pct: attackPct, final: attack },
       multipliers: {
-        attackMult, weaponDmgMult, weaponDmgPct, elementalPct, elementalApplied: opts.elementalAffectsBullets,
+        attackMult, weaponDmgMult, weaponDmgPct, elementalPct, elementalApplied: !!elementalOnBullets, weakspotZoneMult: zone, damagePoolModel: opts.damagePoolModel,
         critRatePct: critRate * 100, critDmgPct, critMult, weakspotPct, weakMult, critWeakMult,
         dmgVsPct, weaponVulnPct, statusVulnPct, allDmgPct, commonMult, falloff: opts.falloff, mitigation: opts.mitigation,
       },

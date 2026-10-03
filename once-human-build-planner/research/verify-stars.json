@@ -1,0 +1,106 @@
+{
+  "question": "What exactly does each blueprint star (1★→6★) do to a WEAPON's displayed DMG and to an ARMOR piece's Max HP / Psi Intensity in Once Human, as a multiplier table? Are tier (I–V) and stars independent multiplicative factors? Does Epic cap at 5★ and Legendary at 6★? Do stars change anything else?",
+  "verdict": "Implement stars as a rarity-dependent LINEAR bonus on the 1★ value (additive steps of the base, not compounding), as a factor that is independent of and multiplied with the blueprint-tier (I–V) factor, applied ONLY to weapon DMG (per projectile) and to armor HP and Psi Intensity: displayed = round(base_T1_1★ × tierMult × starMult). Star tables: Legendary (cap 6★): 1.00 / 1.05 / 1.10 / 1.15 / 1.20 / 1.25. Epic (cap 5★): 1.00 / 1.06 / 1.11 / 1.17 / 1.22 (= +5.5%/star rounded to whole percent). Rare (cap 4★): 1.00 / 1.06 / 1.13 / 1.19. Standard/common (cap 3★): 1.00 / 1.07 / 1.14. The Legendary table is verified for weapons (DE.50 Jaws Tier I 128 → 160 at 6★; 17 in-game Tier-V 6★ weapon cards equal the Tier-V 1★ DMG × 1.25 exactly) and for armor (per-star table at every tier; fandom Lonewolf Hood Tier VI 925 = OHDB Tier-V 740 × 1.25). The Epic/Rare/Standard tables are verified for ARMOR by two independent datasets (legacy per-star table and 2026 in-game OCR: epic 5★ = OHDB T5 × 1.22 for all six slots) plus fandom Raid Helmet (rare) ×1.189 at 4★; for EPIC WEAPONS no per-star sample exists, so use 1.22 at 5★ by analogy and expose a toggle to flat 1.20. Stars do NOT change Pollution Resist (constant 21/28 across all stars), fire rate, magazine, crit rate, crit DMG, weakspot DMG, range, reload, special-effect values or set bonuses (6★ cards show identical FR/MAG/CR/CD/WS to 1★). Claim (B) 1.0…1.5 is a hard-coded placeholder in the lReDragol calculator, contradicted by every dataset; claim (C) '~4%/star' is the relative step of model (A) (5/105…5/120 = 4.8%→4.2%) and '1★ vs 3★ 10–15%' = +10%. Tier factors to combine with: armor HP ×1 / 1.3333 / 2.6667 / 5.3333 / 9.8333 (legacy; since v2.3.1 Tier-V HP is rebased ×1.2542, i.e. 12.333× Tier I, Psi unchanged), armor Psi ×1 / 1.5 / 2.375 / 3.75 / 5.75; weapon DMG ×1 / 1.547 / 2.469 / 3.859 / 5.867 (Tier I→V). IMPORTANT CORRECTION: OHDB's displayed weapon DMG (Jaws 494, Wildfire 444, Last Valor 174, Bullseye 1216) is the TIER IV 1★ value; Tier V 1★ = OHDB × 1.52 (751 / 675 / 264 / 1848). The planner's '≈3.85× Tier I→Tier V' is actually Tier I→Tier IV.",
+  "confidence": "high",
+  "evidenceFor": [
+    {
+      "source": "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/all_armor_stats.json (items.helmet.legendary.stars[1..6].levels[5]; same file at portable_calc_v2/data/menu/calc/bd_json/)",
+      "quote": "hp 590, 620, 649, 678, 708, 738 | psi_intensity 92, 97, 101, 106, 110, 115 | pollution_resist 21, 21, 21, 21, 21, 21  → HP ratios 1.000/1.051/1.100/1.149/1.200/1.251; Psi 1.000/1.054/1.098/1.152/1.196/1.250"
+    },
+    {
+      "source": "same file, items.boots.legendary (Tier V) and items.gloves.legendary",
+      "quote": "boots hp 1180, 1239, 1298, 1357, 1416, 1475 → exactly 1.00/1.05/1.10/1.15/1.20/1.25; gloves hp 885, 929, 974, 1018, 1061, 1106 → 1.000/1.050/1.101/1.150/1.199/1.250. Mean legendary HP ratio over all six slots: [1.0, 1.0503, 1.0998, 1.1497, 1.1997, 1.2503]"
+    },
+    {
+      "source": "same file, lower-tier rows (tier × star independence)",
+      "quote": "helmet legendary 2★ levels 1–5: 63/84/168/336/620 vs 1★ 60/80/160/320/590 (every tier ×1.05); helmet 4★: 69/92/184/368/678 (×1.15); mask 3★: 33/44/88/176/324 (×1.10); pants 6★: 180/240/480/960/1770 vs 144/192/384/768/1416 (every tier ×1.25); boots 2★ 126/168/336/672/1239 (×1.05)"
+    },
+    {
+      "source": "same file, epic / rare / common Tier V rows (rarity-dependent star table)",
+      "quote": "epic helmet 531, 563, 589, 621, 648 (×1.060/1.109/1.170/1.220); epic boots 1062, 1126, 1179, 1243, 1296 (×1.060/1.110/1.170/1.220); epic mask psi 104, 110, 115, 122, 127; rare helmet 472, 500, 533, 562 (×1.059/1.129/1.191); rare boots 944, 1001, 1067, 1123; common helmet 413, 442, 471 (×1.070/1.140); common top 1074, 1149, 1224. Mean HP ratios: epic [1.0601, 1.1098, 1.17, 1.2203], rare [1.0598, 1.1301, 1.1902], common [1.0695, 1.1402]"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/player.py (armor item class)",
+      "quote": "self.max_stars = {'legendary': 6, 'epic': 5, 'rare': 4, 'common': 3}[self.rarity]  …  def get_stats(self): star_data = self.base_stats_data.get(str(self.star), {}); levels_data = star_data.get('levels', {}); level_data = levels_data.get(str(self.level), {})  (the armor path reads the real per-star table, not the generic 1.0…1.5 multipliers)"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/data/raw/external-references/once_human_english_reference.json (OHDB item pages, Tier V rows)",
+      "quote": "Cage Helmet | HP +740 | Pollution Resist +12 | Psi Intensity +92 | Durability: 400 ; Falcon Cap | HP +666 | Pollution Resist +12 | Psi Intensity +83 ; Blast Helmet | HP +592 | Psi Intensity +74 ; Snowland Rustic Hat | HP +518 | Psi Intensity +64 ; Agent Mask | HP +333 | Psi Intensity +104 ; Agent Pants | HP +1598 | Psi Intensity +66  → every rarity = legacy Tier-V 1★ HP × 1.2542 (740/590, 666/531, 592/472, 518/413, 333/266, 1598/1274) with Psi unchanged: this is the v2.3.1 HP rebase of the 1★ base, not a star factor"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/data/custom-datamine/raw.json (armor.base_stats, 2026-03-01, '_note: Values shown are Tier V (max tier). Key = star level')",
+      "quote": "helmet legendary {hp 925, pollution_resist 12, psi_intensity 115} / epic {hp 813, 12, 101}; mask legendary {462, 16, 144} / epic {406, 16, 127}; top legendary {2405, 16, 80} / epic {2113, 16, 71}; bottoms legendary {2220, 12, 92} / epic {1950, 12, 81}; gloves legendary {1388, 12, 86} / epic {1219, 12, 76}; shoes legendary 1850/58, epic 1625/50  → legendary max-star / OHDB Tier-V 1★ = 925/740 = 1.250, 2405/1924 = 1.250, 2220/1776 = 1.250, 1850/1480 = 1.250, Psi 115/92 = 1.25; epic max-star / OHDB = 813/666 = 1.221, 406/333 = 1.219, 2113/1732 = 1.220, 1950/1598 = 1.220, 1219/999 = 1.220, 1625/1332 = 1.220, Psi 101/83 = 1.217, 127/104 = 1.221, 81/66 = 1.227"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/Lonewolf_Set , https://once-human.fandom.com/wiki/Savior_Hood , https://once-human.fandom.com/wiki/Bastille_Set (search snippets; pages blocked)",
+      "quote": "All three helmets have the same base stats: HP 60, Pollution Resist 9, and Psi Intensity 16, with Legendary rarity … Lonewolf Hood Enhancement Tier VI: HP: 925, Pollution Resist: 12, Psi Intensity: 115 … Savior Hood stats range from 60-925 HP, 3-12 Pollution Resist, and 16-115 Psi Intensity … Bastille Hood: 60-590 HP, 9-21 Pollution Resist, and 16-92 Psi Intensity (legacy table, Tier V 1★)"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/Raid_Set_(Armor) (rare set; snippet recorded in research/calibration.md §6)",
+      "quote": "Raid Helmet enhancement tier I HP 296 / PR 16 / Psi 92 → tier IV HP 352 / PR 16 / Psi 109. 352/296 = 1.189, 109/92 = 1.185  → matches the rare 4★ factor 1.19 (not 1.15 of a uniform +5% model, not 1.30 of claim B); Pollution Resist unchanged"
+    },
+    {
+      "source": "https://game8.co/games/Once-Human/archives/Weapons-DE50-Jaws and https://once-human.fandom.com/wiki/DE.50_-_Jaws (search snippets)",
+      "quote": "DE.50 Jaws is a legendary grade weapon … base damage of 128, fire rate of 190, and MAG capacity of 8 … Tier I = 128, Tier II = 198, Tier III = 316, Tier IV = 494, and Tier V = 751 … at 6★ (6-star), the DE.50 - Jaws has 160 DMG  → 160/128 = 1.25 at 6★ (Tier I); 128×1.25 = 160.0 exactly, vs 192 under claim B and 155.7 under compounding 4%"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md §II (OCR of in-game WeaponsOverview-FullStarsFullCalibsLvl5.png, 2026-03-02: 'Base stats represent Tier V, 6-Star')",
+      "quote": "DE.50 - Jaws | DMG 939, FR 190, MAG 9, CR 6%, CD 25%, WS 60% ; SOCR - The Last Valor | DMG 330, FR 515, MAG 30, CR 6%, CD 27%, WS 60% ; MPS7 - Outer Space | DMG 240, FR 850, MAG 35, CR 8%, CD 30%, WS 50% ; AWS.338 - Bullseye | DMG 2310, FR 40, MAG 5, CR 2%, CD 26%, WS 95% ; HAMR - Brahminy | DMG 1596 ; KVD - Boom! Boom! | DMG 319 ; KV-SBR - Little Jaws | DMG 209 ; MPS5 - Kumawink | DMG 270 ; TEC9 - Additional Rules | DMG 449  → vs Tier-V 1★ (fandom/wikily 751, 264, 192; OHDB×1.52 = 1848, 1277, 255, 167, 216, 359): 939/751 = 1.250, 330/264 = 1.250, 240/192 = 1.250, 2310/1848 = 1.250, 1596/1276.8 = 1.250, 319/255.4 = 1.249, 209/167.2 = 1.250, 270/215.8 = 1.251, 449/358.7 = 1.252. FR, MAG, Crit Rate, Crit DMG, Weakspot DMG are identical to the 1★ OHDB values → stars change DMG only"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/SOCR_-_The_Last_Valor (snippet) and https://wikily.gg/once-human/items/10411304/ ; Gledson-z/once-human-planner game_data.js (wikily mirror)",
+      "quote": "The SOCR - The Last Valor is Tier V with 264 DMG … corresponds to the Tier V version with Blueprint Enhancement Tier I (One Star) … base weapon damage is listed as 45 ; wikily/Gledson: dano 264 / cadencia 515 / carregador 30 ; OHDB/saitoh/lReDragol: damage 174 → 264/174 = 1.517 (Tier V / Tier IV); 264/45 = 5.867 (Tier V / Tier I), identical to Jaws 751/128 = 5.867"
+    },
+    {
+      "source": "https://game8.co/games/Once-Human/archives/Weapons-DE50-Wildfire and https://wikily.gg/once-human/items/de-50-wildfire-10111303/ (Epic pistol; snippets)",
+      "quote": "Tier I: 115 DMG, Tier II: 178, Tier III: 284, Tier IV: 444, Tier V: 675 … item 10111303 is the Tier 3 version … Damage (DMG): 284  → OHDB/lReDragol list Wildfire at 444 = Tier IV; tier ratios 1.548/1.596/1.563/1.520 identical to Jaws (1.547/1.596/1.563/1.520); wikily item-ID suffix 01/03/05 = tier, 99 = blueprint (not stars)"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/Blueprints , https://wikily.gg/once-human/armor-blueprints/ , https://steamcommunity.com/app/2139460/discussions/0/4514381284530733471/ (snippets)",
+      "quote": "Epic blueprints have a maximum of 5 stars, while Legendary blueprints have a maximum of 6 stars … Blueprint enhancement tiers increase the damage stat of weapons across all their blueprint tiers, with the number of 'stars' a blueprint has indicating its enhancement tier … Blueprint enhancement tiers further increase the HP and Psi Intensity of armor across all their blueprint tiers … Star Limit is also Rarity Locked, Blue Gear won't reach 5 or 6 Star"
+    },
+    {
+      "source": "https://steamcommunity.com/app/2139460/discussions/0/6330466705287939267/ and https://steamcommunity.com/app/2139460/discussions/0/671726025354256537/ (snippets)",
+      "quote": "approximately a 4% increase in damage per star … Weapon stars do increase damage, but the boost is relatively small-about 10-15% … comparing a 1-star and a 3-star Tier 1 SOCR  → consistent with the linear table: relative step 5/105 = 4.8%, 5/110 = 4.5%, 5/115 = 4.3%, 5/120 = 4.2%; 1★→3★ = +10%. Under claim B the steps would be 9.1%/8.3%/7.7%/7.1% and 1★→3★ = +20%"
+    }
+  ],
+  "evidenceAgainst": [
+    {
+      "source": "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/mechanics.py lines 1177, 1213–1223 (claim B)",
+      "quote": "PROGRESSION_SCALING_STATS = {'damage_per_projectile'} … star_multipliers = {1:1.0,2:1.1,3:1.2,4:1.3,5:1.4,6:1.5} ; level_multipliers = {1:1.0,2:1.05,3:1.10,4:1.15,5:1.20} ; calibration_bonuses = {0:0.0,1:0.02,…,6:0.12} … new_value = base_value * star_multiplier * level_multiplier * (1 + calibration_bonus)  — REJECTED: hard-coded placeholders; the same table makes Tier V only ×1.20 while every dataset shows Tier V = ×5.87 (weapons) / ×9.83 HP (armor); weapon_list.json contains no per-star data; the calculator's armor path (player.py get_stats) ignores these multipliers and reads the +5%/star table; tools/README_en.md: the OHDB importer 'uses public datamined sources as a bridge until direct extraction is complete'"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/player.py lines 38–70",
+      "quote": "star_multipliers = {1: 1.0, 2: 1.1, 3: 1.2, 4: 1.3, 5: 1.4, 6: 1.5} … (inside an unused calculate_stats(); get_stats() is what the UI calls)"
+    },
+    {
+      "source": "https://gamersandgeek.com/once-human-weapon-armor-gear-stars/ and a Steam anecdote (snippets recorded in research/calibration.md)",
+      "quote": "weapon stars increase damage by about 10-15% ; '1★→3★ 9950→10050 DPS' (~1%)  — vague / inconsistent with all numeric data"
+    },
+    {
+      "source": "lReDragol all_armor_stats.json data-quality caveats",
+      "quote": "items.top.epic stars 4 and 5 are identical rows (171/228/456/914/1685); items.helmet.rare star 1 level 3 = 256 (duplicate of level 4, should be 128); epic/rare Psi ratios scatter ±0.5%  → epic/rare/common per-star values carry ±0.01 uncertainty; legendary rows are clean"
+    },
+    {
+      "source": "0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md screenshot label 'FullCalibs'",
+      "quote": "Base stats represent Tier V, 6-Star, Full Calibrations baselines  — if a calibration DMG bonus were included, the implied star factor would be < 1.25. Rejected: weapon calibration was removed in v2.3.1 (2026-01-21) and the screenshot is dated 2026-03-02; the ratio is exactly 1.25 for every weapon and equals the independently verified armor 6★ factor and the Jaws 128→160 datum"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/Recurve_Crossbow (Epic; snippet)",
+      "quote": "Tier I: 223 DMG, Tier II: 304, Tier III: 416, Tier IV: 609, Tier V: 980  — does not match OHDB's 1072 at any tier or star (likely stale/rebalanced page); shows tier curves may differ per weapon or version; no bearing on the star factor"
+    },
+    {
+      "source": "https://www.oncehumandb.com/guides/best-weapons (snippet) and saitoh183 data/weapons.json tier field",
+      "quote": "SOCR - The Last Valor … dealing 174 damage, 515 RPM, a 30-round magazine at T5 … at Tier IV … the weapon has a DMG of 174 ; saitoh: Counter({('legendary', 5): 35, ('epic', 5): 26, ('rare', 5): 26, ('uncommon', 5): 35, ('uncommon', 1): 4})  — OHDB's own tier labelling is self-contradictory; the numeric evidence (Jaws 494, Wildfire 444 appear as Tier IV in game8/fandom tier tables; wikily Tier-4 item 10411304 = 174) says the OHDB value is Tier IV"
+    }
+  ],
+  "alternativesToExpose": [
+    "Star table mode (default = rarity-specific): Legendary 1.00/1.05/1.10/1.15/1.20/1.25; Epic 1.00/1.06/1.11/1.17/1.22; Rare 1.00/1.06/1.13/1.19; Standard 1.00/1.07/1.14  vs  'uniform +5% of 1★ per star for every rarity' (Epic 5★ = 1.20). Only Epic WEAPONS are unverified; both modes give identical Legendary results.",
+    "Legacy 'lReDragol' mode: 1.0/1.1/1.2/1.3/1.4/1.5 (6★ = ×1.50) — keep only as a labelled reference toggle; contradicted by every dataset.",
+    "Compounding mode ~4%/star (1.04^(star−1), 6★ ≈ 1.217) — reproduces the Steam '4% per star' anecdote; not recommended.",
+    "Rounding of the displayed stat: Math.round(base × tier × star) (matches 30×1.25→38, 1110×1.25→1388) vs round-half-even (OCR shows 370×1.25→462); affects ±1 HP/DMG only.",
+    "Weapon tier basis: treat OHDB/saitoh/lReDragol DMG as Tier IV 1★ and derive Tier V 1★ = ×1.52 (Jaws 751, Wildfire 675, Last Valor 264, Bullseye 1848) [default]  vs  treat it as Tier V (planner's current assumption).",
+    "Armor HP basis: legacy Tier-V 1★ (legendary helmet 590) vs post-v2.3.1 Tier-V 1★ (740 = ×1.2542, all rarities; Psi unchanged; Pollution 12/16). Default post-2.3.1 for the live game."
+  ],
+  "notes": "METHOD: read verbatim the lReDragol all_armor_stats.json / mechanics.py / player.py / weapon_list.json / items_and_sets.json, saitoh183 weapons.json+armor.json, TeeReckzi/OHMM OHDB reference JSON, 0x91CEA55 raw.json + INGAME_KNOWLEDGE_BIBLE.md, nohvenell2 Korean armor dump; computed all implied ratios with Python (script output kept in the scratchpad). Game sites (fandom, game8, wikily, OHDB, Steam, translate.goog mirrors, 0x91cea55.github.io) are blocked, so their numbers come from 15 search-engine snippets quoted above; GitHub API tree listing was refused and GitHub code search returned nothing new. KEY FINDINGS: (1) Stars are linear in the 1★ base, applied per tier identically (every lower-tier row in the legacy table equals base × tierMult × starMult), so tier and star are independent multiplicative factors. (2) Legendary 6★ = ×1.25 holds for weapons (Jaws 128→160; 17 in-game 6★ cards = T5 1★ × 1.25) and armor HP and Psi (legacy table; 0x91 OCR 925/740; fandom Lonewolf Hood 925). (3) The per-star step depends on rarity — the max-star totals are +25% (Legendary 6★), +22% (Epic 5★), +19% (Rare 4★), +14% (Standard 3★); Epic 5★ = 1.22 is confirmed for armor by two independent datasets (legacy table 648/531; 2026 OCR 813/666, 2113/1732, 1950/1598, 1625/1332 all = 1.220) and Rare 4★ = 1.19 by fandom Raid Helmet (352/296). Epic weapons at 5★ have no direct sample (medium confidence for the 1.22 value; the cap of 5★ itself is high confidence). (4) Nothing else scales with stars: Pollution Resist is flat across stars in all 24 slot×rarity series; FR/MAG/CR/CD/WS on 6★ cards equal 1★ values; no source links stars to special-effect values, set bonuses or mod slots (differences such as Jaws 'every 3 hits' vs older 'every 4 shots' are patch changes, not stars). (5) Side finding affecting the planner's weapon data: OHDB's displayed DMG is the Tier IV value (Jaws 494 = fandom/game8 Tier IV; Wildfire 444 = Tier IV; Last Valor 174 = wikily Tier-4 item page), so the '3.85× Tier I→Tier V' in research/weapons.md is Tier I→Tier IV; Tier V 1★ = OHDB × 1.52 and Tier I→V ≈ ×5.867 for guns (Jaws 751/128, Last Valor 264/45). The 0x91 'T5/6-Star' OCR values = Tier V 1★ × 1.25 (e.g. 939 = 751 × 1.25), with no residual calibration factor. (6) Side finding on armor: OHDB 'Durability 400' rows (helmet 740, mask 370, top 1924, pants 1776, gloves 1110, shoes 1480; epic 666/333/1732/1598/999/1332; rare 592/…; common 518/…) are post-v2.3.1 Tier V 1★ values = legacy × 1.2542 for ALL rarities (so not a 6★ factor, contrary to research/armor.md §5), Psi unchanged, Pollution rebased to 12/16; max-star values in the live game are therefore legendary 740×1.25 = 925 and epic 666×1.22 = 813. (7) 0x91 raw.json keys its epic max-star row as '6' but the value is the 5★ factor (1.22) — a schema label, not evidence of a 6★ Epic. NOT FOUND: an explicit official per-star table; intermediate-star DMG samples for any weapon (only the 1★ and 6★ Jaws endpoints and 6★ cards for 17 legendaries); any Epic/Rare weapon per-star sample; Starchrom per-star costs are out of scope here (see research/calibration.md §6)."
+}

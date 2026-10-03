@@ -1,0 +1,520 @@
+{
+  "question": "Verify the status-effect / weapon-keyword numbers (Burn, Frost Vortex, Power Surge, Unstable Bomber, Shrapnel, Bounce, The Bull's Eye, Fast Gunner, Fortress Warfare, Jaws, Blazing Bolts, Pyroclasm charged shot, Memory Storm) and the Psi Intensity scaling model the calculator should use as of Once Human v3.0.x (Sept/Oct 2026).",
+  "verdict": "Implement two damage families. (1) Psi-scaled Status procs: Burn = 12% Psi per 0.5 s tick for 6 s (12 ticks, 144% per stack-application; up to 5 stacks, tick damage x stacks), Frost Vortex = 50% Psi per 0.5 s for 4 s (8 ticks, 400%; 4.5 m radius; one vortex at a time), Power Surge = 50% Psi once per proc (status 6 s, Accuracy -40%), Unstable Bomber = 120% Psi per blast after 0.1 s (1.5 m radius, decays to min 50% over the radius). These cannot crit, cannot hit weakspots and ignore range falloff, except weapon/gear overrides (Gilded Gauntlets -> Burn crits; DE.50 Jaws -> Unstable Bomber crits with +25% crit rate; SN700 Gulped Lore -> guaranteed crit; ACS12 Corrosion grants Power Surge crit rate). (2) Attack-scaled bullet keywords: Shrapnel = 60% of Attack as Weapon DMG to a different random body part (same element as the weapon), Bounce = 40% of Attack per bounce (bounces to 1 enemy within 15 m then once more); both can crit, hit weakspots and suffer distance falloff, and are NOT scaled by Psi/Status DMG. Fast Gunner, The Bull's Eye and Fortress Warfare deal no damage of their own: Fast Gunner = +1% Fire Rate and +1% Attack per stack for 2 s, max 5 stacks; The Bull's Eye = Vulnerability +8% for 12 s (applies to all damage taken; Vulnerability Amplifier +8%); Fortress Warfare = 2 m zone, allies get Heavy Armor (Super Armor + Weapon DMG +20%) for 5 s. Trigger chances/conditions are NOT keyword constants - they are set by each weapon's text (e.g. Outer Space 25% on hit, Corrosion 70-80% on hit, Last Valor every 4 hits with crits counting double, Jaws every 4 shots, Abyss Glance every 20 hits with weakspots counting double, Predator 40% on hit, AWS.338 70% on weakspot hit) and 'X Trigger Chance +Y%' mod sub-attributes multiply the weapon's own chance ('based on the weapon's trigger chance'). Psi model: procDamage = Psi_eff x BaseFactor x (1 + sum StatusDMG%) x (1 + sum matching ElementDMG%) x (1 + sum KeywordDMG% e.g. 'Burn DMG') x (1 + sum KeywordFinalDMG% / 'Ultimate DMG') x (1 + sum Vulnerability% incl. Status Vulnerability) x (1 + sum DmgVsEnemyType%) x targetMitigation, where Psi_eff = flat Psi x (1 + sum PsiIntensity%) - i.e. Psi % bonuses are applied to the displayed flat Psi before the factor (every percentage bucket is additive inside, multiplicative between buckets). Pyroclasm Starter's charged Dragon's Breath is a special case: 95% of Attack dealt as Blaze Status DMG that still takes Crit/Weakspot multipliers (since 2026-02-25). Memory Storm (v3.0.6) only changes Conflicting Memories' trigger cadence (every 6 hits; every 12 hits or first after reload hits all targets in range), not Shrapnel's 60% factor. Blazing Bolts could not be found anywhere - leave null. No v3.0.x patch changed any base keyword factor; the only 3.0.x status-number changes found are Voodoo Doll ult 250% Psi and Psychic Kid Psi+5% -> Status DMG +5% (v3.0.7).",
+  "confidence": "medium",
+  "confidenceBreakdown": {
+    "baseFactors (Burn 12/0.5s/6s, Frost Vortex 50/0.5s/4s, Power Surge 50, Unstable Bomber 120, Shrapnel 60, Bounce 40)": "high - fandom + Steam guide + official patch notes + 0x91 2026 data agree; older texts explain every disagreement",
+    "canCrit/canWeakspot/falloff flags": "high for Burn, Power Surge, Unstable Bomber, Shrapnel, Bounce (explicit wiki sentences); medium for Frost Vortex (by analogy + 0x91 flags)",
+    "trigger rules": "medium - weapon texts come from OHDB mirrors/snippets; several are pre-2025 wording (Little Jaws, Mr Squid, Brahminy)",
+    "Psi bucket arithmetic (separate vs merged buckets, Psi% order)": "medium-low - no official formula; community calculators and the in-game stat sheet layout support separate buckets",
+    "Fortress Warfare / Fast Gunner / Bull's Eye numbers": "high",
+    "Jaws / Pyroclasm / Memory Storm": "medium (single-source snippets for 95% and +30%/8 s)",
+    "Blazing Bolts": "none - not found"
+  },
+  "keywords": {
+    "burn": {
+      "name": "Burn",
+      "element": "Blaze",
+      "damageFamily": "status",
+      "baseFactorPct": 12,
+      "scalesWith": "psi",
+      "tickSeconds": 0.5,
+      "durationSeconds": 6,
+      "ticksPerApplication": 12,
+      "totalPctOfPsiPerStackPerApplication": 144,
+      "maxStacksBase": 5,
+      "stackModel": "tick damage x current stacks (0x91: `x = tickDamage * currentStacks`); stack cap raised by Flame Resonance (+2), KAM Crank (+1), Blitz: Burning Wrath 25% chance +1 stack on trigger",
+      "triggerRule": "On hit, weapon-specific chance: KVD Boom! Boom! 18%, ACS12 Pyroclasm Starter 27%, EBR-14 Octopus 50%; KAM Crank every 7 hits. No universal chance; mods/sub-attributes add 'Burn Trigger Chance %' (multiplicative on the weapon's own chance).",
+      "canCrit": false,
+      "canWeakspot": false,
+      "distanceFalloff": false,
+      "exceptions": "Gilded Gauntlets unlock Burn crits (in-game sheet shows 'Burn Crit Rate 20%, Burn Crit DMG Bonus 20%'); EBR-14 Octopus has Keyword Crit Rate +20% in 0x91 data.",
+      "source": [
+        "https://once-human.fandom.com/wiki/Burn_(Status_Effect) (via search snippet)",
+        "https://steamcommunity.com/sharedfiles/filedetails/?id=3479671509 (Steam guide, via search snippet)",
+        "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js (0x91CEA55 calculator bundle v1.3.0, data dated 2026-03-05, read in full)",
+        "https://www.oncehuman.game/news/devBlog/20241123/40781_1195665.html (official Co-Dev Update 2024-11-23, via search snippet)"
+      ],
+      "confidence": "high",
+      "history": "Base DMG raised 10% -> 12% in the 2024-11-23 Co-Dev Update (lReDragol/OHDB mirrored text still says 10%)."
+    },
+    "frostVortex": {
+      "name": "Frost Vortex",
+      "element": "Frost",
+      "damageFamily": "status",
+      "baseFactorPct": 50,
+      "scalesWith": "psi",
+      "tickSeconds": 0.5,
+      "durationSeconds": 4,
+      "ticksPerApplication": 8,
+      "totalPctOfPsiPerApplication": 400,
+      "radiusMeters": 4.5,
+      "maxSimultaneous": 1,
+      "stackModel": "only 1 Frost Vortex may exist at a time (KV-SBR Icy Rain allows 2; Vortex Multiplier mod +1)",
+      "triggerRule": "Weapon-specific: KAM Abyss Glance every 20 hits (weakspot hits count as 2; reduced to 15 per 2024-11-23 blog), M416 Silent Anabasis ~10-12% on hit, KV-SBR Icy Rain 40% on crit. Mods/sub-attributes add 'Frost Vortex Trigger Chance %'.",
+      "canCrit": false,
+      "canWeakspot": false,
+      "distanceFalloff": false,
+      "source": [
+        "https://once-human.fandom.com/wiki/Frost_Vortex_(Status_Effect) (via search snippet)",
+        "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js (0x91CEA55 calculator bundle v1.3.0, data dated 2026-03-05, read in full)"
+      ],
+      "confidence": "medium-high",
+      "history": "Older sources (TheGamer, lReDragol/OHDB text) say 30% Psi per second for 4 s; both current fandom and the 2026-03 0x91 data say 50% per 0.5 s for 4 s. The buff date was not found."
+    },
+    "powerSurge": {
+      "name": "Power Surge",
+      "element": "Shock",
+      "damageFamily": "status",
+      "baseFactorPct": 50,
+      "scalesWith": "psi",
+      "tickSeconds": null,
+      "durationSeconds": 6,
+      "ticksPerApplication": 1,
+      "statusEffect": "Power Surge status 6 s, Accuracy -40% on target (Static Shock mod: duration -50%, DMG +20%)",
+      "triggerRule": "On hit, weapon-specific chance: MPS7 Outer Space 25% (+30% trigger factor 12 s after a kill, +40% 3 s after reload), SOCR Outsider 35%, ACS12 Corrosion 70-80% (no status on non-Meta-Humans; Power Surge Crit Rate/Crit DMG +15% per stack x10), R500 Hammerhead Shark 80% on weakspot hit, Critical Pulse continuous on hit (0.5 s CD) + charged orb lightning 75% Psi; Stun Baton light attacks. Mods: Shock Rampage +5% trigger chance (based on weapon chance) x4.",
+      "canCrit": false,
+      "canWeakspot": false,
+      "distanceFalloff": false,
+      "exceptions": "ACS12 Corrosion grants 'Power Surge Crit Rate +15%' stacks, implying its Power Surge can crit; Thunderclap mask: after 20 Power Surges next hit summons Celestial Thunder = 200% Psi Shock DMG.",
+      "source": [
+        "https://once-human.fandom.com/wiki/Power_Surge_(Status_Effect) (via search snippet)",
+        "https://steamcommunity.com/sharedfiles/filedetails/?id=3479671509 (Steam guide, via search snippet)",
+        "https://sportskeeda.com/mmo/once-human-status-damage-vs-elemental-damage-explained (via search snippet)",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (+ context_module.py, mechanics.py; read in full)",
+        "once-human.fandom.com/wiki/ACS12_-_Corrosion, wikily.gg Critical Pulse 10732404, game8 Power Surge build (via search snippet)"
+      ],
+      "confidence": "high",
+      "history": "No base-factor change found 2025-2026. 2024-11-23 blog mentioned per-weapon trigger changes (e.g. 40% on hit / 90% on weakspot for one weapon)."
+    },
+    "unstableBomber": {
+      "name": "Unstable Bomber",
+      "element": "Blast (Explosive)",
+      "damageFamily": "status",
+      "baseFactorPct": 120,
+      "scalesWith": "psi",
+      "tickSeconds": null,
+      "durationSeconds": null,
+      "ticksPerApplication": 1,
+      "delaySeconds": 0.1,
+      "blastRadiusMeters": 1.5,
+      "radiusDecay": "damage decays over the blast radius down to a minimum of 50%",
+      "triggerRule": "Weapon-specific: DE.50 Jaws every 4 shots; KV-SBR Little Jaws guaranteed on hit with 0.9 s cooldown (delay +0.2 s; +20% DMG per 0.1 s of delay), SN700 Gulped Lore 80% on weakspot hit (guaranteed crit), QBJ97 Fiery Trees chance on hit (full Spark raises chance).",
+      "canCrit": false,
+      "canWeakspot": false,
+      "distanceFalloff": false,
+      "exceptions": "DE.50 Jaws: 'Unstable Bomber can Crit, Crit Rate +25%'; SN700 Gulped Lore: guaranteed Crit DMG; Reckless Bomber mod converts 1% Crit Rate -> +0.5% UB DMG (i.e. UB normally cannot crit).",
+      "source": [
+        "https://once-human.fandom.com/wiki/Unstable_Bomber_(Status_Effect) (via search snippet)",
+        "https://www.oncehuman.game/news/update/20250617/40780_1241054.html (official balance notes, live 2025-06-19, via search snippet)",
+        "https://once-human.fandom.com/wiki/DE.50_-_Jaws (via search snippet)",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (+ context_module.py, mechanics.py; read in full)"
+      ],
+      "confidence": "high",
+      "history": "100% -> 120% in the 2025-06-17 balance notes (live 2025-06-19). 0x91 bundle still carries 70%/80% per-weapon factors (stale)."
+    },
+    "shrapnel": {
+      "name": "Shrapnel",
+      "element": "weapon's own element",
+      "damageFamily": "weapon",
+      "baseFactorPct": 60,
+      "scalesWith": "attack",
+      "tickSeconds": null,
+      "durationSeconds": null,
+      "ticksPerApplication": 1,
+      "target": "a different random body part of the same enemy",
+      "triggerRule": "Weapon-specific: SOCR The Last Valor every 4 hits (crits count as 2 hits; crit grants +1 trigger for 1 s; +30% Shrapnel Crit DMG), MG4 Conflicting Memories every 6 hits since v3.0.6 (was 12; Memory Storm every 12 hits or after reload), AWS.338 Black Panther every 4 hits, MPS7 Div-Evo 25% on hit, G17 Dusty 55% on weakspot hit, SN700 Finale chance on hit / guaranteed on weakspot hit.",
+      "canCrit": true,
+      "canWeakspot": true,
+      "distanceFalloff": true,
+      "source": [
+        "https://once-human.fandom.com/wiki/Shrapnel_(Status_Effect) (via search snippet)",
+        "https://www.oncehuman.game/news/update/20250521/40780_1235763.html (official Combat Balance Adjustments 2025-05-21, via search snippet)",
+        "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js (0x91CEA55 calculator bundle v1.3.0, data dated 2026-03-05, read in full)"
+      ],
+      "confidence": "high",
+      "history": "50% -> 60% of Attack in a 2025 'Combat Balance Adjustments' update (snippet names the change; the 2025-05-21 notes are the likeliest). lReDragol/OHDB and Gledson/wikily texts still say 50%."
+    },
+    "bounce": {
+      "name": "Bounce",
+      "element": "weapon's own element",
+      "damageFamily": "weapon",
+      "baseFactorPct": 40,
+      "scalesWith": "attack",
+      "tickSeconds": null,
+      "durationSeconds": null,
+      "ticksPerApplication": "1 per bounce; bounces to 1 enemy within 15 m then once more (2 bounces base)",
+      "triggerRule": "Weapon-specific: MPS5 Kumawink 25% on hit (Bounce base DMG +50%), HAMR Brahminy 60% (Bounces +2; 50% Bounce DMG to players; weakspot priority +50%), MG4 Mr Squid 90% on crit (old text), KVK 3 Bull (2026). Mods: Boomerang Bullet +2% trigger chance per trigger x10 (based on weapon chance).",
+      "canCrit": true,
+      "canWeakspot": true,
+      "distanceFalloff": true,
+      "source": [
+        "https://www.oncehuman.game/news/devBlog/20241123/40781_1195665.html (official Co-Dev Update 2024-11-23, via search snippet)",
+        "https://github.com/bramsey679/Once_Human_DPS_Calculator data/formulas.json bounce_base_multiplier 0.4"
+      ],
+      "confidence": "high",
+      "history": "Reworked 2024-11-23 to 40% of Attack per bounce. Pre-rework text (still in lReDragol/OHDB and the 0x91 generic table) was 60% Attack to a random enemy within 10 m; 0x91 per-weapon rows use 35%."
+    },
+    "theBullsEye": {
+      "name": "The Bull's Eye",
+      "element": null,
+      "damageFamily": "debuff",
+      "baseFactorPct": null,
+      "scalesWith": null,
+      "tickSeconds": null,
+      "durationSeconds": 12,
+      "effect": "marks/highlights the target; Vulnerability +8% for 12 s (Vulnerability Amplifier mod: +8% more). Vulnerability multiplies all damage taken (weapon and status) as its own (1+sum) factor.",
+      "triggerRule": "Weapon-specific: AWS.338 Bullseye 70% on weakspot hit (and first hit after weapon switch), DBSG Doombringer 30% on hit / 80% within 5 m, DE.50 Wildfire 60% on hit (80% spread), Recurve Crossbow 100% on weakspot hit (once per target per 15 s; +15% Crit Rate vs marked for 10 s), Scout Drone (Invisible Hunter cradle).",
+      "canCrit": null,
+      "canWeakspot": null,
+      "distanceFalloff": null,
+      "source": [
+        "https://once-human.fandom.com/wiki/The_Bull's_Eye_(Status_Effect) (via search snippet)",
+        "https://once-human.fandom.com/wiki/AWS.338_-_Bingo (via snippet)",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (+ context_module.py, mechanics.py; read in full)",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json (oncehumandb.com mod scrape, read in full)"
+      ],
+      "confidence": "high",
+      "history": "0x91 bundle models it as 10 s (stale/incorrect); fandom, lReDragol and OHDB mod text agree on 12 s."
+    },
+    "fastGunner": {
+      "name": "Fast Gunner",
+      "element": null,
+      "damageFamily": "self-buff",
+      "baseFactorPct": null,
+      "scalesWith": null,
+      "tickSeconds": null,
+      "durationSeconds": 2,
+      "effect": "each stack: Fire Rate +1% and Attack +1% for 2 s, up to 5 stacks (Blitzkrieg mask: +5 max stacks and +1% Fire Rate per stack; Shooting Blitz: duration +4 s and Weapon DMG +15% while active; Shoot Out: Weapon DMG +1.5% per trigger x20).",
+      "triggerRule": "On hit, weapon-specific chance: MG4 Predator 40% (infinite ammo 0.5 s at stack multiples of 5; +2% Weapon DMG per consecutive hit up to +80%), R500 Memento 36%, MG4 Wrath of Hades 40%, ACS12 Netherworld 50% when all pellets hit, MPS5 Primal Rage.",
+      "canCrit": null,
+      "canWeakspot": null,
+      "distanceFalloff": null,
+      "source": [
+        "https://once-human.fandom.com/wiki/Fast_Gunner_(Status_Effect) (via search snippet)",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (+ context_module.py, mechanics.py; read in full)",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json (oncehumandb.com mod scrape, read in full)",
+        "https://www.oncehuman.game/news/update/20250617/40780_1241054.html (official balance notes, live 2025-06-19, via search snippet)"
+      ],
+      "confidence": "high",
+      "history": "0x91 bundle models 10 stacks x Fire Rate +10 (stale/incorrect). Predator reworked 2025-06-19."
+    },
+    "fortressWarfare": {
+      "name": "Fortress Warfare",
+      "element": null,
+      "damageFamily": "zone-buff",
+      "baseFactorPct": null,
+      "scalesWith": null,
+      "tickSeconds": null,
+      "durationSeconds": 5,
+      "radiusMeters": 2,
+      "effect": "creates a 2 m radius zone; allies inside gain Heavy Armor for 5 s. Heavy Armor = Super Armor + Weapon DMG +20%. Mods: Light Cannon / Unbreakable Attack +15% while in state; United We Stand up to +40% Weapon DMG by players inside; Durable Territory +1 s per hit up to 5 s; Final Territory Weapon DMG +10% for 10 s after it ends; Portable Territory status lingers 2 s.",
+      "triggerRule": "Weapon-specific with cooldown: M416 Autumn Equinox every 7 hits (15 s CD; also heals 4% max HP/s in zone), DB12 Raining Cash on reload (10 s CD; Crit Rate +30%, DR 30%, Attack ramps to +40%), Compound Bow on aim complete (10 s CD), Ultra Force / Long Axe heavy attack (10 s CD), FP9/TEC9 Additional Rules on hit (CD).",
+      "canCrit": null,
+      "canWeakspot": null,
+      "distanceFalloff": null,
+      "source": [
+        "https://once-human.fandom.com/wiki/Fortress_Warfare_(Status_Effect) (via search snippet)",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (+ context_module.py, mechanics.py; read in full)",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json (oncehumandb.com mod scrape, read in full)"
+      ],
+      "confidence": "medium-high",
+      "history": "No numeric changes found 2025-2026."
+    },
+    "jaws_unstableBomber": {
+      "name": "DE.50 - Jaws (weapon-specific Unstable Bomber)",
+      "damageFamily": "status",
+      "baseFactorPct": 120,
+      "scalesWith": "psi",
+      "tickSeconds": null,
+      "durationSeconds": null,
+      "triggerRule": "every 4 shots (crits count toward the counter); after a weakspot hit: Explosive Elemental DMG +30% for 8 s",
+      "canCrit": true,
+      "critRateBonusPct": 25,
+      "canWeakspot": false,
+      "distanceFalloff": false,
+      "source": [
+        "https://once-human.fandom.com/wiki/DE.50_-_Jaws (via search snippet)",
+        "https://wikily.gg/once-human/items/10112303/ (via snippet)",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (+ context_module.py, mechanics.py; read in full)"
+      ],
+      "confidence": "medium",
+      "history": "Adjusted in v2.0.1 (2025-07-16) - details not retrieved; the 'can Crit, Crit Rate +25%' line is the current text."
+    },
+    "blazingBolts": {
+      "name": "Blazing Bolts",
+      "baseFactorPct": null,
+      "scalesWith": null,
+      "tickSeconds": null,
+      "durationSeconds": null,
+      "triggerRule": null,
+      "canCrit": null,
+      "canWeakspot": null,
+      "source": [],
+      "confidence": "none",
+      "history": "NOT FOUND in any dataset (lReDragol, saitoh/OHDB, 0x91, smus-rgb, bramsey) nor in two targeted web searches. Possibly a mis-remembered or mobile/CN-only name. Keep null and hide from the UI."
+    },
+    "pyroclasmChargedShot": {
+      "name": "ACS12 - Pyroclasm Starter: Dragon's Breath (charged shot)",
+      "element": "Blaze",
+      "damageFamily": "status (since 2026-02-25) but Attack-scaled",
+      "baseFactorPct": 95,
+      "scalesWith": "attack",
+      "tickSeconds": null,
+      "durationSeconds": null,
+      "effect": "On hit 27% chance to apply Burn; 20% chance to spawn a Deviant Particle (pick-up = Charging state 60 s). Reloading while charged loads Dragon's Breath rounds dealing Blaze Elemental Status DMG equal to 95% of Attack (Burn DMG bonus applies); Blaze DMG +20% while using Dragon's Breath, +8% per Charge consumed up to 4 stacks until the next reload.",
+      "triggerRule": "per pellet while Dragon's Breath is loaded",
+      "canCrit": true,
+      "canWeakspot": true,
+      "distanceFalloff": null,
+      "source": [
+        "https://wikily.gg/once-human/items/10234301/ and https://game8.co/games/Once-Human/archives/480978 (ACS12 - Pyroclasm Starter, via search snippet)",
+        "https://www.oncehuman.game/news/devBlog/20260212/40781_1287008.html (official dev blog 2026-02-12, via search snippet)"
+      ],
+      "confidence": "medium",
+      "history": "2026-02-25: charged-shot damage type changed Weapon DMG -> Status DMG 'while still allowing it to benefit from Crit Hit/Crit DMG and Weakspot/Weakspot DMG bonuses'. Same blog: Pathfinder and Additional Rules deal both Weapon and Status DMG."
+    },
+    "memoryStorm": {
+      "name": "MG4 - Conflicting Memories: Memory Storm (v3.0.6, 2026-09-16)",
+      "damageFamily": "weapon",
+      "baseFactorPct": 60,
+      "scalesWith": "attack",
+      "tickSeconds": null,
+      "durationSeconds": null,
+      "effect": "Every 6 hits triggers Shrapnel on the target (was 12). After a reload, or every 12 cumulative hits, the next Shrapnel becomes Memory Storm: Shrapnel is dealt to all targets within range simultaneously. Each Shrapnel application grants 0.5 s of stackable Super Armor. Intrinsic (older text): magazine +40; per 40 magazine capacity Shrapnel hits +1 part (up to +4); per 15 capacity over 100 Shrapnel DMG +8%.",
+      "triggerRule": "every 6 hits; Memory Storm every 12 hits or on the first Shrapnel after a reload",
+      "canCrit": true,
+      "canWeakspot": true,
+      "distanceFalloff": true,
+      "source": [
+        "https://www.oncehuman.game/news/devBlog/20260910/40781_1313572.html and .../devBlog/20260916/40781_1314019.html (official v3.0.6 dev blog + announcement, via search snippet)",
+        "https://once-human.fandom.com/wiki/MG4_-_Conflicting_Memories (via snippet)",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (+ context_module.py, mechanics.py; read in full)"
+      ],
+      "confidence": "medium-high"
+    },
+    "otherPsiScaledProcs": {
+      "celestialThunder (Thunderclap mask mod)": "after 20 Power Surges, next hit = 200% Psi Shock DMG",
+      "shatteringIce (weapon mod)": "50% Psi Ice DMG within 1 m when an enemy at the vortex centre is defeated",
+      "ghostLinkOverload (4pc set)": "50% Psi Status DMG per second to target + 3 m for 5 s at 10 Sync",
+      "kvdBoomBoomPyroExplosion": "300% Psi Blaze DMG on killing a burning enemy (lReDragol text)",
+      "silentAnabasisIceCrystalShatter": "100% Psi Frost Status DMG within 4.5 m",
+      "criticalPulseChargedOrb": "75% Psi Shock DMG within 5 m per hit while charged",
+      "voodooDollUltimate": "250% Psi (v3.0.7; was 200% Psi + 10)",
+      "source": [
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json (oncehumandb.com mod scrape, read in full)",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (+ context_module.py, mechanics.py; read in full)",
+        "https://www.oncehuman.game/news/update/20260924/40780_1315053.html (official v3.0.7 notes, via search snippet, as recorded in research/formula.md)",
+        "once-human.fandom.com/wiki/ACS12_-_Corrosion, wikily.gg Critical Pulse 10732404, game8 Power Surge build (via search snippet)"
+      ]
+    }
+  },
+  "psiIntensityModel": {
+    "formula": "proc = Psi_eff * factor * (1+S_status) * (1+S_element[matching]) * (1+S_keywordDmg) * (1+S_keywordFinal) * (1+S_vulnerability) * (1+S_vsEnemyType) * mitigation",
+    "psiEffective": "Psi_eff = flatPsi * (1 + S_psiPct). Evidence: 0x91 applies Tungsten AP ammo 'psiIntensityBonus 15%' as `Math.round(Psi * 15/100)` added to the Psi stat before any factor; the in-game stat sheet shows a single 'Psi Intensity 1052' line (no separate % line); Lightning Impulse Regulator/Pulse Power Device text 'Psi Intensity +30% for 60s'.",
+    "bucketsAreAdditiveInsideMultiplicativeBetween": "0x91 `Lm()`: finalDamage = base * scalingFactor * PRODUCT over buckets of (1 + sum(stat%)/100); buckets = weapon_damage, elemental_damage, status_damage, attack_percent, psi_increase, burn/frost_vortex/power_surge/shrapnel/unstable_bomber/bounce _factor, *_final, hit_amplifier (Crit DMG + Weakspot DMG summed in ONE bucket), target_normal/elite/boss, vulnerability. lReDragol calculate_status_damage: base * (1+status%) * (1+elemental%) * (1+element-specific%) * (1+vulnerability%).",
+    "statusVsElemental": "separate multiplicative factors - Sportskeeda worked example 800 Psi x 50% = 400; x (1+0.20) x (1+0.06) = 508.8",
+    "keywordDmgVsStatusDmg": "modelled as separate buckets (in-game sheet lists 'Status DMG Bonus 128%', 'Elemental DMG Bonus Blaze 91.3%', 'Burn DMG Bonus 87%' as distinct lines; 0x91 keeps BurnFactor separate from StatusDamage). Fandom's shorthand '12% x Psi x (1 + Burn DMG Factor Bonus) x (1 + Burn Final DMG Bonus)' may fold Status/Blaze/Burn into one 'Factor' - expose a toggle.",
+    "finalVsFactor": "'Final DMG' / 'Ultimate DMG' mods (Frostwave Wither +30% FV final, Pinpoint Strike +35% UB final, First Electrocution +35% PS ultimate) are a separate multiplicative bucket from 'X DMG +%' factor bonuses (0x91 ADR-002 / Bible 'The 113 Test').",
+    "perStackMultipliers": "Blaze Amplifier 'every Burn stack +3% Psi Intensity DMG' and Reckless Bomber '1% Crit Rate -> +0.5% UB DMG' are keyword-factor bucket additions.",
+    "weaponVsStatusVulnerability": "since 2025-12-23 Deviation vulnerability is split into Weapon Vulnerability and Status Vulnerability; The Bull's Eye's generic 'Vulnerability +8%' applies to both families."
+  },
+  "patchHistory2025_2026": [
+    "2024-11-23 Co-Dev Update: Burn base 10% -> 12%; Bounce reworked to 40% of Attack per bounce (15 m, bounces twice); Frost Vortex trigger delay reduced; Little Jaws UB now on hit; Abyss Glance FV hits 20 -> 15.",
+    "2025 Combat Balance Adjustments (2025-05-21 notes most likely): Shrapnel 50% -> 60% of Attack; Reload Efficiency consolidated.",
+    "2025-06-17 (live 06-19): Unstable Bomber 100% -> 120%; Predator Fast Gunner 40% on hit + infinite ammo at multiples of 5; Doombringer Attack +12% x3.",
+    "2025-07-16 v2.0.1: DE.50 Jaws adjusted (details not retrieved; current text: UB can crit, Crit Rate +25%).",
+    "2025-12-23: combat-Deviation vulnerability split into Weapon / Status Vulnerability.",
+    "2026-02-25: Pyroclasm Starter charged shot Weapon DMG -> Status DMG, still crits/weakspots.",
+    "2026-07-22 v3.0.2: SN700 Finale Reverb max stacks 5 -> 4, 4% -> 5% per stack.",
+    "2026-09-16 v3.0.6: MG4 Conflicting Memories Shrapnel every 12 -> 6 hits; Memory Storm added; 0.5 s stackable Super Armor per Shrapnel.",
+    "2026-09-28 v3.0.7: Voodoo Doll ult 200% Psi + 10 -> 250% Psi; Psychic Kid Psi Intensity +5% -> Status DMG +5%; Treacherous Tides 2pc back to 12% Weapon & Status DMG.",
+    "No v3.0.x change to Burn/Frost Vortex/Power Surge/Unstable Bomber/Shrapnel/Bounce base factors was found."
+  ],
+  "evidenceFor": [
+    {
+      "source": "https://once-human.fandom.com/wiki/Burn_(Status_Effect) (via search snippet)",
+      "quote": "Burn deals 12% PSI Intensity as Status DMG every 0.5s for 6s. It can stack up to 5 times. ... 12% x PSI Intensity x (1 + Burn DMG Factor Bonus) x (1 + Burn Final DMG Bonus)"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js (0x91CEA55 calculator bundle v1.3.0, data dated 2026-03-05, read in full)",
+      "quote": "{id:\"status-burn\",name:\"Burn\",baseTickIntervalSeconds:.5,baseDurationSeconds:6,baseMaxStacks:5,scalingFactor:.12,scalingStat:L.PsiIntensity ...} ... {id:\"status-vortex\",name:\"Frost Vortex\",baseTickIntervalSeconds:.5,baseDurationSeconds:4,baseMaxStacks:1,scalingFactor:.5,scalingStat:L.PsiIntensity}"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js (0x91CEA55 calculator bundle v1.3.0, data dated 2026-03-05, read in full)",
+      "quote": "const y0={[me.Burn]:{scalingFactor:.12,baseStatType:L.PsiIntensity,canCrit:!1,canWeakspot:!1},[me.Shrapnel]:{scalingFactor:.6,baseStatType:L.DamagePerProjectile,canCrit:!0,canWeakspot:!0},[me.FrostVortex]:{scalingFactor:.5,baseStatType:L.PsiIntensity,canCrit:!1,canWeakspot:!1},...,[me.Bounce]:{...canCrit:!0,canWeakspot:!0},[me.BullsEye]:{baseTriggerChance:.7,...}}"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js (0x91CEA55 calculator bundle v1.3.0, data dated 2026-03-05, read in full)",
+      "quote": "function Lm(e,t,n,r=!1,i=1){let l=e*i; ... for(const p of t){let m=0; for(const x of p.contributors) if(uu(x.condition,n)){const O=n.statValues.get(x.stat)??0; ... m+=O ...} const y=1+m/100; ... l*=y ...} return{finalDamage:l,...}}  (base x scalingFactor x PRODUCT of (1 + bucket sum))"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js (0x91CEA55 calculator bundle v1.3.0, data dated 2026-03-05, read in full)",
+      "quote": "const A=p.snapshot[L.PsiIntensity]||0;if(A&&S.psiIntensityBonus>0){const C=Math.round(A*(S.psiIntensityBonus/100));x.stats.add(L.PsiIntensity,C,`Ammunition: ${S.name} (+${S.psiIntensityBonus}%)`)}  (Psi % added to flat Psi before factors)"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js (0x91CEA55 calculator bundle v1.3.0, data dated 2026-03-05, read in full)",
+      "quote": "{id:ht.HitAmplifier,contributors:[{stat:L.CritDamagePercent,condition:Uo(\"wasCrit\")},{stat:L.WeakspotDamagePercent,condition:...wasWeakspot...}]} ... {id:ht.BurnFactor,contributors:[{stat:L.BurnDamageFactor,condition:Yt(me.Burn)}]} ... {id:ht.BurnFinal,...} (separate buckets for Status DMG, Element DMG, Keyword Factor, Keyword Final)"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js (0x91CEA55 calculator bundle v1.3.0, data dated 2026-03-05, read in full)",
+      "quote": "DoT tick: const{finalDamage:y}=Lm(u,Bm,h,!1,l.scalingFactor),x=y*i.currentStacks; n.recordDamage(x,`${l.name} Tick`...)  (Burn tick damage multiplied by current stacks)"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/Frost_Vortex_(Status_Effect) (via search snippet)",
+      "quote": "traps enemies within a 4.5m radius and inflicts 50% PSI intensity status damage every 0.5s for 4s ... Only 1 Frost Vortex may exist at any time"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/Power_Surge_(Status_Effect) (via search snippet)",
+      "quote": "Power Surge deals Status DMG of 50% Psi Intensity once and inflicts Power Surge status for 6s with an Accuracy -40% debuff ... the additional damage cannot Crit, cannot strike Weakspots, and will not decay with distance"
+    },
+    {
+      "source": "https://steamcommunity.com/sharedfiles/filedetails/?id=3479671509 (Steam guide, via search snippet)",
+      "quote": "Power Surge Triggers AoE Shock damage equal to 50% of Psi Intensity ... ignores critical hits, weak spots, and distance reduction ... Actual Factor = 50% x (1+Power Surge DMG Factor Bonus) x (1+Power Surge Final DMG Bonus)"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/Unstable_Bomber_(Status_Effect) (via search snippet)",
+      "quote": "triggers 1 Status DMG blast of 120% PSI Intensity after 0.1s with a blast radius of 1.5m. The damage decays over the explosion distance, down to a minimum of 50% ... it cannot cause crit damage, cannot strike enemy weakspots, and will not decay with distance"
+    },
+    {
+      "source": "https://www.oncehuman.game/news/update/20250617/40780_1241054.html (official balance notes, live 2025-06-19, via search snippet)",
+      "quote": "Unstable Bomber: Damage increased from 100% to 120%"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/Shrapnel_(Status_Effect) (via search snippet)",
+      "quote": "Upon hitting an enemy with a bullet, Shrapnel deals +60% Attack as Weapon DMG to a different random part. The element type is the same as the weapon's element ... can cause crit damage, hit weakspots, and will decay with distance"
+    },
+    {
+      "source": "search snippet citing the official Combat Balance Adjustments (oncehuman.game/news/update/20250521/40780_1235763.html)",
+      "quote": "the Shrapnel keyword's base damage multiplier was changed from 50% to 60%"
+    },
+    {
+      "source": "https://www.oncehuman.game/news/devBlog/20241123/40781_1195665.html (official Co-Dev Update 2024-11-23, via search snippet)",
+      "quote": "Each bounce deals Weapon DMG equal to 40% of your Attack ... Burn's Base DMG was increased from 10% to 12%"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/Fast_Gunner_(Status_Effect) (via search snippet)",
+      "quote": "each stack grants Fire Rate +1% and Attack +1% for 2 seconds, with the effect able to stack up to 5 times"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/The_Bull's_Eye_(Status_Effect) (via search snippet)",
+      "quote": "The Bull's Eye marks and highlights a target, increasing their Vulnerability by 8%, lasting 12 seconds ... when hitting a Weakspot with a weapon, there is a 70% chance to apply The Bull's Eye"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/Fortress_Warfare_(Status_Effect) (via search snippet)",
+      "quote": "a passive weapon status that, when triggered, creates an area of effect within a 2m radius that grants allies Heavy Armor for 5s. The Heavy Armor provides Super Armor with Weapon DMG +20%"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (+ context_module.py, mechanics.py; read in full)",
+      "quote": "DB12 - Raining Cash: apply_status heavy_armor duration 5 'Grants Super Armor with Weapon DMG +20%'; M416 - Autumn Equinox: every_n_hits n=7 cooldown 15 -> fortress_warfare '2m radius ... Heavy Armor for 5 seconds and recovers 4% of max HP per second'; DE.50 - Jaws: every_n_shots n=4 -> unstable_bomber, passive unstable_bomber_crit_bonus crit_rate_percent 25 can_crit true; AWS.338 - Bullseye: weakspot_hit chance 70 -> the_bullseye 'Vulnerability +8% for 12 seconds'; MG4 - Predator: hit_target chance 40 -> fast_gunner, 'Fire Rate +1% and Attack +1% for 2 seconds', max_stacks 5; SOCR - The Last Valor: every_n_hits n=4 -> shrapnel can_crit true can_hit_weakspots true decay true"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (+ context_module.py, mechanics.py; read in full) context_module.py",
+      "quote": "def calculate_status_damage(self, base_damage, damage_type, ...): damage *= 1 + status_damage_percent/100; damage *= 1 + elemental_damage_percent/100; ... apply_dynamic_damage_bonuses: damage *= 1 + vulnerability_percent/100 ... if damage_kind == 'burn': damage *= 1 + burn_elemental_damage_percent/100; deal_status_damage(...): apply_direct_damage(damage*target_count, is_crit=False, weakspot_hit=False)"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/DE.50_-_Jaws (via search snippet)",
+      "quote": "The Unstable Bomber is triggered every 4 shots ... After hitting a Weakspot, you gain Explosion Elemental DMG +30% for 8s ... Unstable Bomber can Crit, and has Crit Rate +25%"
+    },
+    {
+      "source": "once-human.fandom.com/wiki/ACS12_-_Corrosion, wikily.gg Critical Pulse 10732404, game8 Power Surge build (via search snippet)",
+      "quote": "MPS7 - Outer Space: 25% chance to trigger Power Surge when hitting the enemy, Power Surge trigger factor +30% after defeating an enemy for 12s, and +40% after reloading for 3s. ACS12 - Corrosion: 80% chance to trigger Power Surge ... no longer inflict Power Surge status on non-Meta-Human units. Power Surge Crit Rate +15% with Power Surge Crit DMG +15% for 6s, stacking up to 10 times. Critical Pulse: ... hitting a target deals Shock Elemental Status DMG of 75% Psi intensity to targets within 5m"
+    },
+    {
+      "source": "https://wikily.gg/once-human/items/10234301/ and https://game8.co/games/Once-Human/archives/480978 (ACS12 - Pyroclasm Starter, via search snippet)",
+      "quote": "When reloading while charged, the ammunition is replaced with Dragon's Breath rounds that deal Blaze Elemental Status DMG equal to 95% of Attack (with Burn DMG bonus applying) ... Blaze DMG +20%, with additional increases when consuming Charges of +8% per stack, stackable up to 4 stacks until the next reload ... on hit, there's a 27% chance to apply Burn"
+    },
+    {
+      "source": "https://www.oncehuman.game/news/devBlog/20260212/40781_1287008.html (official dev blog 2026-02-12, via search snippet)",
+      "quote": "damage type of Pyroclasm Starter was changed from Weapon DMG to Status DMG when charged, while still allowing it to benefit from Crit Hit/Crit DMG and Weakspot/Weakspot DMG bonuses"
+    },
+    {
+      "source": "https://www.oncehuman.game/news/devBlog/20260910/40781_1313572.html and .../devBlog/20260916/40781_1314019.html (official v3.0.6 dev blog + announcement, via search snippet)",
+      "quote": "Every 6 hits triggers Shrapnel on the target. After reloading, or every 12 cumulative hits, the next Shrapnel trigger is upgraded to [Memory Storm]: dealing Shrapnel to targets within range simultaneously ... Each time a Shrapnel effect is applied to a target, the weapon grants Super Armor for 0.5s, and this effect can stack. (Version 3.0.6, September 16, 2026)"
+    },
+    {
+      "source": "https://sportskeeda.com/mmo/once-human-status-damage-vs-elemental-damage-explained (via search snippet)",
+      "quote": "Psi Intensity 800 -> Power Surge 400 (50%) ... Status Damage 20% and Shock Elemental Damage 6%: 400 x (1 + 20/100) x (1 + 6/100) = 508.8"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json (oncehumandb.com mod scrape, read in full)",
+      "quote": "Shock Rampage: Inflicting Power Surge grants +5% Power Surge Trigger Chance (based on weapon's Trigger Chance) for 5s, up to 4 stack(s). Boomerang Bullet: Each time Bounce is triggered, its trigger chance +2% (based on the weapon's trigger chance). Blaze Amplifier: Every stack of Burn grants +3% Psi Intensity DMG. Reckless Bomber: For every 1% Crit Rate, Unstable Bomber DMG +0.5%. Thunderclap: After triggering Power Surge 20 times, the next hit summons Celestial Thunder (Shock DMG of 200% Psi Intensity). Vulnerability Amplifier: The Bull's Eye adds Vulnerability +8%. Flame Resonance: Max Burn stack +2, Burn duration -20%"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/data/custom-datamine/build-comparison-stats.md (real Lv50 stat sheets)",
+      "quote": "Psi Intensity: 1052 ... Status DMG Bonus: 128.0% ... Elemental DMG Bonus Blaze: 91.3% ... Burn DMG Bonus: 87.0% ... Burn Trigger Chance Bonus: 2.4% ... (Gilded Gloves build) Burn Crit Rate: 20.0%, Burn Crit DMG Bonus: 20.0%"
+    }
+  ],
+  "evidenceAgainst": [
+    {
+      "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js (0x91CEA55 calculator bundle v1.3.0, data dated 2026-03-05, read in full)",
+      "quote": "[me.PowerSurge]:{scalingFactor:1,...}, [me.UnstableBomber]:{scalingFactor:.7,baseTriggerChance:1,canCrit:!0}, [me.Bounce]:{scalingFactor:.6}; per-weapon rows: Unstable Bomber .7/.8, Power Surge .35, Bounce .35; buff-fastgunner baseMaxStacks:10 FireRate valuePerStack:10; status-bullseye baseDurationSeconds:10; buff-fortress-warfare CritRatePercent 15 for 10 s  -- internally inconsistent with its own DoT table and contradicted by official notes/fandom; treated as stale placeholders"
+    },
+    {
+      "source": "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (+ context_module.py, mechanics.py; read in full)",
+      "quote": "KAM - Crank / KVD - Boom! Boom!: 'Deals Status DMG of 10% Psi Intensity every 0.5s for 6s' (pre-2024-11-23 value); Abyss Glance / Silent Anabasis / Icy Rain: '30% Psi Intensity Status DMG per second for 4 seconds' (older Frost Vortex text); Last Valor / Div-Evo / Dusty: 'Weapon DMG of 50% Attack' (pre-buff Shrapnel); Kumawink / Brahminy / Mr Squid: 'Weapon DMG of 60% Attack to a random enemy within a 10m radius' (pre-rework Bounce); Little Jaws: 'blast of 100% Psi Intensity' (pre-June-2025 UB); context_module PERSISTENT_MANNEQUIN_EFFECT_DEFINITIONS burn multiplier 0.4 tick 1.0 (mannequin placeholder)"
+    },
+    {
+      "source": "https://www.thegamer.com/once-human-frost-vortex-build-guide-how-to/ (via snippet, older)",
+      "quote": "Frost Vortex deals 30% PSI Intensity as Status DMG per second in a 4.5m radius"
+    },
+    {
+      "source": "https://gamerant.com/once-human-status-damage-explained/ (via snippet, older)",
+      "quote": "effects like Bounce, Shrapnel, and Unstable Bomber are affected by damage fall-off (contradicts current fandom 'will not decay with distance' for Unstable Bomber)"
+    },
+    {
+      "source": "https://github.com/Abhijanbasyal/OncehUmanCalculator (2025-07)",
+      "quote": "damage = psi*0.12 * elemental * status * weaponBonus * weakspot * (1+critRate*critDamage) * 5  (author lets Burn crit/weakspot and scale with Weapon DMG - contradicted by the wiki)"
+    },
+    {
+      "source": "https://once-human.fandom.com/wiki/Burn_(Status_Effect) (via search snippet)",
+      "quote": "12% x PSI Intensity x (1 + Burn DMG Factor Bonus) x (1 + Burn Final DMG Bonus) - a two-bucket shorthand that does not say whether Status DMG %, Blaze DMG % and Burn DMG % are one additive 'Factor' or separate multiplicative factors"
+    },
+    {
+      "source": "data/formula.json (current planner file)",
+      "quote": "powerSurge ... 'applies a Shock state lasting 2 s', duration 2  -- fandom and lReDragol say the Power Surge status lasts 6 s"
+    }
+  ],
+  "alternativesToExpose": [
+    "Keyword DMG % ('Burn DMG +X%') as a separate multiplicative bucket (default) vs merged additively into the Status DMG % bucket (fandom's single 'DMG Factor Bonus' reading).",
+    "Element DMG % (Blaze/Frost/Shock/Blast) as its own bucket (default, Sportskeeda example) vs merged into Status DMG %.",
+    "Psi Intensity % applied to flat Psi before the factor (default) vs as a trailing multiplier on proc damage (mathematically identical unless flat Psi additions from other sources are ordered after it - expose only as an ordering note).",
+    "Frost Vortex legacy model 30% Psi per 1 s tick for 4 s (older guides/OHDB text) vs current 50% per 0.5 s.",
+    "Unstable Bomber 100% (pre-2025-06-19) vs 120%; Shrapnel 50% (pre-2025) vs 60%; Burn 10% (pre-2024-11-23) vs 12% - as a 'legacy values' preset only.",
+    "Unstable Bomber radius decay: apply average blast multiplier (e.g. 0.75-1.0) vs full 120% at the centre.",
+    "Burn stacking: multiply tick by current stacks (0x91) vs treat each stack as an independent 6 s DoT (same steady-state, different ramp).",
+    "Crit x Weakspot on Shrapnel/Bounce/Pyroclasm charged shots: additive in one 'Hit Amplifier' bucket (0x91 ADR-002, KremaOps) vs multiplicative (OH-Calculator).",
+    "Power Surge status duration 6 s (fandom, default) vs 2 s (current formula.json) - only matters for Shock Diffusion / 'damage to shocked target' effects.",
+    "Trigger chance sub-attributes: multiply the weapon's own chance (mod text 'based on the weapon's trigger chance', default) vs add flat percentage points.",
+    "Shotgun pellets: roll the proc per pellet vs per shot (unverified; Doombringer/Netherworld text implies per-pellet hit counting)."
+  ],
+  "notes": "Method: egress proxy blocked all game sites; numbers were taken from GitHub-hosted datasets read in full (lReDragol weapon_list.json/mechanics.py/context_module.py, saitoh183 OHDB mod scrape, 0x91CEA55 built bundle and stat-sheet transcript) and from 15 WebSearch snippets of fandom / official oncehuman.game pages. The GitHub API/HTML tree endpoints for TeeReckzi/OHMM and 0x91cea55 were policy-blocked (403) so OHMM's loadoutEffectResolver.ts could not be read. Corrections to data/formula.json: Power Surge status duration should be 6 s (not 2 s); add maxStacks 5 to Burn with stack multiplication; Shrapnel 60% confirmed (history 50%->60%); Bull's Eye 12 s and Fast Gunner 5x(+1%/+1%) confirmed; Fortress Warfare, Jaws, Pyroclasm charged shot and Memory Storm can now be filled; Blazing Bolts stays null (no source). Trigger chances must live on the weapon records, not on the keyword: the per-weapon rules above come from OHDB-mirrored text and several (Little Jaws, Mr Squid, Brahminy, Icy Rain) are pre-2025 wording - mark them low confidence in weapons.json. Expected status DPS = sum over procs of procsPerSecond x procDamage with procsPerSecond = hitsPerSecond x effectiveTriggerChance (or hitsPerSecond / N for every-N-hits weapons, counting crits/weakspots double where the text says so); DoTs cap at max stacks x tickDamage / tickInterval while sustained.",
+  "sourcesConsulted": [
+    "https://once-human.fandom.com/wiki/Burn_(Status_Effect) (via search snippet)",
+    "https://once-human.fandom.com/wiki/Frost_Vortex_(Status_Effect) (via search snippet)",
+    "https://once-human.fandom.com/wiki/Power_Surge_(Status_Effect) (via search snippet)",
+    "https://once-human.fandom.com/wiki/Unstable_Bomber_(Status_Effect) (via search snippet)",
+    "https://once-human.fandom.com/wiki/Shrapnel_(Status_Effect) (via search snippet)",
+    "https://once-human.fandom.com/wiki/Fast_Gunner_(Status_Effect) (via search snippet)",
+    "https://once-human.fandom.com/wiki/The_Bull's_Eye_(Status_Effect) (via search snippet)",
+    "https://once-human.fandom.com/wiki/Fortress_Warfare_(Status_Effect) (via search snippet)",
+    "https://once-human.fandom.com/wiki/DE.50_-_Jaws (via search snippet)",
+    "https://steamcommunity.com/sharedfiles/filedetails/?id=3479671509 (Steam guide, via search snippet)",
+    "https://www.oncehuman.game/news/devBlog/20241123/40781_1195665.html (official Co-Dev Update 2024-11-23, via search snippet)",
+    "https://www.oncehuman.game/news/update/20250521/40780_1235763.html (official Combat Balance Adjustments 2025-05-21, via search snippet)",
+    "https://www.oncehuman.game/news/update/20250617/40780_1241054.html (official balance notes, live 2025-06-19, via search snippet)",
+    "https://www.oncehuman.game/news/devBlog/20260212/40781_1287008.html (official dev blog 2026-02-12, via search snippet)",
+    "https://www.oncehuman.game/news/devBlog/20260910/40781_1313572.html and .../devBlog/20260916/40781_1314019.html (official v3.0.6 dev blog + announcement, via search snippet)",
+    "https://www.oncehuman.game/news/update/20260924/40780_1315053.html (official v3.0.7 notes, via search snippet, as recorded in research/formula.md)",
+    "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js (0x91CEA55 calculator bundle v1.3.0, data dated 2026-03-05, read in full)",
+    "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (+ context_module.py, mechanics.py; read in full)",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json (oncehumandb.com mod scrape, read in full)",
+    "https://sportskeeda.com/mmo/once-human-status-damage-vs-elemental-damage-explained (via search snippet)",
+    "https://wikily.gg/once-human/items/10234301/ and https://game8.co/games/Once-Human/archives/480978 (ACS12 - Pyroclasm Starter, via search snippet)",
+    "once-human.fandom.com/wiki/ACS12_-_Corrosion, wikily.gg Critical Pulse 10732404, game8 Power Surge build (via search snippet)",
+    "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/data/custom-datamine/build-comparison-stats.md",
+    "https://github.com/bramsey679/Once_Human_DPS_Calculator (data/formulas.json)",
+    "https://github.com/TeeReckzi/OHMM (README only; source tree blocked by session policy)",
+    "/home/user/shared_workspace/once-human-build-planner/research/{formula,weapons,mods,armor,cradle,calibration}.md (previous researchers' notes)"
+  ]
+}

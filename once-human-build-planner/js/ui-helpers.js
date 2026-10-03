@@ -14,7 +14,7 @@
       for (const [k, v] of Object.entries(props)) {
         if (v == null || v === false) continue;
         if (k.startsWith('on') && typeof v === 'function') el.addEventListener(k.slice(2).toLowerCase(), v);
-        else if (k === 'class') el.className = v;
+        else if (k === 'class') { for (const c of String(v).split(/\s+/)) if (c) el.classList.add(c); }
         else if (k === 'dataset') Object.assign(el.dataset, v);
         else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v);
         else if (k in el && k !== 'list' && typeof v !== 'object') { try { el[k] = v; } catch (_) { el.setAttribute(k, v); } }
