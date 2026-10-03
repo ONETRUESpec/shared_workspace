@@ -20,6 +20,7 @@ wooden, stone, copper, iron, golden, diamond and netherite.
 * **Fights like an axe.** Same attack damage and attack speed as the axe of the same material, and it disables
   shields for the same duration.
 * **Twice the durability** of a single tool of the same material (for example 3122 for diamond, 4062 for netherite).
+* The **netherite multi-tool is fire resistant** when dropped, like every vanilla netherite item.
 * **Enchants, repairs and upgrades like the vanilla tools.** Efficiency, Fortune, Silk Touch, Unbreaking, Mending and
   the axe weapon enchantments all apply. Repair it in an anvil with the material's repair item. Upgrade the diamond
   multi-tool to netherite in a smithing table with a Netherite Upgrade template and a netherite ingot.
@@ -38,7 +39,11 @@ Combine the pickaxe, axe and shovel of one material with two sticks (same for ev
 ```
 
 Netherite can also be made the vanilla way: smithing table, Netherite Upgrade template, diamond multi-tool,
-netherite ingot.
+netherite ingot. The smithing upgrade keeps the diamond multi-tool's enchantments and damage, like vanilla.
+
+Like any crafting-table recipe, the shaped recipe consumes the three tools as plain items: their remaining
+durability and enchantments are not carried over, and the multi-tool always comes out unenchanted at full
+durability. Enchant the multi-tool itself, or use the smithing-table route when going from diamond to netherite.
 
 ## Building
 

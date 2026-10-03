@@ -32,7 +32,14 @@ public final class MultiToolItems {
     }
 
     private static RegistryObject<MultiToolItem> register(String name, ToolMaterial material, float attackDamage, float attackSpeed) {
-        return ITEMS.register(name, () -> new MultiToolItem(material, attackDamage, attackSpeed, new Item.Properties().setId(ITEMS.key(name))));
+        return ITEMS.register(name, () -> {
+            Item.Properties properties = new Item.Properties().setId(ITEMS.key(name));
+            if (material == ToolMaterial.NETHERITE) {
+                // Like every vanilla netherite item: survives lava and fire when dropped.
+                properties.fireResistant();
+            }
+            return new MultiToolItem(material, attackDamage, attackSpeed, properties);
+        });
     }
 
     /** Puts every multi-tool in the Tools &amp; Utilities tab, right after the vanilla hoe of the same material. */
