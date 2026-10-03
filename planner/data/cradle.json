@@ -1,0 +1,1324 @@
+[
+ {
+  "id": "aerial-suppression",
+  "name": "Aerial Suppression",
+  "style": "Combat",
+  "effect": "While airborne, DMG received from monsters is reduced by 30%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "agility",
+  "name": "Agility",
+  "style": "Combat",
+  "effect": "After rolling, Weapon DMG Reduction/n+15% and Status DMG Reduction +15% for 4s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "ammo-cascade-3008",
+  "name": "Ammo Cascade",
+  "style": "Combat",
+  "effect": "After performing a successful backstab/execution/impact, Melee DMG +0.3% and Movement Speed +0.1% for 10s.",
+  "stats": {
+   "meleeDmg": 0.3
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "anti-coherence",
+  "name": "Anti-Coherence",
+  "style": "Combat",
+  "effect": "When using pistols, light machine guns, or melee weapons, DMG +15%, with an additional 100% DMG against Super Anomaly - Coherence.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "anti-phase",
+  "name": "Anti-Phase",
+  "style": "Combat",
+  "effect": "When using sniper rifles, SMGs, or crossbows, DMG +15%, with an additional 100% DMG against Super Anomaly - Phase.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "anti-regen",
+  "name": "Anti-Regen",
+  "style": "Combat",
+  "effect": "When using pistols, light machine guns, or melee weapons, DMG +15%, with an additional 100% DMG against Super Anomaly - Regen.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "anti-void",
+  "name": "Anti-Void",
+  "style": "Combat",
+  "effect": "When using rifles, shotguns, or heavy weapons, DMG +15%, with an additional 100% DMG against Super Anomaly - Void.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "automatic-weapon-enhancement",
+  "name": "Automatic Weapon Enhancement",
+  "style": "Combat",
+  "effect": "DMG +20% when holding SMGs, rifles, or LMGs. Reload 10% of magazine capacity from reserve upon defeating an enemy.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "blazing-detonation",
+  "name": "Blazing Detonation",
+  "style": "Combat",
+  "effect": "When inflicting Burn on a unit that already has Burn, immediately deal one instance of Burn DMG (Cooldown: 3s) and gain Burn DMG +25% for 10s.",
+  "stats": {
+   "keyword": {
+    "Burn": 25.0
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Burn"
+ },
+ {
+  "id": "bounty-hunter",
+  "name": "Bounty Hunter",
+  "style": "Combat",
+  "effect": "After defeating a unit you marked, Weapon DMG +25%, Weakspot DMG +35%, for 15s.",
+  "stats": {
+   "weaponDmg": 25.0,
+   "weakspotDmg": 35.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "brawl-boost-4009",
+  "name": "Brawl Boost",
+  "style": "Combat",
+  "effect": "Damage from Metas -20%, effect halved after dealing damage to a Meta but reset once out of combat.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "bullet-hunt",
+  "name": "Bullet Hunt",
+  "style": "Combat",
+  "effect": "Upon a kill with special ammo effects (Bounce and Shrapnel), Weapon DMG +0.3% for 3 seconds",
+  "stats": {
+   "weaponDmg": 0.3
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Bounce"
+ },
+ {
+  "id": "chaotic-thoughts",
+  "name": "Chaotic Thoughts",
+  "style": "Combat",
+  "effect": "When you have a Whim due to low Sanity, DMG Reduction against Deviants +10%, and DMG against Deviants +10%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "critical-precision",
+  "name": "Critical Precision",
+  "style": "Combat",
+  "effect": "When in Scope Mode, Weakspot DMG +30%",
+  "stats": {
+   "weakspotDmg": 30.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "crossbow-dmg-boost",
+  "name": "Crossbow DMG Boost",
+  "style": "Combat",
+  "effect": "Upon a kill using a Crossbow, there is a 0.3% chance to refill an arrow from inventory with its Weakspot DMG +0.5%",
+  "stats": {
+   "weakspotDmg": 0.5
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "deadly-combo",
+  "name": "Deadly Combo",
+  "style": "Combat",
+  "effect": "Healing medicine cooldown time -0.3%, and healing effects +0.15%",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "deviant-energy-defense",
+  "name": "Deviant Energy Defense",
+  "style": "Combat",
+  "effect": "Summoning or handling Deviations grants a temporary shield equal to 30% of Max HP, lasting 30s. While the shield is active, Weapon DMG Reduction and Status DMG Reduction +10%. Cooldown: 30s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "deviation-handling-3013",
+  "name": "Deviation Handling",
+  "style": "Combat",
+  "effect": "Summoning Deviation grants Status DMG +30% for 20 seconds",
+  "stats": {
+   "statusDmg": 30.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "deviation-master",
+  "name": "Deviation Master",
+  "style": "Combat",
+  "effect": "While a Deviation is present, DMG against the Great Ones (bosses) and elites +50%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "dexterity-3011",
+  "name": "Dexterity",
+  "style": "Combat",
+  "effect": "Rolling grants DMG Reduction + 20% for 4 seconds",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "elemental-charge",
+  "name": "Elemental Charge",
+  "style": "Combat",
+  "effect": "Killing enemies grants Elemental DMG (Blaze, Frost, Shock, Blast) +15% for 3 seconds",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "elemental-sense-5013",
+  "name": "Elemental Sense",
+  "style": "Combat",
+  "effect": "After dealing Elemental DMG, the corresponding Element's DMG +25% for 4s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "energy-surge",
+  "name": "Energy Surge",
+  "style": "Combat",
+  "effect": "Every 8s at night (9:00 PM–3:00 AM), Deviations recover 1 Deviant Power.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "explosives-bonus",
+  "name": "Explosives Bonus",
+  "style": "Combat",
+  "effect": "After triggering Unstable Bomber, Unstable Bomber DMG +5% for 8s, up to 5 stack(s).",
+  "stats": {
+   "keyword": {
+    "Unstable Bomber": 5.0
+   }
+  },
+  "conditional": true,
+  "maxStacks": 5,
+  "keyword": "Unstable Bomber"
+ },
+ {
+  "id": "extreme-freezing",
+  "name": "Extreme Freezing",
+  "style": "Combat",
+  "effect": "When dealing Frost Elemental DMG, Frost Vortex DMG +2.5% and inflict Deviants with 3% Slowdown for 8s, up to 10 stack(s). Freezes targets when fully stacked, up to 1 time per target.",
+  "stats": {
+   "keyword": {
+    "Frost Vortex": 2.5
+   }
+  },
+  "conditional": true,
+  "maxStacks": 10,
+  "keyword": "Frost Vortex"
+ },
+ {
+  "id": "fast-pursuit-5119",
+  "name": "Fast Pursuit",
+  "style": "Combat",
+  "effect": "Upon triggering Fast Gunner, gain one of the following effects for 12s at random: Attack +3%, Crit Rate +3%, or Crit DMG +8%. Up to 5 stack(s). Effect is removed after switching weapons.",
+  "stats": {
+   "critRate": 3.0,
+   "critDmg": 8.0,
+   "attackPct": 3.0
+  },
+  "conditional": true,
+  "maxStacks": 5,
+  "keyword": "Fast Gunner"
+ },
+ {
+  "id": "first-round-blast",
+  "name": "First Round Blast",
+  "style": "Combat",
+  "effect": "After reloading, Instant DMG (Power Surge and Unstable Bomber) +25% for 4s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Power Surge"
+ },
+ {
+  "id": "fortress-link",
+  "name": "Fortress Link",
+  "style": "Combat",
+  "effect": "Fortress Warfare range +50%, with an additional damage boost of +5%. After activating Fortress Warfare for 5s, Fortress Warfare will appear within 10 meters at a non-hostile target's location (or at your location if no such targets are nearby).",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fortress Warfare"
+ },
+ {
+  "id": "frost-sense",
+  "name": "Frost Sense",
+  "style": "Combat",
+  "effect": "Every time you summon Frost Vortex, Ice Crystal, or Ice Spike, Frost DMG +3% for 8s, stacking up to 12 time(s).",
+  "stats": {
+   "elemental": {
+    "Frost": 3.0
+   }
+  },
+  "conditional": false,
+  "maxStacks": 12,
+  "keyword": "Frost Vortex"
+ },
+ {
+  "id": "gunners-gambit",
+  "name": "Gunner's Gambit",
+  "style": "Combat",
+  "effect": "Within the duration of any continuous buff (Fortress Warfare and Fast Gunner), Reload Speed +20%, Weapon DMG +20%",
+  "stats": {
+   "weaponDmg": 20.0,
+   "reload": 20.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fortress Warfare"
+ },
+ {
+  "id": "handgun-enhancement",
+  "name": "Handgun Enhancement",
+  "style": "Combat",
+  "effect": "DMG +20% when holding pistols or shotguns. Reload 1 ammo from reserve upon defeating an enemy.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "heat-agglutination-5102",
+  "name": "Heat Agglutination",
+  "style": "Combat",
+  "effect": "For every 1 stack of Burn triggered, Burn DMG +5% for 6s. Up to 6 stacks.",
+  "stats": {
+   "keyword": {
+    "Burn": 5.0
+   }
+  },
+  "conditional": true,
+  "maxStacks": 6,
+  "keyword": "Burn"
+ },
+ {
+  "id": "instant-obliteration",
+  "name": "Instant Obliteration",
+  "style": "Combat",
+  "effect": "Killing an enemy with any instant buff (Power Surge, Blast) grants Status DMG +25% for 3 seconds",
+  "stats": {
+   "statusDmg": 25.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Power Surge"
+ },
+ {
+  "id": "lmg-reload-boost",
+  "name": "LMG Reload Boost",
+  "style": "Combat",
+  "effect": "The fewer bullets left in the LMG mag, the higher the Reload Speed, capping at +40",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "lone-walker",
+  "name": "Lone Walker",
+  "style": "Combat",
+  "effect": "When fighting solo, medicine usage speed +35%, DMG from monsters -30% when HP is below 30%, and DMG to monsters +20%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "long-range-enhancement",
+  "name": "Long-Range Enhancement",
+  "style": "Combat",
+  "effect": "DMG +20% when holding sniper rifles or crossbows. 30% chance to automatically reload one bullet from your backpack upon defeating a target.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "marked-strike",
+  "name": "Marked Strike",
+  "style": "Combat",
+  "effect": "Weakspot DMG +20% against targets marked with The Bull's Eye.",
+  "stats": {
+   "weakspotDmg": 20.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "The Bull's Eye"
+ },
+ {
+  "id": "master-tactician",
+  "name": "Master Tactician",
+  "style": "Combat",
+  "effect": "After using a tactical item, DMG against the Great Ones (bosses) +25% for 15s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "melee-attack-boost",
+  "name": "Melee Attack Boost",
+  "style": "Combat",
+  "effect": "Killing enemies using melee weapons restores 0.2% of Stamina consumed, up to once every 3 seconds",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "melee-enhancement",
+  "name": "Melee Enhancement",
+  "style": "Combat",
+  "effect": "DMG +20% when holding melee weapons. Recover 20% of expended Stamina upon defeating a target with a melee weapon. Can trigger once every 3s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "overload",
+  "name": "Overload",
+  "style": "Combat",
+  "effect": "Upon dealing Power Surge DMG, energy charges up to 10 stack(s). Reloading removes all stacks and each stack grants +2.5% Power Surge DMG. The boost lasts until the next reload and Energy can be charged during the period.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 10,
+  "keyword": "Power Surge"
+ },
+ {
+  "id": "pistol-dmg-boost",
+  "name": "Pistol DMG Boost",
+  "style": "Combat",
+  "effect": "Defeating a target with a pistol refills 2 bullets from your inventory and grants Crit Rate +0.3% for the next 2 bullets",
+  "stats": {
+   "critRate": 0.3
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "prairie-fire-inferno",
+  "name": "Prairie Fire Inferno",
+  "style": "Combat",
+  "effect": "Based on the number of nearby units affected by Burn, increases Blaze DMG by +15% per unit, up to a maximum of \b+60%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Burn"
+ },
+ {
+  "id": "rapid-aid",
+  "name": "Rapid Aid",
+  "style": "Combat",
+  "effect": "Healing medicine cooldown time -30%, healing effects +15%.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "resilience",
+  "name": "Resilience",
+  "style": "Combat",
+  "effect": "When your Sanity is below 30%, DMG received from Deviants is reduced by 30%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "rifle-amplify",
+  "name": "Rifle Amplify",
+  "style": "Combat",
+  "effect": "Dealing any DMG with Assault Rifle grants Rifle DMG +0.01%, Reload Speed +1, up to 20 stacks until next reload",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 20,
+  "keyword": null
+ },
+ {
+  "id": "robust-3003",
+  "name": "Robust",
+  "style": "Combat",
+  "effect": "Melee DMG +25%, Stamina consumption -30%",
+  "stats": {
+   "meleeDmg": 25.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "smg-dmg-boost",
+  "name": "SMG DMG Boost",
+  "style": "Combat",
+  "effect": "After achieving a kill with an SMG, mag is refilled by 0.2% from your inventory, and Crit Rate +0.25% for the next 5 shots",
+  "stats": {
+   "critRate": 0.25
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "severe-bone-fracture",
+  "name": "Severe Bone Fracture",
+  "style": "Combat",
+  "effect": "Blunt attack can deal Crit Hit with +0.5% Crit Rate for Blunt DMG",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "shield-protection",
+  "name": "Shield Protection",
+  "style": "Combat",
+  "effect": "When Shield is above 40% of Max HP, Deviant DMG Reduction +10%, DMG to monsters +10%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "shotgun-amplify",
+  "name": "Shotgun Amplify",
+  "style": "Combat",
+  "effect": "Dealing any damage with Shotgun grants Crit DMG +0.01%, capping at \b +0.2% \b and lasting for 8 seconds",
+  "stats": {
+   "critDmg": 0.01
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "side-by-side",
+  "name": "Side by Side",
+  "style": "Combat",
+  "effect": "When fighting in a team, armor Durability loss speed -25%, and teammate rescue speed +35%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "sky-operation",
+  "name": "Sky Operation",
+  "style": "Combat",
+  "effect": "Jump and glide speed +15%, and DMG Reduction +10% while jumping and gliding.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "sniper-rifle-crit-boost",
+  "name": "Sniper Rifle Crit Boost",
+  "style": "Combat",
+  "effect": "When in scope mode, Sniper Rifle Crit Rate +0.3%, Crit DMG +0.2%",
+  "stats": {
+   "critRate": 0.3,
+   "critDmg": 0.2
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "special-ammo",
+  "name": "Special Ammo",
+  "style": "Combat",
+  "effect": "Hitting Weakspots with special bullet effects (Bounce and Shrapnel) grants Weapon DMG +25% for 3 seconds",
+  "stats": {
+   "weaponDmg": 25.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Bounce"
+ },
+ {
+  "id": "sprint",
+  "name": "Sprint",
+  "style": "Combat",
+  "effect": "Movement Speed +5%, Running Stamina Cost -15%.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "status-enhancement-5018",
+  "name": "Status Enhancement",
+  "style": "Combat",
+  "effect": "Status DMG +15% for 3s after hitting a weakspot.",
+  "stats": {
+   "statusDmg": 15.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "steady-hand",
+  "name": "Steady Hand",
+  "style": "Combat",
+  "effect": "Within the duration of any continuous buff (Fortress Warfare and Fast Gunner), Weapon Weakspot DMG +0.25% and Accuracy +20",
+  "stats": {
+   "weakspotDmg": 0.25
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fortress Warfare"
+ },
+ {
+  "id": "strategic-genius",
+  "name": "Strategic Genius",
+  "style": "Combat",
+  "effect": "Using Tactical Items grants Weapon DMG + 30% for 6 seconds",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "sustained-suppression",
+  "name": "Sustained Suppression",
+  "style": "Combat",
+  "effect": "Defeating an enemy with Continuous DMG (such as Burn or Frost Vortex) increases Continuous DMG by +20% for 10s, stackable up to 3 times.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 3,
+  "keyword": "Burn"
+ },
+ {
+  "id": "tactical-combo-4010",
+  "name": "Tactical Combo",
+  "style": "Combat",
+  "effect": "Weapon DMG +25% for 4s after switching weapons or reloading.",
+  "stats": {
+   "weaponDmg": 25.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "tactical-leap",
+  "name": "Tactical Leap",
+  "style": "Combat",
+  "effect": "For every 1s spent airborne, gain ++20% DMG against Deviants and ++10% DMG against their shields for 3s, up to 60s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "tough-build",
+  "name": "Tough Build",
+  "style": "Combat",
+  "effect": "Defeating a target in melee restores 10% of lost HP and Stamina; Melee DMG +25%, lasting for 15s.",
+  "stats": {
+   "meleeDmg": 25.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "tracking-bullet",
+  "name": "Tracking Bullet",
+  "style": "Combat",
+  "effect": "After defeating a target with Weapon DMG, Shrapnel DMG +25% and Shrapnel Crit DMG +35% for 15s.",
+  "stats": {
+   "keywordStats": {
+    "Shrapnel": {
+     "critDmg": 35.0
+    }
+   },
+   "keyword": {
+    "Shrapnel": 25.0
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Shrapnel"
+ },
+ {
+  "id": "transient-impact",
+  "name": "Transient Impact",
+  "style": "Combat",
+  "effect": "After defeating an enemy, Power Surge DMG +25% and Shock Elemental DMG +18% for 15s.",
+  "stats": {
+   "elemental": {
+    "Shock": 18.0
+   },
+   "keyword": {
+    "Power Surge": 25.0
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Power Surge"
+ },
+ {
+  "id": "upper-hand",
+  "name": "Upper Hand",
+  "style": "Combat",
+  "effect": "Reloading grants +0.3% Instant DMG to Power Surge and Unstable Bomber for 4 seconds",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Power Surge"
+ },
+ {
+  "id": "weakspot-chain-reaction",
+  "name": "Weakspot Chain Reaction",
+  "style": "Combat",
+  "effect": "Upon Weakspot hits by guns, consecutive buffs (Burn and Frost Vortex) have their Trigger Chance +0.6% until the buff is replaced.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Burn"
+ },
+ {
+  "id": "elemental-surge",
+  "name": "Elemental Surge",
+  "style": "Defense",
+  "effect": "Elemental DMG +0.3% for Blaze, Frost and Shock",
+  "stats": {
+   "elementalAll": 0.3
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "arctic-blast",
+  "name": "Arctic Blast",
+  "style": "Element",
+  "effect": "Frost DMG +0.1% per enemy affected by Frost Vortex, capping at +0.5%",
+  "stats": {
+   "elemental": {
+    "Frost": 0.1
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Frost Vortex"
+ },
+ {
+  "id": "boomerang-bullet",
+  "name": "Boomerang Bullet",
+  "style": "Element",
+  "effect": "Bounce Trigger Count +1",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Bounce"
+ },
+ {
+  "id": "burning-wrath",
+  "name": "Burning Wrath",
+  "style": "Element",
+  "effect": "Blaze DMG +0.5% over 8 seconds upon killing an enemy affected by Burn",
+  "stats": {
+   "elemental": {
+    "Blaze": 0.5
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Burn"
+ },
+ {
+  "id": "embers",
+  "name": "Embers",
+  "style": "Element",
+  "effect": "Buff effect continues, but with Burn stacks halved",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Burn"
+ },
+ {
+  "id": "explosive-barrage",
+  "name": "Explosive Barrage",
+  "style": "Element",
+  "effect": "Shrapnel DMG +0.2% for each part hit by Shrapnel, capping at +0.6%",
+  "stats": {
+   "keyword": {
+    "Shrapnel": 0.2
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Shrapnel"
+ },
+ {
+  "id": "flame-resonance-2015",
+  "name": "Flame Resonance",
+  "style": "Element",
+  "effect": "Burn stacks +3",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Burn"
+ },
+ {
+  "id": "frostwave",
+  "name": "Frostwave",
+  "style": "Element",
+  "effect": "Frost Vortex DMG +0.15% per second, capping at +0.9%",
+  "stats": {
+   "keyword": {
+    "Frost Vortex": 0.15
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Frost Vortex"
+ },
+ {
+  "id": "ice-blockade",
+  "name": "Ice Blockade",
+  "style": "Element",
+  "effect": "Frost Vortex duration +1%",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Frost Vortex"
+ },
+ {
+  "id": "invincible-strike",
+  "name": "Invincible Strike",
+  "style": "Element",
+  "effect": "Shrapnel DMG Loss due to distance -0.5%",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Shrapnel"
+ },
+ {
+  "id": "meteor-blitz",
+  "name": "Meteor Blitz",
+  "style": "Element",
+  "effect": "Hitting the target with Bounce deals an additional +0.5% Bounce DMG",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Bounce"
+ },
+ {
+  "id": "ricochet",
+  "name": "Ricochet",
+  "style": "Element",
+  "effect": "Weapon damage increases by 15%/30%/50% when the number of bounce targets reaches 1/2/3",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Bounce"
+ },
+ {
+  "id": "precise-shot",
+  "name": "Precise Shot",
+  "style": "Gunplay",
+  "effect": "Weapon DMG +0.2%, Accuracy +30 for SMG, Assault Rifle and Shotgun",
+  "stats": {
+   "weaponDmg": 0.2
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "speedy-shot",
+  "name": "Speedy Shot",
+  "style": "Gunplay",
+  "effect": "Weapon DMG +0.2%, Reload Speed +20 for Sniper Rifle, Pistol, Crossbow and LMG",
+  "stats": {
+   "weaponDmg": 0.2
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "swift-reload",
+  "name": "Swift Reload",
+  "style": "Gunplay",
+  "effect": "Defeating a target with a ranged weapon refills +0.15% of the magazine",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "advantage-barrier",
+  "name": "Advantage Barrier",
+  "style": "Scenario",
+  "effect": "Hitting Weakspots or reloading grants a shield equal to 30% of max HP. While the shield is active, Weapon DMG Reduction +15%. Cooldown: 30s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "anti-coherence-crossbow",
+  "name": "Anti-Coherence: Crossbow",
+  "style": "Scenario",
+  "effect": "Crossbows deal 100% DMG to Super Anomaly - Coherence.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "anti-coherence-pistol",
+  "name": "Anti-Coherence: Pistol",
+  "style": "Scenario",
+  "effect": "Pistols deal 100% DMG to Super Anomaly- Coherence.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "anti-phase-smg",
+  "name": "Anti-Phase: SMG",
+  "style": "Scenario",
+  "effect": "SMGs deal 100% damage to Super Anomaly - Phase.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "anti-phase-sniper-rifle",
+  "name": "Anti-Phase: Sniper Rifle",
+  "style": "Scenario",
+  "effect": "Sniper Rifles deal 100% DMG to Super Anomaly - Phase.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "anti-regen-pistol",
+  "name": "Anti-Regen: Pistol",
+  "style": "Scenario",
+  "effect": "Pistols deal 100% DMG to Super Anomaly - Regen.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "anti-regen-sniper-rifle",
+  "name": "Anti-Regen: Sniper Rifle",
+  "style": "Scenario",
+  "effect": "Sniper Rifles deal 100% DMG to Super Anomaly - Regen.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "anti-void-rifle",
+  "name": "Anti-Void: Rifle",
+  "style": "Scenario",
+  "effect": "Rifles deal 100% DMG to Super Anomaly - Void.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "anti-void-shotgun",
+  "name": "Anti-Void: Shotgun",
+  "style": "Scenario",
+  "effect": "Shotguns deal 100% DMG to Super Anomaly - Void.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "engineer",
+  "name": "Engineer",
+  "style": "Scenario",
+  "effect": "While driving a vehicle, all passengers receive DMG Reduction +15%, and Tactical Item Duration +50%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "guerrilla-tactics",
+  "name": "Guerrilla Tactics",
+  "style": "Scenario",
+  "effect": "Removes see-through effects when HP is below 50% (including Lonely Cortex and The Bull's Eye abilities) and grants immunity to see-through effects.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "The Bull's Eye"
+ },
+ {
+  "id": "heavy-strike-9501",
+  "name": "Heavy Strike",
+  "style": "Scenario",
+  "effect": "Fortress Warfare range +50%. After activating Fortress Warfare, Weapon DMG +25% for 8s. Effect is removed after switching weapons.",
+  "stats": {
+   "weaponDmg": 25.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fortress Warfare"
+ },
+ {
+  "id": "logistical-support",
+  "name": "Logistical Support",
+  "style": "Scenario",
+  "effect": "Non-contest area Movement Speed +10%, Sprint Stamina Consumption -50%",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "medic",
+  "name": "Medic",
+  "style": "Scenario",
+  "effect": "Using the lowest-level Heal Pack during rescue reduces the time it takes to rescue a teammate by 50%, and the rescued teammate gains 100% HP and Shield equal to 25% of Max HP.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "scouting-tactics",
+  "name": "Scouting Tactics",
+  "style": "Scenario",
+  "effect": "The Bull's Eye Duration +20%, Lonely Cortex Range +50%",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "The Bull's Eye"
+ },
+ {
+  "id": "series-detonation-9601",
+  "name": "Series Detonation",
+  "style": "Scenario",
+  "effect": "After a unit takes damage from an Unstable Bomber, if the unit takes damage from a bomber within 3s, final damage is increased by 25%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Unstable Bomber"
+ },
+ {
+  "id": "streak-rewards",
+  "name": "Streak Rewards",
+  "style": "Scenario",
+  "effect": "After defeating a Meta-Human, automatically reload 20% of your Magazine Capacity from reserve ammo and recover 15% Stamina.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "swift-recovery",
+  "name": "Swift Recovery",
+  "style": "Scenario",
+  "effect": "Rolling Stamina cost -15%, and upon finishing a roll, recover 10% of max HP. Cooldown: 10s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "valor-trial-1",
+  "name": "Valor Trial 1",
+  "style": "Scenario",
+  "effect": "Frost DMG +0.1% per enemy affected by Frost Vortex, capping at +0.5%",
+  "stats": {
+   "elemental": {
+    "Frost": 0.1
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Frost Vortex"
+ },
+ {
+  "id": "valor-trial-2",
+  "name": "Valor Trial 2",
+  "style": "Scenario",
+  "effect": "Shrapnel DMG 7#+0.2% over 3 seconds upon a Weakspot Hit with Shrapnel",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Shrapnel"
+ },
+ {
+  "id": "valor-trial-3",
+  "name": "Valor Trial 3",
+  "style": "Scenario",
+  "effect": "Weapon damage increases by 15%/30%/50% when the number of bounce targets reaches 1/2/3",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Bounce"
+ },
+ {
+  "id": "valor-trial-4",
+  "name": "Valor Trial 4",
+  "style": "Scenario",
+  "effect": "Blaze DMG +0.5% over 8 seconds upon killing an enemy affected by Burn",
+  "stats": {
+   "elemental": {
+    "Blaze": 0.5
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Burn"
+ },
+ {
+  "id": "valor-trial-5",
+  "name": "Valor Trial 5",
+  "style": "Scenario",
+  "effect": "Frost Vortex duration +1%",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Frost Vortex"
+ },
+ {
+  "id": "ballistic-synchronization-signal",
+  "name": "Ballistic Synchronization Signal",
+  "style": "Specialist",
+  "effect": "After using the Gene Coherence Injection, Weapon DMG and Melee DMG +30% for {2}s.",
+  "stats": {
+   "weaponDmg": 30.0,
+   "meleeDmg": 30.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "blood-pump",
+  "name": "Blood Pump",
+  "style": "Specialist",
+  "effect": "While Gene Resonance Gear is active, quickly recover HP after crouching for a while without taking damage, up to 80%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "bounce-rampage",
+  "name": "Bounce Rampage",
+  "style": "Specialist",
+  "effect": "Hitting by Bounce grants Weapon DMG +1% up to 50 stacks for 1 second",
+  "stats": {
+   "weaponDmg": 1.0
+  },
+  "conditional": true,
+  "maxStacks": 50,
+  "keyword": "Bounce"
+ },
+ {
+  "id": "dominant-demeanor",
+  "name": "Dominant Demeanor",
+  "style": "Specialist",
+  "effect": "Suppression DMG +15%",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "golden-glitter",
+  "name": "Golden Glitter",
+  "style": "Specialist",
+  "effect": "Hitting enemies with Grenade triggers The Bull's Eye",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "The Bull's Eye"
+ },
+ {
+  "id": "guardian-plan",
+  "name": "Guardian Plan",
+  "style": "Specialist",
+  "effect": "After summoning a Rosetta drone, the summoner gains 30% Shield. If the drone is destroyed, the summoner gains an additional 30% Shield.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "ironclad-fortitude",
+  "name": "Ironclad Fortitude",
+  "style": "Specialist",
+  "effect": "Placing the Stardust Barrier triggers Fortress Warfare",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Fortress Warfare"
+ },
+ {
+  "id": "joint-operations",
+  "name": "Joint Operations",
+  "style": "Specialist",
+  "effect": "Summoning a Rosetta drone increases the summoner's Weapon DMG and Melee DMG by 30% for 30 seconds.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "loyal-wingman",
+  "name": "Loyal Wingman",
+  "style": "Specialist",
+  "effect": "When the Rosetta drone is within 10 meters, it will connect with the summoner, sharing the damage taken.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "neural-stimulation-signal",
+  "name": "Neural Stimulation Signal",
+  "style": "Specialist",
+  "effect": "After using the Gene Coherence Injection, Status DMG and Tactical Item DMG +30% for {2}s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "pain-editor",
+  "name": "Pain Editor",
+  "style": "Specialist",
+  "effect": "While Gene Resonance Gear is active, reduce damage taken from Meta-Humans by 10%, with an additional reduction of 10% when jumping or rolling.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "precise-execution",
+  "name": "Precise Execution",
+  "style": "Specialist",
+  "effect": "Triggering The Bull's Eye grants Crit Rate +25% for 3 seconds",
+  "stats": {
+   "critRate": 25.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "The Bull's Eye"
+ },
+ {
+  "id": "scavenging",
+  "name": "Scavenging",
+  "style": "Specialist",
+  "effect": "Normal enemies take +15% DMG",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "shared-energy",
+  "name": "Shared Energy",
+  "style": "Specialist",
+  "effect": "After summoning a Rosetta drone, Status DMG and Tactical Item DMG +30% for 30s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ },
+ {
+  "id": "sniper-rifle-weakspot-dmg-boost",
+  "name": "Sniper Rifle Weakspot DMG Boost",
+  "style": "Specialist",
+  "effect": "When in Scope mode, Sniper Rifle Weakspot DMG +30%, Accuracy +20",
+  "stats": {
+   "weakspotDmg": 30.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null
+ }
+]

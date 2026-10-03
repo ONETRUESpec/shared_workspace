@@ -1,0 +1,354 @@
+[
+ {
+  "id": "butterflys-emissary",
+  "name": "Butterfly's Emissary",
+  "rarity": "common",
+  "effect": "Designated Target: designate a target to attack. Auto Attack: attacks enemies; marks the enemy's Weakspot on hit, making it take +25%/30%/35% extra Weakspot DMG for 5s.",
+  "buff": {
+   "stat": "weakspotDmg",
+   "levels": [
+    25,
+    30,
+    35
+   ],
+   "note": "Markiert den Weakspot: +25/30/35% Weakspot DMG für 5 s.",
+   "status": "community"
+  },
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000001.png",
+  "url": "https://www.oncehumandb.com/deviations/butterflys-emissary"
+ },
+ {
+  "id": "enchanting-void",
+  "name": "Enchanting Void",
+  "rarity": "epic",
+  "effect": "Midnight Maul: player transforms into a panther for 20s, auto-attacks and increases melee DMG taken by targets. Combat Assist: Movement Speed +10% with a melee weapon, recover 10% Max HP on melee hit.",
+  "buff": {
+   "stat": "meleeDmg",
+   "levels": [
+    100
+   ],
+   "note": "Midnight Maul: Nahkampf-DMG am Ziel +100% (nur Melee).",
+   "status": "community"
+  },
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000025.png",
+  "url": "https://www.oncehumandb.com/deviations/enchanting-void"
+ },
+ {
+  "id": "lonewolfs-whisper",
+  "name": "Lonewolf's Whisper",
+  "rarity": "rare",
+  "effect": "Designated Target + Auto Attack: attacks enemies and attracts their aggro; spawns a clone when a target dies. Increases Weapon DMG received by the attacked target by 21.6% (Lunar version: +5% Weapon DMG, +10% at low Sanity).",
+  "buff": {
+   "stat": "weaponDmg",
+   "levels": [
+    16.2,
+    21.6,
+    27.0,
+    32.4,
+    37.8
+   ],
+   "note": "Erhöht den Weapon DMG, den das angegriffene Ziel erhält (theriagames, Werte je Stufe). Varianten (Lunar Oracle, Radiant) nennen 18.75/25/31.25/37.5/43.75%.",
+   "status": "community"
+  },
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000011.png",
+  "url": "https://www.oncehumandb.com/deviations/lonewolfs-whisper"
+ },
+ {
+  "id": "mini-feaster",
+  "name": "Mini Feaster",
+  "rarity": "epic",
+  "effect": "Touch of the Abyss: follows the player, summons tentacles near enemies to smash. When a target triggers Bounce, tentacles are guaranteed next to it and enhance the player's Weapon DMG.",
+  "buff": {
+   "stat": "weaponDmg",
+   "levels": [
+    70
+   ],
+   "note": "+17% Weapon DMG je Tentakel, max. 70% (bei Bounce-Builds praktisch dauerhaft).",
+   "status": "community",
+   "cond": "Tentakel aktiv (Bounce)"
+  },
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000053.png",
+  "url": "https://www.oncehumandb.com/deviations/mini-feaster"
+ },
+ {
+  "id": "mr-wish",
+  "name": "Mr. Wish",
+  "rarity": "epic",
+  "effect": "Rapid Fire: bursts at enemies near the crosshair, marking them with The Bull's Eye. Auto Attack.",
+  "buff": {
+   "stat": "dmgVsMarked",
+   "levels": [
+    8
+   ],
+   "note": "Markiert Ziele mit The Bull's Eye; +8% DMG gegen markierte Ziele für 12 s (eine Quelle nennt zusätzlich Weakspot DMG +30% gegen markierte Ziele; ggf. manuell eintragen).",
+   "status": "community"
+  },
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000034.png",
+  "url": "https://www.oncehumandb.com/deviations/mr-wish"
+ },
+ {
+  "id": "polar-jelly",
+  "name": "Polar Jelly",
+  "rarity": "rare",
+  "effect": "Frostlash: knocks back enemies and forms a fortification. Auto Attack: continuously deals Frost Status DMG to surrounding enemies and pulls them toward it; increases Frost DMG received by 36%. Frost Vortexes formed inside its radius create additional Ice Spikes.",
+  "buff": {
+   "stat": "elementalDmg",
+   "element": "Frost",
+   "levels": [
+    36
+   ],
+   "note": "Getroffene Ziele erhalten +36% Frost DMG (Community-Wert).",
+   "status": "community"
+  },
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000003.png",
+  "url": "https://www.oncehumandb.com/deviations/polar-jelly"
+ },
+ {
+  "id": "pyro-dino",
+  "name": "Pyro Dino",
+  "rarity": "epic",
+  "effect": "Designated Target + Autonomous Attack: attacks enemies, increases Blaze DMG received by 24.5%. Attacking a target affected by Burn causes an Explosion.",
+  "buff": {
+   "stat": "elementalDmg",
+   "element": "Blaze",
+   "levels": [
+    24.5
+   ],
+   "note": "Ziel erhält +24.5% Blaze DMG; Explosion auf brennende Ziele.",
+   "status": "community"
+  },
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000030.png",
+  "url": "https://www.oncehumandb.com/deviations/pyro-dino"
+ },
+ {
+  "id": "snowsprite",
+  "name": "Snowsprite",
+  "rarity": "epic",
+  "effect": "Auto Attack: generates Ice Crystals near the target every 3s. Crystals shatter when shot, dealing 37.5% to 87.5% Frost DMG to nearby targets and making them take +18% to +42% Frost DMG.",
+  "buff": {
+   "stat": "elementalDmg",
+   "element": "Frost",
+   "levels": [
+    20
+   ],
+   "note": "Frostkristalle erhöhen den erhaltenen Frost DMG (Wert geschätzt).",
+   "status": "estimated"
+  },
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000058.png",
+  "url": "https://www.oncehumandb.com/deviations/snowsprite"
+ },
+ {
+  "id": "zapcam",
+  "name": "ZapCam",
+  "rarity": "rare",
+  "effect": "Manual Photograph: locks onto an enemy before dealing damage. Auto Photograph: teleports to targets and takes photos dealing Status DMG; the enemy receives +21.6% Weapon DMG.",
+  "buff": {
+   "stat": "weaponDmg",
+   "levels": [
+    21.6
+   ],
+   "note": "Weapon-DMG-Buff analog Lonewolf's Whisper (Community-Wert, unverifiziert).",
+   "status": "estimated"
+  },
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000040.png",
+  "url": "https://www.oncehumandb.com/deviations/zapcam"
+ },
+ {
+  "id": "behemoth",
+  "name": "Behemoth",
+  "rarity": "rare",
+  "effect": "A loyal companion for Metas.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000069.png",
+  "url": "https://www.oncehumandb.com/deviations/behemoth"
+ },
+ {
+  "id": "brave-george",
+  "name": "Brave George",
+  "rarity": "epic",
+  "effect": "A loyal companion for Metas.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000067.png",
+  "url": "https://www.oncehumandb.com/deviations/brave-george"
+ },
+ {
+  "id": "by-the-wind",
+  "name": "By-the-Wind",
+  "rarity": "rare",
+  "effect": "Gravity Lift: creates a floating area on the ground. Combat Assist: floating zone under the player (fixed height), Movement Speed +20%, jump speed +2, immune to fall DMG and stagger.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000032.png",
+  "url": "https://www.oncehumandb.com/deviations/by-the-wind"
+ },
+ {
+  "id": "chaos-mini-wonder",
+  "name": "Chaos - Mini Wonder",
+  "rarity": "epic",
+  "effect": "Designated Target: buffs an ally. Bullet Absorption: absorbs bullets within a radius.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99200050.png",
+  "url": "https://www.oncehumandb.com/deviations/chaos-mini-wonder"
+ },
+ {
+  "id": "chaos-mr-wish",
+  "name": "Chaos Mr. Wish",
+  "rarity": "epic",
+  "effect": "Rapid Fire: bursts at enemies near the crosshair, marking them with The Bull's Eye. Auto Attack.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99200034.png",
+  "url": "https://www.oncehumandb.com/deviations/chaos-mr-wish"
+ },
+ {
+  "id": "chaos-snowsprite",
+  "name": "Chaos Snowsprite",
+  "rarity": "epic",
+  "effect": "Auto Attack: generates Ice Crystals near the target every 3s. Crystals shatter when shot, dealing 37.5% to 87.5% Frost DMG to nearby targets and making them take +18% to +42% Frost DMG.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99200058.png",
+  "url": "https://www.oncehumandb.com/deviations/chaos-snowsprite"
+ },
+ {
+  "id": "chaos-zeno-purifier",
+  "name": "Chaos Zeno-Purifier",
+  "rarity": "epic",
+  "effect": "Designated Target + Auto Attack: lets the player teleport to the target with melee attacks.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99200038.png",
+  "url": "https://www.oncehumandb.com/deviations/chaos-zeno-purifier"
+ },
+ {
+  "id": "chaosaurus",
+  "name": "Chaosaurus",
+  "rarity": "epic",
+  "effect": "Abilities: Straight-line Burn, Telekinetic Effects. Can participate in combat to breathe fire.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99200030.png",
+  "url": "https://www.oncehumandb.com/deviations/chaosaurus"
+ },
+ {
+  "id": "chuckles",
+  "name": "Chuckles",
+  "rarity": "rare",
+  "effect": "A loyal companion for Metas.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000068.png",
+  "url": "https://www.oncehumandb.com/deviations/chuckles"
+ },
+ {
+  "id": "dr-teddy",
+  "name": "Dr. Teddy",
+  "rarity": "rare",
+  "effect": "Remote Healing: throw to heal 50% Max HP instantly and revive a downed target. Intime Healing: 8% Max HP heal per second, revives allies.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000018.png",
+  "url": "https://www.oncehumandb.com/deviations/dr-teddy"
+ },
+ {
+  "id": "festering-gel",
+  "name": "Festering Gel",
+  "rarity": "common",
+  "effect": "Flawless Fortification: knocks back enemies and forms a shelter. Build Fortification: fixed shelter that blocks attacks; allies nearby recover 6% HP and 3% Sanity per second.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000008.png",
+  "url": "https://www.oncehumandb.com/deviations/festering-gel"
+ },
+ {
+  "id": "grumpy-bulb",
+  "name": "Grumpy Bulb",
+  "rarity": "rare",
+  "effect": "Garlicify: AoE Status DMG on hit and disrupts aggro for 10s. Autonomous Attack: cannot move, continuously attracts aggro of nearby enemies.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000035.png",
+  "url": "https://www.oncehumandb.com/deviations/grumpy-bulb"
+ },
+ {
+  "id": "invincible-sun",
+  "name": "Invincible Sun",
+  "rarity": "rare",
+  "effect": "Autonomous Attack: periodically releases blazing energy rays that hit all nearby enemies, inflicting continuous Burn DMG.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000026.png",
+  "url": "https://www.oncehumandb.com/deviations/invincible-sun"
+ },
+ {
+  "id": "mini-wonder",
+  "name": "Mini Wonder",
+  "rarity": "epic",
+  "effect": "Designated Target: buffs an ally. Bullet Absorption: absorbs bullets within a radius.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000050.png",
+  "url": "https://www.oncehumandb.com/deviations/mini-wonder"
+ },
+ {
+  "id": "radiant-one",
+  "name": "Radiant One",
+  "rarity": "epic",
+  "effect": "Combat Assist: floating zone under the player, Movement Speed +20%, jump speed +2, immune to fall DMG and stagger.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/92000032.png",
+  "url": "https://www.oncehumandb.com/deviations/radiant-one"
+ },
+ {
+  "id": "shattered-maiden",
+  "name": "Shattered Maiden",
+  "rarity": "common",
+  "effect": "Designated Target + Auto Attack: inflicts Slowdown and Chained to non-boss enemies in front, and increases their Explosion DMG received by 40%.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000049.png",
+  "url": "https://www.oncehumandb.com/deviations/shattered-maiden"
+ },
+ {
+  "id": "soul-summoner",
+  "name": "Soul Summoner",
+  "rarity": "rare",
+  "effect": "Abilities: Vulnerability Mark, Fire Boost. Can participate in combat to weaken enemies with cursed...",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000066.png",
+  "url": "https://www.oncehumandb.com/deviations/soul-summoner"
+ },
+ {
+  "id": "voodoo-doll",
+  "name": "Voodoo Doll",
+  "rarity": "rare",
+  "effect": "Designated Target: shares part of the DMG taken (ally) or makes an enemy share DMG taken by the player. Doppelganger: shares half of the DMG received by the player.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000047.png",
+  "url": "https://www.oncehumandb.com/deviations/voodoo-doll"
+ },
+ {
+  "id": "watcher",
+  "name": "Watcher",
+  "rarity": "rare",
+  "effect": "A loyal companion for Metas.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000071.png",
+  "url": "https://www.oncehumandb.com/deviations/watcher"
+ },
+ {
+  "id": "whalepup",
+  "name": "Whalepup",
+  "rarity": "rare",
+  "effect": "Abilities: Transformation Effect, Waterflow Restraint. Can participate in combat, transforming the...",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000064.png",
+  "url": "https://www.oncehumandb.com/deviations/whalepup"
+ },
+ {
+  "id": "zapamander",
+  "name": "Zapamander",
+  "rarity": "epic",
+  "effect": "Abilities: Sprint Boost, Silence Effect. Can participate in combat to summon thunderclouds to strike...",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000059.png",
+  "url": "https://www.oncehumandb.com/deviations/zapamander"
+ },
+ {
+  "id": "zeno-purifier",
+  "name": "Zeno-Purifier",
+  "rarity": "epic",
+  "effect": "Designated Target + Auto Attack: lets the player teleport to the target with melee attacks.",
+  "buff": null,
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/99000038.png",
+  "url": "https://www.oncehumandb.com/deviations/zeno-purifier"
+ }
+]

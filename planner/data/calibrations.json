@@ -1,0 +1,340 @@
+[
+ {
+  "id": "assault-rifle:energy-rifle",
+  "name": "Energy Rifle",
+  "style": "Energy Style",
+  "weaponGroup": "Assault Rifle",
+  "effect": "Can recover ammunition after taking a hit.",
+  "stats": {}
+ },
+ {
+  "id": "assault-rifle:heavy-assault-rifle",
+  "name": "Heavy Assault Rifle",
+  "style": "Heavy Style",
+  "weaponGroup": "Assault Rifle",
+  "effect": "Magazine Capacity +75% Reload Speed -30%",
+  "stats": {
+   "magazine": 75.0,
+   "reload": -30.0
+  }
+ },
+ {
+  "id": "assault-rifle:precision-assault-rifle",
+  "name": "Precision Assault Rifle",
+  "style": "Precision Style",
+  "weaponGroup": "Assault Rifle",
+  "effect": "Attack +25% Range +40% Fire Rate -10%",
+  "stats": {
+   "attackPct": 25.0,
+   "fireRate": -10.0
+  }
+ },
+ {
+  "id": "assault-rifle:rapid-assault-rifle",
+  "name": "Rapid Assault Rifle",
+  "style": "Rapid Shot Style",
+  "weaponGroup": "Assault Rifle",
+  "effect": "Fire Rate +20% Reload Speed +40% Attack -10%",
+  "stats": {
+   "reload": 40.0,
+   "fireRate": 20.0,
+   "attackPct": -10.0
+  }
+ },
+ {
+  "id": "assault-rifle:vanguard-rifle",
+  "name": "Vanguard Rifle",
+  "style": "Vanguard Style",
+  "weaponGroup": "Assault Rifle",
+  "effect": "Stabilizes weapon keyword effects.",
+  "stats": {}
+ },
+ {
+  "id": "bow---crossbow:portable-crossbow",
+  "name": "Portable Crossbow",
+  "style": "Portable Style",
+  "weaponGroup": "Bow / Crossbow",
+  "effect": "Portable bow and crossbow calibration blueprint.",
+  "stats": {}
+ },
+ {
+  "id": "bow---crossbow:precision-crossbow",
+  "name": "Precision Crossbow",
+  "style": "Precision Style",
+  "weaponGroup": "Bow / Crossbow",
+  "effect": "Attack +12.5% Range +20% Reload Speed -25%",
+  "stats": {
+   "attackPct": 12.5,
+   "reload": -25.0
+  }
+ },
+ {
+  "id": "heavy-weapon:capacity-expander",
+  "name": "Capacity Expander",
+  "style": null,
+  "weaponGroup": "Heavy Weapon",
+  "effect": "Heavy weapon calibration blueprint.",
+  "stats": {}
+ },
+ {
+  "id": "heavy-weapon:structural-destruction",
+  "name": "Structural Destruction",
+  "style": null,
+  "weaponGroup": "Heavy Weapon",
+  "effect": "Heavy weapon calibration blueprint.",
+  "stats": {}
+ },
+ {
+  "id": "light-machine-gun:assault-machine-gun",
+  "name": "Assault Machine Gun",
+  "style": "Assault Style",
+  "weaponGroup": "Light Machine Gun",
+  "effect": "Attack +25% Magazine Capacity -30% Stability -50",
+  "stats": {
+   "attackPct": 25.0,
+   "magazine": -30.0
+  }
+ },
+ {
+  "id": "light-machine-gun:overflow-machine-gun",
+  "name": "Overflow Machine Gun",
+  "style": "Overflow Style",
+  "weaponGroup": "Light Machine Gun",
+  "effect": "Can load extra ammunition according to shots fired.",
+  "stats": {}
+ },
+ {
+  "id": "light-machine-gun:rapid-machine-gun",
+  "name": "Rapid Machine Gun",
+  "style": "Rapid Shot Style",
+  "weaponGroup": "Light Machine Gun",
+  "effect": "Fire Rate +10% Accuracy -50 Fire Rate +10% after continous fire for 2s.",
+  "stats": {
+   "fireRate": 20.0
+  }
+ },
+ {
+  "id": "light-machine-gun:steady-machine-gun",
+  "name": "Steady Machine Gun",
+  "style": "Stabilized Style",
+  "weaponGroup": "Light Machine Gun",
+  "effect": "Stability +40 When squatting down to fire, Stability +60.",
+  "stats": {}
+ },
+ {
+  "id": "light-machine-gun:vanguard-machine-gun",
+  "name": "Vanguard Machine Gun",
+  "style": "Vanguard Style",
+  "weaponGroup": "Light Machine Gun",
+  "effect": "Stabilizes weapon keyword effects.",
+  "stats": {}
+ },
+ {
+  "id": "melee:heavy-melee",
+  "name": "Heavy Melee",
+  "style": "Hard-striker Style",
+  "weaponGroup": "Melee",
+  "effect": "Heavy Attack DMG +40% Melee Stamina Cost -25%",
+  "stats": {}
+ },
+ {
+  "id": "melee:speed-melee",
+  "name": "Speed Melee",
+  "style": "Light-striker Style",
+  "weaponGroup": "Melee",
+  "effect": "Movement Speed +12.5% Light strikes continuoussly increase Melee Attack Speed, up to +30%",
+  "stats": {}
+ },
+ {
+  "id": "pistol:boost-pistol",
+  "name": "Boost Pistol",
+  "style": "Boost Style",
+  "weaponGroup": "Pistol",
+  "effect": "Increases keyword trigger chance after reloading.",
+  "stats": {}
+ },
+ {
+  "id": "pistol:frugal-pistol",
+  "name": "Frugal Pistol",
+  "style": "Frugal Style",
+  "weaponGroup": "Pistol",
+  "effect": "Recovers ammunition after missed shots.",
+  "stats": {}
+ },
+ {
+  "id": "pistol:overflow-pistol",
+  "name": "Overflow Pistol",
+  "style": "Overflow Style",
+  "weaponGroup": "Pistol",
+  "effect": "Can load extra ammunition according to shots fired.",
+  "stats": {}
+ },
+ {
+  "id": "pistol:p22",
+  "name": "P22",
+  "style": "Rapid Shot Style",
+  "weaponGroup": "Pistol",
+  "effect": "Fire Rate +25% Magazine Capacity +40% Attack -15%",
+  "stats": {
+   "magazine": 40.0,
+   "fireRate": 25.0,
+   "attackPct": -15.0
+  }
+ },
+ {
+  "id": "pistol:portable-pistol",
+  "name": "Portable Pistol",
+  "style": "Portable Style",
+  "weaponGroup": "Pistol",
+  "effect": "Movement Speed while firing +50 Movement Speed while Holding Gun +12.5% Speed while Holding Gun +50%",
+  "stats": {}
+ },
+ {
+  "id": "pistol:precision-pistol",
+  "name": "Precision Pistol",
+  "style": "Precision Style",
+  "weaponGroup": "Pistol",
+  "effect": "Attack +25% Range +40% Fire Rate -10%",
+  "stats": {
+   "attackPct": 25.0,
+   "fireRate": -10.0
+  }
+ },
+ {
+  "id": "smg:assault-smg",
+  "name": "Assault SMG",
+  "style": "Assault Style",
+  "weaponGroup": "SMG",
+  "effect": "Attack +20% Magazine Capacity -25% Accuracy -50",
+  "stats": {
+   "attackPct": 20.0,
+   "magazine": -25.0
+  }
+ },
+ {
+  "id": "smg:energy-smg",
+  "name": "Energy SMG",
+  "style": "Energy Style",
+  "weaponGroup": "SMG",
+  "effect": "Can recover ammunition after taking a hit.",
+  "stats": {}
+ },
+ {
+  "id": "smg:heavy-smg",
+  "name": "Heavy SMG",
+  "style": "Heavy Style",
+  "weaponGroup": "SMG",
+  "effect": "Magazine Capacity +60% Reload Speed -30%",
+  "stats": {
+   "magazine": 60.0,
+   "reload": -30.0
+  }
+ },
+ {
+  "id": "smg:light-smg",
+  "name": "Light SMG",
+  "style": "Lightweight Style",
+  "weaponGroup": "SMG",
+  "effect": "Reload Speed +150% Magazine Capacity -30%",
+  "stats": {
+   "reload": 150.0,
+   "magazine": -30.0
+  }
+ },
+ {
+  "id": "smg:vanguard-smg",
+  "name": "Vanguard SMG",
+  "style": "Vanguard Style",
+  "weaponGroup": "SMG",
+  "effect": "Stabilizes weapon keyword effects.",
+  "stats": {}
+ },
+ {
+  "id": "shotgun:12-gauge:variant-1",
+  "name": "12-Gauge",
+  "style": "Rapid Shot Style",
+  "weaponGroup": "Shotgun",
+  "effect": "Fire Rate +25%, Magazine Capacity +45%, Attack -10%",
+  "stats": {
+   "magazine": 45.0,
+   "fireRate": 25.0,
+   "attackPct": -10.0
+  }
+ },
+ {
+  "id": "shotgun:12-gauge:variant-2",
+  "name": "12-Gauge",
+  "style": "Rapid Shot Style",
+  "weaponGroup": "Shotgun",
+  "effect": "Fire Rate +25%, Draw Speed 50%, Attack -10%",
+  "stats": {
+   "fireRate": 25.0,
+   "attackPct": -10.0
+  }
+ },
+ {
+  "id": "shotgun:16-gauge",
+  "name": "16-Gauge",
+  "style": "Lightweight Style",
+  "weaponGroup": "Shotgun",
+  "effect": "Reload Speed +150%, Magazine Capacity -30%",
+  "stats": {
+   "reload": 150.0,
+   "magazine": -30.0
+  }
+ },
+ {
+  "id": "shotgun:20-gauge",
+  "name": "20-Gauge",
+  "style": "Heavy Style",
+  "weaponGroup": "Shotgun",
+  "effect": "Magazine Capacity +60% Reload Speed -30%",
+  "stats": {
+   "magazine": 60.0,
+   "reload": -30.0
+  }
+ },
+ {
+  "id": "shotgun:boost-shotgun",
+  "name": "Boost Shotgun",
+  "style": "Boost Style",
+  "weaponGroup": "Shotgun",
+  "effect": "Increases keyword trigger chance after reloading.",
+  "stats": {}
+ },
+ {
+  "id": "sniper-rifle:frugal-sniper-rifle",
+  "name": "Frugal Sniper Rifle",
+  "style": "Frugal Style",
+  "weaponGroup": "Sniper Rifle",
+  "effect": "Recovers ammunition after missed shots.",
+  "stats": {}
+ },
+ {
+  "id": "sniper-rifle:portable-sniper",
+  "name": "Portable Sniper",
+  "style": "Portable Style",
+  "weaponGroup": "Sniper Rifle",
+  "effect": "Movement Speed while firing +50 Movement Speed while Holding Gun +12.5% Speed while Holding Gun +50%",
+  "stats": {}
+ },
+ {
+  "id": "sniper-rifle:rapid-sniper",
+  "name": "Rapid Sniper",
+  "style": "Rapid Shot Style",
+  "weaponGroup": "Sniper Rifle",
+  "effect": "Bolt-pulling Speed +50% Reload Speed +50% Attack -10%",
+  "stats": {
+   "reload": 50.0,
+   "attackPct": -10.0
+  }
+ },
+ {
+  "id": "sniper-rifle:steady-sniper",
+  "name": "Steady Sniper",
+  "style": "Stabilized Style",
+  "weaponGroup": "Sniper Rifle",
+  "effect": "Stability +75 Significant aim shake reduction",
+  "stats": {}
+ }
+]
