@@ -1,0 +1,118 @@
+{
+  "facet": "weapons: Legendary/Epic weapon catalogue with base stats and blueprint star (1-6) scaling",
+  "dataFile": "/home/user/shared_workspace/once-human-build-planner/data/weapons.json",
+  "notesFile": "/home/user/shared_workspace/once-human-build-planner/research/weapons.md",
+  "gameVersionCovered": "Live v3.0.7 (2026-09-28); base stat sheet = Once Human DB snapshot of v2.3.x (imported 2026-03-18 and 2026-04-30); 2026 v3.0.x weapons covered by name/effect only",
+  "confidence": "medium",
+  "recordCount": 67,
+  "keyClaims": [
+    {
+      "claim": "Weapon-card base bonuses are fixed per weapon frame and are identical across rarities: AR (SOCR/M416) 6% crit rate / 27% crit DMG / 60% weakspot DMG; KAM 6/30/55; SMG MPS7 8/30/50, MPS5 8/30/55, KV-SBR & TEC9/FP9 10/30/45, PDW90 8/45/30; LMG MG4 8/30/35, KVD 10/30/40; Shotgun DBSG 10/30/25, ACS12 8/27/15, DB12 8/28/20; Sniper AWS.338 2/26/95, SN700 2/24/90, HAMR 2/30/80, SKS/EBR-14 5/40/50; Pistol DE.50 6/25/60, G17 8/28/55, R500 4/25/65; Crossbow/Compound Bow 2/28/70; Melee 5/25/20.",
+      "evidence": "Datamined weapon_list.json (OHDB-bridged) values; wikily snippets give identical numbers for ACS12 Corrosion (+8/+27/+15), AWS.338 Bullseye (+2/+26/+95), DB12 Raining Cash (+8/+28/+20), FP9 Additional Rules (+10/+30/+45), G17 Hazardous Object (+8/+28); Gledson/wikily gives SOCR 6/27/60, Critical Pulse 2/28/70, MPS7 8/30/50.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://wikily.gg/once-human/weapon-blueprints/",
+        "https://raw.githubusercontent.com/Gledson-z/once-human-planner/main/data/game_data.js"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Tier-V displayed base DMG per projectile (1-star) for the flagship legendaries: AWS.338 Bullseye 1216 (40 RPM, 5 mag, reload 3.6 s); SOCR The Last Valor 174 (515 RPM, 30 mag, 2.3 s); DBSG Doombringer 238x6 (180 RPM, 2 mag); ACS12 Corrosion / Pyroclasm Starter 138x5 (180 RPM, 8 mag); DE.50 Jaws 494 (190 RPM, 9 mag); MG4 Predator / Conflicting Memories 124 (700 RPM, 75 mag); KVD Boom! Boom! 168 (500 RPM, 100 mag, 5.1 s); HAMR Brahminy 840 (85 RPM, 8 mag); R500 Memento 654 (145 RPM, 5 mag); KV-SBR Little Jaws 110 (1000 RPM, 30 mag); MPS7 Outer Space 126 (850 RPM, 35 mag); M416 Silent Anabasis 126 (750 RPM, 36 mag); Critical Pulse / Compound Bow 1192 (90 RPM, 1 mag); DB12 Raining Cash 212x5 (105 RPM, 12 mag).",
+      "evidence": "Two independent OHDB mirrors (lReDragol Mar 2026; saitoh183 Apr 2026) agree on damage and RPM for all 62 Legendary/Epic weapons.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "game8-style \"base damage\" (Bullseye 316, Last Valor 45, Doombringer 62x6, Corrosion 36x5, Jaws 128, Predator 32, Boom Boom 44, Brahminy 218, Memento 170, Little Jaws 29, Silent Anabasis 33) is the Tier-I value; Tier-V displayed DMG is a near-constant 3.82-3.88x higher. A calculator must pick one scale and apply it consistently.",
+      "evidence": "Ratio table in research notes section 3 across 13 weapons; datamined file contains matching low-tier duplicates (Dual Fury 56x6 vs 214x6).",
+      "sources": [
+        "https://game8.co/games/Once-Human/archives/Weapons",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Blueprint stars raise only the weapon DMG stat (HP/Psi Intensity on armor); fire rate, magazine, crit and weakspot are unchanged. Legendary blueprints go to 6 stars and 6-star existed at launch (July 2024); XP per star for a legendary: 1600 / 4000 / 6000 / 8000 / 10000 (29,600 total).",
+      "evidence": "fandom: \"Blueprint enhancement tiers increase the damage stat of weapons across all their blueprint tiers\"; gamersandgeek on HP/PSI; paradoxgaming: \"leveling a legendary blueprint from one to six stars requiring 29,600 experience ... 1600 XP to go from 1 to 2 stars, then 4000, 6000, 8000, and 10000\".",
+      "sources": [
+        "https://once-human.fandom.com/wiki/Weapons",
+        "https://gamersandgeek.com/once-human-weapon-armor-gear-stars/",
+        "https://paradoxgaming.net/gamearticle.php?id=sixstarblueprints"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Per-star DMG multiplier (relative to 1-star): 2*=1.10, 3*=1.20, 4*=1.30, 5*=1.40, 6*=1.50 - the model hard-coded in the lReDragol community calculator. Competing anecdotal evidence: ~4% per star; 1-star vs 3-star \"about 10-15%\". No official figure found.",
+      "evidence": "mechanics.py line 1213 star_multipliers; Steam threads; wikily/OHDB displayed-DMG ratio of 1.52 for three weapons is consistent with 1.5x at 6-star.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/mechanics.py",
+        "https://steamcommunity.com/app/2139460/discussions/0/6330466705287939267/",
+        "https://steamcommunity.com/app/2139460/discussions/0/671726025354256537/",
+        "https://raw.githubusercontent.com/Gledson-z/once-human-planner/main/data/game_data.js"
+      ],
+      "confidence": "low"
+    },
+    {
+      "claim": "Keyword base values embedded in weapon effects: Shrapnel = 50% Attack as Weapon DMG to a random unhit part (can crit/weakspot, decays with distance); Bounce = 60% Attack to a random enemy within 10 m (official Nov 2024 preview said 40%); Power Surge = 50% Psi Intensity Shock status DMG once, 6 s, -40% accuracy; Frost Vortex = 30% Psi Intensity/s for 4 s in 4.5 m; Burn = 10% Psi Intensity every 0.5 s for 6 s, up to 5 stacks; Unstable Bomber = 100% Psi Intensity blast after 0.1 s (0.4 s on Little Jaws) in 1.5 m; The Bull's Eye = Vulnerability +8% for 12 s; Fast Gunner stack = Fire Rate +1% & Attack +1% for 2 s (up to 5).",
+      "evidence": "Datamined mechanics text (quoted in weapons.json specialEffect.text); Gledson Shrapnel text; bramsey formulas.json bounce 0.4 citing official devblog 2024-11-23.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://raw.githubusercontent.com/Gledson-z/once-human-planner/main/data/game_data.js",
+        "https://www.oncehuman.game/news/devBlog/20241123/40781_1195665.html"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Weapon-specific effect numbers: Last Valor - 4 hits trigger Shrapnel, crits count as 2 hits, +30% Shrapnel crit DMG; Bullseye - Bull's Eye on weakspot hit (Vulnerability +8% 12 s), Weakspot DMG +15% per hit up to 3 stacks, Attack +15% for 20 s after weakspot kill; Predator - Fast Gunner stacks, 0.5 s infinite ammo, +2%/hit same target up to +40%, Attack +40% while mag >50%; Little Jaws - Unstable Bomber delay +0.3 s, +20% UB DMG per 0.1 s delay, +10% UB final DMG per hit (x2 on weakspot); Jaws - UB after 0.1 s, 1.5 m, every 4 shots; Brahminy - Bounce 60% Attack, 35% ricochet on weakspot, +20% next-bullet DMG up to 5 stacks; Boom Boom - 18% burn chance, 300% Psi Intensity Blaze burst on killing a burning enemy, +30% Blaze DMG; Silent Anabasis - Ice Crystal shatter 100% Psi Intensity, Frost DMG +60% +20%/crystal up to 15 stacks.",
+      "evidence": "Datamined mechanics text plus wikily snippets (Jaws 0.1 s / 1.5 m / every 4 shots; Predator 40% proc, 0.5 s; Boom Boom 18%).",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://wikily.gg/once-human/weapon-blueprints/"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Damage falloff: rifles/SMGs/LMGs fall to 30% minimum damage beyond 39-93 m (frame-specific), snipers to 10% beyond 93-109 m, shotguns to 10% beyond 13 m, pistols to 25-30% beyond 25-37 m, crossbows to 25% beyond 30 m.",
+      "evidence": "min_damage_range_meters / min_damage_percent fields in the datamined list for every ranged weapon.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "2026 balance/patch facts: v3.0.1 (2026-07-09) added QBJ97 - Fiery Trees and Silver Flowers (Unstable Bomber AR) and SN700 - Finale (Shrapnel sniper); v3.0.2 (2026-07-22) cut Finale's max Reverb stacks 5->4 and raised each stack 4%->5%; v3.0.6 (2026-09-16) reworked MG4 - Conflicting Memories: Shrapnel every 6 hits (was 12), every 12 hits or after reload the next Shrapnel becomes a \"Memory Storm\" hitting all targets in range, each Shrapnel hit grants 0.5 s stackable Super Armor. v2.3.5 (2026-03-25) replaced blueprint fragments with direct Starchrom activation.",
+      "evidence": "marsad research JSON paraphrasing the official posts (URLs cited); vortexgaming snippet for 2.3.4/2.3.5.",
+      "sources": [
+        "https://www.oncehuman.game/news/update/20260709/40780_1307147.html",
+        "https://www.oncehuman.game/news/update/20260722/40780_1308595.html",
+        "https://www.oncehuman.game/news/devBlog/20260910/40781_1313572.html",
+        "https://raw.githubusercontent.com/kingxqtr/marsad/main/data/research/once-human.json",
+        "https://vortexgaming.io/en/postdetail/713570"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Headshots on human enemies deal 2.5x base damage (separate from the weapon weakspot bonus).",
+      "evidence": "keengamer snippet only.",
+      "sources": [
+        "https://www.keengamer.com/articles/guides/once-human-top-10-best-weapons/"
+      ],
+      "confidence": "low"
+    }
+  ],
+  "openQuestions": [
+    "Exact official per-star DMG multiplier (additive +10%/star vs ~4%/star anecdotes); whether it compounds; whether wikily displayed DMG is 5-star or 6-star.",
+    "Do Epic blueprints cap at 5 stars (lReDragol) or 6? Rare/Common caps?",
+    "Starchrom cost and fragment/XP conversion per star after the Mar 2026 (v2.3.5) blueprint rework; fragment costs per star pre-rework.",
+    "Stat sheets for 2026 weapons: QBJ97 - Fiery Trees and Silver Flowers, SN700 - Finale, AUG - Electron Cloud, KVK 3 - Bull, SOCR - Wildfire, KAM - Burning Rage; existence of \"Recurve Crossbow - Wildfire\", \"Compound Bow - Flaming Fervor\", \"Bingo\", \"RD69 Spiral Ripple\", \"Scattershot\", \"Marauder\".",
+    "Magazine conflicts: ACS12 Corrosion 8 vs 18; DE.50 Jaws 9 vs 8; KV-SBR Little Jaws 30 vs 39; KAM Abyss Glance 40 vs 50.",
+    "Keyword conflicts: DB12 Raining Cash (Fortress Warfare vs Shrapnel); whether Doombringer, Corrosion, Boom Boom, Outer Space keywords in bramsey list are simply wrong.",
+    "Effect text for 25 Legendary/Epic weapons with placeholder mechanics (e.g. DBSG - Format, G17 - Cash Only, Aurora Fort, Star Vortex, HAMR - Hannya, EBR-14, SKS - Pathfinder, PDW90).",
+    "Interpretation of weakspot: is weakspot hit DMG = base x (1 + Weakspot DMG%)? Is crit DMG applied as x(1 + CritDMG%)? Not confirmed from a reachable formula source.",
+    "Meaning of OHDB \"range\" (7-60) vs wikily range bar (45-75); whether OHDB values are 1-star Tier V.",
+    "Any 3.0.3-3.0.7 per-weapon balance changes beyond MG4 Conflicting Memories and SN700 Finale."
+  ]
+}

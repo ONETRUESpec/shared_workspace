@@ -1,0 +1,4838 @@
+{
+  "_meta": {
+    "facet": "weapons: Legendary/Epic weapon catalogue with base stats and blueprint star (1-6) scaling",
+    "generatedAt": "2026-10-03",
+    "gameVersion": "Live v3.0.7 (Sept 28 2026). Base stat sheet reflects the Once Human DB snapshot imported Mar 18 2026 (lReDragol) / Apr 30 2026 (saitoh183), i.e. v2.3.x; weapons released from v3.0.1 (Jul 9 2026) onward have names/effects but no stat sheet.",
+    "sources": [
+      "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+      "https://github.com/lReDragol/OnceHuman_Tools (mechanics.py, player.py: star/tier multiplier model; weapon_list.json commit 2026-03-18)",
+      "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+      "https://www.oncehumandb.com/weapons/<slug> (upstream of both datasets; blocked from this session)",
+      "https://raw.githubusercontent.com/Gledson-z/once-human-planner/main/data/game_data.js",
+      "https://wikily.gg/once-human/weapon-blueprints/",
+      "https://game8.co/games/Once-Human/archives/Weapons",
+      "https://www.oncehumandb.com/guides/best-weapons",
+      "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/weapons.json",
+      "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/DATA.md",
+      "https://raw.githubusercontent.com/kingxqtr/marsad/main/data/research/once-human.json",
+      "https://www.oncehuman.game/news/update/20260709/40780_1307147.html",
+      "https://www.oncehuman.game/news/update/20260722/40780_1308595.html",
+      "https://www.oncehuman.game/news/devBlog/20260910/40781_1313572.html",
+      "https://www.oncehuman.game/news/update/20260924/40780_1315053.html",
+      "https://paradoxgaming.net/gamearticle.php?id=sixstarblueprints",
+      "https://vortexgaming.io/en/postdetail/713570",
+      "https://steamcommunity.com/app/2139460/discussions/0/6330466705287939267/",
+      "https://steamcommunity.com/app/2139460/discussions/0/671726025354256537/",
+      "https://once-human.fandom.com/wiki/Weapons",
+      "https://gamersandgeek.com/once-human-weapon-armor-gear-stars/",
+      "https://www.keengamer.com/articles/guides/once-human-top-10-best-weapons/",
+      "https://hardcoregamer.com/once-human/all-weapons-once-human/",
+      "https://github.com/bramsey679/Once_Human_DPS_Calculator (data/weapons.json keyword list, data/formulas.json)"
+    ],
+    "notes": "Network egress in this session blocked every wiki/guide/Steam/official domain (fandom, wiki.gg, wikily, game8, oncehumandb, oncehuman.game, steamcommunity, reddit, archive.org ...). Numbers therefore come from (a) GitHub-hosted datasets that mirror Once Human DB (OHDB) and wikily, (b) search-engine result snippets of game8/wikily/fandom/Steam/paradoxgaming/vortexgaming pages (quoted in research/weapons.md), and (c) an Arabic/English news-research JSON that paraphrases the official 2026 patch notes. Two DMG scales exist in the wild: game8-style \"base damage\" (e.g. Bullseye 316, Last Valor 45) and OHDB/in-game Tier-V displayed DMG (Bullseye 1216, Last Valor 174); the ratio is a near-constant 3.82-3.88 across 12 weapons, so game8 values are read as Tier I. wikily/Gledson values (Last Valor 264, Critical Pulse 1812, Outer Space 192) are 1.517-1.524x the OHDB values, consistent with OHDB = 1-star and wikily = 6-star under the +10%/star model (1.5x) but NOT proven. Percentages are plain numbers meaning percent; baseWeakspotMult = 1 + baseWeakspotDmg/100 is an interpretation (weakspot hit = DMG x (1 + Weakspot DMG%)), not sourced text. Crit/weakspot values are the weapon-card bonuses (e.g. AR 6% crit rate, 27% crit DMG, 60% weakspot DMG) and were confirmed identical between the datamined list and wikily for 7 weapons."
+  },
+  "starScaling": {
+    "description": "Blueprint stars (enhancement tiers) raise a weapon's displayed DMG (and HP/Psi Intensity on armor); they do not change fire rate, magazine, crit or weakspot stats (fandom: \"Blueprint enhancement tiers increase the DMG stat of weapons across all their blueprint tiers; the number of stars a blueprint has indicates its enhancement tier\"). Max 6 stars for Legendary blueprints; 6-star existed at launch (July 2024) - paradoxgaming: \"When Once Human launched, reaching six-star weapons and armor felt nearly impossible ... leveling a legendary blueprint from one to six stars requiring 29,600 experience\". Dec 2024 added the Blueprint Conversion System (transfer stars between blueprints). v2.3.4 (Mar 11 2026, preview) / v2.3.5 (Mar 25 2026): blueprints are activated directly with Starchrom, no fragment collection step (vortexgaming). The exact per-star DMG multiplier is NOT published anywhere reachable; the table below is the model hard-coded in the lReDragol community calculator (Mar 2026) and must be treated as unverified. Anecdotal Steam tests disagree (roughly +4% per star; 1-star vs 3-star Tier-I SOCR \"about 10-15%\").",
+    "dmgMultiplierByStar": {
+      "1": 1,
+      "2": 1.1,
+      "3": 1.2,
+      "4": 1.3,
+      "5": 1.4,
+      "6": 1.5
+    },
+    "dmgMultiplierSource": "https://github.com/lReDragol/OnceHuman_Tools portable_calc_v2/data/menu/calc/mechanics.py line 1213: star_multipliers = {1:1.0,2:1.1,3:1.2,4:1.3,5:1.4,6:1.5} (community model; applied multiplicatively to all PROGRESSION_SCALING_STATS incl. damage)",
+    "dmgMultiplierConfidence": "low",
+    "alternativeEstimates": [
+      {
+        "perStar": 4,
+        "basis": "Steam discussion \"Is there any noticeable difference between 3 star and 4 star weapons?\" - a player estimated ~4% damage per star",
+        "source": "https://steamcommunity.com/app/2139460/discussions/0/6330466705287939267/"
+      },
+      {
+        "total1to3Star": "10-15%",
+        "basis": "Steam \"Blueprint upgrading\" thread: 1-star vs 3-star Tier-I SOCR tested, \"about 10-15%\" / \"slight increase ... nothing game-changing\"",
+        "source": "https://steamcommunity.com/app/2139460/discussions/0/671726025354256537/"
+      },
+      {
+        "observedRatio": 1.52,
+        "basis": "wikily displayed DMG / OHDB displayed DMG for Last Valor (264/174), Critical Pulse (1812/1192), Outer Space (192/126) - consistent with 6-star/1-star = 1.5 if wikily shows max-star values (unconfirmed)",
+        "source": "https://raw.githubusercontent.com/Gledson-z/once-human-planner/main/data/game_data.js"
+      }
+    ],
+    "maxStarsByRarity": {
+      "Legendary": 6,
+      "Epic": 5,
+      "Rare": 4,
+      "Common": 3
+    },
+    "maxStarsByRaritySource": "lReDragol player.py max_stars table (community calculator; unverified in game - only the Legendary 6-star cap is corroborated by paradoxgaming/Steam)",
+    "xpPerStarLegendary": {
+      "1->2": 1600,
+      "2->3": 4000,
+      "3->4": 6000,
+      "4->5": 8000,
+      "5->6": 10000,
+      "total": 29600
+    },
+    "xpPerStarSource": "https://paradoxgaming.net/gamearticle.php?id=sixstarblueprints (via search snippet) and Steam thread 4631485178655577294 snippet (\"29,600 XP\")",
+    "fragmentCostPerStar": null,
+    "starchromCostPerStar": null,
+    "tierMultiplierByBlueprintTier": {
+      "I": 1,
+      "II": 1.05,
+      "III": 1.1,
+      "IV": 1.15,
+      "V": 1.2
+    },
+    "tierMultiplierSource": "lReDragol mechanics.py level_multipliers (community model). CONFLICTS with the observed game8 (Tier I) vs OHDB (Tier V) displayed-DMG ratio of ~3.85x; the in-game tier I->V jump is far larger than +20%. Treat as unreliable.",
+    "calibrationModel": "lReDragol model: calibration levels 0-6 add +2% each (0,2,4,...,12%) - unverified community model",
+    "otherEffects": "Armor: stars raise HP and Psi Intensity (\"The higher the number of stars, the higher the HP and PSI intensity you get from gear pieces, and for weapons, their base damage receives a boost\" - gamersandgeek). Weapon stars also raise weapon-mod-slot? No - unchanged. Tier V blueprints unlock at character level 40 (fandom).",
+    "sixStarIntroduced": "Present at launch (July 9 2024) for Legendary blueprints per paradoxgaming; no patch note found that added a 6th star later."
+  },
+  "classDefaults": {
+    "_note": "Weapon-card base bonuses per platform (\"frame\") from the datamined list; crit/weakspot are percent bonuses. A class default is the modal frame value; ranges show other frames in the same class. Values confirmed identical on wikily for SOCR, Critical Pulse, MPS7, ACS12, AWS.338, DB12, FP9/TEC9, G17 and R500.",
+    "AR": {
+      "baseCritRate": 6,
+      "baseCritDmg": 27,
+      "baseWeakspotDmg": 60,
+      "baseWeakspotMult": 1.6,
+      "frames": {
+        "SOCR": [
+          6,
+          27,
+          60
+        ],
+        "M416": [
+          6,
+          27,
+          60
+        ],
+        "KAM": [
+          6,
+          30,
+          55
+        ]
+      },
+      "minDamagePercent": 30,
+      "minDamageRangeM": "67-76"
+    },
+    "SMG": {
+      "baseCritRate": 8,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 50,
+      "baseWeakspotMult": 1.5,
+      "frames": {
+        "MPS7": [
+          8,
+          30,
+          50
+        ],
+        "MPS5": [
+          8,
+          30,
+          55
+        ],
+        "KV-SBR": [
+          10,
+          30,
+          45
+        ],
+        "TEC9/FP9": [
+          10,
+          30,
+          45
+        ],
+        "PDW90": [
+          8,
+          45,
+          30
+        ]
+      },
+      "minDamagePercent": 30,
+      "minDamageRangeM": "39-50"
+    },
+    "LMG": {
+      "baseCritRate": 8,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 35,
+      "baseWeakspotMult": 1.35,
+      "frames": {
+        "MG4": [
+          8,
+          30,
+          35
+        ],
+        "KVD": [
+          10,
+          30,
+          40
+        ]
+      },
+      "minDamagePercent": 30,
+      "minDamageRangeM": "81-93"
+    },
+    "Shotgun": {
+      "baseCritRate": 10,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 25,
+      "baseWeakspotMult": 1.25,
+      "frames": {
+        "DBSG": [
+          10,
+          30,
+          25
+        ],
+        "ACS12": [
+          8,
+          27,
+          15
+        ],
+        "DB12": [
+          8,
+          28,
+          20
+        ],
+        "S870": [
+          10,
+          30,
+          25
+        ]
+      },
+      "minDamagePercent": 10,
+      "minDamageRangeM": 13
+    },
+    "Sniper": {
+      "baseCritRate": 2,
+      "baseCritDmg": 26,
+      "baseWeakspotDmg": 90,
+      "baseWeakspotMult": 1.9,
+      "frames": {
+        "AWS.338": [
+          2,
+          26,
+          95
+        ],
+        "SN700": [
+          2,
+          24,
+          90
+        ],
+        "HAMR": [
+          2,
+          30,
+          80
+        ],
+        "SKS (marksman)": [
+          5,
+          40,
+          50
+        ],
+        "EBR-14 (marksman)": [
+          5,
+          40,
+          50
+        ]
+      },
+      "minDamagePercent": 10,
+      "minDamageRangeM": "93-109"
+    },
+    "Pistol": {
+      "baseCritRate": 6,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 60,
+      "baseWeakspotMult": 1.6,
+      "frames": {
+        "DE.50": [
+          6,
+          25,
+          60
+        ],
+        "G17": [
+          8,
+          28,
+          55
+        ],
+        "R500": [
+          4,
+          25,
+          65
+        ]
+      },
+      "minDamagePercent": "25-30",
+      "minDamageRangeM": "25-37"
+    },
+    "Crossbow": {
+      "baseCritRate": 2,
+      "baseCritDmg": 28,
+      "baseWeakspotDmg": 70,
+      "baseWeakspotMult": 1.7,
+      "frames": {
+        "Recurve Crossbow / Compound Bow / Critical Pulse": [
+          2,
+          28,
+          70
+        ],
+        "Recurve Bow": [
+          2,
+          30,
+          80
+        ]
+      },
+      "minDamagePercent": 25,
+      "minDamageRangeM": 30
+    },
+    "Bow": {
+      "baseCritRate": 2,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 80,
+      "baseWeakspotMult": 1.8,
+      "frames": {
+        "Recurve Bow (rare)": [
+          2,
+          30,
+          80
+        ]
+      },
+      "note": "Only the rare Recurve Bow is in the dataset; Compound Bow is classed as crossbow by OHDB"
+    },
+    "Launcher": {
+      "baseCritRate": 4,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 35,
+      "baseWeakspotMult": 1.35,
+      "frames": {
+        "MGL": [
+          4,
+          30,
+          35
+        ],
+        "Flamethrower": [
+          10,
+          30,
+          15
+        ],
+        "RPG7": [
+          3,
+          25,
+          25
+        ]
+      }
+    },
+    "Melee": {
+      "baseCritRate": 5,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 20,
+      "baseWeakspotMult": 1.2,
+      "frames": {
+        "all melee": [
+          5,
+          25,
+          20
+        ]
+      }
+    },
+    "humanHeadshotMultiplier": {
+      "value": 2.5,
+      "source": "https://www.keengamer.com/articles/guides/once-human-top-10-best-weapons/ snippet: \"Headshots deal 2.5 times base damage on human enemies\" - unverified, may be outdated"
+    }
+  },
+  "weapons": [
+    {
+      "name": "AUG - Electron Cloud",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "AR",
+      "frame": "AUG",
+      "blueprintFragmentType": null,
+      "element": "Shock",
+      "statusKeyword": "Power Surge",
+      "specialEffect": {
+        "name": "Power Surge",
+        "summary": "Shock elemental AR; \"Electric Orb\" rebound, Shock DMG boost (smus-rgb guide, no numbers).",
+        "text": null,
+        "verified": false,
+        "notes": "Partial data only - no stat sheet reachable for this weapon",
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": null,
+      "baseDmgBasis": null,
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": null,
+      "fireRateRPM": null,
+      "magazine": null,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No per-weapon star table published.",
+      "crossChecks": {
+        "ohdbSnapshot": null,
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null,
+        "frameHintNote": null
+      },
+      "dataQuality": "partial - name/keyword only (frame stats inferred where noted)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/weapons.json"
+      ]
+    },
+    {
+      "name": "KAM - Abyss Glance",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "AR",
+      "frame": "KAM",
+      "blueprintFragmentType": "Stranger",
+      "element": "Frost",
+      "statusKeyword": "Frost Vortex",
+      "specialEffect": {
+        "name": "Frost Vortex",
+        "summary": "Frost Vortex mechanics with increased damage based on proximity to the vortex center and additional bonuses when triggering on multiple hits.",
+        "text": "Traps enemies within a 4.5m radius and inflicts 30% Psi Intensity Status DMG per second for 4 seconds. | Weakspot hits count as 2 hits towards triggering Frost Vortex. | The closer to the center of the Frost Vortex, the higher the Frost Vortex DMG, up to +200%. | Frost DMG increased by 30%.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 150,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 39,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 600,
+      "magazine": 40,
+      "magazineConflict": "smus-rgb lists 50 mag vs datamined 40",
+      "reloadTimeSec": 3.1,
+      "adsTimeSec": 0.23,
+      "baseCritRate": 6,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 55,
+      "baseWeakspotMult": 1.55,
+      "effectiveRangeM": 27,
+      "minDamageRangeM": 76,
+      "minDamagePercent": 30,
+      "ammoType": "Rifle Ammo",
+      "damageBonusTag": "Suppression: Dealing more DMG against Deviants",
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 150,
+          "rpm": 600,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 39,
+          "pellets": null,
+          "rpm": 600,
+          "mag": 50,
+          "note": null
+        },
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/kam-abyss-glance",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/weapons.json"
+      ]
+    },
+    {
+      "name": "M416 - Silent Anabasis",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "AR",
+      "frame": "M416",
+      "blueprintFragmentType": "Wanderer",
+      "element": "Frost",
+      "statusKeyword": "Frost Vortex",
+      "specialEffect": {
+        "name": "Frost Vortex",
+        "summary": "Frost Vortex mechanics with Ice Crystal generation and damage scaling based on shattered Ice Crystals.",
+        "text": "Traps enemies within a 4.5m radius and inflicts 30% Psi Intensity Status DMG per second for 4 seconds. | Generates an Ice Crystal upon triggering Frost Vortex. | Ice Crystals automatically shatter after 15 seconds, dealing Frost Elemental Status DMG equal to 100% Psi Intensity to nearby targets. | Shattering Ice Crystals by shooting them increases the DMG they deal to 60% to players. | Increases Frost Elemental DMG by 60%. | Increases Frost Elemental DMG by an additional 20% for every Ice Crystal shattered, stacking up to 15 times for 10 seconds.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 126,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 33,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 750,
+      "magazine": 36,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.3,
+      "adsTimeSec": 0.22,
+      "baseCritRate": 6,
+      "baseCritDmg": 27,
+      "baseWeakspotDmg": 60,
+      "baseWeakspotMult": 1.6,
+      "effectiveRangeM": 26,
+      "minDamageRangeM": 73,
+      "minDamagePercent": 30,
+      "ammoType": "Rifle Ammo",
+      "damageBonusTag": "Suppression: Dealing more DMG against Deviants",
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 126,
+          "rpm": 750,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 33,
+          "pellets": null,
+          "rpm": 750,
+          "mag": 36,
+          "note": null
+        },
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/m416-silent-anabasis",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://game8.co/games/Once-Human/archives/Weapons",
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/weapons.json"
+      ]
+    },
+    {
+      "name": "QBJ97 - Fiery Trees and Silver Flowers",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "AR",
+      "frame": "QBJ97",
+      "blueprintFragmentType": null,
+      "element": "Blast",
+      "statusKeyword": "Unstable Bomber",
+      "specialEffect": {
+        "name": "Unstable Bomber",
+        "summary": "Hits can apply Unstable Bomber. \"Spark\" stacks reduce recoil; at full Spark the Unstable Bomber chance is boosted (smus-rgb guide paraphrase, unverified numbers). Added v3.0.1 (July 9 2026, 2nd-anniversary); given as a daily check-in reward during the Dreamy Maelstrom event.",
+        "text": null,
+        "verified": false,
+        "notes": "Partial data only - no stat sheet reachable for this weapon",
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": null,
+      "baseDmgBasis": null,
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": null,
+      "fireRateRPM": null,
+      "magazine": null,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No per-weapon star table published.",
+      "crossChecks": {
+        "ohdbSnapshot": null,
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null,
+        "frameHintNote": null
+      },
+      "dataQuality": "partial - name/keyword only (frame stats inferred where noted)",
+      "addedOrChanged": "v3.0.1 2026-07-09",
+      "sources": [
+        "https://www.oncehuman.game/news/update/20260709/40780_1307147.html",
+        "https://www.oncehuman.game/news/devBlog/20260701/40781_1306335.html",
+        "https://raw.githubusercontent.com/kingxqtr/marsad/main/data/research/once-human.json",
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/weapons.json"
+      ]
+    },
+    {
+      "name": "SOCR - The Last Valor",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "AR",
+      "frame": "SOCR",
+      "blueprintFragmentType": "Beyonder",
+      "element": "Physical (weapon element)",
+      "statusKeyword": "Shrapnel",
+      "specialEffect": {
+        "name": "Shrapnel",
+        "summary": "Shrapnel mechanics with increased trigger chances upon multiple hits, enhanced damage on crit hits, and bonuses to Shrapnel DMG.",
+        "text": "Deals Weapon DMG of 50% Attack to a random unhit part. | Crit hits count as 2 hits towards triggering Shrapnel. | Crit hits grant Shrapnel trigger chance +1% for 1 second. | Shrapnel Crit DMG increased by 30%.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 174,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 45,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": 264,
+      "pellets": 1,
+      "fireRateRPM": 515,
+      "magazine": 30,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.3,
+      "adsTimeSec": 0.23,
+      "baseCritRate": 6,
+      "baseCritDmg": 27,
+      "baseWeakspotDmg": 60,
+      "baseWeakspotMult": 1.6,
+      "effectiveRangeM": 27,
+      "minDamageRangeM": 76,
+      "minDamagePercent": 30,
+      "ammoType": "Rifle Ammo",
+      "damageBonusTag": "{\"type\":\"penetration\",\"target\":\"rosetta\",\"value\":0.2}",
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 174,
+          "rpm": 515,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 45,
+          "pellets": null,
+          "rpm": 515,
+          "mag": 30,
+          "note": null
+        },
+        "wikily": {
+          "dmg": 264,
+          "rpm": 515,
+          "mag": 30,
+          "rangeStat": 75,
+          "reloadStat": 56,
+          "crit": 6,
+          "critDmg": 27,
+          "ws": 60,
+          "src": [
+            "https://raw.githubusercontent.com/Gledson-z/once-human-planner/main/data/game_data.js",
+            "https://wikily.gg/once-human/weapon-blueprints/"
+          ]
+        },
+        "critStatsAgreeWithWikily": true
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/socr-the-last-valor",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://game8.co/games/Once-Human/archives/Weapons",
+        "https://www.oncehumandb.com/guides/best-weapons",
+        "https://raw.githubusercontent.com/Gledson-z/once-human-planner/main/data/game_data.js",
+        "https://wikily.gg/once-human/weapon-blueprints/"
+      ]
+    },
+    {
+      "name": "SOCR - Wildfire",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "AR",
+      "frame": "SOCR",
+      "blueprintFragmentType": null,
+      "element": "Physical (weapon element)",
+      "statusKeyword": "Shrapnel",
+      "specialEffect": {
+        "name": "Shrapnel",
+        "summary": "Shrapnel-build AR with crit stacking (smus-rgb guide, no numbers). SOCR frame: 515 RPM, 30 mag, crit 6% / crit DMG 27% / weakspot 60%.",
+        "text": null,
+        "verified": false,
+        "notes": "Partial data only - no stat sheet reachable for this weapon",
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": null,
+      "baseDmgBasis": null,
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": null,
+      "fireRateRPM": 515,
+      "magazine": 30,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": 6,
+      "baseCritDmg": 27,
+      "baseWeakspotDmg": 60,
+      "baseWeakspotMult": 1.6,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No per-weapon star table published.",
+      "crossChecks": {
+        "ohdbSnapshot": null,
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null,
+        "frameHintNote": "fireRate/mag/crit/weakspot are the shared FRAME values from the datamined list, not confirmed for this variant"
+      },
+      "dataQuality": "partial - name/keyword only (frame stats inferred where noted)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/weapons.json"
+      ]
+    },
+    {
+      "name": "Ultra Force",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "AR",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": "None (buff)",
+      "statusKeyword": "Fortress Warfare",
+      "specialEffect": {
+        "name": "Fortress Warfare",
+        "summary": "Heavy attacks activate Fortress Warfare once every 10 seconds and grant stacking crit bonuses.",
+        "text": "Heavy attacks activate Fortress Warfare once every 10 seconds. | Heavy attacks grant all weapons Crit Rate +8% for 10 seconds, up to 3 stacks.",
+        "verified": true,
+        "notes": "Datamined mechanics block looks like a melee (heavy attack) template - UNVERIFIED",
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 264,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 515,
+      "magazine": 36,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.1,
+      "adsTimeSec": 0.24,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": 27,
+      "minDamageRangeM": 76,
+      "minDamagePercent": 30,
+      "ammoType": "Rifle Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 264,
+          "rpm": 515,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/ultra-force",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "Compound Bow",
+      "aliases": [
+        "Compound Bow - The Burden of Betrayal"
+      ],
+      "rarity": "Legendary",
+      "weaponClass": "Crossbow",
+      "frame": null,
+      "blueprintFragmentType": "Huntsman",
+      "element": "None (buff)",
+      "statusKeyword": "Fortress Warfare",
+      "specialEffect": {
+        "name": "Fortress Warfare",
+        "summary": "Fortress Warfare mechanics that trigger after aiming for 3 seconds, providing Attack bonuses and Heavy Armor to allies, with stackable bonuses upon defeating enemies.",
+        "text": "Creates a 2m radius area granting allies Heavy Armor for 5 seconds. | Gain 3 stacks of Brutal Mayhem and Weakspot DMG +25%. | Every shot reduces Brutal Mayhem stacks by 1. | Attack increases the longer you aim, up to 30%. | Heavy Armor grants Super Armor and Weapon DMG +20%.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 1192,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 90,
+      "magazine": 1,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.6,
+      "adsTimeSec": 0.21,
+      "baseCritRate": 2,
+      "baseCritDmg": 28,
+      "baseWeakspotDmg": 70,
+      "baseWeakspotMult": 1.7,
+      "effectiveRangeM": 19,
+      "minDamageRangeM": 30,
+      "minDamagePercent": 25,
+      "ammoType": "Arrow",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 1192,
+          "rpm": 90,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/compound-bow",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "Critical Pulse",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Crossbow",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": "Shock",
+      "statusKeyword": "Power Surge",
+      "specialEffect": {
+        "name": "Power Surge",
+        "summary": "Continuous Power Surge crossbow that enters Charge State through Deviant Particles and calls down Orb Lightning while charged.",
+        "text": "Shock Elemental DMG +30%. | Triggers Continuous Power Surge on hit. | Generates a Deviant Particle on hit. | Picking up a Deviant Particle enters Charge State for 3 seconds. | While charged, hits create Orb Lightning that deals Shock DMG equal to 75% PSI Intensity.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 1192,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 310,
+      "baseDmgTier1Note": "approximate (\"about\")",
+      "dmgWikilyDisplayed": 1812,
+      "pellets": 1,
+      "fireRateRPM": 90,
+      "magazine": 1,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.6,
+      "adsTimeSec": 0.21,
+      "baseCritRate": 2,
+      "baseCritDmg": 28,
+      "baseWeakspotDmg": 70,
+      "baseWeakspotMult": 1.7,
+      "effectiveRangeM": 19,
+      "minDamageRangeM": 30,
+      "minDamagePercent": 25,
+      "ammoType": "Arrow",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 1192,
+          "rpm": 90,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 310,
+          "pellets": null,
+          "rpm": null,
+          "mag": null,
+          "note": null
+        },
+        "wikily": {
+          "dmg": 1812,
+          "rpm": 90,
+          "mag": 1,
+          "rangeStat": 64,
+          "reloadStat": 75,
+          "crit": 2,
+          "critDmg": 28,
+          "ws": 70,
+          "src": [
+            "https://raw.githubusercontent.com/Gledson-z/once-human-planner/main/data/game_data.js"
+          ]
+        },
+        "critStatsAgreeWithWikily": true
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/critical-pulse",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://www.oncehumandb.com/guides/best-weapons",
+        "https://raw.githubusercontent.com/Gledson-z/once-human-planner/main/data/game_data.js"
+      ]
+    },
+    {
+      "name": "Aurora Fort",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "LMG",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 271,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 700,
+      "magazine": 90,
+      "magazineConflict": null,
+      "reloadTimeSec": 4.5,
+      "adsTimeSec": 0.26,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": 29,
+      "minDamageRangeM": 87,
+      "minDamagePercent": 30,
+      "ammoType": "Light Machine Gun Bullet",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 271,
+          "rpm": 700,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/aurora-fort",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "KVD - Boom! Boom!",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "LMG",
+      "frame": "KVD",
+      "blueprintFragmentType": "Juggernaut",
+      "element": "Blaze",
+      "statusKeyword": "Burn",
+      "specialEffect": {
+        "name": "Burn",
+        "summary": "Burn mechanics with increased damage and bonuses upon defeating enemies.",
+        "text": "Deals Status DMG of 10% Psi Intensity every 0.5s for 6s, stacking up to 5 times. | Deals Blaze DMG of 300% Psi Intensity upon killing an enemy affected by Burn and inflicts 1 stack of Burn on hit targets. | Blaze DMG increased by 30%.",
+        "verified": true,
+        "notes": "Burn (datamined mechanics; search snippet: \"18% chance to burn enemies on every hit\")",
+        "conflictingKeywordFromOtherSource": "Bounce (bramsey679 keyword list)"
+      },
+      "baseDmg": 168,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 44,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 500,
+      "magazine": 100,
+      "magazineConflict": null,
+      "reloadTimeSec": 5.1,
+      "adsTimeSec": 0.26,
+      "baseCritRate": 10,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 40,
+      "baseWeakspotMult": 1.4,
+      "effectiveRangeM": 27,
+      "minDamageRangeM": 81,
+      "minDamagePercent": 30,
+      "ammoType": "Light Machine Gun Bullet",
+      "damageBonusTag": "Suppression: Dealing more DMG against Deviants",
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 168,
+          "rpm": 500,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 44,
+          "pellets": null,
+          "rpm": 500,
+          "mag": 100,
+          "note": null
+        },
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/kvd-boom-boom",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://www.oncehumandb.com/guides/best-weapons",
+        "https://hardcoregamer.com/once-human/all-weapons-once-human/"
+      ]
+    },
+    {
+      "name": "MG4 - Conflicting Memories",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "LMG",
+      "frame": "MG4",
+      "blueprintFragmentType": "Beyonder",
+      "element": "Physical (weapon element)",
+      "statusKeyword": "Shrapnel",
+      "specialEffect": {
+        "name": "Shrapnel",
+        "summary": "Shrapnel mechanics that trigger after a certain number of shots on target, with scaling bonuses based on magazine capacity and magazine capacity increases.",
+        "text": "Deals Weapon DMG of 50% Attack to a random unhit part. | For every 40 magazine capacity, parts hit by Shrapnel +1, up to +4. | For every 15 magazine capacity in excess of 100, Shrapnel DMG +8%. | Magazine capacity increased by 40.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 124,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 700,
+      "magazine": 75,
+      "magazineConflict": null,
+      "reloadTimeSec": 4.1,
+      "adsTimeSec": 0.26,
+      "baseCritRate": 8,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 35,
+      "baseWeakspotMult": 1.35,
+      "effectiveRangeM": 31,
+      "minDamageRangeM": 93,
+      "minDamagePercent": 30,
+      "ammoType": "Light Machine Gun Bullet",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 124,
+          "rpm": 700,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": "Reworked Sept 16 2026 (v3.0.6; dev blog Sept 10 2026): Shrapnel now triggers every 6 hits instead of every 12; after a reload, or every 12 hits, the next Shrapnel becomes a \"Memory Storm\" that hits all targets in range; each Shrapnel hit grants 0.5 s of stackable Super Armor. Datamined effect text above is PRE-rework.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/mg4-conflicting-memories",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://www.oncehuman.game/news/devBlog/20260910/40781_1313572.html",
+        "https://raw.githubusercontent.com/kingxqtr/marsad/main/data/research/once-human.json"
+      ]
+    },
+    {
+      "name": "MG4 - Predator",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "LMG",
+      "frame": "MG4",
+      "blueprintFragmentType": "Operator",
+      "element": "None (buff)",
+      "statusKeyword": "Fast Gunner",
+      "specialEffect": {
+        "name": "Fast Gunner",
+        "summary": "Fast Gunner mechanics with increased fire rate and attack bonuses, infinite ammo upon reaching stack multiples, and damage bonuses when hitting the same target consecutively.",
+        "text": "Triggers Fast Gunner, increasing Fire Rate and Attack. | Grants infinite ammo for 0.5 seconds. | Hitting the same target consecutively grants Weapon DMG +2% per hit, up to +40%. Effect resets when the target is changed. | When the remaining bullets are more than 50% of the magazine capacity, Attack +40%. | Each Fast Gunner stack grants Fire Rate +1% and Attack +1% for 2 seconds.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 124,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 32,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 700,
+      "magazine": 75,
+      "magazineConflict": null,
+      "reloadTimeSec": 4.1,
+      "adsTimeSec": 0.26,
+      "baseCritRate": 8,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 35,
+      "baseWeakspotMult": 1.35,
+      "effectiveRangeM": 31,
+      "minDamageRangeM": 93,
+      "minDamagePercent": 30,
+      "ammoType": "Light Machine Gun Bullet",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 124,
+          "rpm": 700,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 32,
+          "pellets": null,
+          "rpm": 700,
+          "mag": 75,
+          "note": null
+        },
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/mg4-predator",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://game8.co/games/Once-Human/archives/Weapons",
+        "https://hardcoregamer.com/once-human/all-weapons-once-human/"
+      ]
+    },
+    {
+      "name": "Kukri",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Melee",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 778,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": null,
+      "magazine": null,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": 5,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 20,
+      "baseWeakspotMult": 1.2,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 778,
+          "rpm": null,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/kukri",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "Scourge",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Melee",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 922,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": null,
+      "magazine": null,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": 5,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 20,
+      "baseWeakspotMult": 1.2,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 922,
+          "rpm": null,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/scourge",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "The Fabled Masamune",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Melee",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 688,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": null,
+      "magazine": null,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": 5,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 20,
+      "baseWeakspotMult": 1.2,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 688,
+          "rpm": null,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/the-fabled-masamune",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "DE.50 - Jaws",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Pistol",
+      "frame": "DE.50",
+      "blueprintFragmentType": null,
+      "element": "Blast",
+      "statusKeyword": "Unstable Bomber",
+      "specialEffect": {
+        "name": "Unstable Bomber",
+        "summary": "Unstable Bomber and Explosive DMG bonuses",
+        "text": null,
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 494,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 128,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 190,
+      "magazine": 9,
+      "magazineConflict": "game8 lists MAG 8 vs datamined 9",
+      "reloadTimeSec": 1.8,
+      "adsTimeSec": 0.19,
+      "baseCritRate": 6,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 60,
+      "baseWeakspotMult": 1.6,
+      "effectiveRangeM": 20,
+      "minDamageRangeM": 32,
+      "minDamagePercent": 25,
+      "ammoType": "Pistol Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 494,
+          "rpm": 190,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 128,
+          "pellets": null,
+          "rpm": 190,
+          "mag": 8,
+          "note": null
+        },
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/de-50-jaws",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://game8.co/games/Once-Human/archives/Weapons",
+        "https://hardcoregamer.com/once-human/all-weapons-once-human/"
+      ]
+    },
+    {
+      "name": "G17 - Cash Only",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Pistol",
+      "frame": "G17",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 110,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 720,
+      "magazine": 60,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.7,
+      "adsTimeSec": 0.17,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": 13,
+      "minDamageRangeM": 25,
+      "minDamagePercent": 30,
+      "ammoType": "Pistol Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 110,
+          "rpm": 720,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/g17-cash-only",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "G17 - Hazardous Object",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Pistol",
+      "frame": "G17",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 230,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 410,
+      "magazine": 13,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.1,
+      "adsTimeSec": 0.17,
+      "baseCritRate": 8,
+      "baseCritDmg": 28,
+      "baseWeakspotDmg": 55,
+      "baseWeakspotMult": 1.55,
+      "effectiveRangeM": 13,
+      "minDamageRangeM": 25,
+      "minDamagePercent": 30,
+      "ammoType": "Pistol Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 230,
+          "rpm": 410,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": {
+          "crit": 8,
+          "critDmg": 28,
+          "src": [
+            "https://wikily.gg/once-human/weapon-blueprints/"
+          ]
+        },
+        "critStatsAgreeWithWikily": true
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/g17-hazardous-object",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://wikily.gg/once-human/weapon-blueprints/"
+      ]
+    },
+    {
+      "name": "R500 - Memento",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Pistol",
+      "frame": "R500",
+      "blueprintFragmentType": null,
+      "element": "None (buff)",
+      "statusKeyword": "Fast Gunner",
+      "specialEffect": {
+        "name": "Fast Gunner",
+        "summary": "A sniper rifle designed to counter Rosetta with unique mechanics like Fast Gunner.",
+        "text": "Grants a stack of Fast Gunner with Fire Rate +1% and Attack +1% for 2 seconds. Can stack up to 5 times.",
+        "verified": true,
+        "notes": "Fast Gunner (datamined); description text wrongly says \"sniper rifle\"",
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 654,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 170,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 145,
+      "magazine": 5,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.3,
+      "adsTimeSec": 0.2,
+      "baseCritRate": 4,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 65,
+      "baseWeakspotMult": 1.65,
+      "effectiveRangeM": 23,
+      "minDamageRangeM": 37,
+      "minDamagePercent": 25,
+      "ammoType": "Pistol Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 654,
+          "rpm": 145,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 170,
+          "pellets": null,
+          "rpm": 145,
+          "mag": 5,
+          "note": null
+        },
+        "wikily": {
+          "crit": 4,
+          "critDmg": 25,
+          "ws": 65,
+          "src": [
+            "https://www.keengamer.com/articles/guides/once-human-top-10-best-weapons/"
+          ]
+        },
+        "critStatsAgreeWithWikily": true
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/r500-memento",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://game8.co/games/Once-Human/archives/Weapons",
+        "https://www.keengamer.com/articles/guides/once-human-top-10-best-weapons/"
+      ]
+    },
+    {
+      "name": "ACS12 - Corrosion",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Shotgun",
+      "frame": "ACS12",
+      "blueprintFragmentType": null,
+      "element": "Shock",
+      "statusKeyword": "Power Surge",
+      "specialEffect": {
+        "name": "Power Surge",
+        "summary": "A legendary shotgun focused on Power Surge mechanics, offering high crit potential and stacking bonuses.",
+        "text": "Triggers Power Surge but does not inflict the status effect.",
+        "verified": true,
+        "notes": "Power Surge (datamined mechanics + smus-rgb guide agree)",
+        "conflictingKeywordFromOtherSource": "Fortress Warfare (bramsey679 DPS calculator keyword list)"
+      },
+      "baseDmg": 138,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 36,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 5,
+      "fireRateRPM": 180,
+      "magazine": 8,
+      "magazineConflict": "game8 snippet lists MAG 18 vs datamined/OHDB 8",
+      "reloadTimeSec": 2.4,
+      "adsTimeSec": 0.23,
+      "baseCritRate": 8,
+      "baseCritDmg": 27,
+      "baseWeakspotDmg": 15,
+      "baseWeakspotMult": 1.15,
+      "effectiveRangeM": 7,
+      "minDamageRangeM": 13,
+      "minDamagePercent": 10,
+      "ammoType": "Shotgun Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 138,
+          "rpm": 180,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 36,
+          "pellets": 5,
+          "rpm": 180,
+          "mag": 18,
+          "note": null
+        },
+        "wikily": {
+          "crit": 8,
+          "critDmg": 27,
+          "ws": 15,
+          "src": [
+            "https://wikily.gg/once-human/weapon-blueprints/"
+          ]
+        },
+        "critStatsAgreeWithWikily": true
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/acs12-corrosion",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://game8.co/games/Once-Human/archives/Weapons",
+        "https://hardcoregamer.com/once-human/all-weapons-once-human/",
+        "https://wikily.gg/once-human/weapon-blueprints/"
+      ]
+    },
+    {
+      "name": "ACS12 - Pyroclasm Starter",
+      "aliases": [
+        "ACS12 - Pyroclasm"
+      ],
+      "rarity": "Legendary",
+      "weaponClass": "Shotgun",
+      "frame": "ACS12",
+      "blueprintFragmentType": null,
+      "element": "Blaze",
+      "statusKeyword": "Burn",
+      "specialEffect": {
+        "name": "Burn",
+        "summary": "A legendary shotgun that combines Burn mechanics with Dragon's Breath ammunition and Charge state buffs.",
+        "text": "Generates a Deviant Particle on hit. Picking it up grants Charge state. | Replaces all ammunition with Dragon's Breath ammo until the next reload. Dragon's Breath: Deals Blaze Elemental Weapon DMG equal to 85% Attack. | Increases Blaze Elemental DMG by 10% for each Charge stack expended, up to 4 stacks.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 138,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 5,
+      "fireRateRPM": 180,
+      "magazine": 8,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.4,
+      "adsTimeSec": 0.23,
+      "baseCritRate": 8,
+      "baseCritDmg": 27,
+      "baseWeakspotDmg": 15,
+      "baseWeakspotMult": 1.15,
+      "effectiveRangeM": 7,
+      "minDamageRangeM": 13,
+      "minDamagePercent": 10,
+      "ammoType": "Shotgun Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 138,
+          "rpm": 180,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/acs12-pyroclasm-starter",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "DB12 - Raining Cash",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Shotgun",
+      "frame": "DB12",
+      "blueprintFragmentType": null,
+      "element": "None (buff)",
+      "statusKeyword": "Fortress Warfare",
+      "specialEffect": {
+        "name": "Fortress Warfare",
+        "summary": "A legendary shotgun with Fortress Warfare mechanics that enhance allies and provide significant buffs during its duration.",
+        "text": "Create an area of effect within a 2m radius that grants allies Heavy Armor for 5 seconds. | Grants Super Armor with Weapon DMG +20%.",
+        "verified": true,
+        "notes": "Fortress Warfare (datamined mechanics) - UNRESOLVED, verify in game",
+        "conflictingKeywordFromOtherSource": "Shrapnel (bramsey679 keyword list)"
+      },
+      "baseDmg": 212,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 5,
+      "fireRateRPM": 105,
+      "magazine": 12,
+      "magazineConflict": null,
+      "reloadTimeSec": 0.5,
+      "adsTimeSec": 0.23,
+      "baseCritRate": 8,
+      "baseCritDmg": 28,
+      "baseWeakspotDmg": 20,
+      "baseWeakspotMult": 1.2,
+      "effectiveRangeM": 7,
+      "minDamageRangeM": 13,
+      "minDamagePercent": 10,
+      "ammoType": "Shotgun Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 212,
+          "rpm": 105,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": {
+          "crit": 8,
+          "critDmg": 28,
+          "ws": 20,
+          "src": [
+            "https://wikily.gg/once-human/weapon-blueprints/"
+          ]
+        },
+        "critStatsAgreeWithWikily": true
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/db12-raining-cash",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://wikily.gg/once-human/weapon-blueprints/"
+      ]
+    },
+    {
+      "name": "DBSG - Doombringer",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Shotgun",
+      "frame": "DBSG",
+      "blueprintFragmentType": null,
+      "element": "None (debuff)",
+      "statusKeyword": "The Bull's Eye",
+      "specialEffect": {
+        "name": "The Bull's Eye",
+        "summary": "Features focusing on marking enemies with The Bull's Eye and stacking buffs.",
+        "text": "Highlight marked target with increased chance when within 5m.",
+        "verified": true,
+        "notes": "The Bull's Eye (datamined mechanics; oncehumandb guide snippet: 'Bull's Eye ability')",
+        "conflictingKeywordFromOtherSource": "Burn (bramsey679 keyword list)"
+      },
+      "baseDmg": 238,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 62,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 6,
+      "fireRateRPM": 180,
+      "magazine": 2,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.1,
+      "adsTimeSec": 0.2,
+      "baseCritRate": 10,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 25,
+      "baseWeakspotMult": 1.25,
+      "effectiveRangeM": 7,
+      "minDamageRangeM": 13,
+      "minDamagePercent": 10,
+      "ammoType": "Shotgun Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 238,
+          "rpm": 180,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 62,
+          "pellets": 6,
+          "rpm": 180,
+          "mag": 2,
+          "note": null
+        },
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/dbsg-doombringer",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://game8.co/games/Once-Human/archives/Weapons",
+        "https://www.oncehumandb.com/guides/best-weapons"
+      ]
+    },
+    {
+      "name": "DBSG - Format",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Shotgun",
+      "frame": "DBSG",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 340,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 6,
+      "fireRateRPM": 180,
+      "magazine": 2,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.1,
+      "adsTimeSec": 0.21,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": 7,
+      "minDamageRangeM": 13,
+      "minDamagePercent": 10,
+      "ammoType": "Shotgun Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 340,
+          "rpm": 180,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/dbsg-format",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "KVK 3 - Bull",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Shotgun",
+      "frame": "KVK 3",
+      "blueprintFragmentType": null,
+      "element": "Physical (weapon element)",
+      "statusKeyword": "Bounce",
+      "specialEffect": {
+        "name": "Bounce",
+        "summary": "\"Bounce Blast\" shotgun for close range (smus-rgb guide, no numbers).",
+        "text": null,
+        "verified": false,
+        "notes": "Partial data only - no stat sheet reachable for this weapon",
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": null,
+      "baseDmgBasis": null,
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": null,
+      "fireRateRPM": null,
+      "magazine": null,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No per-weapon star table published.",
+      "crossChecks": {
+        "ohdbSnapshot": null,
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null,
+        "frameHintNote": null
+      },
+      "dataQuality": "partial - name/keyword only (frame stats inferred where noted)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/weapons.json"
+      ]
+    },
+    {
+      "name": "KV-SBR - Little Jaws",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "SMG",
+      "frame": "KV-SBR",
+      "blueprintFragmentType": "Beyonder",
+      "element": "Blast",
+      "statusKeyword": "Unstable Bomber",
+      "specialEffect": {
+        "name": "Unstable Bomber",
+        "summary": "Unstable Bomber mechanics with increased damage upon hitting enemies affected by Unstable Bomber, additional damage modifiers for weakspot hits, and scaling damage based on Unstable Bomber delay.",
+        "text": "Triggers Unstable Bomber, inflicting a blast of 100% Psi Intensity after 0.4 seconds with a blast radius of 1.5m. The damage decays over distance down to a minimum of 50%. | Hitting enemies affected by Unstable Bomber increases the current Unstable Bomber Final DMG by 10% for 4 seconds. | Weakspot hits double the DMG increase, adding an additional 10% to Explosive Final DMG. | Unstable Bomber delay increased by 0.3 seconds. | For every 0.1 seconds of Unstable Bomber delay, Unstable Bomber DMG increases by 20%.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 110,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 29,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 1000,
+      "magazine": 30,
+      "magazineConflict": "game8 & smus-rgb list MAG 39 vs datamined 30",
+      "reloadTimeSec": 1.9,
+      "adsTimeSec": 0.2,
+      "baseCritRate": 10,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 45,
+      "baseWeakspotMult": 1.45,
+      "effectiveRangeM": 14,
+      "minDamageRangeM": 39,
+      "minDamagePercent": 30,
+      "ammoType": "SMG Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 110,
+          "rpm": 1000,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 29,
+          "pellets": null,
+          "rpm": 1000,
+          "mag": 39,
+          "note": null
+        },
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/kv-sbr-little-jaws",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://game8.co/games/Once-Human/archives/Weapons",
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/weapons.json"
+      ]
+    },
+    {
+      "name": "MPS5 - Kumawink",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "SMG",
+      "frame": "MPS5",
+      "blueprintFragmentType": "Stranger",
+      "element": "Physical (weapon element)",
+      "statusKeyword": "Bounce",
+      "specialEffect": {
+        "name": "Bounce",
+        "summary": "Bounce mechanics with increased trigger chances when hitting weakspots and additional damage against Protocell.",
+        "text": "Deals Weapon DMG of 60% Attack to a random enemy within a 10m radius. | Bounce trigger factor for this shot is increased by 60% when hitting a weakspot. | When magazine capacity is below 50%, the number of Bounce triggers increases by 1. | Bounce base damage increased by 50%. | Impact: Increases damage by 20% when attacking Protocell.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 142,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 37,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 750,
+      "magazine": 30,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.3,
+      "adsTimeSec": 0.21,
+      "baseCritRate": 8,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 55,
+      "baseWeakspotMult": 1.55,
+      "effectiveRangeM": 18,
+      "minDamageRangeM": 50,
+      "minDamagePercent": 30,
+      "ammoType": "SMG Ammo",
+      "damageBonusTag": "Impact: Dealing more DMG against Protocell",
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 142,
+          "rpm": 750,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 37,
+          "pellets": null,
+          "rpm": 750,
+          "mag": null,
+          "note": null
+        },
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/mps5-kumawink",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/weapons.json"
+      ]
+    },
+    {
+      "name": "MPS5 - Primal Rage",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "SMG",
+      "frame": "MPS5",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 142,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 750,
+      "magazine": 30,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.3,
+      "adsTimeSec": 0.21,
+      "baseCritRate": 8,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 55,
+      "baseWeakspotMult": 1.55,
+      "effectiveRangeM": 18,
+      "minDamageRangeM": 50,
+      "minDamagePercent": 30,
+      "ammoType": "SMG Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 142,
+          "rpm": 750,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/mps5-primal-rage",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "MPS7 - Chaos Domain",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "SMG",
+      "frame": "MPS7",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 184,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 850,
+      "magazine": 35,
+      "magazineConflict": null,
+      "reloadTimeSec": 3,
+      "adsTimeSec": 0.2,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": 16,
+      "minDamageRangeM": 44,
+      "minDamagePercent": 30,
+      "ammoType": "SMG Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 184,
+          "rpm": 850,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/mps7-chaos-domain",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "MPS7 - Outer Space",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "SMG",
+      "frame": "MPS7",
+      "blueprintFragmentType": null,
+      "element": "Shock",
+      "statusKeyword": "Power Surge",
+      "specialEffect": {
+        "name": "Power Surge",
+        "summary": "A legendary SMG with Power Surge mechanics that enhance trigger factors upon defeating enemies and reloading.",
+        "text": "Triggers Power Surge on hit, dealing 50% Psi Intensity as Shock Element DMG. | Increases Power Surge trigger factor by 30% for 12 seconds after defeating an enemy. | Increases Power Surge trigger factor by 40% for 3 seconds after reloading.",
+        "verified": true,
+        "notes": "Power Surge (datamined mechanics; smus-rgb: \"Power Surge synergy\")",
+        "conflictingKeywordFromOtherSource": "Frost Vortex (bramsey679 keyword list)"
+      },
+      "baseDmg": 126,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 33,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": 192,
+      "pellets": 1,
+      "fireRateRPM": 850,
+      "magazine": 35,
+      "magazineConflict": null,
+      "reloadTimeSec": 3,
+      "adsTimeSec": 0.19,
+      "baseCritRate": 8,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 50,
+      "baseWeakspotMult": 1.5,
+      "effectiveRangeM": 16,
+      "minDamageRangeM": 44,
+      "minDamagePercent": 30,
+      "ammoType": "SMG Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 126,
+          "rpm": 850,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 33,
+          "pellets": null,
+          "rpm": 850,
+          "mag": 35,
+          "note": null
+        },
+        "wikily": {
+          "dmg": 192,
+          "rpm": 850,
+          "mag": 35,
+          "rangeStat": 45,
+          "reloadStat": 32,
+          "crit": 8,
+          "critDmg": 30,
+          "ws": 50,
+          "src": [
+            "https://raw.githubusercontent.com/Gledson-z/once-human-planner/main/data/game_data.js"
+          ]
+        },
+        "critStatsAgreeWithWikily": true
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/mps7-outer-space",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://game8.co/games/Once-Human/archives/Weapons",
+        "https://raw.githubusercontent.com/Gledson-z/once-human-planner/main/data/game_data.js"
+      ]
+    },
+    {
+      "name": "PDW90 - Holographic Resonance",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "SMG",
+      "frame": "PDW90",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 90,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 900,
+      "magazine": 50,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.2,
+      "adsTimeSec": 0.18,
+      "baseCritRate": 8,
+      "baseCritDmg": 45,
+      "baseWeakspotDmg": 30,
+      "baseWeakspotMult": 1.3,
+      "effectiveRangeM": 17,
+      "minDamageRangeM": 47,
+      "minDamagePercent": 30,
+      "ammoType": "SMG Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 90,
+          "rpm": 900,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/pdw90-holographic-resonance",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "Star Vortex",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "SMG",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 234,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 1000,
+      "magazine": 30,
+      "magazineConflict": null,
+      "reloadTimeSec": 1.9,
+      "adsTimeSec": 0.2,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": 14,
+      "minDamageRangeM": 39,
+      "minDamagePercent": 30,
+      "ammoType": "SMG Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 234,
+          "rpm": 1000,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/star-vortex",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "TEC9 - Additional Rules",
+      "aliases": [
+        "FP9 - Additional Rules"
+      ],
+      "rarity": "Legendary",
+      "weaponClass": "SMG",
+      "frame": "TEC9",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": "Fortress Warfare",
+      "specialEffect": {
+        "name": "Fortress Warfare",
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": "Keyword from smus-rgb guide; datamined file has no effect text",
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 236,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 450,
+      "magazine": 30,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.2,
+      "adsTimeSec": 0.18,
+      "baseCritRate": 10,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 45,
+      "baseWeakspotMult": 1.45,
+      "effectiveRangeM": 17,
+      "minDamageRangeM": 47,
+      "minDamagePercent": 30,
+      "ammoType": "SMG Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 236,
+          "rpm": 450,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": {
+          "crit": 10,
+          "critDmg": 30,
+          "ws": 45,
+          "src": [
+            "https://wikily.gg/once-human/weapon-blueprints/"
+          ],
+          "note": "listed on wikily as \"FP9 - Additional Rules\""
+        },
+        "critStatsAgreeWithWikily": true
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": "Renamed FP9 - Additional Rules in later patches (smus-rgb guide, wikily); smus-rgb: \"Fortress Warfare on hit (CD). Empty reload restores Deviant Power. After Deviation skills, bullets deal elemental DMG by Deviation type. Enhanced DMG/reload in later 3.0.x notes.\" (unverified)",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/tec9-additional-rules",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://wikily.gg/once-human/weapon-blueprints/"
+      ]
+    },
+    {
+      "name": "AWS.338 - Bullseye",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Sniper",
+      "frame": "AWS.338",
+      "blueprintFragmentType": "Huntsman",
+      "element": "None (debuff)",
+      "statusKeyword": "The Bull's Eye",
+      "specialEffect": {
+        "name": "The Bull's Eye",
+        "summary": "The Bull's Eye mechanics that trigger on weakspot hits and after switching weapons, providing Vulnerability and damage bonuses.",
+        "text": "Highlights the marked target and inflicts Vulnerability +8% for 12 seconds. | Highlights the marked target and inflicts Vulnerability +8% for 12 seconds on the first hit after switching weapons. | With a hit, Weakspot DMG +15% for 10 seconds. Effect can stack up to 3 times. | After defeating an enemy with a weakspot hit, Attack +15% for 20 seconds.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 1216,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 316,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 40,
+      "magazine": 5,
+      "magazineConflict": null,
+      "reloadTimeSec": 3.6,
+      "adsTimeSec": 0.24,
+      "baseCritRate": 2,
+      "baseCritDmg": 26,
+      "baseWeakspotDmg": 95,
+      "baseWeakspotMult": 1.95,
+      "effectiveRangeM": 58,
+      "minDamageRangeM": 106,
+      "minDamagePercent": 10,
+      "ammoType": "SR Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 1216,
+          "rpm": 40,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 316,
+          "pellets": null,
+          "rpm": 40,
+          "mag": 5,
+          "note": null
+        },
+        "wikily": {
+          "crit": 2,
+          "critDmg": 26,
+          "ws": 95,
+          "src": [
+            "https://wikily.gg/once-human/weapon-blueprints/"
+          ]
+        },
+        "critStatsAgreeWithWikily": true
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/aws-338-bullseye",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://game8.co/games/Once-Human/archives/Weapons",
+        "https://www.oncehumandb.com/guides/best-weapons",
+        "https://wikily.gg/once-human/weapon-blueprints/"
+      ]
+    },
+    {
+      "name": "EBR-14 - Octopus! Grilled Rings!",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Sniper",
+      "frame": "EBR-14",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 310,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 300,
+      "magazine": 20,
+      "magazineConflict": null,
+      "reloadTimeSec": 3,
+      "adsTimeSec": 0.23,
+      "baseCritRate": 5,
+      "baseCritDmg": 40,
+      "baseWeakspotDmg": 50,
+      "baseWeakspotMult": 1.5,
+      "effectiveRangeM": 51,
+      "minDamageRangeM": 93,
+      "minDamagePercent": 10,
+      "ammoType": "SR Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 310,
+          "rpm": 300,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/ebr-14-octopus-grilled-rings",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "HAMR - Brahminy",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Sniper",
+      "frame": "HAMR",
+      "blueprintFragmentType": "Operator",
+      "element": "Physical (weapon element)",
+      "statusKeyword": "Bounce",
+      "specialEffect": {
+        "name": "Bounce",
+        "summary": "Bounce mechanics with increased trigger chances on weakspot hits, enhanced ricochet, and damage bonuses upon certain conditions.",
+        "text": "Deals Weapon DMG of 60% Attack to a random enemy within a 10m radius. | 35% chance for Bounce to continue to ricochet when hitting a Weakspot. | If Bounce does not defeat an enemy or there is no target, the next 1 bullet's Weapon DMG is increased by 20%, up to 5 stacks. | Bounce will prioritize enemies with higher HP.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 840,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 218,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 85,
+      "magazine": 8,
+      "magazineConflict": null,
+      "reloadTimeSec": 3.4,
+      "adsTimeSec": 0.26,
+      "baseCritRate": 2,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 80,
+      "baseWeakspotMult": 1.8,
+      "effectiveRangeM": 56,
+      "minDamageRangeM": 102,
+      "minDamagePercent": 10,
+      "ammoType": "SR Ammo",
+      "damageBonusTag": "{\"type\":\"penetration\",\"target\":\"rosetta\",\"value\":0.2}",
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 840,
+          "rpm": 85,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 218,
+          "pellets": null,
+          "rpm": 85,
+          "mag": 8,
+          "note": null
+        },
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/hamr-brahminy",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://game8.co/games/Once-Human/archives/Weapons"
+      ]
+    },
+    {
+      "name": "HAMR - Hannya",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Sniper",
+      "frame": "HAMR",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 900,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 85,
+      "magazine": 8,
+      "magazineConflict": null,
+      "reloadTimeSec": 3.4,
+      "adsTimeSec": 0.26,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": 56,
+      "minDamageRangeM": 102,
+      "minDamagePercent": 10,
+      "ammoType": "SR Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 900,
+          "rpm": 85,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/hamr-hannya",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "SKS - Pathfinder",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Sniper",
+      "frame": "SKS",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 360,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 257,
+      "magazine": 20,
+      "magazineConflict": null,
+      "reloadTimeSec": 3,
+      "adsTimeSec": 0.24,
+      "baseCritRate": 5,
+      "baseCritDmg": 40,
+      "baseWeakspotDmg": 50,
+      "baseWeakspotMult": 1.5,
+      "effectiveRangeM": 51,
+      "minDamageRangeM": 93,
+      "minDamagePercent": 10,
+      "ammoType": "SR Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 360,
+          "rpm": 257,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/sks-pathfinder",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "SN700 - Finale",
+      "aliases": [],
+      "rarity": "Legendary",
+      "weaponClass": "Sniper",
+      "frame": "SN700",
+      "blueprintFragmentType": null,
+      "element": "Physical (weapon element)",
+      "statusKeyword": "Shrapnel",
+      "specialEffect": {
+        "name": "Shrapnel",
+        "summary": "Hits have a chance to trigger Shrapnel; weakspot hits guarantee Shrapnel (smus-rgb paraphrase). Has a \"Reverb\" stacking buff: v3.0.2 (July 22 2026) nerf cut max Reverb stacks from 5 to 4 and raised each stack from 4% to 5% (official patch via marsad research). Base frame (common SN700 in datamined list): 40 RPM, 5 mag, crit 2% / crit DMG 24% / weakspot 90%, reload 2.8 s; SN700 - Gulped Lore (epic) shows 1104 dmg, 40 RPM, 5 mag, 2/24/90, reload 3.6 s.",
+        "text": null,
+        "verified": false,
+        "notes": "Partial data only - no stat sheet reachable for this weapon",
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": null,
+      "baseDmgBasis": null,
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": null,
+      "fireRateRPM": 40,
+      "magazine": 5,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": 2,
+      "baseCritDmg": 24,
+      "baseWeakspotDmg": 90,
+      "baseWeakspotMult": 1.9,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No per-weapon star table published.",
+      "crossChecks": {
+        "ohdbSnapshot": null,
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null,
+        "frameHintNote": "fireRate/mag/crit/weakspot are the shared FRAME values from the datamined list, not confirmed for this variant"
+      },
+      "dataQuality": "partial - name/keyword only (frame stats inferred where noted)",
+      "addedOrChanged": "v3.0.1 2026-07-09; nerfed v3.0.2 2026-07-22",
+      "sources": [
+        "https://www.oncehuman.game/news/update/20260709/40780_1307147.html",
+        "https://www.oncehuman.game/news/update/20260722/40780_1308595.html",
+        "https://raw.githubusercontent.com/kingxqtr/marsad/main/data/research/once-human.json",
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/weapons.json"
+      ]
+    },
+    {
+      "name": "KAM - Burning Rage",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "AR",
+      "frame": "KAM",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": "Epic KAM AR \"with aggressive fire profile\" (smus-rgb guide only). KAM frame: 600 RPM, 40 mag, crit 6% / crit DMG 30% / weakspot 55%.",
+        "text": null,
+        "verified": false,
+        "notes": "Partial data only - no stat sheet reachable for this weapon",
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": null,
+      "baseDmgBasis": null,
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": null,
+      "fireRateRPM": 600,
+      "magazine": 40,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": 6,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 55,
+      "baseWeakspotMult": 1.55,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No per-weapon star table published.",
+      "crossChecks": {
+        "ohdbSnapshot": null,
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null,
+        "frameHintNote": "fireRate/mag/crit/weakspot are the shared FRAME values from the datamined list, not confirmed for this variant"
+      },
+      "dataQuality": "partial - name/keyword only (frame stats inferred where noted)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/weapons.json"
+      ]
+    },
+    {
+      "name": "KAM - Crank",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "AR",
+      "frame": "KAM",
+      "blueprintFragmentType": "Juggernaut",
+      "element": "Blaze",
+      "statusKeyword": "Burn",
+      "specialEffect": {
+        "name": "Burn",
+        "summary": "Burn mechanics with increased damage and bonuses upon killing burned enemies.",
+        "text": "Deals Status DMG of 10% Psi Intensity every 0.5s for 6s. DMG increases with more stacks, up to 5 stacks. | Grants Reload Speed +20% for 5 seconds. | Grants Burn DMG +15% for 5 seconds. | Max Burn stacks increased by 1.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 134,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 600,
+      "magazine": 40,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.8,
+      "adsTimeSec": 0.23,
+      "baseCritRate": 6,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 55,
+      "baseWeakspotMult": 1.55,
+      "effectiveRangeM": 25,
+      "minDamageRangeM": 70,
+      "minDamagePercent": 30,
+      "ammoType": "Rifle Ammo",
+      "damageBonusTag": "Suppression: Dealing more DMG against Deviants",
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 134,
+          "rpm": 600,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/kam-crank",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "M416 - Autumn Equinox",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "AR",
+      "frame": "M416",
+      "blueprintFragmentType": "Beyonder",
+      "element": "None (buff)",
+      "statusKeyword": "Fortress Warfare",
+      "specialEffect": {
+        "name": "Fortress Warfare",
+        "summary": "Fortress Warfare mechanics that trigger after hitting enemies 7 times, granting Heavy Armor to allies and HP recovery in the area, along with damage bonuses when HP is high.",
+        "text": "Creates an area of effect within a 2m radius that grants allies Heavy Armor for 5 seconds and recovers 4% of max HP per second. | When HP is above 75%, Weapon DMG +25%.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 114,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 750,
+      "magazine": 36,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.3,
+      "adsTimeSec": 0.22,
+      "baseCritRate": 6,
+      "baseCritDmg": 27,
+      "baseWeakspotDmg": 60,
+      "baseWeakspotMult": 1.6,
+      "effectiveRangeM": 26,
+      "minDamageRangeM": 73,
+      "minDamagePercent": 30,
+      "ammoType": "Rifle Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 114,
+          "rpm": 750,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/m416-autumn-equinox",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "OIC-8 - Last Carnival",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "AR",
+      "frame": "OIC-8",
+      "blueprintFragmentType": null,
+      "element": "Shock",
+      "statusKeyword": "Power Surge",
+      "specialEffect": {
+        "name": "Power Surge",
+        "summary": "Continuous Power Surge crossbow that enters Charge State through Deviant Particles and creates Orb Lightning while charged.",
+        "text": "Shock Elemental DMG +30%. | Triggers Continuous Power Surge on hit. | 70% chance to generate a Deviant Particle on hit. | Picking up a Deviant Particle grants Charge State for 3 seconds. | While in Charge State, hits spawn Orb Lightning that deals Shock DMG equal to 75% PSI Intensity.",
+        "verified": true,
+        "notes": "Datamined mechanics block appears copied from Critical Pulse (Power Surge crossbow text) - treat effect text as UNVERIFIED",
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 120,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 750,
+      "magazine": 40,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.3,
+      "adsTimeSec": 0.22,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": 25,
+      "minDamageRangeM": 70,
+      "minDamagePercent": 30,
+      "ammoType": "Rifle Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 120,
+          "rpm": 750,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/oic-8-last-carnival",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "SOCR - Outsider",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "AR",
+      "frame": "SOCR",
+      "blueprintFragmentType": null,
+      "element": "Shock",
+      "statusKeyword": "Power Surge",
+      "specialEffect": {
+        "name": "Power Surge",
+        "summary": "Power Surge mechanics with increased trigger chances on hit, enhanced chance upon critical hits, and additional bonuses when attacking specific targets.",
+        "text": "Deals Status DMG of 50% Psi Intensity once and inflicts Power Surge status for 6 seconds, reducing accuracy by 40%. | Critical hits increase the chance to trigger Power Surge by 30% for 3 seconds. | Increases the base chance to trigger Power Surge by 30%. | Penetration: Increases damage by 20% when attacking Rosetta.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 156,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 515,
+      "magazine": 30,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.3,
+      "adsTimeSec": 0.22,
+      "baseCritRate": 6,
+      "baseCritDmg": 27,
+      "baseWeakspotDmg": 60,
+      "baseWeakspotMult": 1.6,
+      "effectiveRangeM": 24,
+      "minDamageRangeM": 67,
+      "minDamagePercent": 30,
+      "ammoType": "Rifle Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 156,
+          "rpm": 515,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/socr-outsider",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "Recurve Crossbow",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Crossbow",
+      "frame": null,
+      "blueprintFragmentType": "Huntsman",
+      "element": "None (debuff)",
+      "statusKeyword": "The Bull's Eye",
+      "specialEffect": {
+        "name": "The Bull's Eye",
+        "summary": "The Bull's Eye mechanics that trigger on hitting a weakspot, applying Vulnerability to targets and increasing Crit Rate against marked targets.",
+        "text": "Inflicts The Bull's Eye on the target, highlighting them and applying Vulnerability +8% for 12 seconds. Additionally, all weapons have Crit Rate +15% against targets with The Bull's Eye for 10 seconds. This effect only works once on the same target within 15 seconds.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 1072,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 125,
+      "magazine": 1,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.6,
+      "adsTimeSec": 0.21,
+      "baseCritRate": 2,
+      "baseCritDmg": 28,
+      "baseWeakspotDmg": 70,
+      "baseWeakspotMult": 1.7,
+      "effectiveRangeM": 19,
+      "minDamageRangeM": 30,
+      "minDamagePercent": 25,
+      "ammoType": "Arrow",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 1072,
+          "rpm": 125,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/recurve-crossbow",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "Flamethrower",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Launcher",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 252,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 300,
+      "magazine": 100,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.6,
+      "adsTimeSec": 0.24,
+      "baseCritRate": 10,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 15,
+      "baseWeakspotMult": 1.15,
+      "effectiveRangeM": 34,
+      "minDamageRangeM": 102,
+      "minDamagePercent": 30,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 252,
+          "rpm": 300,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/flamethrower",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "MGL",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Launcher",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 1066,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 140,
+      "magazine": 6,
+      "magazineConflict": null,
+      "reloadTimeSec": 7,
+      "adsTimeSec": 0.25,
+      "baseCritRate": 4,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 35,
+      "baseWeakspotMult": 1.35,
+      "effectiveRangeM": 34,
+      "minDamageRangeM": 102,
+      "minDamagePercent": 30,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 1066,
+          "rpm": 140,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/mgl",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "MG4 - Mr Squid",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "LMG",
+      "frame": "MG4",
+      "blueprintFragmentType": "Wanderer",
+      "element": "Physical (weapon element)",
+      "statusKeyword": "Bounce",
+      "specialEffect": {
+        "name": "Bounce",
+        "summary": "Bounce mechanics with increased trigger chances on critical hits, Weapon DMG stacking, and bonuses when firing continuously or having high ammo.",
+        "text": "Deals Weapon DMG of 60% Attack to a random enemy within a 10m radius. | When Bounce hits, Weapon DMG +2%, up to 50 stacks. 1 stack is removed every 5 seconds. | After continuously firing for 2 seconds, Bounce targets +1. | When remaining bullets are more than 50% of the magazine capacity, Attack +40%.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 110,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 700,
+      "magazine": 75,
+      "magazineConflict": null,
+      "reloadTimeSec": 3.5,
+      "adsTimeSec": 0.27,
+      "baseCritRate": 8,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 35,
+      "baseWeakspotMult": 1.35,
+      "effectiveRangeM": 31,
+      "minDamageRangeM": 93,
+      "minDamagePercent": 30,
+      "ammoType": "Light Machine Gun Bullet",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 110,
+          "rpm": 700,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/mg4-mr-squid",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "MG4 - Wrath Of Hades",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "LMG",
+      "frame": "MG4",
+      "blueprintFragmentType": "Juggernaut",
+      "element": "None (buff)",
+      "statusKeyword": "Fast Gunner",
+      "specialEffect": {
+        "name": "Fast Gunner",
+        "summary": "Fast Gunner mechanics with increased fire rate and attack bonuses, bullet refills upon triggering Fast Gunner and defeating enemies, ensuring sustained firepower.",
+        "text": "Triggers Fast Gunner, granting Fire Rate and Attack bonuses. | Refills 1 bullet from inventory to the secondary weapon. | Restores 1 bullet from inventory to the secondary weapon. | Each Fast Gunner stack grants Fire Rate +1% and Attack +1% for 2 seconds.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 110,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 700,
+      "magazine": 75,
+      "magazineConflict": null,
+      "reloadTimeSec": 3.5,
+      "adsTimeSec": 0.26,
+      "baseCritRate": 8,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 35,
+      "baseWeakspotMult": 1.35,
+      "effectiveRangeM": 31,
+      "minDamageRangeM": 93,
+      "minDamagePercent": 30,
+      "ammoType": "Light Machine Gun Bullet",
+      "damageBonusTag": "{\"type\":\"penetration\",\"target\":\"rosetta\",\"value\":0.2}",
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 110,
+          "rpm": 700,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/mg4-wrath-of-hades",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "Crowbar",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Melee",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 630,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": null,
+      "magazine": null,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": 5,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 20,
+      "baseWeakspotMult": 1.2,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 630,
+          "rpm": null,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/crowbar",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "Frozen Northern Pike",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Melee",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 738,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": null,
+      "magazine": null,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": 5,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 20,
+      "baseWeakspotMult": 1.2,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 738,
+          "rpm": null,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/frozen-northern-pike",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "Long Axe",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Melee",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": "None (buff)",
+      "statusKeyword": "Fortress Warfare",
+      "specialEffect": {
+        "name": "Fortress Warfare",
+        "summary": "Heavy attacks trigger Fortress Warfare and build crit rate stacks for all weapons.",
+        "text": "Heavy attacks activate Fortress Warfare once every 10 seconds. | Heavy attacks grant Crit Rate +8% for 10 seconds, up to 3 stacks.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 830,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": null,
+      "magazine": null,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": 5,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 20,
+      "baseWeakspotMult": 1.2,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 830,
+          "rpm": null,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/long-axe",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "Stun Baton",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Melee",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": "Shock",
+      "statusKeyword": "Power Surge",
+      "specialEffect": {
+        "name": "Power Surge",
+        "summary": "Light attacks apply Power Surge while heavy attacks burst shocked targets for extra damage.",
+        "text": "Light attacks inflict Power Surge. | Heavy attacks against surged targets deal extra Shock DMG in an area.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 700,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": null,
+      "magazine": null,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": 5,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 20,
+      "baseWeakspotMult": 1.2,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 700,
+          "rpm": null,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/stun-baton",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "Warning Sign",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Melee",
+      "frame": null,
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 747,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": null,
+      "magazine": null,
+      "magazineConflict": null,
+      "reloadTimeSec": null,
+      "adsTimeSec": null,
+      "baseCritRate": 5,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 20,
+      "baseWeakspotMult": 1.2,
+      "effectiveRangeM": null,
+      "minDamageRangeM": null,
+      "minDamagePercent": null,
+      "ammoType": null,
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 747,
+          "rpm": null,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/warning-sign",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "DE.50 - Wildfire",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Pistol",
+      "frame": "DE.50",
+      "blueprintFragmentType": null,
+      "element": "None (debuff)",
+      "statusKeyword": "The Bull's Eye",
+      "specialEffect": {
+        "name": "The Bull's Eye",
+        "summary": "Features revolving around The Bull's Eye ability and marked enemies.",
+        "text": "Spread The Bull's Eye to 1 enemy.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 444,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": 115,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 190,
+      "magazine": 8,
+      "magazineConflict": null,
+      "reloadTimeSec": 1.8,
+      "adsTimeSec": 0.19,
+      "baseCritRate": 6,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 60,
+      "baseWeakspotMult": 1.6,
+      "effectiveRangeM": 20,
+      "minDamageRangeM": 32,
+      "minDamagePercent": 25,
+      "ammoType": "Pistol Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 444,
+          "rpm": 190,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 115,
+          "pellets": null,
+          "rpm": 190,
+          "mag": 8,
+          "note": null
+        },
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/de-50-wildfire",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json",
+        "https://game8.co/games/Once-Human/archives/Weapons"
+      ]
+    },
+    {
+      "name": "G17 - Dusty",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Pistol",
+      "frame": "G17",
+      "blueprintFragmentType": null,
+      "element": "Physical (weapon element)",
+      "statusKeyword": "Shrapnel",
+      "specialEffect": {
+        "name": "Shrapnel",
+        "summary": "A rapid-fire pistol with Shrapnel mechanics that enhance weakspot damage and deal extra hits.",
+        "text": "Deals Weapon DMG of 50% Attack to a random unhit part.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 206,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 410,
+      "magazine": 13,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.1,
+      "adsTimeSec": 0.17,
+      "baseCritRate": 8,
+      "baseCritDmg": 28,
+      "baseWeakspotDmg": 55,
+      "baseWeakspotMult": 1.55,
+      "effectiveRangeM": 13,
+      "minDamageRangeM": 25,
+      "minDamagePercent": 30,
+      "ammoType": "Pistol Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 206,
+          "rpm": 410,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/g17-dusty",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "R500 - Hammerhead Shark",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Pistol",
+      "frame": "R500",
+      "blueprintFragmentType": null,
+      "element": "Shock",
+      "statusKeyword": "Power Surge",
+      "specialEffect": {
+        "name": "Power Surge",
+        "summary": "A sniper rifle with Power Surge mechanics to inflict AoE Shock DMG and ammo regeneration.",
+        "text": "Inflicts Power Surge status for 6 seconds, reducing accuracy by 40%. | Deals Shock DMG to all enemies affected by Power Surge in the area.",
+        "verified": true,
+        "notes": "Power Surge; NOTE datamined description text wrongly says \"A sniper rifle\" - R500 is a pistol/revolver",
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 588,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 145,
+      "magazine": 5,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.3,
+      "adsTimeSec": 0.2,
+      "baseCritRate": 4,
+      "baseCritDmg": 25,
+      "baseWeakspotDmg": 65,
+      "baseWeakspotMult": 1.65,
+      "effectiveRangeM": 23,
+      "minDamageRangeM": 37,
+      "minDamagePercent": 25,
+      "ammoType": "Pistol Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 588,
+          "rpm": 145,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/r500-hammerhead-shark",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "R500 - Interfade",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Pistol",
+      "frame": "R500",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 568,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 145,
+      "magazine": 5,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.3,
+      "adsTimeSec": 0.2,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": 23,
+      "minDamageRangeM": 37,
+      "minDamagePercent": 25,
+      "ammoType": "Pistol Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 568,
+          "rpm": 145,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/r500-interfade",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "ACS12 - Netherworld",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Shotgun",
+      "frame": "ACS12",
+      "blueprintFragmentType": null,
+      "element": "None (buff)",
+      "statusKeyword": "Fast Gunner",
+      "specialEffect": {
+        "name": "Fast Gunner",
+        "summary": "An epic shotgun that utilizes Fast Gunner mechanics for increased fire rate, attack, and bonus projectiles.",
+        "text": "Grants a stack of Fast Gunner with Fire Rate +1% and Attack +1% for 2 seconds. Can stack up to 5 times. | Next shot will fire an additional 5 projectiles. | The first 12 bullets after reloading from an empty magazine have Attack +20%.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 124,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 5,
+      "fireRateRPM": 180,
+      "magazine": 8,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.4,
+      "adsTimeSec": 0.23,
+      "baseCritRate": 8,
+      "baseCritDmg": 27,
+      "baseWeakspotDmg": 15,
+      "baseWeakspotMult": 1.15,
+      "effectiveRangeM": 7,
+      "minDamageRangeM": 13,
+      "minDamagePercent": 10,
+      "ammoType": "Shotgun Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 124,
+          "rpm": 180,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/acs12-netherworld",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "DB12 - Backfire",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Shotgun",
+      "frame": "DB12",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 190,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 5,
+      "fireRateRPM": 105,
+      "magazine": 12,
+      "magazineConflict": null,
+      "reloadTimeSec": 0.5,
+      "adsTimeSec": 0.23,
+      "baseCritRate": 8,
+      "baseCritDmg": 28,
+      "baseWeakspotDmg": 20,
+      "baseWeakspotMult": 1.2,
+      "effectiveRangeM": 7,
+      "minDamageRangeM": 13,
+      "minDamagePercent": 10,
+      "ammoType": "Shotgun Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 190,
+          "rpm": 105,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/db12-backfire",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "DBSG - Dual Fury",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Shotgun",
+      "frame": "DBSG",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 214,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 6,
+      "fireRateRPM": 180,
+      "magazine": 2,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.1,
+      "adsTimeSec": 0.2,
+      "baseCritRate": 10,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 25,
+      "baseWeakspotMult": 1.25,
+      "effectiveRangeM": 7,
+      "minDamageRangeM": 13,
+      "minDamagePercent": 10,
+      "ammoType": "Shotgun Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 214,
+          "rpm": 180,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": {
+          "dmg": 56,
+          "pellets": 6,
+          "rpm": 180,
+          "mag": 2,
+          "note": "separate low-tier \"Dual Fury\" entry in the datamined list (range 27)"
+        },
+        "wikily": null,
+        "critStatsAgreeWithWikily": null,
+        "dataminedLowTierEntry": {
+          "dmg": 56,
+          "pellets": 6,
+          "rpm": 180,
+          "mag": 2,
+          "range": 27,
+          "note": "second \"Dual Fury\" entry in the datamined list, apparently a Tier-I value"
+        }
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/dbsg-dual-fury",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "KV-SBR - Icy Rain",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "SMG",
+      "frame": "KV-SBR",
+      "blueprintFragmentType": "Operator",
+      "element": "Frost",
+      "statusKeyword": "Frost Vortex",
+      "specialEffect": {
+        "name": "Frost Vortex",
+        "summary": "Frost Vortex mechanics with a chance to trigger on crit hits, auto-reloading, and increased number of existing vortices.",
+        "text": "Traps enemies within a 4.5m radius and inflicts 30% Psi Intensity Status DMG per second for 4 seconds. | Automatically reloads 15% of bullets after creating Frost Vortex. | Allows up to 2 Frost Vortex to exist simultaneously. | Penetration: Increases damage by 20% when attacking Rosetta.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 98,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 1000,
+      "magazine": 30,
+      "magazineConflict": null,
+      "reloadTimeSec": 1.9,
+      "adsTimeSec": 0.2,
+      "baseCritRate": 10,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 45,
+      "baseWeakspotMult": 1.45,
+      "effectiveRangeM": 14,
+      "minDamageRangeM": 39,
+      "minDamagePercent": 30,
+      "ammoType": "SMG Ammo",
+      "damageBonusTag": "{\"type\":\"penetration\",\"target\":\"rosetta\",\"value\":0.2}",
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 98,
+          "rpm": 1000,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/kv-sbr-icy-rain",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "MPS7 - Div-Evo",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "SMG",
+      "frame": "MPS7",
+      "blueprintFragmentType": "Stranger",
+      "element": "Physical (weapon element)",
+      "statusKeyword": "Shrapnel",
+      "specialEffect": {
+        "name": "Shrapnel",
+        "summary": "Shrapnel mechanics with increased trigger chances upon defeating enemies and enhanced targeting when hitting weakspots.",
+        "text": "Deals Weapon DMG of 50% Attack to a random unhit part. | Increases the chance to trigger Shrapnel by 80% for 12 seconds after defeating an enemy. | Hitting a Weakspot grants Shrapnel target parts +1 for 4 seconds.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 112,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 850,
+      "magazine": 35,
+      "magazineConflict": null,
+      "reloadTimeSec": 2.1,
+      "adsTimeSec": 0.2,
+      "baseCritRate": 8,
+      "baseCritDmg": 30,
+      "baseWeakspotDmg": 50,
+      "baseWeakspotMult": 1.5,
+      "effectiveRangeM": 16,
+      "minDamageRangeM": 44,
+      "minDamagePercent": 30,
+      "ammoType": "SMG Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 112,
+          "rpm": 850,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/mps7-div-evo",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "AWS.338 - Black Panther",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Sniper",
+      "frame": "AWS.338",
+      "blueprintFragmentType": "Huntsman",
+      "element": "Physical (weapon element)",
+      "statusKeyword": "Shrapnel",
+      "specialEffect": {
+        "name": "Shrapnel",
+        "summary": "Shrapnel mechanics with increased trigger chances upon multiple hits, enhanced damage on crit hits, and bonuses to Shrapnel DMG.",
+        "text": "Deals Weapon DMG of 50% Attack to a random unhit part. | Crit hits count as 2 hits towards triggering Shrapnel. | Crit hits grant Shrapnel trigger chance +1% for 1 second. | Shrapnel Crit DMG increased by 30%.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 1094,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 40,
+      "magazine": 5,
+      "magazineConflict": null,
+      "reloadTimeSec": 3.6,
+      "adsTimeSec": 0.25,
+      "baseCritRate": 2,
+      "baseCritDmg": 26,
+      "baseWeakspotDmg": 95,
+      "baseWeakspotMult": 1.95,
+      "effectiveRangeM": 58,
+      "minDamageRangeM": 106,
+      "minDamagePercent": 10,
+      "ammoType": "SR Ammo",
+      "damageBonusTag": "{\"type\":\"penetration\",\"target\":\"rosetta\",\"value\":0.2}",
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 1094,
+          "rpm": 40,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/aws-338-black-panther",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "SN700 - Gulped Lore",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Sniper",
+      "frame": "SN700",
+      "blueprintFragmentType": null,
+      "element": "Blast",
+      "statusKeyword": "Unstable Bomber",
+      "specialEffect": {
+        "name": "Unstable Bomber",
+        "summary": "Unstable Bomber mechanics with increased damage and bonuses upon defeating enemies.",
+        "text": "Triggers Unstable Bomber, dealing a status DMG blast of 100% Psi Intensity after 0.1 seconds with a blast radius of 1.5m. | Defeating an enemy decreases explosion range by 10% and increases DMG by 20% for 30 seconds, up to 5 stacks. | Defeating an enemy increases DMG by 20% for 30 seconds, up to 5 stacks. | Unstable Bomber is guaranteed to deal Crit DMG. | With every 1% Weakspot DMG, Unstable Bomber DMG increases by 1%.",
+        "verified": true,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 1104,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 40,
+      "magazine": 5,
+      "magazineConflict": null,
+      "reloadTimeSec": 3.6,
+      "adsTimeSec": 0.25,
+      "baseCritRate": 2,
+      "baseCritDmg": 24,
+      "baseWeakspotDmg": 90,
+      "baseWeakspotMult": 1.9,
+      "effectiveRangeM": 60,
+      "minDamageRangeM": 109,
+      "minDamagePercent": 10,
+      "ammoType": "SR Ammo",
+      "damageBonusTag": "{\"type\":\"penetration\",\"target\":\"rosetta\",\"value\":0.2}",
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 1104,
+          "rpm": 40,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "full",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/sn700-gulped-lore",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    },
+    {
+      "name": "SR2000 - Die Another Day",
+      "aliases": [],
+      "rarity": "Epic",
+      "weaponClass": "Sniper",
+      "frame": "SR2000",
+      "blueprintFragmentType": null,
+      "element": null,
+      "statusKeyword": null,
+      "specialEffect": {
+        "name": null,
+        "summary": null,
+        "text": null,
+        "verified": false,
+        "notes": null,
+        "conflictingKeywordFromOtherSource": null
+      },
+      "baseDmg": 668,
+      "baseDmgBasis": "Displayed DMG per projectile from Once Human DB (OHDB) as imported by the lReDragol datamined calculator (Mar 2026) and the saitoh183 OHDB snapshot (Apr 2026); interpreted as Tier V at base star (1-star) - see _meta.notes",
+      "baseDmgTier1_game8": null,
+      "baseDmgTier1Note": null,
+      "dmgWikilyDisplayed": null,
+      "pellets": 1,
+      "fireRateRPM": 105,
+      "magazine": 6,
+      "magazineConflict": null,
+      "reloadTimeSec": 3,
+      "adsTimeSec": 0.24,
+      "baseCritRate": null,
+      "baseCritDmg": null,
+      "baseWeakspotDmg": null,
+      "baseWeakspotMult": null,
+      "effectiveRangeM": 51,
+      "minDamageRangeM": 93,
+      "minDamagePercent": 10,
+      "ammoType": "SR Ammo",
+      "damageBonusTag": null,
+      "perStarBaseDmg": {
+        "1": null,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null
+      },
+      "perStarNote": "No source lists per-star DMG for individual weapons; apply starScaling.dmgMultiplierByStar to baseDmg (community model, unverified).",
+      "crossChecks": {
+        "ohdbSnapshot": {
+          "dmg": 668,
+          "rpm": 105,
+          "agreesWithDatamined": true
+        },
+        "game8Tier1": null,
+        "wikily": null,
+        "critStatsAgreeWithWikily": null
+      },
+      "dataQuality": "base stats only; special-effect text not extracted (placeholder in datamined file)",
+      "addedOrChanged": null,
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json",
+        "https://www.oncehumandb.com/weapons/sr2000-die-another-day",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json"
+      ]
+    }
+  ]
+}
