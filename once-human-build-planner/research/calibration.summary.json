@@ -1,0 +1,87 @@
+{
+  "facet": "Once Human calibration blueprints (weapon and armor) and the blueprint star upgrade system",
+  "dataFile": "/home/user/shared_workspace/once-human-build-planner/data/calibration.json",
+  "notesFile": "/home/user/shared_workspace/once-human-build-planner/research/calibration.md",
+  "gameVersionCovered": "Version 2.3.5 (2026-03-25) current state; calibration rework of Version 2.3.1 / Season 3 (2026-01-21); legacy pre-2026 calibration system recorded separately",
+  "confidence": "medium",
+  "recordCount": 25,
+  "keyClaims": [
+    {
+      "claim": "Since Version 2.3.1 (2026-01-21) weapon calibration is no longer a post-craft workbench process: a Calibration Blueprint is consumed as a crafting material at the Intermediate/Advanced Gear Workbench and its attributes apply permanently to the crafted weapon; gear workbenches no longer support calibration or blueprint replacement; previously calibrated weapons keep their stats.",
+      "evidence": "Dev blog 2026-01-13 and v2.3.1 notes: 'The Calibration feature will be removed (previously calibrated weapons will retain their unaffected stats), and gear workbenches will no longer support weapon calibration or blueprint replacement… when crafting weapons, adding calibration blueprints will activate their attribute effects.'",
+      "sources": ["https://www.oncehuman.game/news/devBlog/20260113/40781_1281545.html", "https://www.oncehuman.game/news/update/20260121/40780_1282991.html", "https://www.sportskeeda.com/mmo/once-human-calibration-changes-season-3-explained"],
+      "confidence": "high"
+    },
+    {
+      "claim": "A 2026-system calibration blueprint = fixed style attributes + one guaranteed Attack bonus (Legendary roll 33%-50%) + one merged random attribute (pool: Crit Rate, Crit DMG, Elemental DMG, Weakspot DMG) whose cap equals the sum of the two old slots (Legendary Elemental DMG 15%-20%, from old 6-8% + 9-12%).",
+      "evidence": "Dev blog: 'New Legendary-Rarity Calibration Blueprints feature: Attack 33%~50% and Elemental DMG sub-attribute range: Elemental DMG 15%~20%'; 'Original Legendary… two Elemental DMG sub-attributes… 6%~8% and 9%~12%'; games.gg: 'those two slots collapse into one, with the value cap equal to the combined maximum of the old two attributes.'",
+      "sources": ["https://www.oncehuman.game/news/devBlog/20260113/40781_1281545.html", "https://games.gg/once-human/guides/once-human-calibration-mods-guide/"],
+      "confidence": "medium-high"
+    },
+    {
+      "claim": "Style attributes are shared across weapon classes by style: Precision = Attack +25%, Range +40%, Fire Rate -10% (AR, Pistol); Heavy = Magazine Capacity +60% (SMG, Shotgun) or +75% (AR), Reload Speed -30%; Lightweight = Reload Speed +150%, Magazine Capacity -30% (SMG, Shotgun); Rapid Shot AR = Fire Rate +20%, Reload +40%, Attack -10%; 12-Gauge = Fire Rate +25%, Mag +45%, Attack -10%; Assault Machine Gun = Attack +25%, Mag -30%, Stability -50; Precision Crossbow = Attack +12.5%, Range +20%, Reload -25%.",
+      "evidence": "Fandom Calibration_Blueprints table and wikily item pages as surfaced in search snippets (Precision AR/Pistol and Heavy AR values appeared in 2+ independent snippets).",
+      "sources": ["https://once-human.fandom.com/wiki/Calibration_Blueprints", "https://wikily.gg/once-human/items/30399146/", "https://wikily.gg/once-human/items/30392013/", "https://games.gg/once-human/guides/once-human-calibration-mods-guide/"],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Legacy (launch to 2026-01-21) weapon calibration had up to 10 levels at the Gear Workbench; each level raised weapon DMG (cost: tier materials + Energy Links) and levels 4, 7 and 10 each activated an additional calibration attribute line.",
+      "evidence": "game8 / gamerant: 'Calibrating a weapon will increase its DMG stat per calibration level at the cost of materials and Energy Links… Reaching calibration levels 4, 7, and 10 will activate an additional calibration attribute.'",
+      "sources": ["https://game8.co/games/Once-Human/archives/462834", "https://gamerant.com/once-human-how-get-farm-weapon-calibration-blueprints-gold/", "https://oncehumanverse.com/posts/the-once-human-endgame-grind-weapon-calibration-blueprints-in-2026"],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Armor calibration (HP and Psi Intensity, slots per blueprint tier I:2 II:2 III:4 IV:4 V:6, paid in the piece's own crafting material) was removed in January 2026 and replaced by Fur as a crafting additive; Legendary fur adds +40% base HP and +40% base Psi Intensity.",
+      "evidence": "Fandom Armor: 'Armor Calibration was removed on January 7, 2026 with the Version 2.2.5 update… Tier I had 2 slots, Tier II 2, Tier III 4, Tier IV 4, Tier V 6'; Sportskeeda: 'legendary-quality fur increasing base HP and Psi Intensity by 40%'. Removal date disputed (fandom 2026-01-07 vs dev blog/2.3.1 2026-01-21); pick 2026-01-21.",
+      "sources": ["https://once-human.fandom.com/wiki/Armor", "https://www.sportskeeda.com/mmo/once-human-calibration-changes-season-3-explained", "https://www.oncehuman.game/news/update/20260121/40780_1282991.html"],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Maximum blueprint stars are rarity-locked: Standard 3, Rare 4, Epic 5, Legendary 6.",
+      "evidence": "Fandom Blueprints: 'Standard has 3 tiers, Rare (blue) has 4 tiers, Epic (purple) has 5 tiers, and Legendary (gold) has 6 tiers'; Steam: 'Star Limit is also Rarity Locked, Blue Gear won't reach 5 or 6 Star.'",
+      "sources": ["https://once-human.fandom.com/wiki/Blueprints", "https://steamcommunity.com/app/2139460/discussions/0/573792101998820965/"],
+      "confidence": "high"
+    },
+    {
+      "claim": "Legendary weapon blueprint star-up costs: XP 1,600 / 4,000 / 6,000 / 8,000 / 10,000 (total 29,600) or Starchrom 3,000 / 6,000 / 9,000 / 12,000 / 15,000 (total 45,000) for 1→2 … 5→6; since Version 2.3.5 (2026-03-25) only Starchrom is used (fragments removed) with the same expected total cost.",
+      "evidence": "Steam thread, wikily Blueprint Calculator, fandomwire and paradoxgaming all quote the XP schedule; Starchrom schedule from wikily calculator and the 2.3.5 preparation guides; 2.3.5 notes: 'The expected Starchrom cost to unlock and upgrade blueprints will remain the same as before.'",
+      "sources": ["https://steamcommunity.com/app/2139460/discussions/0/573792101998820965/", "https://wikily.gg/once-human/blueprint-calculator/", "https://fandomwire.com/how-to-unlock-6-star-weapons-quickly-in-once-human/", "https://www.oncehuman.game/news/update/20260325/40780_1292938.html", "https://vortexgaming.io/en/postdetail/713570"],
+      "confidence": "high"
+    },
+    {
+      "claim": "Each weapon star adds +5% of the 1-star base DMG (multipliers 1.00, 1.05, 1.10, 1.15, 1.20, 1.25 for 1★-6★).",
+      "evidence": "DE.50 Jaws: 128 base DMG at 1★, 160 at 6★ (x1.25 over five upgrades). Steam players' 'approximately 4% per star' matches the relative step size (4.2-4.8%). Conflicting '10-15% overall' claim (gamersandgeek) rejected as vaguer.",
+      "sources": ["https://theriagames.com/guide/once-human-de50-jaws/", "https://wikily.gg/once-human/weapon-blueprints/", "https://steamcommunity.com/app/2139460/discussions/0/6330466705287939267/", "https://gamersandgeek.com/once-human-weapon-armor-gear-stars/"],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Each armor star adds about +6.25% of 1-star base HP and Psi Intensity (Pollution Resist unchanged), i.e. 6★ = 1.3125x.",
+      "evidence": "Fandom Raid Helmet: enhancement tier I HP 296 / PR 16 / Psi 92 vs tier IV HP 352 / PR 16 / Psi 109 (352/296 = 1.189, 109/92 = 1.185 = +18.75% over three star-ups). Derived from one item; not stated anywhere as a rule.",
+      "sources": ["https://once-human.fandom.com/wiki/Raid_Set_(Armor)", "https://once-human.fandom.com/wiki/Blueprints"],
+      "confidence": "low"
+    },
+    {
+      "claim": "Blueprint stars are a separate axis from armor blueprint tiers I-V: tiers raise HP, Pollution Resist and Psi Intensity; stars (enhancement tiers) multiply HP and Psi Intensity on top at every tier.",
+      "evidence": "Fandom: 'Blueprint tiers increase the HP, Pollution Resist, and Psi Intensity of armor. All blueprints have tiers I - V. Blueprint enhancement tiers further increase the HP and Psi Intensity of armor across all their blueprint tiers.'",
+      "sources": ["https://once-human.fandom.com/wiki/Armor", "https://once-human.fandom.com/wiki/Raid_Set_(Armor)"],
+      "confidence": "medium-high"
+    },
+    {
+      "claim": "6-star blueprints were already in the game before the December 2024 Blueprint Conversion update (which 'made six-star gear much more achievable'); 6★ was almost certainly a launch (2024-07-09) feature rather than a later addition.",
+      "evidence": "paradoxgaming / dualshockers describe the Dec 2024 conversion system (swap star levels between same-rarity blueprints, 6 conversions per week) as accelerating existing 6★ progress; no patch note introducing 6★ exists in any snippet.",
+      "sources": ["https://paradoxgaming.net/gamearticle.php?id=sixstarblueprints", "https://www.dualshockers.com/once-human-blueprint-conversion/", "https://en.wikipedia.org/wiki/Once_Human_(video_game)"],
+      "confidence": "medium"
+    }
+  ],
+  "openQuestions": [
+    "Attack-bonus and merged-attribute ranges for Epic, Rare and Standard calibration blueprints under the 2026 system (only Legendary 33-50% / Elemental 15-20% found).",
+    "Style values for Steady/Rapid/Frugal/Handy Sniper, Rapid/Steady Machine Gun, Assault SMG, Structural Destruction and Capacity Expander (Heavy Artillery); exact attribute labels of Portable Pistol; whether the Rapid pistol blueprint is really named 'P22'.",
+    "Legacy system: DMG gained per calibration level, Energy Link/material cost per level, and whether the calibration level cap was gated by blueprint stars (no source mentions a star gate).",
+    "Legacy armor calibration HP / Psi Intensity gain per calibration and the Fur bonus for Epic/Rare/Standard fur.",
+    "Exact Starchrom star-up schedule for armor blueprints ('varies by type') and for Epic/Rare weapon blueprints.",
+    "Whether stars change anything beyond base DMG / HP / Psi Intensity (weapon special-effect values, set-effect values, mod slots).",
+    "Independent confirmation of the +5%/star weapon and +6.25%/star armor multipliers with more than one weapon / armor piece.",
+    "A dated patch note or launch document explicitly introducing 6★ blueprints.",
+    "All numbers were taken from search snippets because every page fetch was blocked by the environment's network policy and the search budget ran out; direct verification against the live pages is still required."
+  ]
+}
