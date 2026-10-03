@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Once Human Build Planner</title>
+<meta name="description" content="Once Human build planner and damage calculator: weapons from 1 to 6 stars, calibration, armor sets, mods with substats, food and drink buffs, deviants and Cradle nodes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <h1>Once Human Build Planner</h1>
+    <span class="tag" id="data-version">data: loading</span>
+  </div>
+  <div class="spacer"></div>
+  <div class="actions">
+    <button class="btn small" id="btn-share" type="button" title="Copy a link that restores this build">Copy build link</button>
+    <button class="btn small" id="btn-export" type="button" title="Download the build as JSON">Export JSON</button>
+    <label class="btn small" for="file-import" title="Load a build JSON file">Import JSON</label>
+    <input type="file" id="file-import" accept="application/json" class="hidden-visually">
+    <button class="btn small danger" id="btn-reset" type="button">Reset</button>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="editor" id="editor" aria-label="Build editor">
+    <!-- Panels are rendered by js/ui.js -->
+    <div class="panel"><div class="body"><p class="note">Loading data…</p></div></div>
+  </section>
+  <aside class="results" id="results" aria-label="Results"></aside>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/data.js"></script>
+<script src="js/ui-helpers.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

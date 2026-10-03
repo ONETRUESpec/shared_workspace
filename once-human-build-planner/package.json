@@ -1,0 +1,13 @@
+{
+  "name": "once-human-build-planner",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Once Human build planner and damage calculator (weapons 1-6 stars, calibration, armor sets, mods, food, deviants, Cradle)",
+  "type": "module",
+  "scripts": {
+    "bundle": "node scripts/bundle-data.mjs",
+    "build": "node scripts/bundle-data.mjs && node scripts/build-single.mjs",
+    "test": "node --test tests/",
+    "serve": "python3 -m http.server 8080"
+  }
+}
