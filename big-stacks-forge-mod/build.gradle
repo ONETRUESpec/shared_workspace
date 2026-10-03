@@ -1,0 +1,88 @@
+// Big Stacks: bigger item stacks in the player inventory only, for Minecraft Forge.
+// Uses Mixins; the Mixin wiring follows https://github.com/MinecraftForge/MDKExamples (mixins-only/fg7).
+// Based on the official Forge 26.3 MDK layout (ForgeGradle 7).
+// https://github.com/MinecraftForge/MDKExamples has more complex setups (AccessTransformers, Jar-in-Jar, Mixin).
+
+plugins {
+    id 'java'
+    id 'idea'
+    id 'eclipse'
+    id 'net.minecraftforge.gradle' version '[7.0.17,8)'
+}
+
+version = mod_version
+group = 'com.onetruespec.bigstacks'
+
+base {
+    archivesName = "bigstacks-forge-${minecraft_version}"
+}
+
+// Mojang ships Java 25 to end users in 26.1+, so the mod targets Java 25.
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+minecraft {
+    runs {
+        configureEach {
+            workingDir = layout.projectDirectory.dir('run')
+
+            systemProperty 'eventbus.api.strictRuntimeChecks', 'true'
+            systemProperty 'forge.enabledGameTestNamespaces', mod_id
+            // In the development runs Mixin needs to be told about the config; the built jar carries it in its manifest.
+            args "--mixin.config=${mod_id}.mixins.json"
+        }
+
+        register('client')
+
+        register('server') {
+            args '--nogui'
+        }
+
+        register('gameTestServer')
+    }
+}
+
+repositories {
+    minecraft.mavenizer(it)
+    maven fg.forgeMaven
+    maven fg.minecraftLibsMaven
+    mavenCentral()
+}
+
+dependencies {
+    implementation minecraft.dependency("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
+    annotationProcessor "net.minecraftforge:eventbus-validator:${eventbus_version}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        // Lets Mixin find our config when the jar is loaded as a mod.
+        attributes['MixinConfigs'] = "${mod_id}.mixins.json"
+    }
+}
+
+// Expand ${mod_id} etc. in mods.toml and pack.mcmeta so the versions live in one place (gradle.properties).
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+        minecraft_version      : minecraft_version,
+        minecraft_version_range: minecraft_version_range,
+        forge_version          : forge_version,
+        forge_version_range    : forge_version_range,
+        loader_version_range   : loader_version_range,
+        mod_id                 : mod_id,
+        mod_name               : mod_name,
+        mod_license            : mod_license,
+        mod_version            : mod_version,
+        mod_authors            : mod_authors,
+        mod_description        : mod_description,
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties
+    }
+}

@@ -1,0 +1,14 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "com.onetruespec.bigstacks.mixin",
+  "mixins": [
+    "InventoryMixin",
+    "SlotMixin",
+    "AbstractContainerMenuMixin",
+    "ItemStackMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
