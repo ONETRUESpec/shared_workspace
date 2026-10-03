@@ -3,8 +3,9 @@ package com.onetruespec.magnet;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 /**
- * Settings written to {@code config/magnet-common.toml}. Values are read live, so edits followed by
- * {@code /reload} (or a restart) take effect without rebuilding anything.
+ * Settings written to {@code config/magnet-common.toml}. Values are read live and Forge watches the file, so saving
+ * an edit takes effect within a few seconds without a restart ({@code /reload} is not involved; it only reloads data
+ * packs). Edits made while the game is closed are picked up on the next start.
  */
 public final class MagnetConfig {
     public static final ForgeConfigSpec SPEC;

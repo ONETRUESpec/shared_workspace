@@ -6,6 +6,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -65,8 +67,9 @@ public class MagnetItem extends Item {
         if (!level.isClientSide()) {
             boolean active = !isActive(stack);
             setActive(stack, active);
-            // Same click as a lever: higher pitch for on, lower for off.
-            player.playSound(SoundEvents.LEVER_CLICK, 0.4F, active ? 0.7F : 0.5F);
+            // Same click as a lever: higher pitch for on, lower for off. A null "except" entity means everyone in
+            // range hears it, including the player who clicked (Player#playSound would exclude them on the server).
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.LEVER_CLICK, SoundSource.PLAYERS, 0.4F, active ? 0.7F : 0.5F);
             player.displayClientMessage(Component.translatable(this.getDescriptionId() + (active ? ".enabled" : ".disabled")), true);
             player.awardStat(Stats.ITEM_USED.get(this));
         }
@@ -87,20 +90,28 @@ public class MagnetItem extends Item {
 
     private static void pullTowards(ServerLevel level, Player player) {
         double range = MagnetConfig.RANGE.get();
+        double rangeSquared = range * range;
         double speed = MagnetConfig.SPEED.get();
         int ownDropGraceTicks = MagnetConfig.OWN_DROP_COOLDOWN_SECONDS.get() * 20;
+
+        // The box is only the broad phase; the real test is the spherical distance from the player's feet.
+        Vec3 origin = player.position();
         AABB area = player.getBoundingBox().inflate(range);
+        // Same box vanilla uses to pick items up (Player#touch). Anything already inside it is left to vanilla:
+        // it gets picked up if it can be, and otherwise falls to the ground instead of being held in mid-air.
+        AABB pickupZone = player.getBoundingBox().inflate(1.0D, 0.5D, 1.0D);
 
         // Aim for the middle of the player's body; vanilla picks the item up as soon as it touches the player.
-        Vec3 target = player.position().add(0.0D, player.getBbHeight() * 0.5D, 0.0D);
+        Vec3 target = origin.add(0.0D, player.getBbHeight() * 0.5D, 0.0D);
 
-        List<ItemEntity> items = level.getEntitiesOfClass(ItemEntity.class, area, item -> canPull(item, player, ownDropGraceTicks));
+        List<ItemEntity> items = level.getEntitiesOfClass(ItemEntity.class, area,
+            item -> item.distanceToSqr(origin) <= rangeSquared && !pickupZone.intersects(item.getBoundingBox()) && canPull(item, player, ownDropGraceTicks));
         for (ItemEntity item : items) {
             moveTowards(item, target, speed);
         }
 
         if (MagnetConfig.PULL_EXPERIENCE_ORBS.get()) {
-            for (ExperienceOrb orb : level.getEntitiesOfClass(ExperienceOrb.class, area)) {
+            for (ExperienceOrb orb : level.getEntitiesOfClass(ExperienceOrb.class, area, orb -> orb.distanceToSqr(origin) <= rangeSquared)) {
                 moveTowards(orb, target, speed);
             }
         }
@@ -112,7 +123,16 @@ public class MagnetItem extends Item {
             return false;
         }
         // Leave the player's own throws alone for a while, otherwise dropping something would bring it straight back.
-        return ownDropGraceTicks <= 0 || item.getAge() >= ownDropGraceTicks || item.getOwner() != player;
+        if (ownDropGraceTicks > 0 && item.getAge() < ownDropGraceTicks && item.getOwner() == player) {
+            return false;
+        }
+        // With a full inventory the item would only be dragged around, so leave it where it is until there is room.
+        return player.hasInfiniteMaterials() || hasRoomFor(player.getInventory(), item.getItem());
+    }
+
+    /** Mirrors what {@code Inventory#add} would do without touching the inventory: an empty slot or a stack with space left. */
+    private static boolean hasRoomFor(Inventory inventory, ItemStack stack) {
+        return inventory.getFreeSlot() != -1 || inventory.getSlotWithRemainingSpace(stack) != -1;
     }
 
     private static void moveTowards(Entity entity, Vec3 target, double speed) {

@@ -14,12 +14,17 @@ A toggleable magnet that pulls dropped items (and experience orbs) towards you f
 * **Right-click** the magnet to switch it on or off. A switched-on magnet glows (enchantment glint) and is named
   "Magnet (Active)"; the action bar confirms the change.
 * While it is **switched on and anywhere in your inventory** (hotbar, main inventory, off-hand), every dropped item
-  within **10 blocks** flies towards you and you pick it up as usual. Experience orbs are pulled too.
+  within **10 blocks** (a sphere around you) flies towards you and you pick it up as usual. Experience orbs are
+  pulled too.
 * Items you just threw away yourself (Q key) are left alone for **10 seconds**, so you can still drop things while
-  the magnet is on. Items that cannot be picked up yet (freshly dropped by someone else, or protected by a command)
-  are not pulled either.
+  the magnet is on. Items that still have a pickup delay (freshly dropped by someone else, or given one by a
+  command) are not pulled either.
+* When your inventory has no room for an item, that item stays where it is until you make space, instead of being
+  dragged around behind you. Items a command has reserved for another player can be pulled but not picked up; they
+  drop at your feet.
 * It does nothing in spectator mode, and a magnet lying on the ground does nothing.
-* Everything is configurable in `config/magnet-common.toml`:
+* Everything is configurable in `config/magnet-common.toml`. Forge watches the file, so saved edits apply within a
+  few seconds without a restart:
 
 | Setting                  | Default | Meaning                                                    |
 |--------------------------|---------|------------------------------------------------------------|
