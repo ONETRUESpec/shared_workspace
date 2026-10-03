@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "compressedblocks:uncompress_netherrack",
+  "ingredients": [
+    "compressedblocks:compressed_netherrack_7"
+  ],
+  "result": {
+    "count": 9,
+    "id": "compressedblocks:compressed_netherrack_6"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "compressedblocks:uncompress_stone",
+  "ingredients": [
+    "compressedblocks:compressed_stone_1"
+  ],
+  "result": {
+    "count": 9,
+    "id": "minecraft:stone"
+  }
+}

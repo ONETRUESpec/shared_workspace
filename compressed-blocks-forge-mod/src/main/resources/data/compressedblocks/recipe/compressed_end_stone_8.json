@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "compressedblocks:compress_end_stone",
+  "key": {
+    "#": "compressedblocks:compressed_end_stone_7"
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "id": "compressedblocks:compressed_end_stone_8"
+  }
+}

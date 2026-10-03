@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "compressedblocks:compress_gravel",
+  "key": {
+    "#": "compressedblocks:compressed_gravel_7"
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "id": "compressedblocks:compressed_gravel_8"
+  }
+}
