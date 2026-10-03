@@ -1,17 +1,8 @@
 package com.onetruespec.bigstacks;
 
-import com.mojang.logging.LogUtils;
-import com.mojang.serialization.DataResult;
-
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.slf4j.Logger;
 
 /**
  * Big Stacks: items stack far beyond 64 in the player's own inventory (500 by default, configurable per world),
@@ -28,39 +19,16 @@ import org.slf4j.Logger;
  *       the big stacks survive saving and loading.</li>
  * </ul>
  * The last point is the one that could lose items if it ever stopped applying on a new Minecraft version, so
- * {@link #commonSetup} proves it works at startup and otherwise falls back to 99, which vanilla can always save.
+ * {@link BigStacks} proves it works (a save/load round trip of a big stack, run the first time a limit is needed)
+ * and otherwise falls back to 99, which vanilla can always save.
  */
 @Mod(BigStacksMod.MOD_ID)
 public final class BigStacksMod {
     /** The mod id; must match {@code META-INF/mods.toml} and {@code bigstacks.mixins.json}. */
     public static final String MOD_ID = "bigstacks";
-    private static final Logger LOGGER = LogUtils.getLogger();
 
     public BigStacksMod(FMLJavaModLoadingContext context) {
-        FMLCommonSetupEvent.getBus(context.getModBusGroup()).addListener(BigStacksMod::commonSetup);
-
         // A server config: lives with the world and is sent to clients when they join, so both sides agree.
         context.registerConfig(ModConfig.Type.SERVER, BigStacksConfig.SPEC);
-    }
-
-    /** Checks that a stack bigger than vanilla's 99 survives a round trip through the item save format. */
-    private static void commonSetup(FMLCommonSetupEvent event) {
-        boolean supported = false;
-        try {
-            ItemStack probe = new ItemStack(Items.DIRT, BigStacksConfig.MAX_LIMIT);
-            DataResult<Tag> encoded = ItemStack.CODEC.encodeStart(NbtOps.INSTANCE, probe);
-            if (encoded.result().isPresent()) {
-                DataResult<ItemStack> decoded = ItemStack.CODEC.parse(NbtOps.INSTANCE, encoded.result().get());
-                supported = decoded.result().isPresent() && decoded.result().get().getCount() == BigStacksConfig.MAX_LIMIT;
-            }
-        } catch (RuntimeException e) {
-            LOGGER.error("Big Stacks: self-test of the item save format threw", e);
-        }
-        BigStacks.setBigCountsSerializable(supported);
-        if (supported) {
-            LOGGER.info("Big Stacks: item save format accepts big stacks; inventory stacks go up to the configured limit.");
-        } else {
-            LOGGER.error("Big Stacks: the item save format still rejects stacks above 99 (the ExtraCodecs mixin did not apply on this Minecraft version). Inventory stacks are limited to 99 so nothing can be lost on save.");
-        }
     }
 }

@@ -35,9 +35,9 @@ applied when the game starts):
 | `ExtraCodecsMixin`             | The item save format accepts counts above 99                                  |
 
 The last one is the only patch that could lose items if it ever stopped matching a future Minecraft version, so
-the mod checks at startup that a big stack survives a save/load round trip. If that check fails, it logs an error
-and limits inventory stacks to 99 (which vanilla can always save) instead of 500. Check the log line starting
-with "Big Stacks:" after the first start.
+the mod checks, the first time an inventory is used, that a big stack survives a save/load round trip. If that
+check fails, it logs an error and limits inventory stacks to 99 (which vanilla can always save) instead of 500.
+Look for the log line starting with "Big Stacks:" after opening your inventory for the first time.
 
 ## Building
 
