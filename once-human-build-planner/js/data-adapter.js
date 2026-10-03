@@ -57,6 +57,7 @@
     const elements = Array.from(new Set((low.match(/\b(blaze|frost|blast|shock)\b/g) || []).map(e => ELEMENT_IDS[e])));
     const isDmgish = /\b(dmg|damage|factor|coefficient)\b/.test(low);
     const ctxText = String(m.condition || m.text || '').toLowerCase();
+    if (/\b(dmg|damage) (taken|received)\b/.test(low) && !enemy && value < 0) { push('dmgReductionPct', -value, null, { text: name }); return out; }
     // Generic "DMG" lines whose text names an enemy tier ("Normal enemies take +15% DMG") are DMG-vs-type
     if (/^(dmg|damage|weapon dmg)$/.test(low)) {
       const tier = ctxText.match(/\b(normal|elite|boss)\b[^.]{0,40}\btake/);
@@ -64,8 +65,11 @@
       if (/enemies affected by|targets affected by/.test(ctxText)) { push('weaponVulnPct', value, null, { condition: m.condition || m.text }); push('statusVulnPct', value, null, { condition: m.condition || m.text }); return out; }
     }
 
+    // --- player-side defence first ("DMG Reduction", "Status DMG taken reduction")
+    if (/reduction/.test(low)) { push('dmgReductionPct', value, null, { text: name }); return out; }
+    const debuffText = enemy || /vulnerab/.test(low) || /\b(enemies|enemy|targets?)\b[^.]{0,40}\btakes?\b/.test(ctxText) || (/\btaken\b/.test(low) && value > 0 && !/received/.test(low) && (m.sourceType === 'deviant' || m.sourceType === 'armor-piece' || m.sourceType === 'weapon-mod' || m.sourceType === 'cradle'));
     // --- target-side debuffs ("X DMG taken", "vulnerability")
-    if (enemy || /\btaken\b|vulnerab/.test(low)) {
+    if (debuffText) {
       if (/weakspot dmg taken|weakspot damage taken/.test(low)) { push('weakspotDmgPct', value, null, { condition: m.condition || 'target debuff' }); return out; }
       if (/status (dmg|damage) taken|status vulnerab/.test(low)) { push('statusVulnPct', value, null); return out; }
       if (/weapon (dmg|damage) taken|weapon vulnerab/.test(low)) { push('weaponVulnPct', value, null); return out; }
@@ -145,6 +149,12 @@
     return out;
   }
 
+  /** Strip research annotations from a condition string for display. */
+  function cleanCondition(t) {
+    if (!t) return null;
+    return String(t).replace(/\s*\(game-client string[^)]*\)/gi, '').replace(/;?\s*(value shown is|values? shown)[^.]*\.?/gi, '').replace(/\s*valueBySkillRating[^.]*\.?/g, '').replace(/\s*Older wiki[^.]*\.?/gi, '').replace(/\s*Skill Rating \d shown\.?/gi, '').replace(/\{0\}/g, 'X').replace(/\{1\}/g, 'Y').replace(/\s+/g, ' ').trim() || null;
+  }
+
   /** Does an effect's condition/text describe a situational trigger (so the UI should expose a toggle)? */
   function isConditionalText(t) {
     if (!t) return false;
@@ -201,9 +211,9 @@
         attack, attackSource, attackStar: 1, attackByStar, starRatios: series, maxStars,
         ohdbListedDmg: w.baseDmg != null ? Number(w.baseDmg) : null, tier1Dmg: w.baseDmgTier1_game8 != null ? Number(w.baseDmgTier1_game8) : null,
         pellets: w.pellets || 1, rpm, magazine, reloadTime: reload, burst: o && o.burstBulletNum ? o.burstBulletNum : null,
-        critRatePct: o && o.critRatePct != null ? o.critRatePct : (w.baseCritRate ?? null),
-        critDmgPct: o && o.critDmgPct != null ? o.critDmgPct : (w.baseCritDmg ?? null),
-        weakspotDmgPct: o && o.weakspotDmgPct != null ? o.weakspotDmgPct : (w.baseWeakspotDmg ?? null),
+        critRatePct: o && o.critRatePct ? o.critRatePct : (w.baseCritRate ?? (o && o.critRatePct != null ? o.critRatePct : null)),
+        critDmgPct: o && o.critDmgPct ? o.critDmgPct : (w.baseCritDmg ?? (o && o.critDmgPct != null ? o.critDmgPct : null)),
+        weakspotDmgPct: o && o.weakspotDmgPct ? o.weakspotDmgPct : (w.baseWeakspotDmg ?? (o && o.weakspotDmgPct != null ? o.weakspotDmgPct : null)),
         falloff: o && o.falloff ? o.falloff : (w.effectiveRangeM ? { fullDamageRangeM: w.effectiveRangeM, minDamageRangeM: w.minDamageRangeM || null, minDamageFraction: w.minDamagePercent != null ? w.minDamagePercent / 100 : null } : null),
         ammoType: w.ammoType || null, dataQuality: w.dataQuality || null,
         sources: w.sources || [], official: o || null, triggerChancePct: TRIGGER_CHANCE[w.name] != null ? TRIGGER_CHANCE[w.name] : null,
@@ -234,7 +244,7 @@
     function makePiece(p, set, setId, kind) {
       const slot = normSlot(p.slot);
       const base = p.baseStats || {};
-      const effects = (p.effects || []).map(e => normaliseEffectDef(Object.assign({}, e, { condition: e.condition || (kind === 'key' && isConditionalText(p.effectText) ? p.effectText : null) }), p.name, 'armor-piece')).flat();
+      const effects = (p.effects || []).map(e => normaliseEffectDef(e, p.name, 'armor-piece')).flat();
       return {
         id: slug(p.name), name: p.name, slot, kind, setId, setName: set ? set.name : null, rarity: ((p.rarity || (set && set.rarity) || '')).toLowerCase(),
         keyword: keywordId(p.keyword), effectText: p.effectText || null, effects, alternatives: p.alternatives || [], maxStars: (SERIES[rarityKeyOf((p.rarity || (set && set.rarity) || ''))] || SERIES.legendary).length,
@@ -315,7 +325,9 @@
       const legendary = tiers.find(t => /legendary/i.test(t.tier)) || tiers[tiers.length - 1] || null;
       const expanded = expandSubstat(s.stat);
       for (const ex of expanded) {
-        substats.push({ id: slug(ex.label), label: ex.label, stat: ex.stat, key: ex.key, unit: s.unit === 'flat' ? 'flat' : 'pct', appliesTo: s.appliesTo || ['weapon', 'armor'], tiers, defaultValue: legendary ? legendary.max : (ex.defaultValue || null), notes: s.notes || null });
+        const applies = Array.isArray(s.appliesTo) && s.appliesTo.length ? s.appliesTo.map(a => String(a).toLowerCase()) : ['weapon', 'armor'];
+        const appliesTo = ['weapon', 'armor'].filter(k => applies.some(a => a.startsWith(k)));
+        substats.push({ id: slug(ex.label), label: ex.label, stat: ex.stat, key: ex.key, unit: s.unit === 'flat' ? 'flat' : 'pct', appliesTo: appliesTo.length ? appliesTo : ['weapon', 'armor'], tiers, defaultValue: legendary ? legendary.max : (ex.defaultValue || null), notes: s.notes || null });
       }
     }
     const suffixes = Array.isArray(raw.suffixes) ? raw.suffixes : Object.values(raw.suffixes || {});
@@ -400,12 +412,13 @@
         const cap = effList.find(x => x.stat === e.stat + 'Cap');
         const fx = toEffects(e.stat, e.value, { unit: e.unit, condition: e.condition, source: d.name, sourceType: 'deviant', target: e.target || 'player' });
         for (const f of fx) {
-          f.target = e.target || 'player'; f.valueBySkillRating = bySR; f.conditional = true; f.id = `${slug(d.name)}:${f.stat}:${f.key || ''}`; f.rawStat = e.stat;
+          f.target = e.target || 'player'; f.valueBySkillRating = bySR; f.conditional = false; f.id = `${slug(d.name)}:${f.stat}:${f.key || ''}`; f.rawStat = e.stat;
+          f.condition = cleanCondition(e.condition);
           if (cap && cap.value) { f.perStack = true; f.perStackValue = f.value; f.baseValue = 0; f.maxValue = cap.value; f.maxStacks = Math.max(1, Math.round(cap.value / f.value)); f.capBySkillRating = Array.isArray(cap.valueBySkillRating) ? cap.valueBySkillRating : null; }
         }
         effects.push(...fx);
       }
-      list.push({ id: slug(d.name), name: d.name, type: d.type || 'Combat', text: skill.text || '', effects, damage: skill.damage || null, cooldownSeconds: d.cooldownSeconds || null, durationSeconds: d.durationSeconds || null, notes: d.notes || null, traits: d.traits || [], variants: d.variants || [] });
+      list.push({ id: slug(d.name), name: d.name, type: d.type || 'Combat', text: cleanCondition(skill.text) || '', effects, damage: skill.damage || null, cooldownSeconds: d.cooldownSeconds || null, durationSeconds: d.durationSeconds || null, notes: d.notes || null, traits: d.traits || [], variants: d.variants || [] });
     }
     list.sort((a, b) => a.name.localeCompare(b.name));
     return { list, byId: Object.fromEntries(list.map(d => [d.id, d])), scalingRules: raw.scalingRules || null };
@@ -449,7 +462,7 @@
     const w = cat.weapons.list.find(x => /The Last Valor/i.test(x.name) && x.attack != null) || cat.weapons.list.find(x => x.attackSource === 'official') || cat.weapons.list[0];
     return {
       v: 1,
-      weapon: { id: w ? w.id : null, star: 6, calibration: { styleId: null, attackBonusPct: 50, random: { stat: 'Elemental DMG', value: 20 } }, mod: { id: null, substats: [] } },
+      weapon: { id: w ? w.id : null, star: 6, calibration: { styleId: null, attackBonusPct: 50, random: (w && w.element && w.element !== 'physical') ? { stat: 'Elemental DMG', value: 20 } : { stat: 'Crit DMG', value: 20 } }, mod: { id: null, substats: [] } },
       armor: Object.fromEntries(SLOTS.map(s => [s, { pieceId: null, star: 6, mod: { id: null, substats: [] } }])),
       food: { foodId: null, drinkId: null, chefRex: false, chefRexRating: 5, chefRexMood: 'high' },
       deviant: { id: null, skillRating: 5, active: true },
@@ -487,7 +500,10 @@
     if (forceEnabled) enabled = true;
     let value = fx.value;
     if (fx.perStack) {
-      const stacks = build.stacks[fx.id] != null ? build.stacks[fx.id] : (fx.maxStacks || 1);
+      let stacks = build.stacks[fx.id] != null ? Number(build.stacks[fx.id]) : (fx.maxStacks || 1);
+      if (!isFinite(stacks)) stacks = fx.maxStacks || 1;
+      stacks = Math.max(0, Math.round(stacks));
+      if (fx.maxStacks) stacks = Math.min(stacks, fx.maxStacks);
       const per = fx.perStackValue != null ? fx.perStackValue : fx.value;
       value = (fx.baseValue || 0) + per * stacks;
       if (fx.maxValue != null) value = Math.min(value, fx.maxValue);
@@ -509,6 +525,8 @@
       const def = cat.calibration.randomDefaults[cal.random.stat];
       if (def) push(Object.assign(E.effect(def.stat, cal.random.value, { key: cal.random.key || def.key || null, source: `Calibration: ${cal.random.stat}`, sourceType: 'calibration' }), { id: 'calibration:random', enabled: true }));
     }
+    const weaponKeyword = (cat.weapons.byId[build.weapon.id] || {}).keyword || null;
+    const keywordOk = (kw) => !kw || kw === weaponKeyword;
     // Weapon mod
     pushMod(build.weapon.mod, 'weapon-mod');
     // Armor pieces, set bonuses, mods
@@ -522,7 +540,7 @@
       if (bs.maxHp != null) push(Object.assign(E.effect('maxHp', bs.maxHp, { source: `${piece.name} (${sel.star || 1}★)`, sourceType: 'armor-base' }), { id: `${piece.id}:maxHp`, enabled: true }));
       if (bs.psiIntensity != null) push(Object.assign(E.effect('psiIntensity', bs.psiIntensity, { source: `${piece.name} (${sel.star || 1}★)`, sourceType: 'armor-base' }), { id: `${piece.id}:psi`, enabled: true }));
       if (bs.pollutionResist != null) push(Object.assign(E.effect('pollutionResist', bs.pollutionResist, { source: piece.name, sourceType: 'armor-base' }), { id: `${piece.id}:pr`, enabled: true }));
-      for (const fx of piece.effects) push(applyEffect(fx, build));
+      if (keywordOk(piece.keyword)) for (const fx of piece.effects) push(applyEffect(fx, build));
       if (piece.setId) setCounts[piece.setId] = (setCounts[piece.setId] || 0) + 1;
       pushMod(sel.mod, 'armor-mod');
     }
@@ -573,10 +591,12 @@
       if (!modSel || !modSel.id) return;
       const mod = cat.mods.byId[modSel.id];
       if (!mod) return;
-      for (const fx of mod.effects) push(applyEffect(fx, build));
+      if (keywordOk(mod.keyword)) for (const fx of mod.effects) push(applyEffect(fx, build));
+      const seen = new Set();
       for (const ss of modSel.substats || []) {
         const def = cat.mods.substatsById[ss.id];
-        if (!def || ss.value == null) continue;
+        if (!def || ss.value == null || seen.has(ss.id)) continue;
+        seen.add(ss.id);
         push(Object.assign(E.effect(def.stat, ss.value, { key: def.key, source: `${mod.name}: ${def.label}`, sourceType: kind + '-sub' }), { id: `${mod.id}:sub:${def.id}`, enabled: true }));
       }
     }

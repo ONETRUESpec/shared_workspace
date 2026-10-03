@@ -95,8 +95,8 @@ Post-craft calibration is gone. A calibration blueprint is consumed when craftin
 
 ## 6. Mods
 
-- One mod per weapon and per armor piece; armor mods are slot-specific; weapon mods fit any ranged weapon but keyword mods only work on weapons with that keyword (UI flags the mismatch).
-- Main effect from `data/mods.json` (`effect.stat/value/condition/perStack/maxValue`), conditional ones are toggles.
+- One mod per weapon and per armor piece; armor mods are slot-specific; weapon mods fit any ranged weapon but keyword mods (and keyword key-armor pieces) only work on weapons with that keyword: the planner ignores their effects on other weapons and marks them inactive.
+- Main effect from `data/mods.json` (`effect.stat/value/condition/perStack/maxValue`), conditional ones are toggles. Stacking mods store the total at max stacks with `perStack` as the increment (Shoot Out 1.5 % × 20 = 30 %); a mod with an unconditional base and a stacking part (Bullet Siphon 5 % + 4 %/5 bullets, cap 25 %) is split into an always-on part and a toggle with a stack count, clamped to the cap.
 - **Sub-attributes**: since v2.3.1 each mod has 4 fixed sub-attributes (levels 1–5, mod level max 17). Per-level values are unpublished, so the UI lets you pick the 4 sub-attributes and type their values, pre-filled with the Legendary (max) tier value: Weapon DMG 10 %, Crit DMG 15 %, Weakspot DMG 9 %, Elemental DMG 10 %, Status DMG 10 %, Attack 5 %, DMG vs Normal/Elite/Boss 8 % (`substats` tiers; keyword DMG, trigger chance, Psi, HP etc. have default guesses flagged in the data).
 
 ## 7. Food and drink
@@ -109,6 +109,7 @@ Post-craft calibration is gone. A calibration blueprint is consumed when craftin
 ## 8. Deviations
 
 - Combat deviation effects are linear in Skill Rating: `value = step × (3 + SR)`, so SR5 = 2 × SR1 (decoded client formulas). Target debuffs enter the player formula: Butterfly's Emissary weakspot DMG taken 25.2 → 50.4 % (SR1→SR5) as `weakspotDmgPct` (conditional on the mark), Lonewolf's Whisper Weapon DMG taken 25 → 50 % as `weaponVulnPct`, Shattered Maiden Blast DMG taken 40 → 80 % as `elementalDmgPct:blast`, Mini Feaster Status DMG +10 → 20 % per tentacle (cap 40 → 80 %).
+- The "Skill active on target" switch is the only gate for these debuffs (they are not separate toggles). Mini Feaster stacks its Status DMG per tentacle to the SR-scaled cap.
 - The deviation's own skill damage is Psi-scaled Status DMG (e.g. Polar Jelly 800 % Psi, Voodoo Doll ultimate 250 % Psi/s at SR5) and is shown as text, not added to weapon DPS.
 - Trait buffs (Crack Shot Weapon DMG +5 %, Psychic Kid Status DMG +5 %…) are not yet modelled per variant (open item).
 
@@ -145,7 +146,7 @@ proc_attack (Shrapnel, Bounce, Pyroclasm charged shot)
 | Fortress Warfare | – | – | 5 s zone, 2 m | Heavy Armor: Super Armor + Weapon DMG +20 % |
 | Pyroclasm charged shot | 95 % Attack | attack | – | Blaze Status DMG that still crits/weakspots |
 
-Trigger chances are weapon properties (e.g. Outer Space 25 % on hit, Corrosion 70–80 %, The Last Valor every 4 hits with crits counting double, Jaws every 4 shots); "Trigger Chance +X %" sub-attributes multiply the weapon's own chance. The planner's status DPS uses the weapon's chance when known, else shows per-proc damage only.
+Trigger chances are weapon properties (e.g. Outer Space 25 % on hit, Corrosion 70–80 %, The Last Valor every 4 hits with crits counting double, Jaws every 4 shots); "Trigger Chance +X %" sub-attributes multiply the weapon's own chance (`chance = base × (1 + Σ/100)`). The planner pre-fills the per-shot chance for the weapons whose effect text states it (`Adapter.TRIGGER_CHANCE`), lets you edit it, and only adds status damage to DPS when a chance is set; per-proc damage is always shown.
 
 Verified test: "the 113 test" – Psi 267, Corrosion +15 % Power Surge DMG factor, Mayfly Goggles −30 % coefficient → 267 × 0.5 × 0.85 = 113.475 → 113 observed. Sportskeeda example: Psi 800, Status 20 %, Shock 6 % → 400 × 1.2 × 1.06 = 508.8.
 

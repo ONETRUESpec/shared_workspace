@@ -21,18 +21,19 @@
     document.getElementById('data-version').title = ver;
     document.getElementById('btn-share').addEventListener('click', shareLink);
     document.getElementById('btn-export').addEventListener('click', exportJson);
-    document.getElementById('btn-reset').addEventListener('click', () => { build = A.defaultBuild(cat); persist(); render(); toast('Build reset'); });
+    document.getElementById('btn-reset').addEventListener('click', () => { build = A.exampleBuild(cat); persist(); render(); toast('Reset to the example build'); });
     document.getElementById('file-import').addEventListener('change', importJson);
-    window.addEventListener('hashchange', () => { const b = fromHash(); if (b) { build = b; persist(); render(); } });
+    window.addEventListener('hashchange', () => { const b = fromHash(); if (b) { build = b; clearHash(); persist(); render(); } });
     render();
   }
 
   function loadInitialBuild() {
     const fromUrl = fromHash();
-    if (fromUrl) return fromUrl;
+    if (fromUrl) { clearHash(); storage.set('build', fromUrl); return fromUrl; }
     const saved = storage.get('build', null);
     return migrate(saved) || A.exampleBuild(cat);
   }
+  function clearHash() { if (location.hash) history.replaceState(null, '', location.pathname + location.search); }
   function fromHash() {
     const m = location.hash.match(/#b-([A-Za-z0-9_-]+)/);
     return m ? migrate(decodeState(m[1])) : null;
@@ -52,13 +53,23 @@
     out.target = Object.assign({}, d.target, b.target || {});
     out.options = Object.assign({}, d.options, b.options || {});
     out.toggles = b.toggles || {}; out.stacks = b.stacks || {};
-    if (!cat.weapons.byId[out.weapon.id]) out.weapon.id = d.weapon.id;
+    const w = cat.weapons.byId[out.weapon.id];
+    if (!w || w.attack == null) out.weapon.id = d.weapon.id;
+    const num = (v, lo, hi, dflt) => { v = Number(v); return isFinite(v) ? Math.min(hi, Math.max(lo, v)) : dflt; };
+    out.weapon.star = num(out.weapon.star, 1, 6, 6);
+    out.weapon.calibration.attackBonusPct = num(out.weapon.calibration.attackBonusPct, 0, 60, 50);
+    if (out.weapon.calibration.random) out.weapon.calibration.random.value = num(out.weapon.calibration.random.value, 0, 60, 20);
+    for (const sl of A.SLOTS) { const a = out.armor[sl]; a.star = num(a.star, 1, 6, 6); if (a.pieceId && !cat.armor.piecesById[a.pieceId]) a.pieceId = null; if (!a.mod) a.mod = { id: null, substats: [] }; }
+    out.target.vulnerabilityPct = num(out.target.vulnerabilityPct, 0, 300, 0);
+    out.target.mitigation = num(out.target.mitigation, 1, 300, 100);
+    out.deviant.skillRating = num(out.deviant.skillRating, 1, 5, 5);
+    out.cradle.nodeIds = Array.from(new Set((out.cradle.nodeIds || []).filter(id => cat.cradle.byId[id]))).slice(0, cat.cradle.maxActive);
+    for (const [k, v] of Object.entries(out.stacks)) { const n = Number(v); out.stacks[k] = isFinite(n) ? Math.max(0, Math.round(n)) : 0; }
     return out;
   }
-  function persist() { storage.set('build', build); }
+  function persist() { storage.set('build', build); clearHash(); }
   function shareLink() {
     const url = (location.protocol === 'file:' ? location.href.split('#')[0] : location.origin + location.pathname) + '#b-' + encodeState(build);
-    history.replaceState(null, '', url);
     const done = () => toast('Build link copied');
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, () => toast('Link is in the address bar'));
     else toast('Link is in the address bar');
@@ -99,13 +110,19 @@
     const star = build.weapon.star || 1;
     const body = [];
     body.push(h('div.row',
-      h('div.field', h('label', { for: 'weapon-select' }, 'Weapon'), select(opts, build.weapon.id, v => set(() => { build.weapon.id = v; build.weapon.calibration.styleId = null; }), { id: 'weapon-select' })),
+      h('div.field', h('label', { for: 'weapon-select' }, 'Weapon'), select(opts, build.weapon.id, v => set(() => {
+        const nw = cat.weapons.byId[v]; const ow = cat.weapons.byId[build.weapon.id];
+        build.weapon.id = v; build.weapon.triggerChancePct = null;
+        if (!nw || !ow || nw.class !== ow.class) build.weapon.calibration.styleId = null;
+        if (nw && (!nw.element || nw.element === 'physical') && build.weapon.calibration.random && build.weapon.calibration.random.stat === 'Elemental DMG') build.weapon.calibration.random = { stat: 'Crit DMG', value: 20 };
+        if (build.weapon.star > ((nw && nw.maxStars) || 6)) build.weapon.star = (nw && nw.maxStars) || 6;
+      }), { id: 'weapon-select' })),
       h('div.field.narrow', h('span.label', 'Blueprint stars'), starPicker(star, maxStars, v => set(() => { build.weapon.star = v; }), { id: 'weapon-stars' })),
     ));
     if (w) {
       const atk = w.attackByStar[star];
       body.push(h('div.grid3',
-        stat('DMG (card)', atk != null ? fmt.num(atk) : '–', `${star}★ = ×${(w.starRatios[star - 1] || 1).toFixed(2)} of 1★ ${fmt.num(w.attack)}`),
+        stat('DMG (card)', atk != null ? fmt.num(atk) : '–', `${star}★ = ×${ratioLabel(w.starRatios[star - 1] || 1)} of 1★ ${fmt.num(w.attack)}`),
         stat('Fire rate', w.rpm ? fmt.num(w.rpm) + ' RPM' : '–', w.pellets > 1 ? `${w.pellets} pellets` : null),
         stat('Magazine', w.magazine != null ? w.magazine : '–', w.reloadTime ? `reload ${w.reloadTime}s` : null),
         stat('Crit', `${w.critRatePct ?? '–'}% / +${w.critDmgPct ?? '–'}%`, 'rate / DMG'),
@@ -141,29 +158,35 @@
     return panel('p-weapon', 'Weapon', body, { collapsed: collapsedState('p-weapon') });
   }
 
+  function ratioLabel(r) { const s3 = r.toFixed(3); return s3.endsWith('0') ? r.toFixed(2) : s3; }
   function stat(k, v, sub) { return h('div.kpi', h('div.k', k), h('div.v', { style: { fontSize: '18px' } }, v), sub ? h('div.sub', sub) : null); }
 
   // --- Mods -------------------------------------------------------------------
   function modEditor(sel, mods, kind, keyword, slot) {
-    const list = mods.filter(m => !slot || m.slot === slot);
+    const wk = keyword || null;
+    const list = mods.filter(m => (!slot || m.slot === slot) && (!m.keyword || m.keyword === wk || m.id === sel.id));
     const opts = [{ value: '', label: 'None' }].concat(list.map(m => {
-      const incompatible = kind === 'weapon' && m.keyword && keyword && m.keyword !== keyword;
-      return { value: m.id, label: m.name + (m.keyword ? ` [${m.keywordLabel}]` : '') + (incompatible ? ' – needs ' + m.keywordLabel : ''), group: m.keyword ? 'Keyword mods' : 'General mods' };
+      const incompatible = m.keyword && m.keyword !== wk;
+      return { value: m.id, label: m.name + (m.keyword ? ` [${m.keywordLabel}]` : '') + (incompatible ? ' – inactive, needs ' + m.keywordLabel : ''), group: m.keyword ? (incompatible ? 'Keyword mods (inactive)' : `${m.keywordLabel} mods`) : 'General mods' };
     }));
     const wrap = h('div.slot');
-    wrap.append(h('div.field', h('span.label', kind === 'weapon' ? 'Mod' : 'Armor mod'), select(opts, sel.id || '', v => set(() => { sel.id = v || null; if (!sel.substats || !sel.substats.length) sel.substats = defaultSubstats(kind); }))));
+    const lab = kind === 'weapon' ? 'Mod' : 'Armor mod';
+    const selId = `mod-${kind}-${slot || 'weapon'}`;
+    wrap.append(h('div.field', h('label', { for: selId }, lab), select(opts, sel.id || '', v => set(() => { sel.id = v || null; if (!sel.substats || !sel.substats.length) sel.substats = defaultSubstats(kind); }), { id: selId })));
     const mod = sel.id && cat.mods.byId[sel.id];
     if (mod) {
+      if (mod.keyword && mod.keyword !== wk) wrap.append(h('p.note.warn', `Inactive: this mod needs a ${mod.keywordLabel} weapon. Its effects are not counted.`));
       if (mod.text) wrap.append(h('p.note.small', mod.text));
       if (mod.effects.length) wrap.append(effectList(mod.effects));
       wrap.append(h('span.label', 'Sub-attributes (4, fixed per mod since v2.3.1; values at max level)'));
       const subs = h('div.substats');
-      const subOpts = [{ value: '', label: '—' }].concat(cat.mods.substats.filter(s => s.appliesTo.includes(kind)).map(s => ({ value: s.id, label: s.label })));
       for (let i = 0; i < cat.mods.substatCount; i++) {
         const ss = sel.substats[i] || (sel.substats[i] = { id: null, value: null });
+        const taken = new Set(sel.substats.filter((x, j) => j !== i && x && x.id).map(x => x.id));
+        const subOpts = [{ value: '', label: 'No sub-attribute' }].concat(cat.mods.substats.filter(s => s.appliesTo.includes(kind) && (!taken.has(s.id) || s.id === ss.id)).map(s => ({ value: s.id, label: s.label })));
         const row = h('div.substat');
-        row.append(select(subOpts, ss.id || '', v => set(() => { ss.id = v || null; const d = cat.mods.substatsById[v]; ss.value = d ? d.defaultValue : null; })));
-        row.append(numberInput(ss.value, { step: 0.1, onChange: v => set(() => { ss.value = v; }, { structural: false }) }));
+        row.append(select(subOpts, ss.id || '', v => set(() => { ss.id = v || null; const d = cat.mods.substatsById[v]; ss.value = d ? d.defaultValue : null; }), { 'aria-label': `${lab} sub-attribute ${i + 1}` }));
+        row.append(numberInput(ss.value, { step: 0.1, min: 0, max: 100, attrs: { 'aria-label': `${lab} sub-attribute ${i + 1} value` }, onChange: v => set(() => { ss.value = v; }, { structural: false }) }));
         subs.append(row);
       }
       wrap.append(subs);
@@ -191,7 +214,7 @@
       const right = h('span.v');
       if (fx.perStack) {
         const stacks = build.stacks[fx.id] != null ? build.stacks[fx.id] : (fx.maxStacks || 1);
-        right.append(numberInput(stacks, { min: 0, max: fx.maxStacks || 99, step: 1, width: '58px', attrs: { title: 'stacks' }, onChange: v => set(() => { build.stacks[fx.id] = v || 0; }, { structural: false }) }), ` × ${valueLabel(fx)}`);
+        right.append(numberInput(stacks, { min: 0, max: fx.maxStacks || 99, step: 1, width: '58px', attrs: { title: 'stacks', 'aria-label': `${label} stacks` }, onChange: v => set(() => { build.stacks[fx.id] = v || 0; }, { structural: false }) }), ` × ${valueLabel(fx.perStackValue != null ? Object.assign({}, fx, { value: fx.perStackValue }) : fx)}${fx.maxStacks ? ` (max ${fx.maxStacks})` : ''}`);
       } else right.append(valueLabel(fx));
       row.append(right);
       box.append(row);
@@ -215,8 +238,8 @@
     const counts = {};
     for (const s of A.SLOTS) { const p = build.armor[s].pieceId && cat.armor.piecesById[build.armor[s].pieceId]; if (p && p.setId) counts[p.setId] = (counts[p.setId] || 0) + 1; }
     const quick = h('div.row',
-      h('div.field', h('label', { for: 'set-quick' }, 'Equip a full set'), select([{ value: '', label: 'Choose a set…' }].concat(cat.armor.sets.map(s => ({ value: s.id, label: s.name, class: 'rarity-' + s.rarity }))), '', v => { if (!v) return; set(() => { for (const p of cat.armor.pieces) if (p.setId === v && A.SLOTS.includes(p.slot)) { build.armor[p.slot].pieceId = p.id; } }); }, { id: 'set-quick' })),
-      h('div.field.narrow', h('span.label', 'All stars'), starPicker(Math.min(...A.SLOTS.map(s => build.armor[s].star || 1)), 6, v => set(() => { for (const s of A.SLOTS) build.armor[s].star = v; }), { id: 'armor-stars-all' })),
+      h('div.field', h('label', { for: 'set-quick' }, 'Equip a full set'), select([{ value: '', label: 'Choose a set…' }].concat(cat.armor.sets.map(s => ({ value: s.id, label: `${s.name} (${s.maxPieces} pieces)`, class: 'rarity-' + s.rarity }))), '', v => { if (!v) return; set(() => { for (const sl of A.SLOTS) build.armor[sl].pieceId = null; for (const p of cat.armor.pieces) if (p.setId === v && A.SLOTS.includes(p.slot)) { build.armor[p.slot].pieceId = p.id; } }); toast('Set equipped; other slots cleared'); }, { id: 'set-quick' })),
+      h('div.field.narrow', h('span.label', 'Set all stars'), starPicker(Math.max(...A.SLOTS.map(s => build.armor[s].star || 1)), 6, v => set(() => { for (const s of A.SLOTS) build.armor[s].star = v; }), { id: 'armor-stars-all' })),
     );
     body.push(quick);
     const slots = h('div.slots');
@@ -234,9 +257,12 @@
         const bs = cat.armor.baseStatsAt(p, sel.star || 1);
         card.append(h('div.note.small', `HP ${fmt.num(bs.maxHp)} · Psi ${fmt.num(bs.psiIntensity)} · Pollution ${bs.pollutionResist ?? '–'} (Tier V, ${bs.star}★${p.rarity === 'epic' ? ', Epic caps at 5★' : ''})`));
         if (p.effectText) card.append(h('p.note.small', p.effectText));
+        const wkw = (cat.weapons.byId[build.weapon.id] || {}).keyword || null;
+        if (p.keyword && p.keyword !== wkw) card.append(h('p.note.warn', `Inactive: this piece's effect needs a ${prettyKey(p.keyword)} weapon.`));
         if (p.effects.length) card.append(effectList(p.effects));
       }
-      card.append(modEditor(sel.mod, cat.mods.armorMods, 'armor', null, slot));
+      if (p) card.append(modEditor(sel.mod, cat.mods.armorMods, 'armor', (cat.weapons.byId[build.weapon.id] || {}).keyword || null, slot));
+      else card.append(h('p.note.small.faint', 'Pick a piece to add an armor mod.'));
       slots.append(card);
     }
     body.push(slots);
@@ -315,7 +341,7 @@
     const picked = c.nodeIds.map(id => cat.cradle.byId[id]).filter(Boolean);
     body.push(h('p.note.small', `Up to ${cat.cradle.maxActive} Cradle Overrides. ${picked.length}/${cat.cradle.maxActive} selected.`));
     const opts = [{ value: '', label: 'Add an override…' }].concat(cat.cradle.nodes.filter(n => !c.nodeIds.includes(n.id)).map(n => ({ value: n.id, label: (`${n.name} – ${n.text}`.length > 72 ? `${n.name} – ${n.text}`.slice(0, 70) + '…' : `${n.name} – ${n.text}`), group: n.style || 'Other' })));
-    body.push(h('div.field', h('label', { for: 'cradle-add' }, 'Add override'), select(opts, '', v => { if (!v) return; if (c.nodeIds.length >= cat.cradle.maxActive) { toast(`Maximum ${cat.cradle.maxActive} overrides`); return; } set(() => { c.nodeIds.push(v); }); }, { id: 'cradle-add' })));
+    body.push(h('div.field', h('label', { for: 'cradle-add' }, 'Add override'), select(opts, '', v => { if (!v) return; if (c.nodeIds.length >= cat.cradle.maxActive) { toast(`Maximum ${cat.cradle.maxActive} overrides`); document.getElementById('cradle-add').value = ''; return; } set(() => { c.nodeIds.push(v); }); }, { id: 'cradle-add' })));
     const list = h('div.slots');
     for (const n of picked) {
       list.append(h('div.slot',
@@ -345,8 +371,11 @@
     const o = build.options;
     const body = [
       h('div.field', h('label', { for: 'opt-cw' }, 'Crit × Weakspot on one hit'), select([{ value: 'additive', label: '1 + Crit DMG + Weakspot DMG (one bucket; most community calculators)' }, { value: 'multiplicative', label: '(1 + Crit DMG) × (1 + Weakspot DMG)' }], o.critWeakspotModel, v => set(() => { o.critWeakspotModel = v; }), { id: 'opt-cw' })),
-      switchInput(o.elementalAffectsBullets, 'Apply matching Elemental DMG % to bullets too (unverified; default off = status procs only)', v => set(() => { o.elementalAffectsBullets = v; }), { id: 'opt-el' }),
+      switchInput(o.elementalAffectsBullets, 'Matching Elemental DMG % also multiplies an elemental weapon\'s own bullets (default on; off = status procs only)', v => set(() => { o.elementalAffectsBullets = v; }), { id: 'opt-el' }),
       switchInput(o.attackAndWeaponDmgSeparate, 'Attack % and Weapon DMG % are separate multiplicative buckets (off = one additive bucket)', v => set(() => { o.attackAndWeaponDmgSeparate = v; }), { id: 'opt-aw' }),
+      switchInput(o.statusKeywordSeparate, 'Status DMG % and keyword DMG % multiply as two buckets (off = one additive "DMG factor" pool)', v => set(() => { o.statusKeywordSeparate = v; }), { id: 'opt-sk' }),
+      switchInput(o.damagePoolModel === 'additive', 'Single additive pool: Weapon DMG %, Elemental %, DMG-vs-type %, Vulnerability % and All DMG % add together (datamined formula graph; experimental)', v => set(() => { o.damagePoolModel = v ? 'additive' : 'multiplicative'; }), { id: 'opt-pool' }),
+      h('div.row', h('div.field.narrow', h('label', { for: 'opt-zone' }, 'Weakspot zone multiplier'), numberInput(o.weakspotZoneMult != null ? o.weakspotZoneMult : 1, { min: 0.1, max: 5, step: 0.05, attrs: { id: 'opt-zone' }, onChange: v => set(() => { o.weakspotZoneMult = v || 1; }, { structural: false }) })), h('p.note.small', { style: { flex: '1 1 240px' } }, 'Enemy body-part multiplier on weakspot hits (unknown; 1 = none).')),
     ];
     return panel('p-options', 'Formula options', body, { collapsed: collapsedState('p-options') });
   }
@@ -374,12 +403,12 @@
         r.status && r.status.perProc != null ? kpi(`${prettyKey(r.status.keyword)} proc`, r.status.perProc, r.status.model === 'psi' ? `Psi ${fmt.num(r.psi.effective)} × ${(r.status.factor * 100).toFixed(0)}%${r.status.tickSeconds ? ` per ${r.status.tickSeconds}s tick` : ''}` : `${(r.status.factor * 100).toFixed(0)}% of hit, can crit/weakspot`, 'status') : (w.keyword ? kpi(`${prettyKey(w.keyword)}`, null, 'no numeric model yet', 'status') : null),
         kpi('Max HP', r.defense.maxHp, `Psi ${fmt.num(r.psi.effective)} · Pollution ${fmt.num(r.defense.pollutionResist)}`),
       ),
-      h('div.kpi-grid', { style: { marginTop: '8px' } },
-        kpi('Burst DPS', r.dps.totalBurstBody, `${fmt.num(r.rate.rpm)} RPM${r.dps.statusBurst ? ` · incl. ${fmt.num(r.dps.statusBurst)} status` : ''}`),
+      r.rate.rpm > 0 ? h('div.kpi-grid', { style: { marginTop: '8px' } },
+        kpi('Burst DPS', r.dps.totalBurstBody, `${fmt.num(r.rate.rpm)} RPM${r.dps.statusBurst ? ` · incl. ${fmt.num(r.dps.statusBurst)} status` : (r.status && r.status.perProc != null ? ' · status procs excluded (no trigger chance)' : '')}`),
         kpi('Sustained DPS', r.dps.totalSustainedBody, `mag ${r.rate.magazine} · reload ${r.rate.reloadTime.toFixed(2)}s`),
         kpi('Burst DPS (weakspot)', r.dps.totalBurstWeakspot, 'all shots on weakspot'),
         kpi('Magazine damage', r.dps.magazineDamageBody, 'body, crit-weighted'),
-      ),
+      ) : h('p.note.small', 'No rate-of-fire model for melee weapons; per-hit numbers only.'),
     ));
     results.append(kp);
     // With vs without food
@@ -404,7 +433,7 @@
     }
     build.weapon.star = saved;
     st.append(stb);
-    results.append(h('div.panel', h('header', h('h2', '1★ to 6★')), h('div.body', h('div.table-wrap', st), h('p.note.small', w.rarity === 'epic' ? 'Epic blueprints cap at 5★ (official series ×1.00 / 1.056 / 1.112 / 1.167 / 1.223). Stars change nothing else on the card.' : 'Each star adds 5% of the 1★ card DMG (official blueprint table: ×1.00 / 1.05 / 1.10 / 1.15 / 1.20 / 1.25). Stars change nothing else on the card.'))));
+    results.append(h('div.panel', h('header', h('h2', `1★ to ${w.maxStars || 6}★`)), h('div.body', h('div.table-wrap', st), h('p.note.small', w.rarity === 'epic' ? 'Epic blueprints cap at 5★ (official series ×1.00 / 1.056 / 1.112 / 1.167 / 1.223). Stars change nothing else on the card.' : 'Each star adds 5% of the 1★ card DMG (official blueprint table: ×1.00 / 1.05 / 1.10 / 1.15 / 1.20 / 1.25). Stars change nothing else on the card.'))));
     // Breakdown
     results.append(breakdownPanel(r));
     // Formula

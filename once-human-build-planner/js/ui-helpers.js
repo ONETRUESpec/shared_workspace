@@ -68,7 +68,11 @@
   function numberInput(value, { min, max, step, onChange, width, attrs } = {}) {
     const inp = h('input', Object.assign({ type: 'number', value: value ?? '', min, max, step: step ?? 'any', inputmode: 'decimal' }, attrs || {}));
     if (width) inp.style.width = width;
-    if (onChange) inp.addEventListener('input', () => onChange(inp.value === '' ? null : Number(inp.value)));
+    const clamp = (v) => { if (v == null || !isFinite(v)) return null; if (min != null && v < Number(min)) v = Number(min); if (max != null && v > Number(max)) v = Number(max); return v; };
+    if (onChange) {
+      inp.addEventListener('input', () => onChange(inp.value === '' ? null : clamp(Number(inp.value))));
+      inp.addEventListener('change', () => { const v = inp.value === '' ? null : clamp(Number(inp.value)); if (v != null && String(v) !== inp.value) inp.value = String(v); onChange(v); });
+    }
     return inp;
   }
 

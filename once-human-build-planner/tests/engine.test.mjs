@@ -166,6 +166,7 @@ test('mod stacks: value is the total at max stacks; Bullet Siphon keeps its unco
   const so = cat.mods.byId['shoot-out'];
   assert.ok(so && so.effects[0].perStack && so.effects[0].maxStacks === 20 && so.effects[0].perStackValue === 1.5);
   const b = A.defaultBuild(cat); b.weapon.mod = { id: 'shoot-out', substats: [] };
+  if (so.keyword) b.weapon.id = cat.weapons.list.find(w => w.keyword === so.keyword && w.attack != null).id; // keyword mods only work on matching weapons
   let fx = A.collectEffects(b, cat); const e = fx.find(f => /Shoot Out/.test(f.source));
   assert.equal(e.enabled, false); b.toggles[e.id] = true;
   fx = A.collectEffects(b, cat); assert.equal(fx.find(f => /Shoot Out/.test(f.source)).value, 30);
@@ -218,4 +219,38 @@ test('computeBuild tolerates partial builds (no options / target)', () => {
   const b = A.defaultBuild(cat); delete b.options; delete b.target;
   const r = A.computeBuild(b, cat, {});
   assert.ok(r && r.hits.normal > 0);
+});
+
+test('keyword mods and key armor only apply on weapons with that keyword', () => {
+  const b = A.defaultBuild(cat); // The Last Valor: Shrapnel
+  const fg = cat.mods.weaponMods.find(m => m.keyword === 'fastGunner' && m.effects.some(f => f.stat !== 'other'));
+  b.weapon.mod = { id: fg.id, substats: [] };
+  let fx = A.collectEffects(b, cat);
+  for (const f of fx) if (f.conditional) b.toggles[f.id] = true;
+  fx = A.collectEffects(b, cat);
+  assert.ok(!fx.some(f => f.source === fg.name), 'incompatible keyword mod must not contribute');
+  const mayfly = cat.armor.pieces.find(p => /Mayfly/.test(p.name));
+  b.armor[mayfly.slot].pieceId = mayfly.id;
+  fx = A.collectEffects(b, cat);
+  assert.ok(!fx.some(f => f.source === mayfly.name && f.stat === 'keywordDmgPct'), 'Power Surge key armor inactive on a Shrapnel weapon');
+});
+
+test('defensive "DMG taken reduction" set bonuses never become Vulnerability', () => {
+  const t = (stat, v, m) => A.toEffects(stat, v, m).map(e => e.stat + '=' + e.value).join(',');
+  assert.equal(t('statusDmgTakenReductionPct', 15), 'dmgReductionPct=15');
+  assert.equal(t('weaponDmgTakenReductionPct', 10), 'dmgReductionPct=10');
+  assert.equal(t('DMG Taken from Players', -10), 'dmgReductionPct=10');
+});
+
+test('deviation effects apply with the active switch alone and stacks are clamped', () => {
+  const b = A.defaultBuild(cat);
+  b.deviant = { id: cat.deviants.list.find(d => /Butterfly/.test(d.name)).id, skillRating: 5, active: true };
+  const fx = A.collectEffects(b, cat);
+  const ws = fx.find(f => /Butterfly/.test(f.source) && f.stat === 'weakspotDmgPct');
+  assert.ok(ws && ws.enabled && ws.value === 50.4);
+  for (const p of cat.armor.pieces) if (p.setId === 'lonewolf-set') b.armor[p.slot].pieceId = p.id;
+  let fx2 = A.collectEffects(b, cat); const lone = fx2.find(f => /Lonewolf Set 3pc/.test(f.source) && f.perStack);
+  b.toggles[lone.id] = true; b.stacks[lone.id] = 99;
+  fx2 = A.collectEffects(b, cat); assert.equal(fx2.find(f => f.id === lone.id).value, 60);
+  b.stacks[lone.id] = -5; fx2 = A.collectEffects(b, cat); assert.equal(fx2.find(f => f.id === lone.id).value, 0);
 });
