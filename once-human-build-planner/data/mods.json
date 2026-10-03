@@ -1,0 +1,5512 @@
+{
+ "_meta": {
+  "facet": "Once Human weapon mods and armor mods (incl. substat/suffix/levelling system)",
+  "generatedAt": "2026-10-03",
+  "gameVersion": "Mod effects: OnceHumanDB scrape current as of mid-2026 (post Version 2.3.1 mod revamp, 2026-01-21); version markers up to Patch 3.0.7 (smus dataset 2026-09-30). Legacy tier values labelled as pre-2.3.1.",
+  "sources": [
+   "https://0x91cea55.github.io/OnceHuman",
+   "https://game8.co/games/Once-Human/archives/460076",
+   "https://game8.co/games/Once-Human/archives/468371",
+   "https://game8.co/games/Once-Human/archives/468372",
+   "https://github.com/saitoh183/once-human-build-planner",
+   "https://github.com/thachvn0296/OH-Calculator",
+   "https://kahzgul.substack.com/p/near-as-i-can-tell-a-quick-and-dirty",
+   "https://meta-builds.net/api/get/allData",
+   "https://metaforge.app/once-human/once-human-every-gold-mod",
+   "https://ohdex.gg/mod-list",
+   "https://once-human.fandom.com/wiki/Dark_Resonance_Set",
+   "https://once-human.fandom.com/wiki/Mods",
+   "https://once-human.fandom.com/wiki/Shrapnel_Carnage",
+   "https://primagames.com/gaming/once-human-mods-guide-all-locations-and-tier-list",
+   "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js",
+   "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+   "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/ohg_data.js",
+   "https://steamcommunity.com/app/2139460/discussions/0/4854406759567050488/",
+   "https://steamcommunity.com/app/2139460/discussions/0/7073555334572500765/",
+   "https://steamcommunity.com/sharedfiles/filedetails/?id=3479129708",
+   "https://wikily.gg/once-human/mods/19201115/",
+   "https://wikily.gg/once-human/mods/19206115/",
+   "https://wikily.gg/once-human/mods/37001002/",
+   "https://www.bluestacks.com/blog/game-guides/once-human/ohn-frost-vortex-build-en.html",
+   "https://www.mmorpg.com/news/equipment-mod-changes-are-coming-to-once-human-to-make-progression-easier-2000136844",
+   "https://www.oncehuman.game/news/devBlog/20251212/40781_1276354.html",
+   "https://www.oncehuman.game/news/update/20260121/40780_1282991.html",
+   "https://www.oncehuman.game/wiki/20230201/37492_1071059.html",
+   "https://www.oncehumandb.com/items/vulnerability-amplifier",
+   "https://www.oncehumandb.com/mods",
+   "https://www.oncehumandb.com/mods/blaze-amplifier-burn",
+   "https://www.oncehumandb.com/mods/shrapnel-smash-shrapnel"
+  ],
+  "notes": "Network policy in this session blocked direct fetches of every game wiki/news/community site (403 from egress proxy) and the WebSearch budget was exhausted after 11 queries. Mod data therefore comes from (a) 11 WebSearch result snippets, (b) community datasets cached in the shared scratchpad by the orchestrator (OHDB scrape via saitoh183, 0x91cea55 OCR database + in-game screenshot bible, Game8 list via bramsey, lredragol example builds, joseph meta-builds optimizer, smus guide data) and (c) raw.githubusercontent.com files of those repos. Percentages are plain numbers (12 = +12%). Null means not found; nothing is invented. Values marked 'estimate' come from a community optimizer's own guesses and must not be treated as game data.",
+  "accessLimitations": [
+   "once-human.fandom.com, oncehuman.wiki.gg, game8.co, oncehumandb.com, wikily.gg, ohdex.gg, oncehuman.game, steamcommunity.com, reddit.com, primagames.com, metaforge.app, meta-builds.net, mmorpg.com - all 403 via egress proxy",
+   "WebSearch budget 200/200 exhausted session-wide"
+  ],
+  "recordCounts": {
+   "weaponMods": 37,
+   "armorMods": 64,
+   "legacyTieredEntries": 23,
+   "substats": 24,
+   "suffixes": 16,
+   "fixedSubAttributeObservations": 42
+  }
+ },
+ "weaponModSlots": {
+  "slotsPerWeapon": 1,
+  "placementTypes": [
+   "Ranged Weapon",
+   "Melee Weapon"
+  ],
+  "weaponClasses": [
+   "Pistol/Handgun",
+   "Shotgun",
+   "SMG",
+   "Assault Rifle",
+   "Sniper Rifle",
+   "LMG",
+   "Bow/Crossbow",
+   "Heavy Weapon",
+   "Melee"
+  ],
+  "classRestriction": "No weapon-class restriction found for ranged weapon mods: a weapon mod fits any ranged weapon, but keyword mods (Burn, Frost Vortex, Shrapnel, ...) only function on weapons that carry that keyword. Melee weapons take melee-placement mods (OhDex filters: Ranged Weapon / Melee Weapon).",
+  "attachmentsAreSeparate": "Attachments (Muzzle, Optic, Tactics, Magazine, Ammo - 5 categories) are a different system from the single mod slot and affect handling stats (stability, accuracy, range, reload, mag, velocity).",
+  "sources": [
+   "https://ohdex.gg/mod-list",
+   "https://www.oncehuman.game/wiki/20230201/37492_1071059.html",
+   "https://0x91cea55.github.io/OnceHuman"
+  ]
+ },
+ "armorModSlots": {
+  "Helmet": 1,
+  "Mask": 1,
+  "Top": 1,
+  "Gloves": 1,
+  "Bottoms": 1,
+  "Shoes": 1,
+  "modsAreSlotSpecific": true,
+  "farmingLocations": {
+   "Helmet": "Securement Silo ALPHA",
+   "Mask": "Securement Silo EX1",
+   "Top": "Securement Silo THETA",
+   "Gloves": "Securement Silo SIGMA",
+   "Bottoms": "Securement Silo PSI",
+   "Shoes": "Securement Silo PHI",
+   "Weapon": "Monoliths / Prime War bosses (e.g. Vulnerability Amplifier from Arachsiam or Forsaken Giant; Shrapnel Smash from Monolith of Thirst)"
+  },
+  "sources": [
+   "https://0x91cea55.github.io/OnceHuman",
+   "https://primagames.com/gaming/once-human-mods-guide-all-locations-and-tier-list",
+   "https://game8.co/games/Once-Human/archives/468372",
+   "https://www.oncehumandb.com/items/vulnerability-amplifier"
+  ]
+ },
+ "weaponMods": [
+  {
+   "name": "Blaze Blessing",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Burn",
+   "effect": {
+    "text": "When defeating an enemy affected by Burn, recover 5% HP.",
+    "stat": "hp_recovery_pct",
+    "value": 5,
+    "condition": "on defeating an enemy affected by Burn"
+   },
+   "suffixVariants": [
+    "Burn",
+    "Deviant Energy",
+    "General",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/blaze-blessing-burn",
+    "https://www.oncehumandb.com/mods/blaze-blessing-deviant-energy",
+    "https://www.oncehumandb.com/mods/blaze-blessing-general"
+   ]
+  },
+  {
+   "name": "Bombardier Souvenir",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Unstable Bomber",
+   "effect": {
+    "text": "When triggering Unstable Bomber, automatically refill 10% of your magazine.",
+    "stat": "magazine_refill_pct",
+    "value": 10,
+    "condition": "on Unstable Bomber trigger"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Survival",
+    "Unstable Bomber",
+    "Violence"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/bombardier-souvenir-deviant-energy",
+    "https://www.oncehumandb.com/mods/bombardier-souvenir-general",
+    "https://www.oncehumandb.com/mods/bombardier-souvenir-precision"
+   ]
+  },
+  {
+   "name": "Boomerang Bullet",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Bounce",
+   "effect": {
+    "text": "Each time Bounce is triggered, its trigger chance +2% (based on the weapon's trigger chance), lasting for 5s and stacking up to 10 time(s).",
+    "stat": "bounce_trigger_chance_relative_pct",
+    "value": 20,
+    "condition": "per Bounce trigger; relative to the weapon's base Bounce trigger chance",
+    "perStack": 2,
+    "maxStacks": 10,
+    "durationS": 5
+   },
+   "suffixVariants": [
+    "Bounce",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/boomerang-bullet-bounce",
+    "https://www.oncehumandb.com/mods/boomerang-bullet-general",
+    "https://www.oncehumandb.com/mods/boomerang-bullet-precision"
+   ]
+  },
+  {
+   "name": "Bounce Rampage",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Bounce",
+   "effect": {
+    "text": "The more selectable targets Bounce has, the higher the Bounce DMG, up to +45% (15% per target).",
+    "stat": "bounce_dmg_pct",
+    "value": 45,
+    "condition": "per selectable Bounce target",
+    "perStack": 15,
+    "maxStacks": 3,
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "Bounce",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Official 2024-11-23 dev blog reworked Bounce to 40% of Attack per bounce; this mod's +15%/target (max 45%) consistent across OHDB, 0x91, Game8.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/bounce-rampage-bounce",
+    "https://www.oncehumandb.com/mods/bounce-rampage-general",
+    "https://www.oncehumandb.com/mods/bounce-rampage-precision"
+   ]
+  },
+  {
+   "name": "Burning Wrath",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Burn",
+   "effect": {
+    "text": "Triggering Burn has a 25% chance to grant +1 Burn stack(s).",
+    "stat": "burn_extra_stack_chance_pct",
+    "value": 25,
+    "condition": "on Burn trigger grants +1 Burn stack",
+    "extraStacks": 1
+   },
+   "suffixVariants": [
+    "Burn",
+    "Deviant Energy",
+    "General",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/burning-wrath-burn",
+    "https://www.oncehumandb.com/mods/burning-wrath-deviant-energy",
+    "https://www.oncehumandb.com/mods/burning-wrath-general"
+   ]
+  },
+  {
+   "name": "Cowboy",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Fast Gunner",
+   "effect": {
+    "text": "After reloading an empty magazine, Fast Gunner trigger chance +100% (based on the weapon's Trigger Chance) for 5s. When Fast Gunner reaches max stacks, the duration is increased by 5s.",
+    "stat": "fast_gunner_trigger_chance_relative_pct",
+    "value": 100,
+    "condition": "after reloading an empty magazine, for 5s; +5s when Fast Gunner reaches max stacks",
+    "durationS": 5
+   },
+   "suffixVariants": [
+    "Fast Gunner",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/cowboy-fast-gunner",
+    "https://www.oncehumandb.com/mods/cowboy-general",
+    "https://www.oncehumandb.com/mods/cowboy-precision"
+   ]
+  },
+  {
+   "name": "Cryo Blast",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Frost Vortex",
+   "effect": {
+    "text": "After triggering Frost Vortex, increases Frost Vortex DMG by +4%, up to 5 stacks, lasting 4s.",
+    "stat": "frost_vortex_dmg_pct",
+    "value": 20,
+    "condition": "per Frost Vortex trigger",
+    "perStack": 4,
+    "maxStacks": 5,
+    "durationS": 4,
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Frost Vortex",
+    "General",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/cryo-blast-deviant-energy",
+    "https://www.oncehumandb.com/mods/cryo-blast-frost-vortex",
+    "https://www.oncehumandb.com/mods/cryo-blast-general"
+   ]
+  },
+  {
+   "name": "Cryo Catalyst",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Frost Vortex",
+   "effect": {
+    "text": "Frost Vortex DMG +10%. After triggering a frost construct (Ice Spikes, Ice Missiles, Ice Crystals), Frost Vortex DMG +5% for 6s.",
+    "stat": "frost_vortex_dmg_pct",
+    "value": 10,
+    "condition": null,
+    "secondary": [
+     {
+      "stat": "frost_vortex_dmg_pct",
+      "value": 5,
+      "condition": "for 6s after triggering a frost construct (Ice Spike/Missile/Crystal)",
+      "durationS": 6
+     }
+    ],
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Frost Vortex",
+    "General",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/cryo-catalyst-deviant-energy",
+    "https://www.oncehumandb.com/mods/cryo-catalyst-frost-vortex",
+    "https://www.oncehumandb.com/mods/cryo-catalyst-general"
+   ]
+  },
+  {
+   "name": "Durable Territory",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Fortress Warfare",
+   "effect": {
+    "text": "Every hit landed while in Fortress Warfare state will extend the Fortress Warfare effect by 1s, up to 5s.",
+    "stat": "fortress_warfare_duration_extension_s",
+    "value": 5,
+    "condition": "+1s per hit landed while in Fortress Warfare, up to +5s",
+    "perStack": 1,
+    "unit": "seconds"
+   },
+   "suffixVariants": [
+    "Fortress Warfare",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "0x91 raw.json: 'every enemy defeated extends 5s, up to 5 times'. OHDB/bible: 'every hit extends 1s, up to 5s'. Pick OHDB wording.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/durable-territory-fortress-warfare",
+    "https://www.oncehumandb.com/mods/durable-territory-general",
+    "https://www.oncehumandb.com/mods/durable-territory-precision"
+   ]
+  },
+  {
+   "name": "Embers",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Burn",
+   "effect": {
+    "text": "When Burn is removed, stacks only -50%.",
+    "stat": "burn_stacks_retained_on_removal_pct",
+    "value": 50,
+    "condition": "when Burn is removed, stacks only -50%"
+   },
+   "suffixVariants": [
+    "Burn",
+    "Deviant Energy",
+    "General",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/embers-burn",
+    "https://www.oncehumandb.com/mods/embers-deviant-energy",
+    "https://www.oncehumandb.com/mods/embers-general"
+   ]
+  },
+  {
+   "name": "Final Territory",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Fortress Warfare",
+   "effect": {
+    "text": "When Fortress Warfare ends, Weapon DMG +10%, Movement Speed +10% for 10s.",
+    "stat": "weapon_dmg_pct",
+    "value": 10,
+    "condition": "for 10s when Fortress Warfare ends",
+    "durationS": 10,
+    "secondary": [
+     {
+      "stat": "movement_speed_pct",
+      "value": 10
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Fortress Warfare",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/final-territory-fortress-warfare",
+    "https://www.oncehumandb.com/mods/final-territory-general",
+    "https://www.oncehumandb.com/mods/final-territory-precision"
+   ]
+  },
+  {
+   "name": "Flame Resonance",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Burn",
+   "effect": {
+    "text": "Max Burn stack +2, Burn duration -20%",
+    "stat": "max_burn_stacks",
+    "value": 2,
+    "condition": null,
+    "unit": "stacks",
+    "secondary": [
+     {
+      "stat": "burn_duration_pct",
+      "value": -20
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Burn",
+    "Deviant Energy",
+    "General",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/flame-resonance-burn",
+    "https://www.oncehumandb.com/mods/flame-resonance-deviant-energy",
+    "https://www.oncehumandb.com/mods/flame-resonance-general"
+   ]
+  },
+  {
+   "name": "Frosty Blessing",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Frost Vortex",
+   "effect": {
+    "text": "When Frost Vortex disappears, restore 10% HP.",
+    "stat": "hp_recovery_pct",
+    "value": 10,
+    "condition": "when Frost Vortex disappears"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Frost Vortex",
+    "General",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/frosty-blessing-deviant-energy",
+    "https://www.oncehumandb.com/mods/frosty-blessing-frost-vortex",
+    "https://www.oncehumandb.com/mods/frosty-blessing-general"
+   ]
+  },
+  {
+   "name": "Heavy Explosives",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Unstable Bomber",
+   "effect": {
+    "text": "Unstable Bomber inflicts stagger on enemies and deals 40% less damage to you.",
+    "stat": "unstable_bomber_self_damage_pct",
+    "value": -40,
+    "condition": "Unstable Bomber also staggers enemies"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Survival",
+    "Unstable Bomber",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/heavy-explosives-deviant-energy",
+    "https://www.oncehumandb.com/mods/heavy-explosives-general",
+    "https://www.oncehumandb.com/mods/heavy-explosives-precision"
+   ]
+  },
+  {
+   "name": "Hunter's Perk",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "The Bull's Eye",
+   "effect": {
+    "text": "Marked enemies DMG vs. Metas -20%.",
+    "stat": "marked_enemy_dmg_vs_metas_pct",
+    "value": -20,
+    "condition": "defensive: marked enemies deal 20% less DMG to Metas"
+   },
+   "suffixVariants": [
+    "General",
+    "Precision",
+    "Survival",
+    "The Bull's Eye",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Defensive effect (reduces damage marked enemies deal to Metas), not a damage boost.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/hunters-perk-general",
+    "https://www.oncehumandb.com/mods/hunters-perk-precision",
+    "https://www.oncehumandb.com/mods/hunters-perk-survival"
+   ]
+  },
+  {
+   "name": "Multi-Bounce",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Bounce",
+   "effect": {
+    "text": "The more Bounces, the higher the damage, up to +45% (7.5% per Bounce).",
+    "stat": "bounce_dmg_pct",
+    "value": 45,
+    "condition": "per Bounce",
+    "perStack": 7.5,
+    "maxStacks": 6,
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "Bounce",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/multi-bounce-bounce",
+    "https://www.oncehumandb.com/mods/multi-bounce-general",
+    "https://www.oncehumandb.com/mods/multi-bounce-precision"
+   ]
+  },
+  {
+   "name": "Portable Territory",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Fortress Warfare",
+   "effect": {
+    "text": "After leaving Fortress Warfare, the status will remain for 2s.",
+    "stat": "fortress_warfare_linger_s",
+    "value": 2,
+    "condition": "status remains after leaving Fortress Warfare",
+    "unit": "seconds"
+   },
+   "suffixVariants": [
+    "Fortress Warfare",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/portable-territory-fortress-warfare",
+    "https://www.oncehumandb.com/mods/portable-territory-general",
+    "https://www.oncehumandb.com/mods/portable-territory-precision"
+   ]
+  },
+  {
+   "name": "Precision Rush",
+   "aliases": [
+    "Precise Rush"
+   ],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Fast Gunner",
+   "effect": {
+    "text": "When Fast Gunner is active, increase Weakspot DMG for 3s, up to +45%.",
+    "stat": "weakspot_dmg_pct",
+    "value": 45,
+    "condition": "while Fast Gunner is active; ramps over 3s of continuous fire",
+    "rampS": 3
+   },
+   "suffixVariants": [
+    "Fast Gunner",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "OHDB lists both 'Precise Rush' (General suffix) and 'Precision Rush' (keyword/Precision/Survival/Violent suffixes) with identical text - treated as one mod.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/precise-rush-general",
+    "https://www.oncehumandb.com/mods/precision-rush-fast-gunner",
+    "https://www.oncehumandb.com/mods/precision-rush-precision"
+   ]
+  },
+  {
+   "name": "Reckless Bomber",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Unstable Bomber",
+   "effect": {
+    "text": "For every 1% Crit Rate, Unstable Bomber DMG +0.5%.",
+    "stat": "unstable_bomber_dmg_pct",
+    "value": 0.5,
+    "condition": "per 1% Crit Rate (e.g. 60% Crit Rate = +30%)",
+    "perUnit": "1% crit rate",
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Survival",
+    "Unstable Bomber",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/reckless-bomber-deviant-energy",
+    "https://www.oncehumandb.com/mods/reckless-bomber-general",
+    "https://www.oncehumandb.com/mods/reckless-bomber-precision"
+   ]
+  },
+  {
+   "name": "Recover Mark",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "The Bull's Eye",
+   "effect": {
+    "text": "When defeating marked enemies, recover 15% HP and 25% Stamina.",
+    "stat": "hp_recovery_pct",
+    "value": 15,
+    "condition": "on defeating a marked enemy",
+    "secondary": [
+     {
+      "stat": "stamina_recovery_pct",
+      "value": 25
+     }
+    ]
+   },
+   "suffixVariants": [
+    "General",
+    "Precision",
+    "Survival",
+    "The Bull's Eye",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/recover-mark-general",
+    "https://www.oncehumandb.com/mods/recover-mark-precision",
+    "https://www.oncehumandb.com/mods/recover-mark-survival"
+   ]
+  },
+  {
+   "name": "Shatter Them All",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Shrapnel",
+   "effect": {
+    "text": "The more parts Shrapnel hits, the higher the Shrapnel DMG. Each part +15%, up to 45%.",
+    "stat": "shrapnel_dmg_pct",
+    "value": 45,
+    "condition": "per body part hit by Shrapnel",
+    "perStack": 15,
+    "maxStacks": 3,
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "General",
+    "Precision",
+    "Shrapnel",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/shatter-them-all-general",
+    "https://www.oncehumandb.com/mods/shatter-them-all-precision",
+    "https://www.oncehumandb.com/mods/shatter-them-all-shrapnel"
+   ]
+  },
+  {
+   "name": "Shattering Ice",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Frost Vortex",
+   "effect": {
+    "text": "When an enemy at the center of the Frost Vortex is defeated, deal 50% Psi Intensity Ice DMG to enemies within 1m once.",
+    "stat": "frost_vortex_center_kill_ice_dmg_pct_psi",
+    "value": 50,
+    "condition": "once, to enemies within 1m, when the enemy at the Frost Vortex center is defeated",
+    "unit": "% of Psi Intensity"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Frost Vortex",
+    "General",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/shattering-ice-deviant-energy",
+    "https://www.oncehumandb.com/mods/shattering-ice-frost-vortex",
+    "https://www.oncehumandb.com/mods/shattering-ice-general"
+   ]
+  },
+  {
+   "name": "Shield Breaker",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Shrapnel",
+   "effect": {
+    "text": "When hitting a shielded enemy, Shrapnel DMG +60% for 1s.",
+    "stat": "shrapnel_dmg_pct",
+    "value": 60,
+    "condition": "for 1s when hitting a shielded enemy",
+    "durationS": 1,
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "General",
+    "Precision",
+    "Shrapnel",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/shield-breaker-general",
+    "https://www.oncehumandb.com/mods/shield-breaker-precision",
+    "https://www.oncehumandb.com/mods/shield-breaker-shrapnel"
+   ]
+  },
+  {
+   "name": "Shock Diffusion",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Power Surge",
+   "effect": {
+    "text": "When triggering Power Surge, apply the Power Surge Status to 1 enemy(s) within 10m of the target (prioritizes enemies that are not affected by Power Surge Status).",
+    "stat": "power_surge_spread_targets",
+    "value": 1,
+    "condition": "applies Power Surge status to 1 extra enemy within 10m (prefers unaffected)",
+    "unit": "targets",
+    "radiusM": 10
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "General",
+    "Power Surge",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/shock-diffusion-deviant-energy",
+    "https://www.oncehumandb.com/mods/shock-diffusion-general",
+    "https://www.oncehumandb.com/mods/shock-diffusion-power-surge"
+   ]
+  },
+  {
+   "name": "Shock Rampage",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Power Surge",
+   "effect": {
+    "text": "Inflicting Power Surge grants +5% Power Surge Trigger Chance (based on weapon's Trigger Chance) for 5s, up to 4 stack(s).",
+    "stat": "power_surge_trigger_chance_relative_pct",
+    "value": 20,
+    "condition": "per Power Surge inflicted, relative to weapon base trigger chance",
+    "perStack": 5,
+    "maxStacks": 4,
+    "durationS": 5
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "General",
+    "Power Surge",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/shock-rampage-deviant-energy",
+    "https://www.oncehumandb.com/mods/shock-rampage-general",
+    "https://www.oncehumandb.com/mods/shock-rampage-power-surge"
+   ]
+  },
+  {
+   "name": "Shoot Out",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Fast Gunner",
+   "effect": {
+    "text": "When triggering Fast Gunner, Weapon DMG +1.5% for 10s, up to 20 stack(s).",
+    "stat": "weapon_dmg_pct",
+    "value": 30,
+    "condition": "per Fast Gunner trigger",
+    "perStack": 1.5,
+    "maxStacks": 20,
+    "durationS": 10
+   },
+   "suffixVariants": [
+    "Fast Gunner",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/shoot-out-fast-gunner",
+    "https://www.oncehumandb.com/mods/shoot-out-general",
+    "https://www.oncehumandb.com/mods/shoot-out-precision"
+   ]
+  },
+  {
+   "name": "Shooting Blitz",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Fast Gunner",
+   "effect": {
+    "text": "Fast Gunner duration +4s. When Fast Gunner is active, Weapon DMG +15%.",
+    "stat": "weapon_dmg_pct",
+    "value": 15,
+    "condition": "while Fast Gunner is active",
+    "secondary": [
+     {
+      "stat": "fast_gunner_duration_s",
+      "value": 4
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Fast Gunner",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/shooting-blitz-fast-gunner",
+    "https://www.oncehumandb.com/mods/shooting-blitz-general",
+    "https://www.oncehumandb.com/mods/shooting-blitz-precision"
+   ]
+  },
+  {
+   "name": "Shrapnel Souvenir",
+   "aliases": [
+    "Shrapnel Loot"
+   ],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Shrapnel",
+   "effect": {
+    "text": "When Shrapnel hits a Weakspot, automatically refills 1 bullet(s) from inventory.",
+    "stat": "bullet_refill_count",
+    "value": 1,
+    "condition": "when Shrapnel hits a Weakspot",
+    "unit": "bullets"
+   },
+   "suffixVariants": [
+    "General",
+    "Precision",
+    "Shrapnel",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "OHDB lists both 'Shrapnel Loot' (General) and 'Shrapnel Souvenir' - identical text, one mod.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/shrapnel-loot-general",
+    "https://www.oncehumandb.com/mods/shrapnel-souvenir-precision",
+    "https://www.oncehumandb.com/mods/shrapnel-souvenir-shrapnel"
+   ]
+  },
+  {
+   "name": "Shrapnel Smash",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Shrapnel",
+   "effect": {
+    "text": "Triggering Shrapnel grants Shrapnel Crit Rate +2% for 2s. Effect can stack up to 15 time(s).",
+    "stat": "shrapnel_crit_rate_pct",
+    "value": 30,
+    "condition": "per Shrapnel trigger",
+    "perStack": 2,
+    "maxStacks": 15,
+    "durationS": 2
+   },
+   "suffixVariants": [
+    "General",
+    "Precision",
+    "Shrapnel",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Older value (Game8 era / 0x91 raw.json 2026-03-01): +1% Shrapnel Crit Rate per stack, 20 stacks (20% total). OHDB (current) and 0x91 in-game screenshot bible: +2% x15 (30% total). Pick: 2%/15 stacks.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/shrapnel-smash-general",
+    "https://www.oncehumandb.com/mods/shrapnel-smash-precision",
+    "https://www.oncehumandb.com/mods/shrapnel-smash-shrapnel"
+   ]
+  },
+  {
+   "name": "Spreading Marks",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "The Bull's Eye",
+   "effect": {
+    "text": "When a marked enemy is defeated, The Bull's Eye will spread to 1 enemy(s) within 15m.",
+    "stat": "bulls_eye_spread_targets",
+    "value": 1,
+    "condition": "when a marked enemy is defeated, spreads to 1 enemy within 15m",
+    "unit": "targets",
+    "radiusM": 15
+   },
+   "suffixVariants": [
+    "Common",
+    "Precision",
+    "Survival",
+    "The Bull's Eye",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/spreading-marks-common",
+    "https://www.oncehumandb.com/mods/spreading-marks-precision",
+    "https://www.oncehumandb.com/mods/spreading-marks-survival"
+   ]
+  },
+  {
+   "name": "Static Shock",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Power Surge",
+   "effect": {
+    "text": "Power Surge Status duration -50%, and Power Surge DMG +20%.",
+    "stat": "power_surge_dmg_pct",
+    "value": 20,
+    "condition": null,
+    "secondary": [
+     {
+      "stat": "power_surge_status_duration_pct",
+      "value": -50
+     }
+    ],
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "General",
+    "Power Surge",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/static-shock-deviant-energy",
+    "https://www.oncehumandb.com/mods/static-shock-general",
+    "https://www.oncehumandb.com/mods/static-shock-power-surge"
+   ]
+  },
+  {
+   "name": "Super Bullet",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Bounce",
+   "effect": {
+    "text": "Bounce Crit Rate +10%, Bounce Crit DMG +25%.",
+    "stat": "bounce_crit_rate_pct",
+    "value": 10,
+    "condition": null,
+    "secondary": [
+     {
+      "stat": "bounce_crit_dmg_pct",
+      "value": 25
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Bounce",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/super-bullet-bounce",
+    "https://www.oncehumandb.com/mods/super-bullet-general",
+    "https://www.oncehumandb.com/mods/super-bullet-precision"
+   ]
+  },
+  {
+   "name": "Super Charged",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Unstable Bomber",
+   "effect": {
+    "text": "Triggering Unstable Bomber grants Unstable Bomber DMG +5% for 3s. Effect can stack up to 6 times.",
+    "stat": "unstable_bomber_dmg_pct",
+    "value": 30,
+    "condition": "per Unstable Bomber trigger",
+    "perStack": 5,
+    "maxStacks": 6,
+    "durationS": 3,
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Survival",
+    "Unstable Bomber",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/super-charged-deviant-energy",
+    "https://www.oncehumandb.com/mods/super-charged-general",
+    "https://www.oncehumandb.com/mods/super-charged-precision"
+   ]
+  },
+  {
+   "name": "Surge Amplifier",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Power Surge",
+   "effect": {
+    "text": "Inflicting Power Surge grants Power Surge DMG +5% for 3s, up to 4 stack(s).",
+    "stat": "power_surge_dmg_pct",
+    "value": 20,
+    "condition": "per Power Surge inflicted",
+    "perStack": 5,
+    "maxStacks": 4,
+    "durationS": 3,
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "General",
+    "Power Surge",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/surge-amplifier-deviant-energy",
+    "https://www.oncehumandb.com/mods/surge-amplifier-general",
+    "https://www.oncehumandb.com/mods/surge-amplifier-power-surge"
+   ]
+  },
+  {
+   "name": "United We Stand",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Fortress Warfare",
+   "effect": {
+    "text": "The more players inside Fortress Warfare, the greater the Weapon DMG bonus, up to 40%.",
+    "stat": "weapon_dmg_pct",
+    "value": 40,
+    "condition": "scales with number of players inside Fortress Warfare, up to +40% (per-player step not published)"
+   },
+   "suffixVariants": [
+    "Fortress Warfare",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "0x91 bible screenshot shows 'Same Legendary Mods required: 0/3' for this mod - suggests a co-op/same-mod count requirement; per-player step value not published.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/united-we-stand-fortress-warfare",
+    "https://www.oncehumandb.com/mods/united-we-stand-general",
+    "https://www.oncehumandb.com/mods/united-we-stand-precision"
+   ]
+  },
+  {
+   "name": "Vulnerability Amplifier",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "The Bull's Eye",
+   "effect": {
+    "text": "The Bull's Eye adds Vulnerability +8%.",
+    "stat": "bulls_eye_vulnerability_pct",
+    "value": 8,
+    "condition": "adds to The Bull's Eye base 8% Vulnerability (16% total on marked targets)"
+   },
+   "suffixVariants": [
+    "General",
+    "Precision",
+    "Survival",
+    "The Bull's Eye",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "OHDB item page: obtained from Arachsiam (Mirage Monolith) or Forsaken Giant (Emberdust Monolith). 0x91: stacks with base 8% Bull's Eye vulnerability for 16% total.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/vulnerability-amplifier-general",
+    "https://www.oncehumandb.com/mods/vulnerability-amplifier-precision",
+    "https://www.oncehumandb.com/mods/vulnerability-amplifier-survival"
+   ]
+  },
+  {
+   "name": "Vortex Multiplier",
+   "aliases": [],
+   "slot": "Weapon",
+   "rarity": "legendary",
+   "keyword": "Frost Vortex",
+   "effect": {
+    "text": "Max number of Frost Vortexes +1; Frost Vortex DMG +10% (community guide wording).",
+    "stat": "frost_vortex_dmg_pct",
+    "value": 10,
+    "condition": "also +1 max Frost Vortex",
+    "secondary": [
+     {
+      "stat": "max_frost_vortexes",
+      "value": 1
+     }
+    ]
+   },
+   "suffixVariants": [],
+   "status": "legacy/unverified - not present in the current OHDB mod list; appears in Frost Vortex build guides (BlueStacks, Game8) and in lredragol example builds",
+   "fixedSubAttributesReported": [
+    "Frost Vortex DMG +6.0% (fixed attribute)",
+    "Frost Vortex Trigger Chance +6.0%",
+    "Frost Vortex Duration +15.0%",
+    "Frost DMG +6.0%"
+   ],
+   "fixedSubAttributesNote": "Values quoted from a search-result snippet (Frost Vortex build guide, 2025/2026); exact page not fetchable - treat as single-source.",
+   "sources": [
+    "https://www.bluestacks.com/blog/game-guides/once-human/ohn-frost-vortex-build-en.html",
+    "https://game8.co/games/Once-Human/archives/Builds-Frost-Vortex"
+   ],
+   "notes": "Drops: Monolith of Thirst (Normal), Monolith of Greed (Hard/Pro), LEA Research Lab (Pro); 'can be enhanced up to five times' (legacy enhancement cap)."
+  }
+ ],
+ "armorMods": [
+  {
+   "name": "Bullet Siphon",
+   "aliases": [],
+   "slot": "Bottoms",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Weapon DMG +5%. Every 5 bullets consumed in the magazine grants +4% Weapon DMG, capped at 20%.",
+    "stat": "weapon_dmg_pct",
+    "value": 5,
+    "condition": "+4% per 5 bullets consumed from the magazine, capped at +20% (25% total at cap); resets on reload",
+    "perStack": 4,
+    "maxValue": 25
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Legacy Tier IV (Game8) lacks the flat +5% Weapon DMG; Tier V/current has it.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/bullet-siphon-deviant-energy",
+    "https://www.oncehumandb.com/mods/bullet-siphon-downstar",
+    "https://www.oncehumandb.com/mods/bullet-siphon-downstar-deviant-energy"
+   ]
+  },
+  {
+   "name": "Critical Surge",
+   "aliases": [],
+   "slot": "Bottoms",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "When the magazine is empty, Crit DMG +15% for 12s. Stacks independently, up to 3 stack(s).",
+    "stat": "crit_dmg_pct",
+    "value": 45,
+    "condition": "magazine empty; stacks independently",
+    "perStack": 15,
+    "maxStacks": 3,
+    "durationS": 12
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/critical-surge-deviant-energy",
+    "https://www.oncehumandb.com/mods/critical-surge-downstar",
+    "https://www.oncehumandb.com/mods/critical-surge-downstar-deviant-energy"
+   ]
+  },
+  {
+   "name": "Deadshot",
+   "aliases": [],
+   "slot": "Bottoms",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Each Crit Hit by non-melee weapons grants +5% Crit DMG, up to 45%. The effect is removed upon the next reload.",
+    "stat": "crit_dmg_pct",
+    "value": 45,
+    "condition": "per Crit Hit with non-melee weapons; removed on next reload",
+    "perStack": 5,
+    "maxStacks": 9
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Drops from Securement Silo PSI (search snippets). Consistent across OHDB, 0x91, Game8: +5% Crit DMG per crit up to 45%.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/deadshot-deviant-energy",
+    "https://www.oncehumandb.com/mods/deadshot-downstar",
+    "https://www.oncehumandb.com/mods/deadshot-downstar-deviant-energy"
+   ]
+  },
+  {
+   "name": "Distant Strike",
+   "aliases": [],
+   "slot": "Bottoms",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Weakspot DMG +20% when a bullet hits a target more than 20 meters away. For every additional 1 meter(s) away from the target, Weakspot DMG +1%, up to +20%.",
+    "stat": "weakspot_dmg_pct",
+    "value": 20,
+    "condition": "bullet hits target >20m away; +1% per additional metre, up to +20% more (40% total)",
+    "maxValue": 40
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Also known as 'Unstoppable' (0x91, lredragol builds). 0x91 raw.json says base +10% beyond 20m; OHDB/bible say +20%. Pick 20%.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/distant-strike-deviant-energy",
+    "https://www.oncehumandb.com/mods/distant-strike-downstar",
+    "https://www.oncehumandb.com/mods/distant-strike-downstar-deviant-energy"
+   ]
+  },
+  {
+   "name": "Elemental Resonance",
+   "aliases": [],
+   "slot": "Bottoms",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "For each instance of Elemental DMG dealt from the previous magazine, the next magazine gains Elemental DMG +1% for 15s upon reloading, up to +24%.",
+    "stat": "elemental_dmg_pct",
+    "value": 24,
+    "condition": "+1% per instance of Elemental DMG dealt in the previous magazine, applied for 15s on reload",
+    "perStack": 1,
+    "maxStacks": 24,
+    "durationS": 15
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "0x91 bundle simplifies to flat +20% Elemental DMG; use the ramp model (1%/instance, max 24%).",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/elemental-resonance-deviant-energy",
+    "https://www.oncehumandb.com/mods/elemental-resonance-downstar",
+    "https://www.oncehumandb.com/mods/elemental-resonance-downstar-deviant-energy"
+   ]
+  },
+  {
+   "name": "Melee Momentum",
+   "aliases": [],
+   "slot": "Bottoms",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Melee DMG +20%. After a melee kill, recover 30% of max Stamina.",
+    "stat": "melee_dmg_pct",
+    "value": 20,
+    "condition": "melee kill also restores 30% max Stamina"
+   },
+   "suffixVariants": [
+    "Downstar",
+    "Downstar Deviant Energy",
+    "Melee Default",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/melee-momentum-downstar",
+    "https://www.oncehumandb.com/mods/melee-momentum-downstar-deviant-energy",
+    "https://www.oncehumandb.com/mods/melee-momentum-melee-default"
+   ]
+  },
+  {
+   "name": "Precision Charge",
+   "aliases": [
+    "Precise Charge"
+   ],
+   "slot": "Bottoms",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "For every 10% Weakspot hit rate of the previous magazine, Elemental DMG +4%, up to 24%, lasting for 10s. Reloading resets the calculation.",
+    "stat": "elemental_dmg_pct",
+    "value": 24,
+    "condition": "+4% per 10% Weakspot hit rate of previous magazine, for 10s; reload resets",
+    "perStack": 4,
+    "maxStacks": 6,
+    "durationS": 10
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "OHDB lists both 'Precise Charge' (General) and 'Precision Charge' - identical text, one mod.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/precise-charge-general",
+    "https://www.oncehumandb.com/mods/precision-charge-deviant-energy",
+    "https://www.oncehumandb.com/mods/precision-charge-downstar"
+   ]
+  },
+  {
+   "name": "Reload Rampage",
+   "aliases": [],
+   "slot": "Bottoms",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "After killing an enemy, refill 2 bullets from reserves (no more than 50% of the Magazine Capacity). Weapon DMG and Status DMG +10% until next reload.",
+    "stat": "weapon_dmg_pct",
+    "value": 10,
+    "condition": "after killing an enemy, until next reload; also refills 2 bullets (max 50% mag)",
+    "secondary": [
+     {
+      "stat": "status_dmg_pct",
+      "value": 10
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "0x91 raw.json text is a mis-OCR duplicate of Bullet Siphon; OHDB text used.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/reload-rampage-deviant-energy",
+    "https://www.oncehumandb.com/mods/reload-rampage-downstar",
+    "https://www.oncehumandb.com/mods/reload-rampage-downstar-deviant-energy"
+   ]
+  },
+  {
+   "name": "Status Amplification",
+   "aliases": [],
+   "slot": "Bottoms",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "When the magazine is empty, Status DMG +10% for 12s. Effect can stack up to 3 times.",
+    "stat": "status_dmg_pct",
+    "value": 30,
+    "condition": "magazine empty",
+    "perStack": 10,
+    "maxStacks": 3,
+    "durationS": 12
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Also known as 'Abnormal Increase' (older name, 0x91 bible, lredragol builds, Steam threads).",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/status-amplification-deviant-energy",
+    "https://www.oncehumandb.com/mods/status-amplification-downstar",
+    "https://www.oncehumandb.com/mods/status-amplification-downstar-deviant-energy"
+   ]
+  },
+  {
+   "name": "Three Strikes",
+   "aliases": [],
+   "slot": "Bottoms",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "For the first three hits after reloading (not exceeding 50% of magazine capacity), Weakspot DMG +50%.",
+    "stat": "weakspot_dmg_pct",
+    "value": 50,
+    "condition": "first three hits after reloading (not exceeding 50% of magazine capacity)"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "0x91 raw.json lists +30%; OHDB and 0x91 screenshot bible list +50%. Pick 50%.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/three-strikes-deviant-energy",
+    "https://www.oncehumandb.com/mods/three-strikes-downstar",
+    "https://www.oncehumandb.com/mods/three-strikes-downstar-deviant-energy"
+   ]
+  },
+  {
+   "name": "Crit Amplifier",
+   "aliases": [],
+   "slot": "Gloves",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Crit Rate +10%, Crit DMG +15%.",
+    "stat": "crit_rate_pct",
+    "value": 10,
+    "condition": null,
+    "secondary": [
+     {
+      "stat": "crit_dmg_pct",
+      "value": 15
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Legacy Tier IV (Game8): Crit Rate +5%, Crit DMG +15%; Tier V/current: +10%/+15%.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/crit-amplifier-crescent",
+    "https://www.oncehumandb.com/mods/crit-amplifier-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/crit-amplifier-deviant-energy"
+   ]
+  },
+  {
+   "name": "Crit Boost",
+   "aliases": [],
+   "slot": "Gloves",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Crit Rate +15%",
+    "stat": "crit_rate_pct",
+    "value": 15,
+    "condition": null
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonant Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Legacy tiers (Game8 via bramsey): weapon-slot Crit Boost I/II/III = +3/+6/+9% Crit Rate; gloves Tier IV = +12%. Current OHDB legendary gloves value +15%.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/crit-boost-crescent",
+    "https://www.oncehumandb.com/mods/crit-boost-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/crit-boost-deviant-energy"
+   ]
+  },
+  {
+   "name": "Elemental Overload",
+   "aliases": [],
+   "slot": "Gloves",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Element DMG (Blaze, Frost, Shock, Blast) +18%.",
+    "stat": "elemental_dmg_pct",
+    "value": 18,
+    "condition": "Blaze, Frost, Shock, Blast"
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/elemental-overload-crescent",
+    "https://www.oncehumandb.com/mods/elemental-overload-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/elemental-overload-deviant-energy"
+   ]
+  },
+  {
+   "name": "Lifeforce Boost",
+   "aliases": [],
+   "slot": "Gloves",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "HP +12%",
+    "stat": "max_hp_pct",
+    "value": 12,
+    "condition": null
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "OHDB lists it under Gloves only; the 0x91 in-game screenshot bible shows Lifeforce Boost (HP +12%) available for Helmet, Top, Bottoms, Shoes and Gloves.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/lifeforce-boost-crescent",
+    "https://www.oncehumandb.com/mods/lifeforce-boost-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/lifeforce-boost-deviant-energy"
+   ]
+  },
+  {
+   "name": "Melee Amplifier",
+   "aliases": [],
+   "slot": "Gloves",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Melee DMG +20%",
+    "stat": "melee_dmg_pct",
+    "value": 20,
+    "condition": null
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Melee Default",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/melee-amplifier-crescent",
+    "https://www.oncehumandb.com/mods/melee-amplifier-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/melee-amplifier-melee-default"
+   ]
+  },
+  {
+   "name": "Status Enhancement",
+   "aliases": [],
+   "slot": "Gloves",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Status DMG +20%",
+    "stat": "status_dmg_pct",
+    "value": 20,
+    "condition": null
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/status-enhancement-crescent",
+    "https://www.oncehumandb.com/mods/status-enhancement-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/status-enhancement-deviant-energy"
+   ]
+  },
+  {
+   "name": "Weakspot DMG Boost",
+   "aliases": [],
+   "slot": "Gloves",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Weakspot DMG +25%",
+    "stat": "weakspot_dmg_pct",
+    "value": 25,
+    "condition": null
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Search snippet from metaforge.app listed 'Weakspot DMG +30.0%' (likely a Tier-V legacy or outdated value); OHDB (current): +25%. Pick 25%.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/weakspot-dmg-boost-crescent",
+    "https://www.oncehumandb.com/mods/weakspot-dmg-boost-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/weakspot-dmg-boost-deviant-energy"
+   ]
+  },
+  {
+   "name": "Weapon Amplifier",
+   "aliases": [],
+   "slot": "Gloves",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Weapon DMG +15%",
+    "stat": "weapon_dmg_pct",
+    "value": 15,
+    "condition": null
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Resonance",
+    "Resonance Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Also known as 'Munitions Amplifier' (0x91).",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/weapon-amplifier-crescent",
+    "https://www.oncehumandb.com/mods/weapon-amplifier-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/weapon-amplifier-deviant-energy"
+   ]
+  },
+  {
+   "name": "Deviation Expert",
+   "aliases": [],
+   "slot": "Helmet",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Range -25%, Fire Rate +10%, Status DMG +20%",
+    "stat": "status_dmg_pct",
+    "value": 20,
+    "condition": null,
+    "secondary": [
+     {
+      "stat": "fire_rate_pct",
+      "value": 10
+     },
+     {
+      "stat": "range_pct",
+      "value": -25
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/deviation-expert-crescent",
+    "https://www.oncehumandb.com/mods/deviation-expert-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/deviation-expert-deviant-energy"
+   ]
+  },
+  {
+   "name": "Elemental Havoc",
+   "aliases": [],
+   "slot": "Helmet",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Elemental DMG +10%. When HP is above 90%, +10% additionally.",
+    "stat": "elemental_dmg_pct",
+    "value": 10,
+    "condition": "+10% additionally when HP above 90% (20% total)",
+    "maxValue": 20
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violence"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/elemental-havoc-crescent",
+    "https://www.oncehumandb.com/mods/elemental-havoc-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/elemental-havoc-deviant-energy"
+   ]
+  },
+  {
+   "name": "First-Move Advantage",
+   "aliases": [],
+   "slot": "Helmet",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "After reloading, Crit Rate +10%, Crit DMG +20% for 2s.",
+    "stat": "crit_rate_pct",
+    "value": 10,
+    "condition": "for 2s after reloading",
+    "durationS": 2,
+    "secondary": [
+     {
+      "stat": "crit_dmg_pct",
+      "value": 20
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/first-move-advantage-crescent",
+    "https://www.oncehumandb.com/mods/first-move-advantage-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/first-move-advantage-deviant-energy"
+   ]
+  },
+  {
+   "name": "Fortune's Favor",
+   "aliases": [],
+   "slot": "Helmet",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Cannot deal Weakspot DMG. Crit Rate +10% and Crit DMG +30%.",
+    "stat": "crit_rate_pct",
+    "value": 10,
+    "condition": "cannot deal Weakspot DMG",
+    "secondary": [
+     {
+      "stat": "crit_dmg_pct",
+      "value": 30
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Also known as 'Fateful Strike' (0x91). 0x91 bundle places it on Mask; OHDB says Helmet. Pick Helmet.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/fortunes-favor-crescent",
+    "https://www.oncehumandb.com/mods/fortunes-favor-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/fortunes-favor-deviant-energy"
+   ]
+  },
+  {
+   "name": "Momentum Up",
+   "aliases": [],
+   "slot": "Helmet",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Fire Rate +10% for the first 50% of the magazine and Weapon DMG +30% for the next 50% of the magazine.",
+    "stat": "fire_rate_pct",
+    "value": 10,
+    "condition": "first 50% of magazine",
+    "secondary": [
+     {
+      "stat": "weapon_dmg_pct",
+      "value": 30,
+      "condition": "second 50% of magazine"
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/momentum-up-crescent",
+    "https://www.oncehumandb.com/mods/momentum-up-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/momentum-up-deviant-energy"
+   ]
+  },
+  {
+   "name": "Overflow",
+   "aliases": [],
+   "slot": "Helmet",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "When reloading an empty magazine, Magazine Capacity +30%.",
+    "stat": "magazine_capacity_pct",
+    "value": 30,
+    "condition": "when reloading an empty magazine"
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Also known as 'Mag Expansion' (0x91).",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/overflow-crescent",
+    "https://www.oncehumandb.com/mods/overflow-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/overflow-deviant-energy"
+   ]
+  },
+  {
+   "name": "Precise Strike",
+   "aliases": [],
+   "slot": "Helmet",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Hitting a weakspot grants Weakspot DMG +12% for 3s. Effect can stack 3 times.",
+    "stat": "weakspot_dmg_pct",
+    "value": 36,
+    "condition": "per weakspot hit",
+    "perStack": 12,
+    "maxStacks": 3,
+    "durationS": 3
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Wikily lists it as 'quality 4 Gear Mod' from Securement Silo ALPHA and Silo Taurus. Consistent +12% x3.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/precise-strike-crescent",
+    "https://www.oncehumandb.com/mods/precise-strike-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/precise-strike-deviant-energy"
+   ]
+  },
+  {
+   "name": "Quick Toss",
+   "aliases": [],
+   "slot": "Helmet",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "After using a throwable, Fire Rate +15% for 8s; reload 50% of the magazine for the previously equipped weapon (triggered every 12s).",
+    "stat": "fire_rate_pct",
+    "value": 15,
+    "condition": "for 8s after using a throwable; also reloads 50% of previous weapon's magazine (every 12s)",
+    "durationS": 8,
+    "cooldownS": 12
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/quick-toss-crescent",
+    "https://www.oncehumandb.com/mods/quick-toss-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/quick-toss-deviant-energy"
+   ]
+  },
+  {
+   "name": "Weapon Symphony",
+   "aliases": [],
+   "slot": "Helmet",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "After switching weapons, Fire Rate +10% and Weapon DMG +25%. This effect decreases by 10% per second, up to a maximum decrease of 60%.",
+    "stat": "weapon_dmg_pct",
+    "value": 25,
+    "condition": "after switching weapons; decays 10% per second up to a 60% decrease",
+    "secondary": [
+     {
+      "stat": "fire_rate_pct",
+      "value": 10
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/weapon-symphony-crescent",
+    "https://www.oncehumandb.com/mods/weapon-symphony-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/weapon-symphony-deviant-energy"
+   ]
+  },
+  {
+   "name": "Work of Proficiency",
+   "aliases": [],
+   "slot": "Helmet",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "When reloading with an empty magazine, Reload Efficiency +5%, Elemental DMG +20%. Resets with the next reload.",
+    "stat": "elemental_dmg_pct",
+    "value": 20,
+    "condition": "when reloading with an empty magazine; resets with next reload",
+    "secondary": [
+     {
+      "stat": "reload_efficiency_pct",
+      "value": 5
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Crescent",
+    "Crescent Deviant Energy",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/work-of-proficiency-crescent",
+    "https://www.oncehumandb.com/mods/work-of-proficiency-crescent-deviant-energy",
+    "https://www.oncehumandb.com/mods/work-of-proficiency-deviant-energy"
+   ]
+  },
+  {
+   "name": "Blaze Amplifier",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Burn",
+   "effect": {
+    "text": "Every stack of Burn grants +3% Psi Intensity DMG.",
+    "stat": "psi_intensity_dmg_pct",
+    "value": 3,
+    "condition": "per Burn stack on target",
+    "perStack": 3,
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "Burn",
+    "Deviant Energy",
+    "General",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Legacy Tier IV (Game8): +2.5% per Burn stack; Tier V/current: +3%. Found in Securement Silo EX1 (Chalk Peak).",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/blaze-amplifier-burn",
+    "https://www.oncehumandb.com/mods/blaze-amplifier-deviant-energy",
+    "https://www.oncehumandb.com/mods/blaze-amplifier-general"
+   ]
+  },
+  {
+   "name": "Blitzkrieg",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Fast Gunner",
+   "effect": {
+    "text": "Fast Gunner stacks +5 and additional Fire Rate +1% for each stack.",
+    "stat": "fast_gunner_max_stacks",
+    "value": 5,
+    "condition": null,
+    "unit": "stacks",
+    "secondary": [
+     {
+      "stat": "fire_rate_pct",
+      "value": 1,
+      "condition": "additional per Fast Gunner stack"
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Fast Gunner",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Legacy Tier IV (Game8): +4 stacks, +0.8% Fire Rate per stack; Tier V/current: +5, +1%.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/blitzkrieg-fast-gunner",
+    "https://www.oncehumandb.com/mods/blitzkrieg-general",
+    "https://www.oncehumandb.com/mods/blitzkrieg-precision"
+   ]
+  },
+  {
+   "name": "Break Bounce",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Bounce",
+   "effect": {
+    "text": "When a bullet hits an enemy above 50% HP, the bullet's final DMG +25%.",
+    "stat": "bounce_final_dmg_pct",
+    "value": 25,
+    "condition": "bullet hits an enemy above 50% HP",
+    "damageBucket": "final"
+   },
+   "suffixVariants": [
+    "Bounce",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/break-bounce-bounce",
+    "https://www.oncehumandb.com/mods/break-bounce-general",
+    "https://www.oncehumandb.com/mods/break-bounce-precision"
+   ]
+  },
+  {
+   "name": "Delayed Blast",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Unstable Bomber",
+   "effect": {
+    "text": "Before the bomb explodes, for every 4 hits taken, the bomb's final DMG +25%.",
+    "stat": "unstable_bomber_final_dmg_pct",
+    "value": 25,
+    "condition": "per 4 hits taken by the bomb before it explodes",
+    "perStack": 25,
+    "damageBucket": "final (OHDB text says 'final DMG'; 0x91 raw.json classed it factor)"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Survival",
+    "Unstable Bomber",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "0x91 raw.json says every 5 hits and 'Ultimate DMG'; OHDB/bible say every 4 hits and 'final DMG'. Pick 4 hits.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/delayed-blast-deviant-energy",
+    "https://www.oncehumandb.com/mods/delayed-blast-general",
+    "https://www.oncehumandb.com/mods/delayed-blast-precision"
+   ]
+  },
+  {
+   "name": "Explosive Barrage",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Fast Gunner",
+   "effect": {
+    "text": "When in Fast Gunner state, Crit Rate +10%, and Weapon DMG +10%.",
+    "stat": "crit_rate_pct",
+    "value": 10,
+    "condition": "while in Fast Gunner state",
+    "secondary": [
+     {
+      "stat": "weapon_dmg_pct",
+      "value": 10
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Fast Gunner",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/explosive-barrage-fast-gunner",
+    "https://www.oncehumandb.com/mods/explosive-barrage-general",
+    "https://www.oncehumandb.com/mods/explosive-barrage-precision"
+   ]
+  },
+  {
+   "name": "Explosive Shrapnel",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Shrapnel",
+   "effect": {
+    "text": "The 20th Shrapnel is explosive and deals \b+300%\b DMG as a critical hit.",
+    "stat": "shrapnel_nth_hit_dmg_pct",
+    "value": 300,
+    "condition": "every 20th Shrapnel is explosive, +300% DMG as a guaranteed critical hit",
+    "every": 20
+   },
+   "suffixVariants": [
+    "General",
+    "Precision",
+    "Shrapnel",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/explosive-shrapnel-general",
+    "https://www.oncehumandb.com/mods/explosive-shrapnel-precision",
+    "https://www.oncehumandb.com/mods/explosive-shrapnel-shrapnel"
+   ]
+  },
+  {
+   "name": "First Electrocution",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Power Surge",
+   "effect": {
+    "text": "For enemies without Power Surge status, Power Surge's Ultimate DMG +35%.",
+    "stat": "power_surge_final_dmg_pct",
+    "value": 35,
+    "condition": "target has no Power Surge status ('Ultimate DMG' = Final DMG per 0x91 ADR note)",
+    "damageBucket": "final"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "General",
+    "Power Surge",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/first-electrocution-deviant-energy",
+    "https://www.oncehumandb.com/mods/first-electrocution-general",
+    "https://www.oncehumandb.com/mods/first-electrocution-power-surge"
+   ]
+  },
+  {
+   "name": "Frost Construct",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Frost Vortex",
+   "effect": {
+    "text": "Frost Constructs (Ice Spikes, Ice Missiles, Ice Crystals) deal +10% damage; if the target is in Frost Vortex status, damage dealt +10%.",
+    "stat": "frost_construct_dmg_pct",
+    "value": 10,
+    "condition": "+10% more if target is in Frost Vortex status (20% total)",
+    "maxValue": 20,
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Frost Vortex",
+    "General",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/frost-construct-deviant-energy",
+    "https://www.oncehumandb.com/mods/frost-construct-frost-vortex",
+    "https://www.oncehumandb.com/mods/frost-construct-general"
+   ]
+  },
+  {
+   "name": "Frostwave Wither",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Frost Vortex",
+   "effect": {
+    "text": "Frost Vortex's final DMG +30%, decreasing by 8% per second over time.",
+    "stat": "frost_vortex_final_dmg_pct",
+    "value": 30,
+    "condition": "decreases by 8% per second over time",
+    "decayPerSecond": 8,
+    "damageBucket": "final"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Frost Vortex",
+    "General",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/frostwave-wither-deviant-energy",
+    "https://www.oncehumandb.com/mods/frostwave-wither-frost-vortex",
+    "https://www.oncehumandb.com/mods/frostwave-wither-general"
+   ]
+  },
+  {
+   "name": "Light Cannon",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Fortress Warfare",
+   "effect": {
+    "text": "No Super Armor inside Fortress Warfare. While in Fortress Warfare state, Attack +15%.",
+    "stat": "attack_pct",
+    "value": 15,
+    "condition": "while in Fortress Warfare; removes Super Armor inside Fortress Warfare"
+   },
+   "suffixVariants": [
+    "Fortress Warfare",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "0x91 raw.json lists Attack +12%; OHDB and 0x91 bible list +15%. Pick 15%.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/light-cannon-fortress-warfare",
+    "https://www.oncehumandb.com/mods/light-cannon-general",
+    "https://www.oncehumandb.com/mods/light-cannon-precision"
+   ]
+  },
+  {
+   "name": "Most Wanted",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "The Bull's Eye",
+   "effect": {
+    "text": "Every time an enemy is marked, Attack +5% for 8s. Effect can stack up to 3 times.",
+    "stat": "attack_pct",
+    "value": 15,
+    "condition": "per enemy marked",
+    "perStack": 5,
+    "maxStacks": 3,
+    "durationS": 8
+   },
+   "suffixVariants": [
+    "General",
+    "Precision",
+    "Survival",
+    "The Bull's Eye",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/most-wanted-general",
+    "https://www.oncehumandb.com/mods/most-wanted-precision",
+    "https://www.oncehumandb.com/mods/most-wanted-survival"
+   ]
+  },
+  {
+   "name": "Pinpoint Strike",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Unstable Bomber",
+   "effect": {
+    "text": "When Unstable Bomber hits only one enemy, Unstable Bomber final DMG +35%.",
+    "stat": "unstable_bomber_final_dmg_pct",
+    "value": 35,
+    "condition": "Unstable Bomber hits only one enemy",
+    "damageBucket": "final"
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "General",
+    "Precision",
+    "Survival",
+    "Unstable Bomber",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/pinpoint-strike-deviant-energy",
+    "https://www.oncehumandb.com/mods/pinpoint-strike-general",
+    "https://www.oncehumandb.com/mods/pinpoint-strike-precision"
+   ]
+  },
+  {
+   "name": "Precision Bounce",
+   "aliases": [
+    "Precise Bounce"
+   ],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Bounce",
+   "effect": {
+    "text": "After triggering Bounce 6 times, the next bullet's Bounce DMG +125%.",
+    "stat": "bounce_dmg_pct",
+    "value": 125,
+    "condition": "next bullet after triggering Bounce 6 times",
+    "damageBucket": "factor"
+   },
+   "suffixVariants": [
+    "Bounce",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "OHDB lists both 'Precise Bounce' (General) and 'Precision Bounce' - identical text, one mod.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/precise-bounce-general",
+    "https://www.oncehumandb.com/mods/precision-bounce-bounce",
+    "https://www.oncehumandb.com/mods/precision-bounce-precision"
+   ]
+  },
+  {
+   "name": "Retrusion Explosion",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Burn",
+   "effect": {
+    "text": "When hitting Burning enemies, Crit Rate +8%, and Crit DMG +20%.",
+    "stat": "crit_rate_pct",
+    "value": 8,
+    "condition": "hitting Burning enemies",
+    "secondary": [
+     {
+      "stat": "crit_dmg_pct",
+      "value": 20
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Burn",
+    "Deviant Energy",
+    "General",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/retrusion-explosion-burn",
+    "https://www.oncehumandb.com/mods/retrusion-explosion-deviant-energy",
+    "https://www.oncehumandb.com/mods/retrusion-explosion-general"
+   ]
+  },
+  {
+   "name": "Shrapnel Carnage",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Shrapnel",
+   "effect": {
+    "text": "Shrapnel Weakspot Hit Weight +100%, Shrapnel Weakspot DMG +25%.",
+    "stat": "shrapnel_weakspot_hit_weight_pct",
+    "value": 100,
+    "condition": null,
+    "secondary": [
+     {
+      "stat": "shrapnel_weakspot_dmg_pct",
+      "value": 25
+     }
+    ]
+   },
+   "suffixVariants": [
+    "General",
+    "Precision",
+    "Shrapnel",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Fandom wiki wording: 'chance of Shrapnel hitting Weakspots increases by 100%, Shrapnel Weakspot DMG +25%'. Mask slot (Fandom says Face/Mask).",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/shrapnel-carnage-general",
+    "https://www.oncehumandb.com/mods/shrapnel-carnage-precision",
+    "https://www.oncehumandb.com/mods/shrapnel-carnage-shrapnel"
+   ]
+  },
+  {
+   "name": "Targeted Strike",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "The Bull's Eye",
+   "effect": {
+    "text": "When hitting marked enemies, Crit Rate +10%, and Crit DMG +25%.",
+    "stat": "crit_rate_pct",
+    "value": 10,
+    "condition": "hitting marked (Bull's Eye) enemies",
+    "secondary": [
+     {
+      "stat": "crit_dmg_pct",
+      "value": 25
+     }
+    ]
+   },
+   "suffixVariants": [
+    "General",
+    "Precision",
+    "Survival",
+    "The Bull's Eye",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/targeted-strike-general",
+    "https://www.oncehumandb.com/mods/targeted-strike-precision",
+    "https://www.oncehumandb.com/mods/targeted-strike-survival"
+   ]
+  },
+  {
+   "name": "Thunderclap",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Power Surge",
+   "effect": {
+    "text": "After triggering Power Surge 20 times, the next hit summons Celestial Thunder (Shock DMG of 200% Psi Intensity).",
+    "stat": "celestial_thunder_shock_dmg_pct_psi",
+    "value": 200,
+    "condition": "next hit after 20 Power Surge triggers",
+    "unit": "% of Psi Intensity",
+    "every": 20
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "General",
+    "Power Surge",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/thunderclap-deviant-energy",
+    "https://www.oncehumandb.com/mods/thunderclap-general",
+    "https://www.oncehumandb.com/mods/thunderclap-power-surge"
+   ]
+  },
+  {
+   "name": "Unbreakable",
+   "aliases": [],
+   "slot": "Mask",
+   "rarity": "legendary",
+   "keyword": "Fortress Warfare",
+   "effect": {
+    "text": "Fortress Warfare Range -30%. While in Fortress Warfare state, Attack +15%.",
+    "stat": "attack_pct",
+    "value": 15,
+    "condition": "while in Fortress Warfare",
+    "secondary": [
+     {
+      "stat": "fortress_warfare_range_pct",
+      "value": -30
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Fortress Warfare",
+    "General",
+    "Precision",
+    "Survival",
+    "Violent"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/unbreakable-fortress-warfare",
+    "https://www.oncehumandb.com/mods/unbreakable-general",
+    "https://www.oncehumandb.com/mods/unbreakable-precision"
+   ]
+  },
+  {
+   "name": "Against All Odds",
+   "aliases": [],
+   "slot": "Shoes",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Weapon and Status DMG +10%. For every +5% Max HP consumed, gains an additional +5%, lasting 5s, stacking up to 3 stack(s).",
+    "stat": "weapon_and_status_dmg_pct",
+    "value": 10,
+    "condition": "+5% per 5% Max HP consumed, 3 stacks, 5s (25% total)",
+    "perStack": 5,
+    "maxStacks": 3,
+    "durationS": 5,
+    "maxValue": 25
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/against-all-odds-battle",
+    "https://www.oncehumandb.com/mods/against-all-odds-deviant-energy",
+    "https://www.oncehumandb.com/mods/against-all-odds-downstar"
+   ]
+  },
+  {
+   "name": "Covered Advance",
+   "aliases": [],
+   "slot": "Shoes",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Taking no DMG within 4s grants +20% Melee, Weapon, and Status DMG for 30s. The effect resets when the duration ends.",
+    "stat": "melee_weapon_status_dmg_pct",
+    "value": 20,
+    "condition": "for 30s after taking no DMG for 4s; resets when duration ends",
+    "durationS": 30
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "Legacy Tier IV (Game8): 6s no-damage window, +16%; Tier V/current: 4s, +20%.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/covered-advance-battle",
+    "https://www.oncehumandb.com/mods/covered-advance-deviant-energy",
+    "https://www.oncehumandb.com/mods/covered-advance-downstar"
+   ]
+  },
+  {
+   "name": "Ferocious Charge",
+   "aliases": [],
+   "slot": "Shoes",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Killing enemies within 10 meters grants Melee, Weapon, Status DMG +20% for 8s.",
+    "stat": "melee_weapon_status_dmg_pct",
+    "value": 20,
+    "condition": "for 8s after killing an enemy within 10m",
+    "durationS": 8
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/ferocious-charge-battle",
+    "https://www.oncehumandb.com/mods/ferocious-charge-deviant-energy",
+    "https://www.oncehumandb.com/mods/ferocious-charge-downstar"
+   ]
+  },
+  {
+   "name": "Power of Striving",
+   "aliases": [],
+   "slot": "Shoes",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Weapon and Status DMG +10%. Stamina loss grants an additional DMG boost, up to +20%.",
+    "stat": "weapon_and_status_dmg_pct",
+    "value": 10,
+    "condition": "Stamina loss grants up to +20% more (30% total)",
+    "maxValue": 30
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/power-of-striving-battle",
+    "https://www.oncehumandb.com/mods/power-of-striving-deviant-energy",
+    "https://www.oncehumandb.com/mods/power-of-striving-downstar"
+   ]
+  },
+  {
+   "name": "Rush Hour",
+   "aliases": [],
+   "slot": "Shoes",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Every 10% HP loss grants +4% Melee, Weapon, and Status DMG.",
+    "stat": "melee_weapon_status_dmg_pct",
+    "value": 4,
+    "condition": "per 10% HP lost (cap not stated in tooltip; 36% at 10% HP if uncapped)",
+    "perStack": 4
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/rush-hour-battle",
+    "https://www.oncehumandb.com/mods/rush-hour-deviant-energy",
+    "https://www.oncehumandb.com/mods/rush-hour-downstar"
+   ]
+  },
+  {
+   "name": "Ruthless Reaper",
+   "aliases": [],
+   "slot": "Shoes",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "After getting 2 kill(s), refill 100% of your magazine from your reserves.",
+    "stat": "magazine_refill_pct",
+    "value": 100,
+    "condition": "after 2 kills, refilled from reserves"
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/ruthless-reaper-battle",
+    "https://www.oncehumandb.com/mods/ruthless-reaper-deviant-energy",
+    "https://www.oncehumandb.com/mods/ruthless-reaper-downstar"
+   ]
+  },
+  {
+   "name": "Secluded Strike",
+   "aliases": [],
+   "slot": "Shoes",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Having no enemies within 7 meters around you grants +15% Weapon and Status DMG.",
+    "stat": "weapon_and_status_dmg_pct",
+    "value": 15,
+    "condition": "no enemies within 7m"
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "General",
+    "Mirror Deviant Energy",
+    "Mrror",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/secluded-strike-battle",
+    "https://www.oncehumandb.com/mods/secluded-strike-deviant-energy",
+    "https://www.oncehumandb.com/mods/secluded-strike-downstar"
+   ]
+  },
+  {
+   "name": "Slow and Steady",
+   "aliases": [
+    "Steady Hand"
+   ],
+   "slot": "Shoes",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Melee, Weapon, Status DMG +10%. When HP is above 90%, grants +10% additional DMG.",
+    "stat": "melee_weapon_status_dmg_pct",
+    "value": 10,
+    "condition": "+10% additionally when HP above 90% (20% total)",
+    "maxValue": 20
+   },
+   "suffixVariants": [
+    "Deviant Energy",
+    "Downstar",
+    "Downstar Deviant Energy",
+    "Fury",
+    "General",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Resistance",
+    "Survival",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "OHDB lists 'Steady Hand' (Fury/Resistance/Downstar/Precision/Survival/Deviant Energy suffixes) with identical text - treated as one mod.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/slow-and-steady-general",
+    "https://www.oncehumandb.com/mods/slow-and-steady-mirror",
+    "https://www.oncehumandb.com/mods/slow-and-steady-mirror-deviant-energy"
+   ]
+  },
+  {
+   "name": "Ardent Shield",
+   "aliases": [],
+   "slot": "Top",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "While the shield is active, you gain 15% DMG Reduction. When the shield exceeds 1,000, single instances of DMG will not penetrate the shield.",
+    "stat": "dmg_reduction_pct",
+    "value": 15,
+    "condition": "while shield is active; shield >1000 blocks single instances fully"
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/ardent-shield-battle",
+    "https://www.oncehumandb.com/mods/ardent-shield-deviant-energy",
+    "https://www.oncehumandb.com/mods/ardent-shield-general"
+   ]
+  },
+  {
+   "name": "Critical Rescue",
+   "aliases": [],
+   "slot": "Top",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "DMG Reduction +20% and Healing Received +20% when HP is below 30%.",
+    "stat": "dmg_reduction_pct",
+    "value": 20,
+    "condition": "HP below 30%",
+    "secondary": [
+     {
+      "stat": "healing_received_pct",
+      "value": 20
+     }
+    ]
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/critical-rescue-battle",
+    "https://www.oncehumandb.com/mods/critical-rescue-deviant-energy",
+    "https://www.oncehumandb.com/mods/critical-rescue-general"
+   ]
+  },
+  {
+   "name": "Enduring Shield",
+   "aliases": [],
+   "slot": "Top",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "When out of combat, gain 1 stack of Safe Haven every 5s, stacking up to 5 times. For every 5 damage received, remove 1 stack of Safe Haven to gain 8% Shield for 3s.",
+    "stat": "shield_pct_max_hp",
+    "value": 8,
+    "condition": "per Safe Haven stack consumed (gain 1 stack per 5s out of combat, max 5; every 5 damage received consumes 1) for 3s",
+    "maxStacks": 5,
+    "durationS": 3
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/enduring-shield-battle",
+    "https://www.oncehumandb.com/mods/enduring-shield-deviant-energy",
+    "https://www.oncehumandb.com/mods/enduring-shield-general"
+   ]
+  },
+  {
+   "name": "Head Guard",
+   "aliases": [],
+   "slot": "Top",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Weakspot DMG Reduction +15%; Weakspot DMG Reduction +15% further when HP is above 60%.",
+    "stat": "weakspot_dmg_reduction_pct",
+    "value": 15,
+    "condition": "+15% further when HP above 60% (30% total)",
+    "maxValue": 30
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "0x91 raw.json: 'When HP above 70%, head is no longer a Weakspot'. OHDB/bible: Weakspot DMG Reduction +15% (+15% when HP>60%). Pick OHDB.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/head-guard-battle",
+    "https://www.oncehumandb.com/mods/head-guard-deviant-energy",
+    "https://www.oncehumandb.com/mods/head-guard-general"
+   ]
+  },
+  {
+   "name": "Head-on Conflict",
+   "aliases": [],
+   "slot": "Top",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "Having enemies within 7 meters around you grants 10% DMG Reduction. Taking melee DMG from enemies grants an extra 10% DMG Reduction for 5 seconds.",
+    "stat": "dmg_reduction_pct",
+    "value": 10,
+    "condition": "enemies within 7m; +10% for 5s after taking melee DMG",
+    "maxValue": 20
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/head-on-conflict-battle",
+    "https://www.oncehumandb.com/mods/head-on-conflict-deviant-energy",
+    "https://www.oncehumandb.com/mods/head-on-conflict-general"
+   ]
+  },
+  {
+   "name": "Healing Fortification",
+   "aliases": [],
+   "slot": "Top",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "When using a healing shot, DMG Reduction +40% for 2s.",
+    "stat": "dmg_reduction_pct",
+    "value": 40,
+    "condition": "for 2s when using a healing shot",
+    "durationS": 2
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/healing-fortification-battle",
+    "https://www.oncehumandb.com/mods/healing-fortification-deviant-energy",
+    "https://www.oncehumandb.com/mods/healing-fortification-general"
+   ]
+  },
+  {
+   "name": "Quick Comeback",
+   "aliases": [],
+   "slot": "Top",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "When using a healing shot, Movement Speed +20% for 2s and refills the magazine from the inventory to 100%.",
+    "stat": "movement_speed_pct",
+    "value": 20,
+    "condition": "for 2s when using a healing shot; refills magazine to 100%",
+    "durationS": 2
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "0x91 raw.json swaps the Quick Comeback / Rejuvenating texts (gives Quick Comeback 'Healing +25% when HP>70%'). OHDB and 0x91 bible agree on the healing-shot movement/refill text. Pick OHDB.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/quick-comeback-battle",
+    "https://www.oncehumandb.com/mods/quick-comeback-deviant-energy",
+    "https://www.oncehumandb.com/mods/quick-comeback-general"
+   ]
+  },
+  {
+   "name": "Rejuvenating",
+   "aliases": [],
+   "slot": "Top",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "When Shield is above 30% of Max HP, defeating an enemy recovers 20% of Max HP. Excess recovery is converted into Shield lasting 20s (Cooldown: 10s).",
+    "stat": "hp_recovery_pct",
+    "value": 20,
+    "condition": "on kill while Shield >30% of Max HP; excess becomes Shield for 20s; cooldown 10s",
+    "cooldownS": 10
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": "0x91 raw.json gives this the healing-shot text; OHDB and 0x91 bible give the shield/HP-recovery text. Pick OHDB.",
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/rejuvenating-battle",
+    "https://www.oncehumandb.com/mods/rejuvenating-deviant-energy",
+    "https://www.oncehumandb.com/mods/rejuvenating-general"
+   ]
+  },
+  {
+   "name": "Resist Advantage",
+   "aliases": [],
+   "slot": "Top",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "When out of combat, gain 1 stack of 10% DMG Reduction every 5s. Effect can stack up to 5 times. 1 stack is removed when hit.",
+    "stat": "dmg_reduction_pct",
+    "value": 50,
+    "condition": "1 stack of 10% per 5s out of combat, max 5; 1 stack removed when hit",
+    "perStack": 10,
+    "maxStacks": 5
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/resist-advantage-battle",
+    "https://www.oncehumandb.com/mods/resist-advantage-deviant-energy",
+    "https://www.oncehumandb.com/mods/resist-advantage-general"
+   ]
+  },
+  {
+   "name": "Status Immune",
+   "aliases": [],
+   "slot": "Top",
+   "rarity": "legendary",
+   "keyword": null,
+   "effect": {
+    "text": "When HP is lower than 60%, purge all Deviated States (cooldown: 15s)",
+    "stat": "purge_deviated_states",
+    "value": 1,
+    "condition": "when HP below 60%; cooldown 15s",
+    "unit": "boolean",
+    "cooldownS": 15
+   },
+   "suffixVariants": [
+    "Battle",
+    "Deviant Energy",
+    "General",
+    "Lunar",
+    "Lunar Deviant Energy",
+    "Mirror",
+    "Mirror Deviant Energy",
+    "Phantasmal",
+    "Phantasmal Deviant Energy",
+    "Precision",
+    "Survival",
+    "Violent",
+    "Wild",
+    "Wild Deviant Energy"
+   ],
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "notes": null,
+   "ohdbUrls": [
+    "https://www.oncehumandb.com/mods/status-immune-battle",
+    "https://www.oncehumandb.com/mods/status-immune-deviant-energy",
+    "https://www.oncehumandb.com/mods/status-immune-general"
+   ]
+  }
+ ],
+ "substats": [
+  {
+   "stat": "Weapon DMG",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [
+    {
+     "tier": "Common (White, T1)",
+     "min": 2,
+     "max": 2,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Uncommon (Green, T2)",
+     "min": 4,
+     "max": 4,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Rare (Blue, T3)",
+     "min": 6,
+     "max": 6,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Epic (Purple, T4)",
+     "min": 8,
+     "max": 8,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Legendary (Gold, T5)",
+     "min": 10,
+     "max": 10,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    }
+   ],
+   "alternateValues": [
+    {
+     "tier": "Legendary",
+     "value": 6,
+     "source": "https://0x91cea55.github.io/OnceHuman",
+     "note": "0x91 raw.json v1.3.0: legendary_value 0.06, common_value 0.012"
+    },
+    {
+     "tier": "Legendary (General suffix est.)",
+     "value": 2.4,
+     "source": "https://meta-builds.net/api/get/allData",
+     "note": "joseph optimizer SUFFIX_VAL General wd:2.4 (estimate)"
+    }
+   ],
+   "confidence": "low",
+   "note": "Two 0x91 artefacts disagree (bundle 10% vs raw.json 6% at legendary). Treat the per-tier ladder as provisional."
+  },
+  {
+   "stat": "Crit DMG",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [
+    {
+     "tier": "Common (White, T1)",
+     "min": 3,
+     "max": 3,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Uncommon (Green, T2)",
+     "min": 6,
+     "max": 6,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Rare (Blue, T3)",
+     "min": 9,
+     "max": 9,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Epic (Purple, T4)",
+     "min": 12,
+     "max": 12,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Legendary (Gold, T5)",
+     "min": 15,
+     "max": 15,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    }
+   ],
+   "alternateValues": [
+    {
+     "tier": "Legendary (Violent suffix)",
+     "value": 15,
+     "source": "https://0x91cea55.github.io/OnceHuman",
+     "note": "suffix_tier_values.violent: 3/6/9/12/15 by rarity"
+    },
+    {
+     "tier": "Legendary (Violent suffix est.)",
+     "value": 12,
+     "source": "https://meta-builds.net/api/get/allData",
+     "note": "joseph SUFFIX_VAL Violent cd:12 (equals the Epic step)"
+    }
+   ],
+   "confidence": "medium",
+   "note": "Both 0x91 artefacts agree on 15% legendary; Violent suffix guarantees Crit DMG as first sub-attribute."
+  },
+  {
+   "stat": "Weakspot DMG",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [
+    {
+     "tier": "Common (White, T1)",
+     "min": 1.8,
+     "max": 1.8,
+     "source": "https://0x91cea55.github.io/OnceHuman"
+    },
+    {
+     "tier": "Uncommon (Green, T2)",
+     "min": 3.6,
+     "max": 3.6,
+     "source": "https://0x91cea55.github.io/OnceHuman"
+    },
+    {
+     "tier": "Rare (Blue, T3)",
+     "min": 5.4,
+     "max": 5.4,
+     "source": "https://0x91cea55.github.io/OnceHuman"
+    },
+    {
+     "tier": "Epic (Purple, T4)",
+     "min": 7.2,
+     "max": 7.2,
+     "source": "https://0x91cea55.github.io/OnceHuman"
+    },
+    {
+     "tier": "Legendary (Gold, T5)",
+     "min": 9,
+     "max": 9,
+     "source": "https://0x91cea55.github.io/OnceHuman"
+    }
+   ],
+   "alternateValues": [
+    {
+     "tier": "Legendary",
+     "value": 15,
+     "source": "https://0x91cea55.github.io/OnceHuman",
+     "note": "0x91 raw.json offensive.weakspot_dmg_percent legendary_max 0.15 (conflicts with its own suffix table 0.09)"
+    },
+    {
+     "tier": "Legendary (Precision suffix est.)",
+     "value": 7.2,
+     "source": "https://meta-builds.net/api/get/allData",
+     "note": "joseph SUFFIX_VAL Precision ws:7.2 (equals the Epic step)"
+    }
+   ],
+   "confidence": "low",
+   "note": "Precision suffix guarantees Weakspot DMG. 0x91 bundle has no value table for this stat (returns 0)."
+  },
+  {
+   "stat": "Elemental DMG",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [
+    {
+     "tier": "Common (White, T1)",
+     "min": 2,
+     "max": 2,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Uncommon (Green, T2)",
+     "min": 4,
+     "max": 4,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Rare (Blue, T3)",
+     "min": 6,
+     "max": 6,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Epic (Purple, T4)",
+     "min": 8,
+     "max": 8,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Legendary (Gold, T5)",
+     "min": 10,
+     "max": 10,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    }
+   ],
+   "alternateValues": [
+    {
+     "tier": "Legendary ('Talents'/Deviant Energy suffix)",
+     "value": 8,
+     "source": "https://0x91cea55.github.io/OnceHuman",
+     "note": "suffix_tier_values.talents: 1.6/3.2/4.8/6.4/8"
+    }
+   ],
+   "confidence": "low"
+  },
+  {
+   "stat": "Status DMG",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [
+    {
+     "tier": "Common (White, T1)",
+     "min": 2,
+     "max": 2,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Uncommon (Green, T2)",
+     "min": 4,
+     "max": 4,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Rare (Blue, T3)",
+     "min": 6,
+     "max": 6,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Epic (Purple, T4)",
+     "min": 8,
+     "max": 8,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Legendary (Gold, T5)",
+     "min": 10,
+     "max": 10,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    }
+   ],
+   "alternateValues": [
+    {
+     "tier": "Legendary",
+     "value": 6,
+     "source": "https://0x91cea55.github.io/OnceHuman",
+     "note": "0x91 raw.json status_dmg_percent legendary_max 0.06"
+    },
+    {
+     "tier": "Legendary (Deviant Energy suffix est.)",
+     "value": 8,
+     "source": "https://meta-builds.net/api/get/allData",
+     "note": "joseph SUFFIX_VAL 'Deviant Energy' st:8"
+    }
+   ],
+   "confidence": "low"
+  },
+  {
+   "stat": "Attack",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [
+    {
+     "tier": "Common (White, T1)",
+     "min": 1,
+     "max": 1,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Uncommon (Green, T2)",
+     "min": 2,
+     "max": 2,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Rare (Blue, T3)",
+     "min": 3,
+     "max": 3,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Epic (Purple, T4)",
+     "min": 4,
+     "max": 4,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Legendary (Gold, T5)",
+     "min": 5,
+     "max": 5,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    }
+   ],
+   "confidence": "low"
+  },
+  {
+   "stat": "DMG vs Normal",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [
+    {
+     "tier": "Common (White, T1)",
+     "min": 1.5,
+     "max": 1.5,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Uncommon (Green, T2)",
+     "min": 3,
+     "max": 3,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Rare (Blue, T3)",
+     "min": 4.5,
+     "max": 4.5,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Epic (Purple, T4)",
+     "min": 6,
+     "max": 6,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Legendary (Gold, T5)",
+     "min": 8,
+     "max": 8,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    }
+   ],
+   "confidence": "low",
+   "note": "Also appears as fixed sub-attribute 'damage_vs_normal' on Top/Gloves/Bottoms/Shoes mods in lredragol builds."
+  },
+  {
+   "stat": "DMG vs Elite",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [
+    {
+     "tier": "Common (White, T1)",
+     "min": 1.5,
+     "max": 1.5,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Uncommon (Green, T2)",
+     "min": 3,
+     "max": 3,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Rare (Blue, T3)",
+     "min": 4.5,
+     "max": 4.5,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Epic (Purple, T4)",
+     "min": 6,
+     "max": 6,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Legendary (Gold, T5)",
+     "min": 8,
+     "max": 8,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    }
+   ],
+   "confidence": "low"
+  },
+  {
+   "stat": "DMG vs Boss / Great Ones",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [
+    {
+     "tier": "Common (White, T1)",
+     "min": 1.5,
+     "max": 1.5,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Uncommon (Green, T2)",
+     "min": 3,
+     "max": 3,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Rare (Blue, T3)",
+     "min": 4.5,
+     "max": 4.5,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Epic (Purple, T4)",
+     "min": 6,
+     "max": 6,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    },
+    {
+     "tier": "Legendary (Gold, T5)",
+     "min": 8,
+     "max": 8,
+     "source": "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+    }
+   ],
+   "confidence": "low",
+   "note": "Steam Mod Conversion Guide lists 'damage to normal/elite/great ones' in the base substat pool."
+  },
+  {
+   "stat": "Crit Rate",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [],
+   "confidence": "low",
+   "note": "Observed as fixed sub-attribute (helmet/top/bottoms) in lredragol builds; value ladder not published. Search snippet: 'Crit rate +10%' max on some gold mods (unverified)."
+  },
+  {
+   "stat": "Max HP",
+   "unit": "%",
+   "appliesTo": [
+    "armor"
+   ],
+   "tiers": [],
+   "alternateValues": [
+    {
+     "tier": "example",
+     "value": 12,
+     "source": "https://0x91cea55.github.io/OnceHuman",
+     "note": "0x91 'example_value 0.12' - may be conflated with Lifeforce Boost main effect"
+    },
+    {
+     "tier": "Legendary (Survival suffix est.)",
+     "value": 4.8,
+     "source": "https://meta-builds.net/api/get/allData"
+    }
+   ],
+   "confidence": "low"
+  },
+  {
+   "stat": "DMG Reduction (Weapon / Status / Weakspot DMG taken)",
+   "unit": "%",
+   "appliesTo": [
+    "armor"
+   ],
+   "tiers": [],
+   "alternateValues": [
+    {
+     "tier": "Legendary (Survival suffix est.)",
+     "value": 3.2,
+     "source": "https://meta-builds.net/api/get/allData"
+    },
+    {
+     "tier": "Legendary (Resistance suffix est.)",
+     "value": 6,
+     "source": "https://meta-builds.net/api/get/allData"
+    }
+   ],
+   "confidence": "low",
+   "note": "Steam guide pool: 'damage reduction from weapon/status/weakspot damage'."
+  },
+  {
+   "stat": "Reload Speed / Reload Efficiency",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [],
+   "alternateValues": [
+    {
+     "tier": "Legendary (General suffix est.)",
+     "value": 2,
+     "source": "https://meta-builds.net/api/get/allData"
+    }
+   ],
+   "confidence": "low",
+   "note": "Fixed sub-attribute 'reload_efficiency' seen on weapon/top/shoes mods."
+  },
+  {
+   "stat": "Magazine Capacity",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [],
+   "confidence": "low",
+   "note": "Fixed sub-attribute 'magazine_capacity' seen on weapon/bottoms/shoes mods; Steam guide pool: 'mag size'."
+  },
+  {
+   "stat": "Fire Rate",
+   "unit": "%",
+   "appliesTo": [
+    "weapon"
+   ],
+   "tiers": [],
+   "confidence": "low",
+   "note": "Listed by 0x91 as a utility substat; no values found."
+  },
+  {
+   "stat": "Psi Intensity",
+   "unit": "flat",
+   "appliesTo": [],
+   "tiers": [],
+   "confidence": "low",
+   "note": "No evidence found that Psi Intensity rolls as a mod sub-attribute (it is an armor base stat). Null."
+  },
+  {
+   "stat": "Pollution Resist",
+   "unit": "flat",
+   "appliesTo": [],
+   "tiers": [],
+   "confidence": "low",
+   "note": "No evidence found as a mod sub-attribute (armor base stat). Null."
+  },
+  {
+   "stat": "Movement Speed",
+   "unit": "%",
+   "appliesTo": [],
+   "tiers": [],
+   "confidence": "low",
+   "note": "No evidence found as a mod sub-attribute. Null."
+  },
+  {
+   "stat": "<Keyword> DMG (Shrapnel/Bounce/Burn/Frost Vortex/Power Surge(Shock)/Unstable Bomber/Fortress)",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor(mask)"
+   ],
+   "tiers": [],
+   "alternateValues": [
+    {
+     "tier": "Legendary (keyword suffix est.)",
+     "value": 8,
+     "source": "https://meta-builds.net/api/get/allData",
+     "note": "joseph kw:8 estimate"
+    }
+   ],
+   "confidence": "low",
+   "note": "Fixed first sub-attribute on keyword-suffixed mods (lredragol: shrapnel_damage, bounce_damage, burn_damage, frost_vortex_damage, shock_damage, unstable_bomber_damage, fortress_damage)."
+  },
+  {
+   "stat": "<Keyword> Trigger Chance",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor(mask)"
+   ],
+   "tiers": [],
+   "alternateValues": [
+    {
+     "tier": "Legendary (Burn suffix)",
+     "value": 6,
+     "source": "https://0x91cea55.github.io/OnceHuman",
+     "note": "0x91: Burn Trigger Chance +6% legendary; two Burn-suffix pieces = +12%"
+    }
+   ],
+   "confidence": "low"
+  },
+  {
+   "stat": "<Keyword> Duration",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor"
+   ],
+   "tiers": [],
+   "confidence": "low",
+   "note": "burn_duration, frost_vortex_duration, fortress_duration, fast_gunner_duration observed as fixed sub-attributes."
+  },
+  {
+   "stat": "<Keyword> Crit DMG / Weakspot DMG",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor(gloves/bottoms)"
+   ],
+   "tiers": [],
+   "confidence": "low",
+   "note": "shrapnel_crit_damage, bounce_crit_damage, bounce_weakspot_damage, shock_crit_damage, marked_target_weakspot_damage observed."
+  },
+  {
+   "stat": "<Element> Elemental DMG (Blaze/Frost/Shock)",
+   "unit": "%",
+   "appliesTo": [
+    "weapon",
+    "armor(gloves)"
+   ],
+   "tiers": [],
+   "confidence": "low",
+   "note": "burn_elemental_damage, frost_elemental_damage, shock_elemental_damage observed; also 'damage_to_shocked_target'."
+  },
+  {
+   "stat": "Instant keyword DMG / trigger chance; Bullet-effect DMG / trigger chance",
+   "unit": "%",
+   "appliesTo": [
+    "armor(mask/bottoms)"
+   ],
+   "tiers": [],
+   "confidence": "low",
+   "note": "instant_keyword_* (mask) and bullet_effect_* (bottoms) observed in lredragol builds."
+  }
+ ],
+ "substatCount": 4,
+ "substatCountNote": "4 sub-attributes per legendary mod (dev blog examples 3/3/2/2 and 5/5/5/2). Lower-rarity counts not verified.",
+ "levelling": {
+  "currentSystem": {
+   "effectiveFrom": "Version 2.3.1 (2026-01-21), announced in the 2025-12-12 developer blog",
+   "subAttributesPerMod": 4,
+   "subAttributesAreFixed": true,
+   "rule": "The four sub-attributes are no longer randomly generated but fixed to match the mod's core traits (e.g. a Frost Vortex weapon mod carries Frost Vortex DMG / Trigger Chance / Duration / Frost Elemental DMG).",
+   "modLevel": "Mod level = sum of the four sub-attribute levels, maximum Level 17.",
+   "subAttributeLevelRange": [
+    1,
+    5
+   ],
+   "examples": {
+    "legendary_level_10": [
+     3,
+     3,
+     2,
+     2
+    ],
+    "legendary_level_17": [
+     5,
+     5,
+     5,
+     2
+    ]
+   },
+   "shinyMods": "Level-17 'Shiny' versions exist with slightly higher main stats (0x91); smus data (patch 3.0.7): 'Shiny Mod (Lv17+) obtained via collection progress and Lv17 transforms (3.0.x system)'.",
+   "legacyMods": "Mods obtained before 2.3.1 keep their randomly rolled sub-attributes (0x91).",
+   "valuePerSubAttributeLevel": null,
+   "sources": [
+    "https://www.oncehuman.game/news/devBlog/20251212/40781_1276354.html",
+    "https://www.mmorpg.com/news/equipment-mod-changes-are-coming-to-once-human-to-make-progression-easier-2000136844",
+    "https://www.oncehuman.game/news/update/20260121/40780_1282991.html",
+    "https://0x91cea55.github.io/OnceHuman",
+    "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/ohg_data.js"
+   ]
+  },
+  "legacySystem": {
+   "effectiveUntil": "2026-01-21",
+   "substatsPerMod": 4,
+   "substatRarities": [
+    "Common",
+    "Rare",
+    "Epic"
+   ],
+   "conversionRules": "Mod Conversion: 4 Common = 1 Rare, 3 Rare = 1 Epic (Steam Mod Conversion Guide, 2025).",
+   "enhancement": "Enhancing a mod increases the value of one random existing substat; its rarity does not change. A mod can be enhanced 5 times to reach Level 10 ('intermediate quality'). Vortex Multiplier page: 'can be enhanced up to five times'.",
+   "substatPool": "Weapon/Status DMG, DMG vs Normal/Elite/Great Ones, Weapon/Status/Weakspot DMG reduction, Reload Speed, Mag size, HP bonus; magnitude depends on the substat's rarity; harder content drops higher-rarity substats.",
+   "modTiers": "Game8-era listings show mod tiers I-V with scaling main effects (e.g. Crit Boost I/II/III = 3/6/9% Crit Rate; Blaze Amplifier IV 2.5% vs V 3%).",
+   "sources": [
+    "https://steamcommunity.com/sharedfiles/filedetails/?id=3479129708",
+    "https://steamcommunity.com/app/2139460/discussions/0/4854406759567050488/",
+    "https://game8.co/games/Once-Human/archives/460076",
+    "https://www.bluestacks.com/blog/game-guides/once-human/ohn-frost-vortex-build-en.html"
+   ]
+  }
+ },
+ "suffixes": [
+  {
+   "suffix": "General",
+   "guaranteedSubAttribute": "Weapon DMG (+Reload Efficiency) - inferred",
+   "valuesLegendary": {
+    "weapon_dmg_pct": 2.4,
+    "reload_efficiency_pct": 2
+   },
+   "valueSource": "https://meta-builds.net/api/get/allData",
+   "valueConfidence": "low (joseph estimate)",
+   "slots": [
+    "Weapon",
+    "Helmet",
+    "Mask",
+    "Top",
+    "Gloves",
+    "Bottoms",
+    "Shoes"
+   ]
+  },
+  {
+   "suffix": "Violent",
+   "guaranteedSubAttribute": "Crit DMG",
+   "valuesByRarity": {
+    "common": 3,
+    "uncommon": 6,
+    "rare": 9,
+    "epic": 12,
+    "legendary": 15
+   },
+   "valueSource": "https://0x91cea55.github.io/OnceHuman",
+   "valueConfidence": "medium",
+   "slots": [
+    "Weapon",
+    "Helmet",
+    "Mask",
+    "Top",
+    "Gloves",
+    "Bottoms",
+    "Shoes"
+   ],
+   "note": "OHDB also spells one variant 'Violence'."
+  },
+  {
+   "suffix": "Precision",
+   "guaranteedSubAttribute": "Weakspot DMG",
+   "valuesByRarity": {
+    "common": 1.8,
+    "uncommon": 3.6,
+    "rare": 5.4,
+    "epic": 7.2,
+    "legendary": 9
+   },
+   "valueSource": "https://0x91cea55.github.io/OnceHuman",
+   "valueConfidence": "low (0x91 elsewhere says legendary max 15%)",
+   "slots": [
+    "Weapon",
+    "Helmet",
+    "Mask",
+    "Top",
+    "Gloves",
+    "Bottoms",
+    "Shoes"
+   ]
+  },
+  {
+   "suffix": "Deviant Energy",
+   "guaranteedSubAttribute": "Status DMG / Elemental DMG (varies)",
+   "valuesByRarity": {
+    "common": 1.6,
+    "uncommon": 3.2,
+    "rare": 4.8,
+    "epic": 6.4,
+    "legendary": 8
+   },
+   "valueSource": "https://0x91cea55.github.io/OnceHuman",
+   "valueConfidence": "low",
+   "note": "0x91 calls this 'Talents' (Elemental DMG). Appears alone and combined with scenario suffixes (e.g. 'Lunar Deviant Energy', 'Resonance Deviant Energy').",
+   "slots": [
+    "Weapon",
+    "Helmet",
+    "Mask",
+    "Top",
+    "Gloves",
+    "Bottoms",
+    "Shoes"
+   ]
+  },
+  {
+   "suffix": "Survival",
+   "guaranteedSubAttribute": "Max HP / DMG Reduction",
+   "valuesLegendary": {
+    "max_hp_pct": 4.8,
+    "dmg_reduction_pct": 3.2
+   },
+   "valueSource": "https://meta-builds.net/api/get/allData",
+   "valueConfidence": "low (estimate)",
+   "slots": [
+    "Weapon",
+    "Helmet",
+    "Mask",
+    "Top",
+    "Gloves",
+    "Bottoms",
+    "Shoes"
+   ]
+  },
+  {
+   "suffix": "Fury",
+   "guaranteedSubAttribute": "Weapon DMG + Crit DMG (inferred)",
+   "valuesLegendary": {
+    "weapon_dmg_pct": 5,
+    "crit_dmg_pct": 5
+   },
+   "valueSource": "https://meta-builds.net/api/get/allData",
+   "valueConfidence": "low (estimate)",
+   "slots": [
+    "Shoes (Steady Hand)"
+   ]
+  },
+  {
+   "suffix": "Resistance",
+   "guaranteedSubAttribute": "DMG Reduction (inferred)",
+   "valuesLegendary": {
+    "dmg_reduction_pct": 6
+   },
+   "valueSource": "https://meta-builds.net/api/get/allData",
+   "valueConfidence": "low (estimate)",
+   "slots": [
+    "Shoes (Steady Hand)"
+   ]
+  },
+  {
+   "suffix": "Melee Default",
+   "guaranteedSubAttribute": "Melee DMG (inferred)",
+   "valuesLegendary": {
+    "melee_dmg_pct": 8
+   },
+   "valueSource": "https://meta-builds.net/api/get/allData",
+   "valueConfidence": "low (estimate)",
+   "slots": [
+    "Gloves (Melee Amplifier)",
+    "Bottoms (Melee Momentum)"
+   ]
+  },
+  {
+   "suffix": "Keyword suffixes: Burn, Fast Gunner, Bounce, Unstable Bomber, Frost Vortex, Fortress Warfare, Shrapnel, Power Surge, The Bull's Eye",
+   "guaranteedSubAttribute": "<Keyword> DMG or <Keyword> Trigger Chance",
+   "valuesLegendary": {
+    "burn_trigger_chance_pct": 6,
+    "keyword_dmg_pct_estimate": 8
+   },
+   "valueSource": "https://0x91cea55.github.io/OnceHuman",
+   "valueConfidence": "low",
+   "note": "Only on Weapon mods and Mask mods of the matching keyword. 0x91: 'Burn: Burn Trigger Chance +6% legendary; two pieces = +12%'.",
+   "slots": [
+    "Weapon",
+    "Mask"
+   ]
+  },
+  {
+   "suffix": "Lunar (+ Lunar Deviant Energy)",
+   "guaranteedSubAttribute": "Crit DMG / Elemental DMG / Weapon-Status DMG scaling inversely with HP",
+   "peakValuesLegendary": {
+    "crit_dmg_pct": 30,
+    "elemental_dmg_pct": 16,
+    "weapon_or_status_dmg_pct": 12
+   },
+   "epicScaling": "80% of legendary peak (e.g. 24% Crit DMG)",
+   "maxTrigger": "low HP (community consensus <= 30%)",
+   "valueSource": "https://0x91cea55.github.io/OnceHuman",
+   "valueConfidence": "medium (0x91 in-game screenshot LunarCrescentSubstatPercents.png)",
+   "slots": [
+    "Helmet",
+    "Top"
+   ],
+   "estimates": {
+    "joseph": {
+     "normal": {
+      "cd": 8,
+      "wd": 2
+     },
+     "semi(<=50%HP)": {
+      "cd": 18,
+      "wd": 6
+     },
+     "low(<30%HP)": {
+      "cd": 30,
+      "wd": 10
+     }
+    }
+   }
+  },
+  {
+   "suffix": "Crescent (+ Crescent Deviant Energy)",
+   "guaranteedSubAttribute": "base bonus + extra bonus when Shield >= 40%",
+   "peakValuesLegendary": {
+    "crit_dmg_pct": {
+     "base": 10,
+     "extra": 15,
+     "peak": 25
+    },
+    "elemental_dmg_pct": {
+     "base": 5,
+     "extra": 8,
+     "peak": 13
+    },
+    "weapon_or_status_dmg_pct": {
+     "base": 4,
+     "extra": 6,
+     "peak": 10
+    }
+   },
+   "valueSource": "https://0x91cea55.github.io/OnceHuman",
+   "valueConfidence": "medium (in-game screenshot)",
+   "slots": [
+    "Helmet",
+    "Gloves"
+   ]
+  },
+  {
+   "suffix": "Resonance (+ Resonance Deviant Energy)",
+   "guaranteedSubAttribute": "sustained-damage bonus when dealing Weakspot, Crit and Elemental DMG",
+   "valuesLegendary": null,
+   "estimates": {
+    "joseph": {
+     "Resonance": {
+      "status_dmg_pct": 6
+     },
+     "Resonance Deviant Energy": {
+      "status_dmg_pct": 8
+     }
+    }
+   },
+   "valueSource": "https://steamcommunity.com/app/2139460/discussions/0/7073555334572500765/",
+   "valueConfidence": "low",
+   "note": "Steam thread: 'Resonance suffix increases sustained damage output when dealing Weakspot, Crit, and Elemental DMG, available on pants and gloves in the Prime War.' Not a set bonus.",
+   "slots": [
+    "Gloves",
+    "Bottoms"
+   ]
+  },
+  {
+   "suffix": "Mirror / Wild / Phantasmal (+ Deviant Energy)",
+   "guaranteedSubAttribute": "Aberrant Progeny (Visional Wheel S3 / 3.0.x) exclusive suffixes",
+   "valuesLegendary": null,
+   "estimates": {
+    "joseph": {
+     "Mirror": {
+      "wd": 4,
+      "cd": 4,
+      "dr": 3
+     },
+     "Wild": {
+      "wd": 4,
+      "cd": 4,
+      "dr": 3
+     },
+     "Phantasmal": {
+      "wd": 3,
+      "cd": 3,
+      "dr(low HP)": 8
+     }
+    }
+   },
+   "valueSource": "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/ohg_data.js",
+   "valueConfidence": "low",
+   "slots": [
+    "Top",
+    "Shoes"
+   ]
+  },
+  {
+   "suffix": "Downstar (+ Downstar Deviant Energy)",
+   "guaranteedSubAttribute": null,
+   "estimates": {
+    "joseph": {
+     "wd": 3,
+     "cd": 3
+    }
+   },
+   "valueSource": "https://meta-builds.net/api/get/allData",
+   "valueConfidence": "low",
+   "slots": [
+    "Bottoms",
+    "Shoes"
+   ]
+  },
+  {
+   "suffix": "Battle",
+   "guaranteedSubAttribute": null,
+   "estimates": {
+    "joseph": {
+     "wd": 4,
+     "cd": 4
+    }
+   },
+   "valueSource": "https://meta-builds.net/api/get/allData",
+   "valueConfidence": "low",
+   "slots": [
+    "Top",
+    "Shoes"
+   ]
+  },
+  {
+   "suffix": "Aero (+ Aero Deviant Energy)",
+   "guaranteedSubAttribute": null,
+   "estimates": {
+    "joseph": {
+     "wd": 2,
+     "cd": 2
+    }
+   },
+   "valueSource": "https://meta-builds.net/api/get/allData",
+   "valueConfidence": "low",
+   "slots": [],
+   "note": "Seen on OHDB 'Elemental Resonance (Aero Deviant Energy)' page; not in current scrape variant list."
+  }
+ ],
+ "modSetMechanics": {
+  "exists": false,
+  "note": "No 'mod set' or 'mod resonance' set-bonus mechanic was found. 'Resonance' is (a) a mod SUFFIX on gloves/pants from Prime War and (b) part of mod names (Flame Resonance, Elemental Resonance) and an armor set name (Dark Resonance Set, v2.3.1). The 0x91 screenshot of United We Stand shows 'Same Legendary Mods required: 0/3', hinting at a per-mod same-mod-count condition rather than a set system."
+ },
+ "damageBuckets": {
+  "model": "Keyword damage = Base x (1 + sum Factor bonuses) x (1 + sum Final bonuses). Factor and Final are each additive within the bucket and multiplicative with each other (0x91, 'UNCERTAIN - validate').",
+  "confirmedFinalBucketMods": [
+   "Break Bounce (+25% Bounce Final, target >50% HP)",
+   "Frostwave Wither (+30% Frost Vortex Final, decaying 8%/s)",
+   "Pinpoint Strike (+35% Unstable Bomber Final, single target)"
+  ],
+  "translationNote": "'Ultimate DMG' (First Electrocution, Delayed Blast tooltips) is a translation of Final DMG Bonus per 0x91 ADR-002/014; 'DMG Coefficient' = Factor pool.",
+  "source": "https://0x91cea55.github.io/OnceHuman"
+ },
+ "fixedSubAttributesObserved": [
+  {
+   "slot": "boots",
+   "mod": "Covered Advance General",
+   "subAttributesObserved": [
+    "damage_vs_normal",
+    "magazine_capacity",
+    "reload_efficiency",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "boots",
+   "mod": "Covered Advance Precision",
+   "subAttributesObserved": [
+    "damage_vs_normal",
+    "magazine_capacity",
+    "reload_efficiency"
+   ]
+  },
+  {
+   "slot": "boots",
+   "mod": "Slow And Steady General",
+   "subAttributesObserved": [
+    "damage_vs_normal",
+    "magazine_capacity",
+    "reload_efficiency",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "gloves",
+   "mod": "Crit Amplifier",
+   "subAttributesObserved": [
+    "crit_damage",
+    "damage_vs_normal",
+    "shrapnel_crit_damage",
+    "weakspot_damage",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "gloves",
+   "mod": "Crit Boost",
+   "subAttributesObserved": [
+    "crit_damage",
+    "weakspot_damage",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "gloves",
+   "mod": "Elemental Overload",
+   "subAttributesObserved": [
+    "burn_elemental_damage",
+    "elemental_damage",
+    "frost_elemental_damage",
+    "status_damage"
+   ]
+  },
+  {
+   "slot": "gloves",
+   "mod": "Status Enhancement",
+   "subAttributesObserved": [
+    "burn_elemental_damage",
+    "elemental_damage",
+    "shock_elemental_damage",
+    "status_damage"
+   ]
+  },
+  {
+   "slot": "gloves",
+   "mod": "Weakspot Dmg Boost Precision",
+   "subAttributesObserved": [
+    "bounce_weakspot_damage",
+    "crit_damage",
+    "weakspot_damage",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "helmet",
+   "mod": "Deviation Expert",
+   "subAttributesObserved": [
+    "crit_rate",
+    "elemental_damage",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "helmet",
+   "mod": "Momentum Up",
+   "subAttributesObserved": [
+    "crit_damage",
+    "crit_rate",
+    "weakspot_damage",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "helmet",
+   "mod": "Precise Strike",
+   "subAttributesObserved": [
+    "crit_damage",
+    "crit_rate",
+    "weakspot_damage",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "helmet",
+   "mod": "Work of Proficiency",
+   "subAttributesObserved": [
+    "crit_rate",
+    "elemental_damage",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "mask",
+   "mod": "Blaze Amplifier Burn",
+   "subAttributesObserved": [
+    "burn_damage",
+    "burn_trigger_chance",
+    "status_damage"
+   ]
+  },
+  {
+   "slot": "mask",
+   "mod": "Blitzkrieg",
+   "subAttributesObserved": [
+    "fast_gunner_duration",
+    "fast_gunner_trigger_chance",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "mask",
+   "mod": "Break Bounce",
+   "subAttributesObserved": [
+    "bounce_damage",
+    "bounce_trigger_chance",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "mask",
+   "mod": "Frost Construct Frost Vortex",
+   "subAttributesObserved": [
+    "frost_vortex_damage",
+    "frost_vortex_trigger_chance",
+    "status_damage"
+   ]
+  },
+  {
+   "slot": "mask",
+   "mod": "Lingering Frost",
+   "subAttributesObserved": [
+    "frost_vortex_damage",
+    "frost_vortex_trigger_chance",
+    "status_damage"
+   ]
+  },
+  {
+   "slot": "mask",
+   "mod": "Point Detonation",
+   "subAttributesObserved": [
+    "instant_keyword_damage",
+    "instant_keyword_trigger_chance",
+    "status_damage"
+   ]
+  },
+  {
+   "slot": "mask",
+   "mod": "Targeted Strike",
+   "subAttributesObserved": [
+    "marked_target_damage",
+    "marked_target_weakspot_damage",
+    "status_damage"
+   ]
+  },
+  {
+   "slot": "mask",
+   "mod": "Thunderclap Power Surge",
+   "subAttributesObserved": [
+    "damage_to_shocked_target",
+    "shock_trigger_chance",
+    "status_damage"
+   ]
+  },
+  {
+   "slot": "mask",
+   "mod": "Unbreakable Fortress Warfare",
+   "subAttributesObserved": [
+    "fortress_damage",
+    "fortress_duration",
+    "status_damage",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "pants",
+   "mod": "Abnormal Increase",
+   "subAttributesObserved": [
+    "burn_duration",
+    "crit_damage",
+    "damage_vs_normal",
+    "shock_crit_damage",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "pants",
+   "mod": "Bullet Siphon",
+   "subAttributesObserved": [
+    "bullet_effect_damage",
+    "bullet_effect_trigger_chance",
+    "crit_damage",
+    "frost_vortex_duration",
+    "magazine_capacity",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "pants",
+   "mod": "Bullet Siphon Precision",
+   "subAttributesObserved": [
+    "damage_vs_normal",
+    "magazine_capacity",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "pants",
+   "mod": "Critical Surge General",
+   "subAttributesObserved": [
+    "crit_damage",
+    "frost_vortex_duration",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "pants",
+   "mod": "Deadshot",
+   "subAttributesObserved": [
+    "crit_damage",
+    "crit_rate",
+    "damage_vs_normal",
+    "magazine_capacity",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "pants",
+   "mod": "Deadshot Precision",
+   "subAttributesObserved": [
+    "crit_rate",
+    "damage_vs_normal",
+    "magazine_capacity"
+   ]
+  },
+  {
+   "slot": "pants",
+   "mod": "Precision Charge",
+   "subAttributesObserved": [
+    "crit_damage",
+    "shock_crit_damage",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "pants",
+   "mod": "Unstoppable",
+   "subAttributesObserved": [
+    "damage_vs_normal",
+    "magazine_capacity",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "top",
+   "mod": "Critical Rescue",
+   "subAttributesObserved": [
+    "crit_rate",
+    "damage_vs_normal",
+    "reload_efficiency",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "top",
+   "mod": "Healing Fortification",
+   "subAttributesObserved": [
+    "damage_vs_normal",
+    "reload_efficiency",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "top",
+   "mod": "Rejuvenating",
+   "subAttributesObserved": [
+    "crit_rate",
+    "reload_efficiency",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "weapon",
+   "mod": "Bombardier Souvenir",
+   "subAttributesObserved": [
+    "crit_damage",
+    "unstable_bomber_damage",
+    "unstable_bomber_trigger_chance",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "weapon",
+   "mod": "Bombardier Souvenir Unstable Bomber",
+   "subAttributesObserved": [
+    "magazine_capacity",
+    "reload_efficiency",
+    "unstable_bomber_damage",
+    "unstable_bomber_trigger_chance"
+   ]
+  },
+  {
+   "slot": "weapon",
+   "mod": "Burning Wrath Burn",
+   "subAttributesObserved": [
+    "burn_damage",
+    "burn_duration",
+    "burn_elemental_damage",
+    "burn_trigger_chance"
+   ]
+  },
+  {
+   "slot": "weapon",
+   "mod": "Cryo Blast Frost Vortex",
+   "subAttributesObserved": [
+    "frost_elemental_damage",
+    "frost_vortex_damage",
+    "frost_vortex_duration",
+    "frost_vortex_trigger_chance"
+   ]
+  },
+  {
+   "slot": "weapon",
+   "mod": "Portable Territory Fortress Warfare",
+   "subAttributesObserved": [
+    "crit_damage",
+    "fortress_damage",
+    "fortress_duration",
+    "fortress_trigger_chance",
+    "reload_efficiency",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "weapon",
+   "mod": "Precision Rush",
+   "subAttributesObserved": [
+    "fast_gunner_trigger_chance",
+    "fast_gunner_weapon_damage",
+    "magazine_capacity",
+    "weapon_damage"
+   ]
+  },
+  {
+   "slot": "weapon",
+   "mod": "Shatter Them All",
+   "subAttributesObserved": [
+    "shrapnel_crit_damage",
+    "shrapnel_damage",
+    "shrapnel_trigger_chance",
+    "weakspot_damage"
+   ]
+  },
+  {
+   "slot": "weapon",
+   "mod": "Static Shock Power Surge",
+   "subAttributesObserved": [
+    "damage_to_shocked_target",
+    "shock_damage",
+    "shock_elemental_damage",
+    "shock_trigger_chance"
+   ]
+  },
+  {
+   "slot": "weapon",
+   "mod": "Targeted Bounce",
+   "subAttributesObserved": [
+    "bounce_crit_damage",
+    "bounce_damage",
+    "bounce_trigger_chance",
+    "bounce_weakspot_damage"
+   ]
+  },
+  {
+   "slot": "weapon",
+   "mod": "Vortex Multiplier",
+   "subAttributesObserved": [
+    "frost_elemental_damage",
+    "frost_vortex_damage",
+    "frost_vortex_duration",
+    "frost_vortex_trigger_chance"
+   ]
+  }
+ ],
+ "legacyTieredMods": [
+  {
+   "name": "Blaze Amplifier",
+   "tier": "IV",
+   "slot": "Mask",
+   "category": "Burn",
+   "effect": "Every stack of Burn grants +2.5% Psi Intensity DMG.",
+   "stats": {
+    "psi_intensity_damage_per_burn_stack": 0.025
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Blaze Amplifier",
+   "tier": "V",
+   "slot": "Mask",
+   "category": "Burn",
+   "effect": "Every stack of Burn grants +3% Psi Intensity DMG.",
+   "stats": {
+    "psi_intensity_damage_per_burn_stack": 0.03
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Blaze Blessing",
+   "tier": "IV",
+   "slot": "All Weapons",
+   "category": "Burn",
+   "effect": "When defeating an enemy affected by Burn, recover 5% HP.",
+   "stats": {
+    "heal_on_burn_kill_pct": 0.05
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Blaze Blessing",
+   "tier": "V",
+   "slot": "All Weapons",
+   "category": "Burn",
+   "effect": "TBA",
+   "stats": {},
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": "Game8 currently lists this as TBA."
+  },
+  {
+   "name": "Blitzkrieg",
+   "tier": "IV",
+   "slot": "Mask",
+   "category": "Fast Gunner",
+   "effect": "Fast Gunner stacks +4 and additional Fire Rate +0.8% for each stack.",
+   "stats": {
+    "fast_gunner_stack_bonus": 4,
+    "fire_rate_per_stack": 0.008
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Blitzkrieg",
+   "tier": "V",
+   "slot": "Mask",
+   "category": "Fast Gunner",
+   "effect": "Fast Gunner stacks +5 and additional Fire Rate +1% for each stack.",
+   "stats": {
+    "fast_gunner_stack_bonus": 5,
+    "fire_rate_per_stack": 0.01
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Bombardier Souvenir",
+   "tier": "V",
+   "slot": "All Weapons",
+   "category": "Unstable Bomber",
+   "effect": "When triggering Unstable Bomber, automatically refill 10% of your magazine.",
+   "stats": {
+    "magazine_refill_on_trigger_pct": 0.1
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Bounce Rampage",
+   "tier": "V",
+   "slot": "All Weapons",
+   "category": "Bounce",
+   "effect": "Bounce deals more DMG as more targets are hit, up to DMG +45%",
+   "stats": {
+    "max_bonus_pct": 0.45,
+    "per_target_pct": 0.15
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Bullet Siphon",
+   "tier": "IV",
+   "slot": "Bottoms",
+   "category": "Weapon",
+   "effect": "Every 5 bullets consumed in the magazine grants +4% Weapon DMG, capped at 20%.",
+   "stats": {
+    "weapon_damage_per_five_bullets_pct": 0.04,
+    "cap_pct": 0.2
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Bullet Siphon",
+   "tier": "V",
+   "slot": "Bottoms",
+   "category": "Weapon",
+   "effect": "Weapon DMG +5%. Every 5 bullets consumed in the magazine grants +4% Weapon DMG, capped at 20%.",
+   "stats": {
+    "flat_weapon_damage_pct": 0.05,
+    "weapon_damage_per_five_bullets_pct": 0.04,
+    "cap_pct": 0.2
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Burning Wrath",
+   "tier": "V",
+   "slot": "All Weapons",
+   "category": "Burn",
+   "effect": "Triggering Burn has a 25% chance to grant +1 Burn stack(s).",
+   "stats": {
+    "burn_stack_proc_chance": 0.25,
+    "extra_burn_stacks": 1
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Covered Advance",
+   "tier": "IV",
+   "slot": "Shoes",
+   "category": "General",
+   "effect": "Taking no DMG within 6s grants +16% Melee, Weapon, and Status DMG for 30s. The effect resets when the duration ends.",
+   "stats": {
+    "damage_bonus_pct": 0.16,
+    "no_damage_window_s": 6,
+    "duration_s": 30
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Covered Advance",
+   "tier": "V",
+   "slot": "Shoes",
+   "category": "General",
+   "effect": "Taking no DMG within 4s grants +20% Melee, Weapon, and Status DMG for 30s. The effect resets when the duration ends.",
+   "stats": {
+    "damage_bonus_pct": 0.2,
+    "no_damage_window_s": 4,
+    "duration_s": 30
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Cowboy",
+   "tier": "V",
+   "slot": "All Weapons",
+   "category": "Fast Gunner",
+   "effect": "After reloading when the magazine is empty, Fast Gunner trigger chance 100% (based on the weapon's Trigger Chance) for 5s. When Fast Gunner reaches max stacks, the duration is increased by 5s.",
+   "stats": {
+    "trigger_chance_multiplier": 1.0,
+    "duration_s": 5,
+    "max_stack_extension_s": 5
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Crit Amplifier",
+   "tier": "IV",
+   "slot": "Gloves",
+   "category": "Crit",
+   "effect": "Crit Rate +5%, Crit DMG +15%",
+   "stats": {
+    "crit_rate_pct": 0.05,
+    "crit_damage_pct": 0.15
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Crit Amplifier",
+   "tier": "V",
+   "slot": "Gloves",
+   "category": "Crit",
+   "effect": "Crit Rate +10%, Crit DMG +15%",
+   "stats": {
+    "crit_rate_pct": 0.1,
+    "crit_damage_pct": 0.15
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Crit Boost",
+   "tier": "I",
+   "slot": "All Weapons",
+   "category": "Crit",
+   "effect": "Crit Rate +3.0%",
+   "stats": {
+    "crit_rate_pct": 0.03
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Crit Boost",
+   "tier": "II",
+   "slot": "All Weapons",
+   "category": "Crit",
+   "effect": "Crit Rate +6.0%",
+   "stats": {
+    "crit_rate_pct": 0.06
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Crit Boost",
+   "tier": "III",
+   "slot": "All Weapons",
+   "category": "Crit",
+   "effect": "Crit Rate +9.0%",
+   "stats": {
+    "crit_rate_pct": 0.09
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Crit Boost",
+   "tier": "IV",
+   "slot": "Gloves",
+   "category": "Crit",
+   "effect": "Crit Rate +12.0%",
+   "stats": {
+    "crit_rate_pct": 0.12
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Crit DMG Enhancement",
+   "tier": "I",
+   "slot": "All Armor",
+   "category": "Crit",
+   "effect": "Crit Rate +2.0%, Crit DMG +4.0%",
+   "stats": {
+    "crit_rate_pct": 0.02,
+    "crit_damage_pct": 0.04
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Crit DMG Enhancement",
+   "tier": "II",
+   "slot": "All Armor",
+   "category": "Crit",
+   "effect": "Crit Rate +2.0%, Crit DMG +8.0%",
+   "stats": {
+    "crit_rate_pct": 0.02,
+    "crit_damage_pct": 0.08
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  },
+  {
+   "name": "Crit DMG Enhancement",
+   "tier": "III",
+   "slot": "All Armor",
+   "category": "Crit",
+   "effect": "Crit Rate +2.0%, Crit DMG +12.0%",
+   "stats": {
+    "crit_rate_pct": 0.02,
+    "crit_damage_pct": 0.12
+   },
+   "source": "https://game8.co/games/Once-Human/archives/460076",
+   "note": null
+  }
+ ]
+}

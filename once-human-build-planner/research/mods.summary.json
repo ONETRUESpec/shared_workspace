@@ -1,0 +1,126 @@
+{
+ "facet": "Once Human weapon mods and armor mods (substat system)",
+ "dataFile": "/home/user/shared_workspace/once-human-build-planner/data/mods.json",
+ "notesFile": "/home/user/shared_workspace/once-human-build-planner/research/mods.md",
+ "gameVersionCovered": "Post-2.3.1 mod revamp (2026-01-21) effect texts from OnceHumanDB; version markers through Patch 3.0.7 (2026-09-30); legacy Game8 tier values flagged pre-2.3.1",
+ "confidence": "medium",
+ "recordCount": 101,
+ "keyClaims": [
+  {
+   "claim": "Every weapon has exactly 1 mod slot and every armor piece (Helmet, Mask, Top, Gloves, Bottoms, Shoes) has exactly 1 armor-mod slot; armor mods are slot-specific; weapon mods are not class-restricted but keyword mods only work on weapons with that keyword. Attachments (Muzzle/Optic/Tactics/Magazine/Ammo) are a separate system.",
+   "evidence": "0x91 raw.json mod_slots: 'Each armor piece has ONE armor mod slot. Weapon mods are separate and go on weapons only.' OhDex mod list placement filter: Ranged Weapon / Melee Weapon / Helmet / Mask / Top / Gloves / Bottoms / Shoes. Official equipment guide: five accessory categories.",
+   "sources": [
+    "https://0x91cea55.github.io/OnceHuman",
+    "https://ohdex.gg/mod-list",
+    "https://www.oncehuman.game/wiki/20230201/37492_1071059.html"
+   ],
+   "confidence": "high"
+  },
+  {
+   "claim": "Since Version 2.3.1 (2026-01-21) a mod's four sub-attributes are fixed to its core traits; mod level = sum of sub-attribute levels, max 17; legendary Level 10 = 3/3/2/2, Level 17 = 5/5/5/2; Level-17 'Shiny' mods have slightly higher main stats.",
+   "evidence": "Dev blog 2025-12-12 (search snippet): 'Mod level is determined by the sum of a mod's sub-attribute levels, up to a maximum of Level 17 ... legendary mod at level 10 has sub-attribute levels of 3, 3, 2, and 2 ... level 17: 5, 5, 5, 2 ... four sub-attributes are no longer randomly generated, but fixed'. 0x91: 'Major mod system rework on 2026-01-21 ... FIXED substats ... Shiny versions at level 17'.",
+   "sources": [
+    "https://www.oncehuman.game/news/devBlog/20251212/40781_1276354.html",
+    "https://www.mmorpg.com/news/equipment-mod-changes-are-coming-to-once-human-to-make-progression-easier-2000136844",
+    "https://www.oncehuman.game/news/update/20260121/40780_1282991.html",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "confidence": "high"
+  },
+  {
+   "claim": "Legacy (pre-2.3.1) substat system: 4 random substats of Common/Rare/Epic rarity; Mod Conversion 4 Common = 1 Rare, 3 Rare = 1 Epic; enhancing raises one random existing substat's value without changing rarity; 5 enhancements reach Level 10.",
+   "evidence": "Steam Mod Conversion Guide: 'Mods have substats of different rarities: Common, Rare, and Epic ... 4 Common = 1 Rare, and 3 Rare = 1 Epic'. Steam thread: 'Enhancing a mod will increase the stat of a random attribute ... quality ... will not change' and 'upgrade a mod 5 times to make it level 10'.",
+   "sources": [
+    "https://steamcommunity.com/sharedfiles/filedetails/?id=3479129708",
+    "https://steamcommunity.com/app/2139460/discussions/0/4854406759567050488/"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "claim": "Mod suffixes decide the guaranteed first sub-attribute: Violent = Crit DMG (3/6/9/12/15% by rarity), Precision = Weakspot DMG (1.8/3.6/5.4/7.2/9%), Deviant Energy ('Talents') = Elemental/Status DMG (1.6/3.2/4.8/6.4/8%), keyword suffixes = keyword stat (e.g. Burn Trigger Chance +6% legendary).",
+   "evidence": "0x91 raw.json suffix_tier_values table; OHDB variant lists show the same suffix families (General, Violent, Precision, Deviant Energy, Survival, keyword names, Lunar, Crescent, Resonance, Mirror, Wild, Phantasmal, Downstar, Battle).",
+   "sources": [
+    "https://0x91cea55.github.io/OnceHuman",
+    "https://www.oncehumandb.com/mods",
+    "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/mods.json"
+   ],
+   "confidence": "low-medium (single primary source for values; joseph optimizer uses 12/7.2/8 instead)"
+  },
+  {
+   "claim": "Lunar suffix peaks at low HP: Crit DMG +30%, Elemental DMG +16%, Weapon/Status DMG +12% (legendary; epic = 80%). Crescent suffix: base + extra at >=40% Shield: Crit DMG 10+15=25%, Elemental 5+8=13%, Weapon/Status 4+6=10%.",
+   "evidence": "0x91 INGAME_KNOWLEDGE_BIBLE section VI, sourced from in-game screenshot LunarCrescentSubstatPercents.png.",
+   "sources": [
+    "https://0x91cea55.github.io/OnceHuman",
+    "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "claim": "Core crit/weakspot armor mods (current OHDB values): Crit Amplifier +10% Crit Rate/+15% Crit DMG (gloves); Crit Boost +15% Crit Rate (gloves); Weakspot DMG Boost +25% (gloves); Weapon Amplifier +15% Weapon DMG; Status Enhancement +20%; Elemental Overload +18%; Deadshot +5% Crit DMG per crit up to +45% until reload (bottoms); Precise Strike +12% Weakspot DMG x3 for 3s (helmet); Fortune's Favor +10% CR/+30% CD but no weakspot DMG.",
+   "evidence": "OHDB mod texts (saitoh scrape), matched by 0x91 OCR and screenshot bible; Deadshot and Precise Strike also in search snippets (oncehumandb/wikily).",
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://0x91cea55.github.io/OnceHuman",
+    "https://wikily.gg/once-human/mods/19201115/"
+   ],
+   "confidence": "high"
+  },
+  {
+   "claim": "Keyword weapon mods stack rules: Shrapnel Smash +2% Shrapnel Crit Rate x15 (30%) for 2s; Shatter Them All +15%/part up to 45%; Multi-Bounce +7.5%/bounce up to 45%; Bounce Rampage +15%/target up to 45%; Super Charged +5% UB DMG x6 (3s); Surge Amplifier +5% PS DMG x4 (3s); Static Shock PS DMG +20%, duration -50%; Cryo Blast +4% FV DMG x5 (4s); Cryo Catalyst FV DMG +10% (+5% after construct); Shoot Out +1.5% Weapon DMG x20 (10s); Shooting Blitz +15% Weapon DMG while Fast Gunner; Vulnerability Amplifier Bull's Eye vulnerability +8% (16% total).",
+   "evidence": "OHDB texts; 0x91 OCR values agree except Shrapnel Smash (old 1%x20).",
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://0x91cea55.github.io/OnceHuman",
+    "https://www.oncehumandb.com/items/vulnerability-amplifier",
+    "https://www.oncehumandb.com/mods/shrapnel-smash-shrapnel"
+   ],
+   "confidence": "high"
+  },
+  {
+   "claim": "Mask keyword mods include Final-bucket multipliers that multiply with normal (Factor) bonuses: Break Bounce +25% Bounce final (target >50% HP), Frostwave Wither +30% FV final decaying 8%/s, Pinpoint Strike +35% UB final (single target), First Electrocution +35% PS 'Ultimate'(=Final) on unaffected targets, Delayed Blast +25% UB final per 4 hits; Blaze Amplifier +3% Psi Intensity DMG per Burn stack; Targeted Strike +10% CR/+25% CD vs marked; Explosive Barrage +10% CR/+10% WD in Fast Gunner; Shrapnel Carnage +100% weakspot hit weight/+25% Shrapnel weakspot DMG.",
+   "evidence": "OHDB texts + 0x91 Factor/Final classification ('CONFIRMED FINAL BUCKET MODS: Break Bounce, Frostwave Wither, Pinpoint Strike').",
+   "sources": [
+    "https://www.oncehumandb.com/mods",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "confidence": "medium (bucket model itself flagged 'uncertain' by 0x91)"
+  },
+  {
+   "claim": "Per-tier substat ladder (White/Green/Blue/Purple/Gold) used by the 0x91 simulator: Crit DMG 3/6/9/12/15; Weapon DMG, Elemental DMG, Status DMG 2/4/6/8/10; Attack 1/2/3/4/5; DMG vs Normal/Elite/Boss 1.5/3/4.5/6/8. 0x91's own raw.json instead gives legendary Weapon DMG 6%, Status DMG 6%, Elemental 8%, Weakspot 15%.",
+   "evidence": "0x91 gh-pages bundle table 'Vue' and raw.json 'substats.offensive'.",
+   "sources": [
+    "https://raw.githubusercontent.com/0x91cea55/OnceHuman/gh-pages/assets/index-DXU_nBNN.js",
+    "https://0x91cea55.github.io/OnceHuman"
+   ],
+   "confidence": "low (internally inconsistent; no official table found)"
+  },
+  {
+   "claim": "There is no mod 'set' / 'resonance' set-bonus mechanic; 'Resonance' is a Prime War mod suffix (gloves/pants) boosting sustained Weakspot/Crit/Elemental damage output, and otherwise part of individual mod/armor-set names.",
+   "evidence": "Steam thread 'Resonance mod, what does this means': 'Resonance suffix increases sustained damage output when dealing Weakspot, Crit, and Elemental DMG, available on pants and gloves in the Prime War.' OHDB variant lists.",
+   "sources": [
+    "https://steamcommunity.com/app/2139460/discussions/0/7073555334572500765/",
+    "https://www.oncehumandb.com/mods"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "claim": "Game8-era tiered values (legacy, pre-2.3.1) exist for the same mods: Blaze Amplifier IV 2.5%/V 3%; Blitzkrieg IV +4 stacks 0.8%/V +5 1%; Crit Amplifier IV 5%/15% vs V 10%/15%; Covered Advance IV 6s/16% vs V 4s/20%; Crit Boost I-III 3/6/9% (weapon), IV 12% (gloves); Crit DMG Enhancement I-III +2% CR & 4/8/12% CD (any armor).",
+   "evidence": "bramsey dataset (source_refs game8-mod-list).",
+   "sources": [
+    "https://game8.co/games/Once-Human/archives/460076",
+    "https://game8.co/games/Once-Human/archives/468372"
+   ],
+   "confidence": "medium (values dated)"
+  }
+ ],
+ "openQuestions": [
+  "Exact value per sub-attribute level (1-5) for each fixed sub-attribute in the post-2.3.1 system - not published anywhere reachable; only the level-distribution examples (3/3/2/2, 5/5/5/2) are known.",
+  "Authoritative legendary substat/suffix values: 0x91 gives conflicting numbers (Weapon DMG 6% vs 10%; Weakspot DMG 9% vs 15%); joseph optimizer uses 12/7.2/8. Needs in-game tooltip verification.",
+  "Shiny (Lv17) mod main-stat bonus magnitude and how 'Lv17 transforms' / collection progress work in 3.0.x.",
+  "Exact numeric effects of scenario suffixes Mirror / Wild / Phantasmal / Downstar / Battle / Resonance / Aero (only community estimates found).",
+  "Whether 'Vortex Multiplier', 'Targeted Bounce', 'Point Detonation', 'Lingering Frost', 'Elemental Amplifier', 'Vortex Overcharge' are renamed, removed or still-current mods (absent from the OHDB scrape).",
+  "United We Stand per-player step and the meaning of 'Same Legendary Mods required: 0/3' seen in its tooltip screenshot.",
+  "Substat count for Epic/Rare mods and whether Fire Rate / Movement Speed / Psi Intensity / Pollution Resist can roll as sub-attributes (no evidence found).",
+  "Whether any patch after 3.0.0 (through 3.0.7, Sep 2026) changed individual mod numbers - official patch notes were unreachable."
+ ]
+}
