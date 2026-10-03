@@ -1,0 +1,94 @@
+{
+  "facet": "armor",
+  "dataFile": "/home/user/shared_workspace/once-human-build-planner/data/armor.json",
+  "notesFile": "/home/user/shared_workspace/once-human-build-planner/research/armor.md",
+  "gameVersionCovered": "Set roster through v3.0.7 (2026-10); set-bonus text from in-game OCR (2026-03, v2.3.x), meta-builds.net export tagged v3.0.5 (2026-09-25), fandom set pages and the 3.0.6 Treacherous Tides rework (2026-09-16); base-stat tables from pre-2.3.1 OHDB/Korean mirror plus post-2.3.1 Tier V 6-star OCR (2026-03-01)",
+  "confidence": "medium",
+  "recordCount": 197,
+  "keyClaims": [
+    {
+      "claim": "Armor base stats depend only on slot, rarity, crafting tier and star; every piece sharing slot+rarity has identical stats. Tier I 1-star legendary HP: Helmet 60, Mask 30, Top 156, Gloves 90, Pants 144, Shoes 120 (600 total); Psi 16/20/11/12/13/8. Epic = 0.9x HP (54/27/140/81/130/108), Rare 48/24/125/72/115/96, Uncommon 42/21/109/63/101/84.",
+      "evidence": "Three independent oncehumandb.com mirrors (saitoh183, TeeReckzi/OHMM, lReDragol) list the same HP per piece; lReDragol base_stat_hint and all_armor_stats star1/level1 rows give the same HP and Psi; 0x91 datamine note: 'All pieces of same slot/rarity/stars share identical base stats regardless of set or specific piece name.'",
+      "sources": ["https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/armor.json", "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/src/presentation/ohdb/armor.json", "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/all_armor_stats.json", "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/data/custom-datamine/raw.json"],
+      "confidence": "high"
+    },
+    {
+      "claim": "Crafting tier multiplies Tier-I base stats by HP x1 / 1.3333 / 2.6667 / 5.3333 / 9.8333 and Psi x1 / 1.5 / 2.375 / 3.75 / 5.75 (legendary) for Tiers I-V; legacy Pollution Resist is 9/12/15/18/21 (helmet, gloves, pants, shoes) and 12/16/20/24/28 (mask, top).",
+      "evidence": "lReDragol all_armor_stats.json Tier V 1-star legendary helmet = 590/21/92 from 60/9/16; Korean dump craft-5 values are identical (helmet 590/21/92, mask 295/28/115, top 1534/28/64, pants 1416/21/74, gloves 885/21/69, shoes 1180/21/46); items_and_sets.json 'multipliers.legendary.levels' lists exactly these ratios.",
+      "sources": ["https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/all_armor_stats.json", "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json", "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"],
+      "confidence": "high (legacy era)"
+    },
+    {
+      "claim": "Blueprint stars scale Max HP and Psi Intensity by (1 + 0.05 x (star - 1)), i.e. 6-star = 1.25x the 1-star value; Pollution Resist does not change with stars; set bonuses and key-armor effect values never scale with stars or tier.",
+      "evidence": "Tier V legendary helmet by star 590, 620, 649, 678, 708, 738 and gloves 885, 929, 974, 1018, 1061, 1106 (all = 1-star x 1.00..1.25 within rounding), psi 92..115, pollution flat 21; OHDB 6-star pages show 740/370/1924/1776/1110/1480 = 1.254x. All set/key effect texts are fixed strings in every source (OCR, OHDB, meta-builds, fandom) with no star-dependent values.",
+      "sources": ["https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/all_armor_stats.json", "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/data/raw/external-references/once_human_english_reference.json", "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md"],
+      "confidence": "high for the legacy table; medium that per-star steps are unchanged after 2.3.1"
+    },
+    {
+      "claim": "Version 2.3.1 (2026-01-21) removed armor calibration and re-based stats: Tier V 6-star legendary HP is now 925/462/2405/2220/1388/1850 (helmet/mask/top/pants/gloves/shoes) = exactly 1.25x the pre-2.3.1 6-star values; Psi unchanged (115/144/80/92/86/58); Pollution Resist 12 (helmet/pants/gloves/shoes) / 16 (mask/top). Legacy calibration had given up to +80% HP / +40% Psi.",
+      "evidence": "0x91 raw.json 'armor.base_stats' (Tier V, 6-star, 2026-03-01) with documentation 'Post-2.3.1: Calibration system removed. Stats determined by rarity and star level'; ratios 925/740, 462/370, 2405/1924, 2220/1776, 1388/1110, 1850/1480 all = 1.25; lReDragol calibration_bonuses hp {1:0.18 ... 6:0.8}, psi {1:0.08 ... 6:0.4}.",
+      "sources": ["https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/data/custom-datamine/raw.json", "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/data/raw/external-references/once_human_english_reference.json", "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/all_armor_stats.json"],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Lonewolf (legendary): 1pc Magazine Capacity +10%; 2pc Crit Rate +5%; 3pc every 2 weapon crit hits grant 1 Lone Shadow stack = Crit DMG +6% for 30s, max 8; 4pc max stacks 10 and Crit Rate +8% for 2s after reloading (peak +60% Crit DMG).",
+      "evidence": "In-game OCR table (2026-03): 'After landing 2 critical weapon hits, gain 1 stacks of Lone Shadow. Lone Shadow grants Crit DMG +6% for 30s. Max stacks: 8.' / 'Increase max Lone Shadow stacks to 10. Crit Rate +8% for 2s after reloading.'; meta-builds v3.0.5 and fandom agree on 2 crits/30s. Older OHDB text says every 4 crits / 20s / +10%.",
+      "sources": ["https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md", "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json", "https://once-human.fandom.com/wiki/Lonewolf_Set"],
+      "confidence": "high"
+    },
+    {
+      "claim": "Bastille (legendary): 1pc Weapon DMG +10% when HP > 70%; 2pc Reload Speed +15% (meta-builds says 20%); 3pc crouch + immobile 0.5s -> Bastille state: Weapon DMG +40%, on exit no sprint and stamina cost +100% for 3s; 4pc Armor stacks (+1/s from 3s after exit, max 60) each giving a shield of 1% Max HP while in Bastille.",
+      "evidence": "OCR table, OHDB mirror and fandom all read 15% reload; meta-builds v3.0.5 and 0x91 all-old read 20% and add 'If the shield drops to 0 during Bastille state, you gain a 30% Vulnerability effect'.",
+      "sources": ["https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md", "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json", "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json", "https://once-human.fandom.com/wiki/Bastille_Set"],
+      "confidence": "high (2pc value medium)"
+    },
+    {
+      "claim": "Shelterer (legendary): 1pc Status DMG Reduction 15%; 2pc Elemental DMG (Blaze/Frost/Shock/Blast) +8%; 3pc each weapon hit +1 Deviant Energy = +1% Elemental DMG per stack, max 20, reload removes half; 4pc max stacks +10 (30) and weakspot hits grant +2 extra stacks -> up to +38% elemental.",
+      "evidence": "Identical wording in OCR table, OHDB mirror, meta-builds v3.0.5 and fandom.",
+      "sources": ["https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md", "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json", "https://once-human.fandom.com/wiki/Shelterer_Set"],
+      "confidence": "high"
+    },
+    {
+      "claim": "Renegade (legendary): 1pc Reload Speed +10% (some sources 15%); 2pc Weakspot DMG +10%; 3pc Archer's Focus +4% Weakspot DMG per consecutive hit on the same enemy, max 10 (halved on target change); 4pc on reload load +0.6% extra ammo per 1% weakspot-hit share of the previous magazine, cap +30%.",
+      "evidence": "OCR table and OHDB mirror give 10% / 10% / 4%x10 / 0.6% cap 30%; meta-builds v3.0.5 and one fandom snippet give 1pc 15%.",
+      "sources": ["https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md", "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json", "https://once-human.fandom.com/wiki/Renegade_Set"],
+      "confidence": "high (1pc value medium)"
+    },
+    {
+      "claim": "Treacherous Tides was reworked in 3.0.6 (2026-09-16): damage bonus now scales with HP instead of Sanity. Current: 1pc Weapon DMG Reduction 10%; 2pc HP < 70% -> Weapon & Status DMG +12% (briefly 10%, restored); 3pc Weapon & Status DMG +8% at 100% HP rising to +28% as HP drops (was +10% -> +28% at 30% Sanity, plus -40% low-Sanity HP penalty); 4pc shield when HP < 40% (was 20% Max HP, cd 8s; 'increased' in 3.0.6, new value unknown).",
+      "evidence": "mmorpg.com / oncehuman.game 3.0.6 announcement summaries: 'removes the Sanity mechanic from damage boosts, which will now scale with HP ... fixed 10% DMG bonus was removed from the 3-piece ... Shield benefit of the 4-piece set was increased'; follow-up: '2-piece set DMG bonus is restored from 10% to 12% ... 3-piece base Weapon and Status DMG bonus at 100% HP is increased from 0% to 8%, maximum remaining at 28%'. Pre-rework text from OCR table and fandom.",
+      "sources": ["https://www.oncehuman.game/news/devBlog/20260916/40781_1314019.html", "https://www.mmorpg.com/news/once-human-announces-some-combat-balance-reworks-coming-next-week-2000138901", "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/ohg_data.js", "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md"],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Savior (legendary, post-2025 rework): 1pc Medicine Cooldown Haste 0.2; 2pc while shielded Weapon & Status DMG +10%; 3pc on hit consume 8% current HP for a 5%-Max-HP shield (30s, cd 0.5s; no HP cost when shield > 40%) and each HP consumption gives Weapon & Status DMG +5%, max 4 stacks, 12s (peak +30% with 2pc); 4pc auto-use least potent treatment below 30% HP (cd 40s).",
+      "evidence": "OCR table (2026-03) and fandom page wording; OHDB mirror has an older 6%/6%/60% variant; meta-builds v3.0.5 still carries launch-era text (HP>70% +10%; Activator cloak).",
+      "sources": ["https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md", "https://once-human.fandom.com/wiki/Savior_Set", "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json"],
+      "confidence": "medium-high"
+    },
+    {
+      "claim": "2026 sets: Dark Resonance (2.3.1, 2026-01-21): 1pc Ultimate -> 10% shield 10s; 2pc Deviant Power not full -> Weapon & Status +12%; 3pc +0.6% Gun & Status DMG per Deviant Power consumed, cap +30%; 4pc Battle Skill consumes 30 Deviant Power for -50% cooldown. Ghost Link (3.0.1, 2026-07-09): 1pc Crit Rate +3%; 2pc Reload Efficiency +15%; 3pc Sync +3% Weapon DMG per weapon hit, max 10, 5s; 4pc at 10 Sync apply Overload = Status DMG 50% Psi Intensity per second to target and 3m radius for 5s.",
+      "evidence": "Fandom pages, OCR table (Dark Resonance) and meta-builds v3.0.5 export agree verbatim; smus 3.0.7 dataset notes Ghost Link 3pc 'conditions adjusted in 3.0.4'.",
+      "sources": ["https://once-human.fandom.com/wiki/Dark_Resonance_Set", "https://once-human.fandom.com/wiki/Ghost_Link_Set", "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json", "https://www.oncehuman.game/news/devBlog/20260702/40781_1306465.html"],
+      "confidence": "medium-high"
+    },
+    {
+      "claim": "Epic/rare utility sets: Falcon 1pc roll stamina -20%, 2pc Crit DMG +12%, 3pc Stamina > 90% -> Crit Rate +5% & Crit DMG +20%, 4pc Max Stamina +25 and +30 stamina on kill; Agent 1pc head DMG taken -10%, 2pc Weakspot +10%, 3pc Bullet Saver +15% Weakspot per precise kill (8s, max 3), 4pc after kill Reload +20% and after weakspot kill Fire Rate +10% until reload; Heavy Duty 1pc HP +10%, 2pc Elemental +8%, 3pc on kill Move Speed +20% 2s and Elemental +40% decaying over 8s, 4pc +4% DMG reduction per enemy within 5m (max 4); Scout 2pc Weapon DMG +8%, 3pc +20% Weapon/Tactical DMG while unspotted.",
+      "evidence": "OCR table (Falcon/Agent/Heavy Duty), OHDB mirror, meta-builds and fandom agree; only OHDB's Falcon 4pc text deviates (duplicate of Blast 4pc).",
+      "sources": ["https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md", "https://www.oncehumandb.com/armor-sets/heavy-duty-set", "https://once-human.fandom.com/wiki/Falcon_Set", "https://once-human.fandom.com/wiki/Agent_Set", "https://once-human.fandom.com/wiki/Scout_Set"],
+      "confidence": "high"
+    }
+  ],
+  "openQuestions": [
+    "Post-2.3.1 per-star values for stars 1-5 (only Tier V 6-star was observed); whether the +5%/star rule and the 'pollution does not scale with stars' rule still hold after the January 2026 re-base.",
+    "Pollution Resist for Tiers II-IV after 2.3.1 (only Tier I = 3/4 and Tier V = 12/16 observed).",
+    "Whether Epic blueprints cap at 5 stars (lReDragol/Korean table) or 6 stars (OHDB shows epic pieces at 1.25x values).",
+    "Treacherous Tides 4-piece shield percentage after the 3.0.6 'shield increased' change.",
+    "Ghost Link 3-piece change in 3.0.4 and the current Gravity Tide 3/4-piece numbers (fandom +2%/12 stacks/+15% vs meta-builds +1.5%/15 stacks/+10%).",
+    "Bastille 2pc reload (15% vs 20%) and Renegade 1pc reload (10% vs 15%) - OCR and meta-builds disagree; the 4pc Bastille '30% Vulnerability when shield breaks' clause is only in two sources.",
+    "Several key-armor numbers differ between the OCR screenshot and meta-builds/Korean text (Gas-tight Helmet +150% vs +120%, Dust Mask 70% vs 50%, Gas Mask Hood 6s vs 3s, Hot Dog Shorts +2 vs +1, Tattoo vs Prickly Dance Pants swapped).",
+    "Whether any armor set was added between 3.0.1 (Ghost Link) and 3.0.7 - none found in the 3.0.7 dataset, but official patch notes could not be fetched.",
+    "Exact release dates for launch-era sets and Treacherous Tides; the 'only one Key Armor equippable per loadout' rule is a single-source note.",
+    "Official sources (oncehuman.game patch notes, Steam news, fandom, oncehumandb, meta-builds) were egress-blocked; all numbers came from GitHub mirrors/exports and search summaries and should be spot-checked in-game."
+  ]
+}

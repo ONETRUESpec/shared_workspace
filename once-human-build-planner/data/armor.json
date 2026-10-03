@@ -1,0 +1,5915 @@
+{
+  "_meta": {
+    "facet": "armor",
+    "generatedAt": "2026-10-03",
+    "gameVersion": "Set roster through Version 3.0.7 (2026-10). Set-bonus text: in-game OCR 2026-03 (v2.3.x), meta-builds.net export tagged game v3.0.5 (fetched 2026-09-25), fandom set pages (2026), 3.0.6 Treacherous Tides rework (2026-09-16). Base-stat tables: legacy pre-2.3.1 OHDB/Korean mirror (lReDragol) + post-2.3.1 Tier V 6-star OCR (2026-03-01).",
+    "sources": [
+      "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/all_armor_stats.json",
+      "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json",
+      "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/player.py",
+      "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+      "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/data/custom-datamine/raw.json",
+      "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/data/custom-datamine/all-old.json",
+      "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/armor.json",
+      "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/src/presentation/ohdb/armor.json",
+      "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/data/raw/external-references/once_human_english_reference.json",
+      "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/src/ui/registries/generated/armor-sets.generated.ts",
+      "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json",
+      "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+      "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/details/sets.json",
+      "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/ohg_data.js",
+      "https://raw.githubusercontent.com/bramsey679/Once_Human_DPS_Calculator/main/data/armor.json",
+      "https://once-human.fandom.com/wiki/Armor",
+      "https://once-human.fandom.com/wiki/Lonewolf_Set",
+      "https://once-human.fandom.com/wiki/Savior_Set",
+      "https://once-human.fandom.com/wiki/Dark_Resonance_Set",
+      "https://once-human.fandom.com/wiki/Renegade_Set",
+      "https://once-human.fandom.com/wiki/Treacherous_Tides_Set",
+      "https://once-human.fandom.com/wiki/Bastille_Set",
+      "https://once-human.fandom.com/wiki/Falcon_Set",
+      "https://once-human.fandom.com/wiki/Shelterer_Set",
+      "https://once-human.fandom.com/wiki/Agent_Set",
+      "https://once-human.fandom.com/wiki/Scout_Set",
+      "https://once-human.fandom.com/wiki/Raid_Set_(Armor)",
+      "https://once-human.fandom.com/wiki/Blackstone_Set",
+      "https://once-human.fandom.com/wiki/Ghost_Link_Set",
+      "https://once-human.fandom.com/wiki/Gravity_Tide_Set",
+      "https://once-human.fandom.com/wiki/Stormweaver_Set",
+      "https://www.oncehumandb.com/armor-sets",
+      "https://www.oncehumandb.com/armor-sets/heavy-duty-set",
+      "https://www.oncehuman.game/news/devBlog/20260916/40781_1314019.html",
+      "https://www.oncehuman.game/news/devBlog/20260910/40781_1313572.html",
+      "https://www.mmorpg.com/news/once-human-announces-some-combat-balance-reworks-coming-next-week-2000138901",
+      "https://massivelyop.com/2026/09/11/once-human-is-buffing-a-machine-gun-and-a-set-of-named-armor-next-week/",
+      "https://www.oncehuman.game/news/devBlog/20260116/40781_1282292.html",
+      "https://www.oncehuman.game/news/devBlog/20260702/40781_1306465.html",
+      "https://game8.co/games/Once-Human/archives/462429",
+      "https://game8.co/games/Once-Human/archives/464307",
+      "https://wikily.gg/once-human/armor-blueprints/",
+      "https://paradoxgaming.net/gamearticle.php?id=sixstarblueprints",
+      "https://www.oncehuman.game/news/update/20250110/40780_1205980.html"
+    ],
+    "notes": "Direct web access to fandom/oncehumandb/meta-builds/oncehuman.game was blocked by the network proxy and the WebSearch budget ran out mid-task, so set texts were cross-checked across GitHub-hosted mirrors/exports of those sites plus search-result summaries. Percentages are plain numbers (12 = +12%). Set bonus and key-armor effect values do NOT scale with star or tier in any source; only Max HP / Psi Intensity (and legacy Pollution Resist by tier) scale. Base stats are identical for every piece sharing slot+rarity regardless of set. Each armor piece has exactly one armor-mod slot. Only one Key Armor piece can be equipped per loadout (0x91 note). lReDragol \"common\" rarity = in-game Uncommon (green).",
+    "recordCount": {
+      "sets": 23,
+      "setPieces": 133,
+      "keyArmor": 41,
+      "slots": 6
+    }
+  },
+  "slots": [
+    {
+      "slot": "Helmet",
+      "aliases": [
+        "Hood",
+        "Cap",
+        "Hat",
+        "Goggles",
+        "Beret",
+        "Face Shield",
+        "Head"
+      ],
+      "armorModSlots": 1,
+      "baseStatsTier1Star1": {
+        "legendary": {
+          "maxHp": 60,
+          "psiIntensity": 16,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        },
+        "epic": {
+          "maxHp": 54,
+          "psiIntensity": 14,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        },
+        "rare": {
+          "maxHp": 48,
+          "psiIntensity": 13,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        },
+        "uncommon": {
+          "maxHp": 42,
+          "psiIntensity": 11,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        }
+      },
+      "tier5ByStarLegacyPre231": {
+        "legendary": {
+          "maxHp": [
+            590,
+            620,
+            649,
+            678,
+            708,
+            738
+          ],
+          "psiIntensity": [
+            92,
+            97,
+            101,
+            106,
+            110,
+            115
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "epic": {
+          "maxHp": [
+            531,
+            563,
+            589,
+            621,
+            648,
+            null
+          ],
+          "psiIntensity": [
+            83,
+            88,
+            92,
+            97,
+            101,
+            null
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "rare": {
+          "maxHp": [
+            472,
+            500,
+            533,
+            562,
+            null,
+            null
+          ],
+          "psiIntensity": [
+            74,
+            78,
+            84,
+            88,
+            null,
+            null
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "uncommon": {
+          "maxHp": [
+            413,
+            442,
+            471,
+            null,
+            null,
+            null
+          ],
+          "psiIntensity": [
+            64,
+            68,
+            73,
+            null,
+            null,
+            null
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        }
+      },
+      "tier5Star6Ohdb": {
+        "legendary": {
+          "hp": 740,
+          "poll": 12,
+          "psi": 92
+        },
+        "epic": {
+          "hp": 666,
+          "poll": 12,
+          "psi": 83
+        }
+      },
+      "tier5Star6Post231Ocr": {
+        "legendary": {
+          "hp": 925,
+          "poll": 12,
+          "psi": 115
+        },
+        "epic": {
+          "hp": 813,
+          "poll": 12,
+          "psi": 101
+        }
+      }
+    },
+    {
+      "slot": "Mask",
+      "aliases": [
+        "Facewear",
+        "Face"
+      ],
+      "armorModSlots": 1,
+      "baseStatsTier1Star1": {
+        "legendary": {
+          "maxHp": 30,
+          "psiIntensity": 20,
+          "pollutionResist": 4,
+          "pollutionResistLegacyPre231": 12
+        },
+        "epic": {
+          "maxHp": 27,
+          "psiIntensity": 18,
+          "pollutionResist": 4,
+          "pollutionResistLegacyPre231": 12
+        },
+        "rare": {
+          "maxHp": 24,
+          "psiIntensity": 16,
+          "pollutionResist": 4,
+          "pollutionResistLegacyPre231": 12
+        },
+        "uncommon": {
+          "maxHp": 21,
+          "psiIntensity": 14,
+          "pollutionResist": 4,
+          "pollutionResistLegacyPre231": 12
+        }
+      },
+      "tier5ByStarLegacyPre231": {
+        "legendary": {
+          "maxHp": [
+            295,
+            310,
+            324,
+            339,
+            354,
+            369
+          ],
+          "psiIntensity": [
+            115,
+            121,
+            127,
+            132,
+            138,
+            144
+          ],
+          "pollutionResist": 28,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "epic": {
+          "maxHp": [
+            266,
+            282,
+            295,
+            311,
+            325,
+            null
+          ],
+          "psiIntensity": [
+            104,
+            110,
+            115,
+            122,
+            127,
+            null
+          ],
+          "pollutionResist": 28,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "rare": {
+          "maxHp": [
+            236,
+            250,
+            267,
+            281,
+            null,
+            null
+          ],
+          "psiIntensity": [
+            92,
+            98,
+            104,
+            109,
+            null,
+            null
+          ],
+          "pollutionResist": 28,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "uncommon": {
+          "maxHp": [
+            207,
+            221,
+            236,
+            null,
+            null,
+            null
+          ],
+          "psiIntensity": [
+            81,
+            87,
+            92,
+            null,
+            null,
+            null
+          ],
+          "pollutionResist": 28,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        }
+      },
+      "tier5Star6Ohdb": {
+        "legendary": {
+          "hp": 370,
+          "poll": 16,
+          "psi": 115
+        },
+        "epic": {
+          "hp": 333,
+          "poll": 16,
+          "psi": 104
+        }
+      },
+      "tier5Star6Post231Ocr": {
+        "legendary": {
+          "hp": 462,
+          "poll": 16,
+          "psi": 144
+        },
+        "epic": {
+          "hp": 406,
+          "poll": 16,
+          "psi": 127
+        }
+      }
+    },
+    {
+      "slot": "Top",
+      "aliases": [
+        "Jacket",
+        "Shirt",
+        "Vest",
+        "Cloak",
+        "Wrap",
+        "Tops",
+        "Chest",
+        "Upper Body"
+      ],
+      "armorModSlots": 1,
+      "baseStatsTier1Star1": {
+        "legendary": {
+          "maxHp": 156,
+          "psiIntensity": 11,
+          "pollutionResist": 4,
+          "pollutionResistLegacyPre231": 12
+        },
+        "epic": {
+          "maxHp": 140,
+          "psiIntensity": 10,
+          "pollutionResist": 4,
+          "pollutionResistLegacyPre231": 12
+        },
+        "rare": {
+          "maxHp": 125,
+          "psiIntensity": 9,
+          "pollutionResist": 4,
+          "pollutionResistLegacyPre231": 12
+        },
+        "uncommon": {
+          "maxHp": 109,
+          "psiIntensity": 8,
+          "pollutionResist": 4,
+          "pollutionResistLegacyPre231": 12
+        }
+      },
+      "tier5ByStarLegacyPre231": {
+        "legendary": {
+          "maxHp": [
+            1534,
+            1611,
+            1687,
+            1764,
+            1840,
+            1918
+          ],
+          "psiIntensity": [
+            64,
+            67,
+            70,
+            74,
+            77,
+            80
+          ],
+          "pollutionResist": 28,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "epic": {
+          "maxHp": [
+            1381,
+            1464,
+            1533,
+            1685,
+            1685,
+            null
+          ],
+          "psiIntensity": [
+            58,
+            61,
+            64,
+            71,
+            71,
+            null
+          ],
+          "pollutionResist": 28,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "rare": {
+          "maxHp": [
+            1227,
+            1301,
+            1387,
+            1460,
+            null,
+            null
+          ],
+          "psiIntensity": [
+            52,
+            55,
+            59,
+            62,
+            null,
+            null
+          ],
+          "pollutionResist": 28,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "uncommon": {
+          "maxHp": [
+            1074,
+            1149,
+            1224,
+            null,
+            null,
+            null
+          ],
+          "psiIntensity": [
+            45,
+            48,
+            51,
+            null,
+            null,
+            null
+          ],
+          "pollutionResist": 28,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        }
+      },
+      "tier5Star6Ohdb": {
+        "legendary": {
+          "hp": 1924,
+          "poll": 16,
+          "psi": 64
+        },
+        "epic": {
+          "hp": 1732,
+          "poll": 16,
+          "psi": 58
+        }
+      },
+      "tier5Star6Post231Ocr": {
+        "legendary": {
+          "hp": 2405,
+          "poll": 16,
+          "psi": 80
+        },
+        "epic": {
+          "hp": 2113,
+          "poll": 16,
+          "psi": 71
+        }
+      }
+    },
+    {
+      "slot": "Gloves",
+      "aliases": [
+        "Gauntlets",
+        "Palm Shield"
+      ],
+      "armorModSlots": 1,
+      "baseStatsTier1Star1": {
+        "legendary": {
+          "maxHp": 90,
+          "psiIntensity": 12,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        },
+        "epic": {
+          "maxHp": 81,
+          "psiIntensity": 11,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        },
+        "rare": {
+          "maxHp": 72,
+          "psiIntensity": 10,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        },
+        "uncommon": {
+          "maxHp": 63,
+          "psiIntensity": 8,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        }
+      },
+      "tier5ByStarLegacyPre231": {
+        "legendary": {
+          "maxHp": [
+            885,
+            929,
+            974,
+            1018,
+            1061,
+            1106
+          ],
+          "psiIntensity": [
+            69,
+            72,
+            76,
+            79,
+            83,
+            86
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "epic": {
+          "maxHp": [
+            797,
+            845,
+            885,
+            932,
+            972,
+            null
+          ],
+          "psiIntensity": [
+            62,
+            66,
+            69,
+            73,
+            76,
+            null
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "rare": {
+          "maxHp": [
+            708,
+            750,
+            800,
+            843,
+            null,
+            null
+          ],
+          "psiIntensity": [
+            55,
+            58,
+            62,
+            65,
+            null,
+            null
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "uncommon": {
+          "maxHp": [
+            620,
+            663,
+            707,
+            null,
+            null,
+            null
+          ],
+          "psiIntensity": [
+            48,
+            51,
+            55,
+            null,
+            null,
+            null
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        }
+      },
+      "tier5Star6Ohdb": {
+        "legendary": {
+          "hp": 1110,
+          "poll": 12,
+          "psi": 69
+        },
+        "epic": {
+          "hp": 999,
+          "poll": 12,
+          "psi": 62
+        }
+      },
+      "tier5Star6Post231Ocr": {
+        "legendary": {
+          "hp": 1388,
+          "poll": 12,
+          "psi": 86
+        },
+        "epic": {
+          "hp": 1219,
+          "poll": 12,
+          "psi": 76
+        }
+      }
+    },
+    {
+      "slot": "Pants",
+      "aliases": [
+        "Bottoms",
+        "Shorts",
+        "Trousers",
+        "Legs"
+      ],
+      "armorModSlots": 1,
+      "baseStatsTier1Star1": {
+        "legendary": {
+          "maxHp": 144,
+          "psiIntensity": 13,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        },
+        "epic": {
+          "maxHp": 130,
+          "psiIntensity": 12,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        },
+        "rare": {
+          "maxHp": 115,
+          "psiIntensity": 10,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        },
+        "uncommon": {
+          "maxHp": 101,
+          "psiIntensity": 9,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        }
+      },
+      "tier5ByStarLegacyPre231": {
+        "legendary": {
+          "maxHp": [
+            1416,
+            1487,
+            1558,
+            1628,
+            1699,
+            1770
+          ],
+          "psiIntensity": [
+            74,
+            78,
+            81,
+            85,
+            89,
+            92
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "epic": {
+          "maxHp": [
+            1274,
+            1350,
+            1414,
+            1491,
+            1554,
+            null
+          ],
+          "psiIntensity": [
+            66,
+            70,
+            73,
+            77,
+            81,
+            null
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "rare": {
+          "maxHp": [
+            1133,
+            1201,
+            1280,
+            1348,
+            null,
+            null
+          ],
+          "psiIntensity": [
+            59,
+            63,
+            67,
+            70,
+            null,
+            null
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "uncommon": {
+          "maxHp": [
+            991,
+            1060,
+            1130,
+            null,
+            null,
+            null
+          ],
+          "psiIntensity": [
+            52,
+            56,
+            59,
+            null,
+            null,
+            null
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        }
+      },
+      "tier5Star6Ohdb": {
+        "legendary": {
+          "hp": 1776,
+          "poll": 12,
+          "psi": 74
+        },
+        "epic": {
+          "hp": 1598,
+          "poll": 12,
+          "psi": 66
+        }
+      },
+      "tier5Star6Post231Ocr": {
+        "legendary": {
+          "hp": 2220,
+          "poll": 12,
+          "psi": 92
+        },
+        "epic": {
+          "hp": 1950,
+          "poll": 12,
+          "psi": 81
+        }
+      }
+    },
+    {
+      "slot": "Shoes",
+      "aliases": [
+        "Boots",
+        "Footwear"
+      ],
+      "armorModSlots": 1,
+      "baseStatsTier1Star1": {
+        "legendary": {
+          "maxHp": 120,
+          "psiIntensity": 8,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        },
+        "epic": {
+          "maxHp": 108,
+          "psiIntensity": 7,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        },
+        "rare": {
+          "maxHp": 96,
+          "psiIntensity": 6,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        },
+        "uncommon": {
+          "maxHp": 84,
+          "psiIntensity": 6,
+          "pollutionResist": 3,
+          "pollutionResistLegacyPre231": 9
+        }
+      },
+      "tier5ByStarLegacyPre231": {
+        "legendary": {
+          "maxHp": [
+            1180,
+            1239,
+            1298,
+            1357,
+            1416,
+            1475
+          ],
+          "psiIntensity": [
+            46,
+            48,
+            51,
+            53,
+            55,
+            58
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "epic": {
+          "maxHp": [
+            1062,
+            1126,
+            1179,
+            1243,
+            1296,
+            null
+          ],
+          "psiIntensity": [
+            41,
+            43,
+            46,
+            48,
+            50,
+            null
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "rare": {
+          "maxHp": [
+            944,
+            1001,
+            1067,
+            1123,
+            null,
+            null
+          ],
+          "psiIntensity": [
+            37,
+            39,
+            42,
+            44,
+            null,
+            null
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        },
+        "uncommon": {
+          "maxHp": [
+            826,
+            884,
+            942,
+            null,
+            null,
+            null
+          ],
+          "psiIntensity": [
+            32,
+            34,
+            36,
+            null,
+            null,
+            null
+          ],
+          "pollutionResist": 21,
+          "note": "index 0 = 1-star ... index 5 = 6-star; null = star not available for this rarity (or missing in source)"
+        }
+      },
+      "tier5Star6Ohdb": {
+        "legendary": {
+          "hp": 1480,
+          "poll": 12,
+          "psi": 46
+        },
+        "epic": {
+          "hp": 1332,
+          "poll": 12,
+          "psi": 41
+        }
+      },
+      "tier5Star6Post231Ocr": {
+        "legendary": {
+          "hp": 1850,
+          "poll": 12,
+          "psi": 58
+        },
+        "epic": {
+          "hp": 1625,
+          "poll": 12,
+          "psi": 50
+        }
+      }
+    }
+  ],
+  "starScaling": {
+    "summary": "Blueprint stars (1-6) and crafting tier (I-V) both scale the piece BASE STATS only (Max HP and Psi Intensity). Set bonuses and Key Armor special effects are fixed text with no star-dependent numbers in any source. Pollution Resist scales with tier but not with stars in the legacy table.",
+    "specialEffectsScaleWithStars": false,
+    "specialEffectsScaleWithTier": false,
+    "maxStarsByRarity": {
+      "legendary": 6,
+      "epic": 5,
+      "rare": 4,
+      "uncommon": 3,
+      "source": "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/player.py",
+      "confidence": "medium",
+      "note": "lReDragol calculator caps; the Korean/OHDB-derived table only has epic to 5 stars, rare to 4, uncommon(common) to 3. OHDB pages show epic pieces at 6-star-equivalent values (e.g. Agent Mask 333 HP), so the epic cap may be 6 in-game - unverified."
+    },
+    "tierMultipliersFromTier1": {
+      "appliesTo": "all rarities, all slots (legacy table, 1-star column)",
+      "maxHp": {
+        "I": 1,
+        "II": 1.3333,
+        "III": 2.6667,
+        "IV": 5.3333,
+        "V": 9.8333
+      },
+      "psiIntensity": {
+        "I": 1,
+        "II": 1.5,
+        "III": 2.375,
+        "IV": 3.75,
+        "V": 5.75,
+        "note": "legendary; epic/rare/uncommon differ by rounding (epic V = 5.93, rare V = 5.69, uncommon V = 5.82)"
+      },
+      "pollutionResistLegacy": {
+        "helmetGlovesPantsShoes": {
+          "I": 9,
+          "II": 12,
+          "III": 15,
+          "IV": 18,
+          "V": 21
+        },
+        "maskTop": {
+          "I": 12,
+          "II": 16,
+          "III": 20,
+          "IV": 24,
+          "V": 28
+        }
+      },
+      "pollutionResistPost231": {
+        "tier1": {
+          "helmetGlovesPantsShoes": 3,
+          "maskTop": 4
+        },
+        "tier5": {
+          "helmetGlovesPantsShoes": 12,
+          "maskTop": 16
+        },
+        "tiers2to4": null,
+        "note": "post-2.3.1 (Jan 21 2026) values seen on OHDB and in Mar-2026 OCR; intermediate tiers not found"
+      },
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/all_armor_stats.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    "starMultiplier": {
+      "formula": "stat(star) = stat(1-star) * (1 + 0.05 * (star - 1))",
+      "values": {
+        "1": 1,
+        "2": 1.05,
+        "3": 1.1,
+        "4": 1.15,
+        "5": 1.2,
+        "6": 1.25
+      },
+      "appliesTo": [
+        "maxHp",
+        "psiIntensity"
+      ],
+      "doesNotApplyTo": [
+        "pollutionResist (legacy table flat per tier)",
+        "set bonus values",
+        "key armor effect values"
+      ],
+      "verification": "Legendary helmet T5: 590,620,649,678,708,738 (=590*1.00..1.25 within rounding); gloves T5: 885,929,974,1018,1061,1106; mask T5 psi 115..144. OHDB T5 6-star pages show 740/370/1924/1776/1110/1480 = 1.254x the 1-star T5 values.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/all_armor_stats.json",
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/data/raw/external-references/once_human_english_reference.json"
+      ],
+      "confidence": "high (legacy era); post-2.3.1 per-star steps assumed unchanged (not directly observed)"
+    },
+    "post231Rebase": {
+      "patch": "Version 2.3.1 (2026-01-21) per 0x91CEA55 datamine notes: \"Calibration system removed. Stats determined by rarity and star level\"",
+      "observed": "Tier V 6-star legendary HP after 2.3.1 = exactly 1.25x the pre-2.3.1 6-star values (925 vs 740, 462 vs 370, 2405 vs 1924, 2220 vs 1776, 1388 vs 1110, 1850 vs 1480). Psi Intensity unchanged (115/144/80/92/86/58). Pollution Resist re-based (helmet/pants/gloves/shoes 12, mask/top 16 at T5).",
+      "recommendedModel": "maxHp(T5, star) = baseT1 * 9.8333 * 1.25 * (1 + 0.05*(star-1)) for current game; psi(T5,star) = baseT1 * 5.75 * (1 + 0.05*(star-1)) (legendary).",
+      "fullLegendaryT5Star6Total": {
+        "pre231": 7400,
+        "post231": 9250,
+        "note": "sum of six legendary pieces at Tier V 6-star"
+      },
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/data/custom-datamine/raw.json",
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/data/raw/external-references/once_human_english_reference.json"
+      ],
+      "confidence": "medium"
+    },
+    "legacyCalibrationPre231": {
+      "note": "Armor calibration (removed in 2.3.1). Max calibration level by tier: T1-2 -> 2, T3-4 -> 4, T5 -> 6.",
+      "hpBonusByCalibrationLevel": {
+        "0": 0,
+        "1": 0.18,
+        "2": 0.36,
+        "3": 0.48,
+        "4": 0.6,
+        "5": 0.7,
+        "6": 0.8
+      },
+      "psiBonusByCalibrationLevel": {
+        "0": 0,
+        "1": 0.08,
+        "2": 0.16,
+        "3": 0.24,
+        "4": 0.3,
+        "5": 0.35,
+        "6": 0.4
+      },
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/all_armor_stats.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/player.py"
+      ]
+    },
+    "blueprintUpgradeCosts": {
+      "legendary1to6StarsTotalXp": 29600,
+      "star5to6Xp": 10000,
+      "star5to6StarchromAlt": 15000,
+      "armorKeyPieceStarchrom": 8000,
+      "armorSetPieceStarchrom": 3000,
+      "darkResonancePieceStarchrom": 2000,
+      "sources": [
+        "https://paradoxgaming.net/gamearticle.php?id=sixstarblueprints",
+        "https://once-human.fandom.com/wiki/Dark_Resonance_Set"
+      ],
+      "confidence": "low-medium (search snippets only)"
+    }
+  },
+  "sets": [
+    {
+      "name": "Lonewolf Set",
+      "aliases": [
+        "Lone Wolf Set"
+      ],
+      "rarity": "legendary",
+      "style": "Juggernaut",
+      "addedIn": "launch (2024-07)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Lonewolf Hat",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Lonewolf Mask",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Lonewolf Jacket",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Lonewolf Gloves",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Lonewolf Pants",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Lonewolf Shoes",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Magazine Capacity Bonus +10%",
+          "effects": [
+            {
+              "stat": "magazineCapacityPct",
+              "value": 10,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Crit Rate +5%",
+          "effects": [
+            {
+              "stat": "critRatePct",
+              "value": 5,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "After landing 2 critical weapon hits, gain 1 stack of Lone Shadow. Lone Shadow grants Crit DMG +6% for 30s. Max stacks: 8.",
+          "effects": [
+            {
+              "stat": "critDmgPct",
+              "value": 6,
+              "condition": "+1 stack per 2 weapon crit hits (buff: Lone Shadow)",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 8,
+              "duration": 30
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "Gain 1 stack of Lone Shadow for every 4 Crit shots landed with a weapon. Lone Shadow: Crit DMG +6% for 20s, stacking up to 8 times.",
+              "source": "oncehumandb.com mirror (lReDragol/saitoh) - older",
+              "pick": false
+            }
+          ],
+          "pickRationale": "In-game OCR (2026-03) + meta-builds v3.0.5 + fandom all say 2 crits / 30s; OHDB mirror text is older."
+        },
+        {
+          "pieces": 4,
+          "text": "Increase max Lone Shadow stacks to 10. Crit Rate +8% for 2s after reloading.",
+          "effects": [
+            {
+              "stat": "loneShadowMaxStacks",
+              "value": 10,
+              "condition": null,
+              "perStar": null
+            },
+            {
+              "stat": "critRatePct",
+              "value": 8,
+              "condition": "after reloading",
+              "perStar": null,
+              "duration": 2
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "Increases maximum Lonewolf stacks to 10. After reloading, gain Crit Rate +10% for 2s.",
+              "source": "oncehumandb.com mirror",
+              "pick": false
+            },
+            {
+              "text": "Increase max Lone Shadow stacks to 10. After a kill, Crit Rate +8% for 2s.",
+              "source": "meta-builds.net v3.0.5 export",
+              "pick": false
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://once-human.fandom.com/wiki/Lonewolf_Set",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Bastille Set",
+      "rarity": "legendary",
+      "style": "Beyonder (Meta-Human)",
+      "addedIn": "launch (2024-07)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Bastille Helmet",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Bastille Mask",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Bastille Top",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Bastille Gloves",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Bastille Pants",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Bastille Boots",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Weapon DMG +10% when HP is above 70%.",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 10,
+              "condition": "HP > 70%",
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Reload Speed +15%",
+          "effects": [
+            {
+              "stat": "reloadSpeedPct",
+              "value": 15,
+              "condition": null,
+              "perStar": null
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "Reload Speed +20.0%",
+              "source": "meta-builds.net v3.0.5 export; 0x91 all-old.json",
+              "pick": false
+            }
+          ],
+          "pickRationale": "In-game OCR (2026-03), OHDB mirror and fandom all read 15%."
+        },
+        {
+          "pieces": 3,
+          "text": "Stay crouched and immobile for 0.5s to enter the Bastille state. While in the Bastille state, gain Weapon DMG +40%. After exiting the Bastille state, you cannot sprint and your Stamina consumption is increased by +100% for 3s.",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 40,
+              "condition": "in Bastille state (crouched + immobile 0.5s)",
+              "perStar": null
+            },
+            {
+              "stat": "staminaCostPct",
+              "value": 100,
+              "condition": "after exiting Bastille state (penalty, no sprint)",
+              "perStar": null,
+              "duration": 3
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "3s after exiting Bastille state, gain 1 stack of Armor per second, up to 60 stacks. While in Bastille state, each stack of Armor provides a Shield equal to 1% of max HP.",
+          "effects": [
+            {
+              "stat": "shieldPctMaxHp",
+              "value": 1,
+              "condition": "stacks build +1/s starting 3s after leaving Bastille; shield applies while in Bastille",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 60
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "... If the shield drops to 0 during Bastille state, you gain a 30% Vulnerability effect.",
+              "source": "meta-builds.net v3.0.5 export; 0x91 all-old.json (extra clause)",
+              "pick": false
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://once-human.fandom.com/wiki/Bastille_Set",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Savior Set",
+      "rarity": "legendary",
+      "style": "Operator",
+      "addedIn": "launch (2024-07); reworked 2025-01 (v1.4 balance pass)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Savior Helmet",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Savior Mask",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Savior Top",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Savior Gloves",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Savior Pants",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Savior Shoes",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Medicine Cooldown Haste 0.2 (Medicine CD -20%)",
+          "effects": [
+            {
+              "stat": "medicineCooldownHaste",
+              "value": 0.2,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "While shielded, Weapon DMG and Status DMG dealt increases by +10%.",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 10,
+              "condition": "while shielded",
+              "perStar": null
+            },
+            {
+              "stat": "statusDmgPct",
+              "value": 10,
+              "condition": "while shielded",
+              "perStar": null
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "When HP is above 70%, Weapon and Status DMG +10%",
+              "source": "meta-builds.net v3.0.5 export (appears to be launch-era text)",
+              "pick": false
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "Consumes 8% of current HP upon hit to generate a temporary shield equal to 5% of Max HP, lasting 30s (Cooldown: 0.5s; when shield exceeds 40%, hits landed will refresh shield duration and damage boost timer without deducting HP). When HP is consumed, Weapon and Status DMG +5%, stacking up to 4 stack(s), lasting 12s.",
+          "effects": [
+            {
+              "stat": "shieldPctMaxHp",
+              "value": 5,
+              "condition": "on hit; costs 8% current HP unless shield > 40%",
+              "perStar": null,
+              "duration": 30,
+              "cooldown": 0.5
+            },
+            {
+              "stat": "weaponDmgPct",
+              "value": 5,
+              "condition": "per HP consumption",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 4,
+              "duration": 12
+            },
+            {
+              "stat": "statusDmgPct",
+              "value": 5,
+              "condition": "per HP consumption",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 4,
+              "duration": 12
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "Consumes 6% of current HP on hit to generate a temporary shield equal to 6% of Max HP, lasting 30s (Cooldown: 0.5s; does not trigger if Shield exceeds 60%)",
+              "source": "oncehumandb.com mirror (older)",
+              "pick": false
+            },
+            {
+              "text": "When HP is below 30%, automatically use the least potent Activator in the Backpack (cooldown: 40s)",
+              "source": "meta-builds.net v3.0.5 (launch-era ordering)",
+              "pick": false
+            }
+          ],
+          "pickRationale": "In-game OCR (2026-03) and fandom agree on 8%/5%/40%/+5% x4 stacks."
+        },
+        {
+          "pieces": 4,
+          "text": "Automatically uses the least potent treatment in the backpack when HP is below 30% (Cooldown: 40s).",
+          "effects": [
+            {
+              "stat": "autoHealBelowHpPct",
+              "value": 30,
+              "condition": null,
+              "perStar": null,
+              "cooldown": 40
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "After using an Activator, Movement Speed +20%, all DMG +20% and cloak for 2s. 20% DMG Reduction on torso and limbs for 20s.",
+              "source": "meta-builds.net v3.0.5 (launch-era text)",
+              "pick": false
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://once-human.fandom.com/wiki/Savior_Set",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ],
+      "confidence": "medium-high"
+    },
+    {
+      "name": "Treacherous Tides Set",
+      "rarity": "legendary",
+      "style": "Juggernaut",
+      "addedIn": null,
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Treacherous Tides Helmet",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Treacherous Tides Mask",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Treacherous Tides Top",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Treacherous Tides Gloves",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Treacherous Tides Pants",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Treacherous Tides Shoes",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Weapon DMG Reduction 10%",
+          "effects": [
+            {
+              "stat": "weaponDmgTakenReductionPct",
+              "value": 10,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "When HP is below 70%, Weapon and Status DMG +12%.",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 12,
+              "condition": "HP < 70%",
+              "perStar": null
+            },
+            {
+              "stat": "statusDmgPct",
+              "value": 12,
+              "condition": "HP < 70%",
+              "perStar": null
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "When HP is above 70% ... +12%",
+              "source": "meta-builds.net v3.0.5 (likely typo)",
+              "pick": false
+            },
+            {
+              "text": "3.0.6 initially changed this to +10%, then a follow-up restored it to +12%",
+              "source": "https://www.mmorpg.com/news/once-human-announces-some-combat-balance-reworks-coming-next-week-2000138901",
+              "pick": false
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "POST-3.0.6 (2026-09-16 + follow-up): Weapon and Status DMG +8% at 100% HP, increasing as current HP decreases, up to +28%. (The Sanity link was removed.) PRE-3.0.6: The HP reduction from low Sanity is decreased by 40%. Weapon and Status DMG +10% and further increases as your Sanity drops, up to +28% (at 30% max Sanity).",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 8,
+              "condition": "at 100% HP; scales up to 28 as HP drops (post-3.0.6)",
+              "perStar": null,
+              "rangeMax": 28
+            },
+            {
+              "stat": "statusDmgPct",
+              "value": 8,
+              "condition": "at 100% HP; scales up to 28 as HP drops (post-3.0.6)",
+              "perStar": null,
+              "rangeMax": 28
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "Pre-3.0.6: +10% base scaling to +28% at 30% Sanity; low-Sanity max-HP penalty -40%",
+              "source": "in-game OCR 2026-03; fandom; meta-builds",
+              "pick": false
+            },
+            {
+              "text": "3.0.6 first iteration: 0% base at 100% HP, max 28%",
+              "source": "https://www.mmorpg.com/news/once-human-announces-some-combat-balance-reworks-coming-next-week-2000138901",
+              "pick": false
+            }
+          ],
+          "pickRationale": "Newest = 3.0.6 patch (2026-09-16) + post-feedback adjustment (8% base)."
+        },
+        {
+          "pieces": 4,
+          "text": "Generates a shield equal to 20% of Max HP when HP is below 40% of the Max. Cooldown: 8s. (3.0.6: \"Shield benefit of the 4-piece set was increased\" - new value not found.)",
+          "effects": [
+            {
+              "stat": "shieldPctMaxHp",
+              "value": 20,
+              "condition": "HP < 40% (pre-3.0.6 value; increased in 3.0.6, exact new % unknown)",
+              "perStar": null,
+              "cooldown": 8
+            }
+          ]
+        }
+      ],
+      "notes": "oncehumandb.com mirror text for this set (\"Movement Speed +8% / Max Load +40 / Logging and Mining Speed +25%\") is a scraping error and was discarded.",
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://once-human.fandom.com/wiki/Treacherous_Tides_Set",
+        "https://www.oncehuman.game/news/devBlog/20260916/40781_1314019.html",
+        "https://www.mmorpg.com/news/once-human-announces-some-combat-balance-reworks-coming-next-week-2000138901",
+        "https://massivelyop.com/2026/09/11/once-human-is-buffing-a-machine-gun-and-a-set-of-named-armor-next-week/",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Renegade Set",
+      "rarity": "legendary",
+      "style": "Huntsman",
+      "addedIn": "launch (2024-07)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Renegade Hood",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Renegade Mask",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Renegade Jacket",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Renegade Gloves",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Renegade Pants",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Renegade Shoes",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Reload Speed +10%",
+          "effects": [
+            {
+              "stat": "reloadSpeedPct",
+              "value": 10,
+              "condition": null,
+              "perStar": null
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "Reload Speed +15.0%",
+              "source": "meta-builds.net v3.0.5; one fandom snippet",
+              "pick": false
+            }
+          ],
+          "pickRationale": "In-game OCR 2026-03 and OHDB say 10%."
+        },
+        {
+          "pieces": 2,
+          "text": "Weakspot DMG +10%",
+          "effects": [
+            {
+              "stat": "weakspotDmgPct",
+              "value": 10,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "Gain 1 stack of Archer's Focus upon hitting the same enemy consecutively. Archer's Focus: Weakspot DMG +4%, stacking up to 10 stacks. Stacks are halved upon changing targets.",
+          "effects": [
+            {
+              "stat": "weakspotDmgPct",
+              "value": 4,
+              "condition": "consecutive hits on same enemy; halved on target change",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 10
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "When reloading, for every 1% of weakspot hits from the previous magazine, load an extra 0.6% bullets, up to 30%.",
+          "effects": [
+            {
+              "stat": "extraAmmoOnReloadPct",
+              "value": 0.6,
+              "condition": "per 1% weakspot-hit share of previous magazine",
+              "perStar": null,
+              "perStack": true,
+              "rangeMax": 30
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "Movement Speed +12%, Stamina Recovery Speed +20% when HP is below 50%",
+              "source": "thegamer/fandom snippet (this is the Scout 4pc text, mis-attributed)",
+              "pick": false
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://once-human.fandom.com/wiki/Renegade_Set",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Shelterer Set",
+      "aliases": [
+        "Shelterd Set"
+      ],
+      "rarity": "legendary",
+      "style": "Wanderer",
+      "addedIn": "launch (2024-07)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Shelterer Hat",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Shelterer Mask",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Shelterer Top",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Shelterer Gloves",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Shelterer Pants",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Shelterer Shoes",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Status DMG Reduction +15%",
+          "effects": [
+            {
+              "stat": "statusDmgTakenReductionPct",
+              "value": 15,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Elemental DMG (Blaze, Frost, Shock, Blast) +8%",
+          "effects": [
+            {
+              "stat": "elementalDmgPct",
+              "value": 8,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "Each weapon hit grants 1 stack of Deviant Energy. Every stack grants +1% Elemental DMG (Blaze, Frost, Shock, Blast). Effect can stack up to 20 stacks. Reloading removes half of the total stacks.",
+          "effects": [
+            {
+              "stat": "elementalDmgPct",
+              "value": 1,
+              "condition": "+1 stack per weapon hit; reload halves stacks",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 20
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "Increase max Deviant Energy stack by 10. Grant 2 additional stacks when hitting a weakspot.",
+          "effects": [
+            {
+              "stat": "deviantEnergyMaxStacks",
+              "value": 30,
+              "condition": null,
+              "perStar": null
+            },
+            {
+              "stat": "deviantEnergyStacksPerWeakspotHit",
+              "value": 3,
+              "condition": "1 base + 2 extra per weakspot hit",
+              "perStar": null
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://once-human.fandom.com/wiki/Shelterer_Set",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Stormweaver Set",
+      "aliases": [
+        "Cyclone Set (KR)"
+      ],
+      "rarity": "legendary",
+      "style": "Stranger",
+      "addedIn": "Version 2.1.1 (2025-08-13)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Stormweaver Helmet",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Stormweaver Mask",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Stormweaver Top",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Stormweaver Gloves",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Stormweaver Pants",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Stormweaver Shoes",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Roll Stamina Cost -20%",
+          "effects": [
+            {
+              "stat": "rollStaminaCostPct",
+              "value": -20,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Magazine Capacity Bonus +15%",
+          "effects": [
+            {
+              "stat": "magazineCapacityPct",
+              "value": 15,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "Taking DMG grants a stack of Powered Armor, DMG Reduction +4% for 10s. Effect can stack up to 6 stacks.",
+          "effects": [
+            {
+              "stat": "dmgReductionPct",
+              "value": 4,
+              "condition": "on taking damage",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 6,
+              "duration": 10
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "Rolling consumes 3 stacks of Powered Armor and triggers an explosion that knocks back surrounding enemies. For each enemy hit, HP +5%, up to +20% (cooldown: 10s).",
+          "effects": [
+            {
+              "stat": "healPctMaxHp",
+              "value": 5,
+              "condition": "per enemy hit by roll explosion (consumes 3 Powered Armor)",
+              "perStar": null,
+              "perStack": true,
+              "rangeMax": 20,
+              "cooldown": 10
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://once-human.fandom.com/wiki/Stormweaver_Set",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Gravity Tide Set",
+      "rarity": "legendary",
+      "style": "Operator",
+      "addedIn": "Version 1.6.1 (2025-05-21)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Gravity Tide Cap",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Gravity Tide Facewear",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Gravity Tide Top",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Gravity Tide Gloves",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Gravity Tide Pants",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Gravity Tide Shoes",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Jump Height +10%",
+          "effects": [
+            {
+              "stat": "jumpHeightPct",
+              "value": 10,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Magazine Capacity Bonus +15%",
+          "effects": [
+            {
+              "stat": "magazineCapacityPct",
+              "value": 15,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "While airborne, gain 20% enemy DMG Reduction; for every 5 meters moved in the air, gain 1 stack of Upper Hand, increasing Weapon and Status DMG by +2%, up to a maximum of 12 stacks.",
+          "effects": [
+            {
+              "stat": "dmgReductionPct",
+              "value": 20,
+              "condition": "while airborne",
+              "perStar": null
+            },
+            {
+              "stat": "weaponDmgPct",
+              "value": 2,
+              "condition": "+1 Upper Hand per 5m airborne",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 12
+            },
+            {
+              "stat": "statusDmgPct",
+              "value": 2,
+              "condition": "+1 Upper Hand per 5m airborne",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 12
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "... +1.5% up to a maximum of 15 stacks. Lose one stack of Upper Hand every 5s",
+              "source": "meta-builds.net v3.0.5 export",
+              "pick": false
+            }
+          ],
+          "pickRationale": "Fandom wiki page (set-specific) vs meta-builds; unable to confirm which is current."
+        },
+        {
+          "pieces": 4,
+          "text": "When Upper Hand exceeds 8 stacks, Weapon and Status DMG +15%. After moving 30m in the air, Upper Hand will stop decaying for 30s.",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 15,
+              "condition": "Upper Hand > 8 stacks",
+              "perStar": null
+            },
+            {
+              "stat": "statusDmgPct",
+              "value": 15,
+              "condition": "Upper Hand > 8 stacks",
+              "perStar": null
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "When Upper Hand exceeds 10 stacks, Weapon and Status damage +10%; after moving 30m in the air, Upper Hand stops decaying for 20s.",
+              "source": "meta-builds.net v3.0.5 export",
+              "pick": false
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://once-human.fandom.com/wiki/Gravity_Tide_Set",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json"
+      ],
+      "confidence": "medium-low"
+    },
+    {
+      "name": "Dark Resonance Set",
+      "rarity": "legendary",
+      "style": "Wanderer (fandom) / Operator (OHDB)",
+      "addedIn": "Version 2.3.1 (2026-01-21, Lunar Oracle / Vision Wheel S3)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Dark Resonance Helmet",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Dark Resonance Mask",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Dark Resonance Vest",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Dark Resonance Gloves",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Dark Resonance Pants",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Dark Resonance Shoes",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Using Ultimate grants a 10% temporary Shield for 10 seconds.",
+          "effects": [
+            {
+              "stat": "shieldPctMaxHp",
+              "value": 10,
+              "condition": "on Deviation Ultimate use",
+              "perStar": null,
+              "duration": 10
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "When Deviant Power is not full, Weapon and Status DMG +12%.",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 12,
+              "condition": "Deviant Power not full",
+              "perStar": null
+            },
+            {
+              "stat": "statusDmgPct",
+              "value": 12,
+              "condition": "Deviant Power not full",
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "For every 1 Energy (Deviant Power) consumed, Gun and Status DMG +0.6%, up to +30%.",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 0.6,
+              "condition": "per 1 Deviant Power consumed",
+              "perStar": null,
+              "perStack": true,
+              "rangeMax": 30
+            },
+            {
+              "stat": "statusDmgPct",
+              "value": 0.6,
+              "condition": "per 1 Deviant Power consumed",
+              "perStar": null,
+              "perStack": true,
+              "rangeMax": 30
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "Consumes 30 Deviant Power when using Battle Skill, reduces its cooldown by 50%.",
+          "effects": [
+            {
+              "stat": "battleSkillCooldownPct",
+              "value": -50,
+              "condition": "costs 30 Deviant Power",
+              "perStar": null
+            }
+          ]
+        }
+      ],
+      "notes": "Blueprints unlock for 2,000 Starchrom each (fandom).",
+      "sources": [
+        "https://once-human.fandom.com/wiki/Dark_Resonance_Set",
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://www.oncehuman.game/news/devBlog/20260116/40781_1282292.html"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Ghost Link Set",
+      "rarity": "legendary",
+      "style": "Beyonder",
+      "addedIn": "Version 3.0.1 (2026-07-09, 2nd Anniversary); 3-piece conditions adjusted in 3.0.4 (details unknown)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Ghost Link Helmet",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Ghost Link Mask",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Ghost Link Vest",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Ghost Link Gloves",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Ghost Link Pants",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Ghost Link Shoes",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Crit Rate +3%",
+          "effects": [
+            {
+              "stat": "critRatePct",
+              "value": 3,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Reload Efficiency +15%",
+          "effects": [
+            {
+              "stat": "reloadSpeedPct",
+              "value": 15,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "When dealing Weapon DMG, gain 1 stack of Sync: Weapon DMG +3%. Stacks up to 10 times. Lasts 5s.",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 3,
+              "condition": "+1 Sync per weapon hit",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 10,
+              "duration": 5
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "When Sync reaches 10 stacks, attacking an enemy applies Overload. Overload: deals Status DMG equal to 50% of Psi Intensity every second to the target and enemies within 3m. Lasts 5s.",
+          "effects": [
+            {
+              "stat": "overloadStatusDmgPctPsiPerSecond",
+              "value": 50,
+              "condition": "Sync at 10 stacks",
+              "perStar": null,
+              "duration": 5,
+              "radiusM": 3
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://once-human.fandom.com/wiki/Ghost_Link_Set",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/ohg_data.js",
+        "https://www.oncehuman.game/news/devBlog/20260702/40781_1306465.html"
+      ],
+      "confidence": "medium-high"
+    },
+    {
+      "name": "Blackstone Set",
+      "rarity": "legendary",
+      "style": "Wanderer",
+      "addedIn": "Way of Winter (2024-10)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Blackstone Hood",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Blackstone Mask",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Blackstone Top",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Blackstone Gloves",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Blackstone Pants",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Blackstone Boots",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Cold Resist and Heat Resist +2.5",
+          "effects": [
+            {
+              "stat": "coldResist",
+              "value": 2.5,
+              "condition": null,
+              "perStar": null
+            },
+            {
+              "stat": "heatResist",
+              "value": 2.5,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Upon dealing Elemental DMG, gain 1 stack of Warm Sensation (Elemental DMG +2%) for 2s. Triggers 1 time every 0.5s, up to a maximum of 5 stacks.",
+          "effects": [
+            {
+              "stat": "elementalDmgPct",
+              "value": 2,
+              "condition": "on elemental damage, 1 trigger per 0.5s",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 5,
+              "duration": 2
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "Triggers 1 time every 2s",
+              "source": "fandom snippet",
+              "pick": false
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "When the temperature is between 10°C and 30°C, you gain the Warm status (Elemental DMG +18%).",
+          "effects": [
+            {
+              "stat": "elementalDmgPct",
+              "value": 18,
+              "condition": "env temperature 10-30°C (Warm)",
+              "perStar": null
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "10-20 degrees",
+              "source": "fandom snippet",
+              "pick": false
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "At 5 stacks of Warm Sensation, you are considered to be in the Warm status. When the environmental temperature is between 10°C and 30°C, gain Elemental DMG +7%.",
+          "effects": [
+            {
+              "stat": "elementalDmgPct",
+              "value": 7,
+              "condition": "env temperature 10-30°C",
+              "perStar": null
+            },
+            {
+              "stat": "warmStatusAt5WarmSensationStacks",
+              "value": true,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/details/sets.json",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://once-human.fandom.com/wiki/Blackstone_Set"
+      ],
+      "confidence": "medium-high"
+    },
+    {
+      "name": "Blackstone Set (Cold)",
+      "rarity": "legendary",
+      "style": "Wanderer",
+      "addedIn": "Way of Winter (2024-10)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Blackstone Hood - Cold",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Blackstone Mask - Cold",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Blackstone Top - Cold",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Blackstone Gloves - Cold",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Blackstone Pants - Cold",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Blackstone Boots - Cold",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Cold Resist +5",
+          "effects": [
+            {
+              "stat": "coldResist",
+              "value": 5,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Upon dealing Elemental DMG, gain 1 stack of Warm Sensation (Elemental DMG +2%) for 2s. Triggers 1 time every 0.5s, up to 5 stacks.",
+          "effects": [
+            {
+              "stat": "elementalDmgPct",
+              "value": 2,
+              "condition": null,
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 5,
+              "duration": 2
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "When the temperature is below 10°C, you gain Cold status (Elemental DMG +10%). For every additional degree below that, gain Elemental DMG +0.5%, up to 20%.",
+          "effects": [
+            {
+              "stat": "elementalDmgPct",
+              "value": 10,
+              "condition": "temp < 10°C; +0.5 per °C below, cap 20 total",
+              "perStar": null,
+              "rangeMax": 20
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "At 5 stacks of Warm Sensation, the environmental temperature drops by 5°C, the DMG bonus provided by the Cold status is doubled, and its cap is increased to 40%.",
+          "effects": [
+            {
+              "stat": "coldStatusBonusMultiplier",
+              "value": 2,
+              "condition": "at 5 Warm Sensation stacks; cap 40%",
+              "perStar": null,
+              "rangeMax": 40
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/details/sets.json"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Blackstone Set (Heat)",
+      "rarity": "legendary",
+      "style": "Wanderer",
+      "addedIn": "Way of Winter (2024-10)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Blackstone Hood - Heat",
+          "baseStats": {
+            "maxHp": 60,
+            "pollutionResist": 3,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Blackstone Mask - Heat",
+          "baseStats": {
+            "maxHp": 30,
+            "pollutionResist": 4,
+            "psiIntensity": 20,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Blackstone Top - Heat",
+          "baseStats": {
+            "maxHp": 156,
+            "pollutionResist": 4,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Blackstone Gloves - Heat",
+          "baseStats": {
+            "maxHp": 90,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Blackstone Pants - Heat",
+          "baseStats": {
+            "maxHp": 144,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Blackstone Boots - Heat",
+          "baseStats": {
+            "maxHp": 120,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Heat Resist +5",
+          "effects": [
+            {
+              "stat": "heatResist",
+              "value": 5,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Upon dealing Elemental DMG, gain 1 stack of Warm Sensation (Elemental DMG +2%) for 2s. Triggers 1 time every 0.5s, up to 5 stacks.",
+          "effects": [
+            {
+              "stat": "elementalDmgPct",
+              "value": 2,
+              "condition": null,
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 5,
+              "duration": 2
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "When the temperature is above 30°C, you gain Passion status (Elemental DMG +10%). For every additional degree above that, gain Elemental DMG +0.5%, up to 20%.",
+          "effects": [
+            {
+              "stat": "elementalDmgPct",
+              "value": 10,
+              "condition": "temp > 30°C; +0.5 per °C above, cap 20 total",
+              "perStar": null,
+              "rangeMax": 20
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "At 5 stacks of Warm Sensation, the environmental temperature rises by 5°C, the DMG bonus provided by the Passion status is doubled, and its cap is increased to 40%.",
+          "effects": [
+            {
+              "stat": "passionStatusBonusMultiplier",
+              "value": 2,
+              "condition": "at 5 Warm Sensation stacks; cap 40%",
+              "perStar": null,
+              "rangeMax": 40
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/details/sets.json"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Falcon Set",
+      "rarity": "epic",
+      "style": "Huntsman",
+      "addedIn": "launch (2024-07)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Falcon Cap",
+          "baseStats": {
+            "maxHp": 54,
+            "pollutionResist": 3,
+            "psiIntensity": 14,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Falcon Mask",
+          "baseStats": {
+            "maxHp": 27,
+            "pollutionResist": 4,
+            "psiIntensity": 18,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Falcon Jacket",
+          "baseStats": {
+            "maxHp": 140,
+            "pollutionResist": 4,
+            "psiIntensity": 10,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Falcon Gloves",
+          "baseStats": {
+            "maxHp": 81,
+            "pollutionResist": 3,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Falcon Pants",
+          "baseStats": {
+            "maxHp": 130,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Falcon Shoes",
+          "baseStats": {
+            "maxHp": 108,
+            "pollutionResist": 3,
+            "psiIntensity": 7,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Rolling Stamina Cost -20%",
+          "effects": [
+            {
+              "stat": "rollStaminaCostPct",
+              "value": -20,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Crit DMG +12%",
+          "effects": [
+            {
+              "stat": "critDmgPct",
+              "value": 12,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "When Stamina is above 90%, Crit Rate +5% and Crit DMG +20%.",
+          "effects": [
+            {
+              "stat": "critRatePct",
+              "value": 5,
+              "condition": "Stamina > 90%",
+              "perStar": null
+            },
+            {
+              "stat": "critDmgPct",
+              "value": 20,
+              "condition": "Stamina > 90%",
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "Max Stamina +25. Recover 30 Stamina instantly with a kill.",
+          "effects": [
+            {
+              "stat": "maxStamina",
+              "value": 25,
+              "condition": null,
+              "perStar": null
+            },
+            {
+              "stat": "staminaOnKill",
+              "value": 30,
+              "condition": null,
+              "perStar": null
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "After killing an enemy, immediately recover 30 Stamina and gain 20% increased Movement Speed for 2s. Cooldown: 3s.",
+              "source": "oncehumandb.com mirror (looks copied from Blast 4pc)",
+              "pick": false
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://once-human.fandom.com/wiki/Falcon_Set",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Agent Set",
+      "rarity": "epic",
+      "style": "Wanderer",
+      "addedIn": "launch (2024-07)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Agent Helmet",
+          "baseStats": {
+            "maxHp": 54,
+            "pollutionResist": 3,
+            "psiIntensity": 14,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Agent Mask",
+          "baseStats": {
+            "maxHp": 27,
+            "pollutionResist": 4,
+            "psiIntensity": 18,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Agent Top",
+          "baseStats": {
+            "maxHp": 140,
+            "pollutionResist": 4,
+            "psiIntensity": 10,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Agent Gloves",
+          "baseStats": {
+            "maxHp": 81,
+            "pollutionResist": 3,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Agent Pants",
+          "baseStats": {
+            "maxHp": 130,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Agent Shoes",
+          "baseStats": {
+            "maxHp": 108,
+            "pollutionResist": 3,
+            "psiIntensity": 7,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Head DMG Reduction +10%",
+          "effects": [
+            {
+              "stat": "headDmgTakenReductionPct",
+              "value": 10,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Weakspot DMG +10%",
+          "effects": [
+            {
+              "stat": "weakspotDmgPct",
+              "value": 10,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "Gain Bullet Saver effect with every precise kill: Weakspot DMG +15% for 8s. Effect can stack up to 3 stacks.",
+          "effects": [
+            {
+              "stat": "weakspotDmgPct",
+              "value": 15,
+              "condition": "per precise (weakspot) kill",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 3,
+              "duration": 8
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "Reload Efficiency +20% after defeating a target. Fire Rate +10% when killing with a Weakspot hit. Effect removed when reloading or switching weapons.",
+          "effects": [
+            {
+              "stat": "reloadSpeedPct",
+              "value": 20,
+              "condition": "after a kill, until reload/switch",
+              "perStar": null
+            },
+            {
+              "stat": "fireRatePct",
+              "value": 10,
+              "condition": "after a weakspot kill, until reload/switch",
+              "perStar": null
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://once-human.fandom.com/wiki/Agent_Set",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Heavy Duty Set",
+      "aliases": [
+        "Heavy Duty Clothing Set"
+      ],
+      "rarity": "epic",
+      "style": "Operator",
+      "addedIn": "launch (2024-07)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Heavy Duty Helmet",
+          "baseStats": {
+            "maxHp": 54,
+            "pollutionResist": 3,
+            "psiIntensity": 14,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Heavy Duty Mask",
+          "baseStats": {
+            "maxHp": 27,
+            "pollutionResist": 4,
+            "psiIntensity": 18,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Heavy Duty Top",
+          "baseStats": {
+            "maxHp": 140,
+            "pollutionResist": 4,
+            "psiIntensity": 10,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Heavy Duty Gloves",
+          "baseStats": {
+            "maxHp": 81,
+            "pollutionResist": 3,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Heavy Duty Pants",
+          "baseStats": {
+            "maxHp": 130,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Heavy Duty Shoes",
+          "baseStats": {
+            "maxHp": 108,
+            "pollutionResist": 3,
+            "psiIntensity": 7,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "HP Bonus +10%",
+          "effects": [
+            {
+              "stat": "maxHpPct",
+              "value": 10,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Elemental DMG (Blaze, Frost, Shock, Blast) +8%",
+          "effects": [
+            {
+              "stat": "elementalDmgPct",
+              "value": 8,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "After killing an enemy, increase Movement Speed by 20% for 2s and Elemental DMG (Blaze, Frost, Shock, Blast) by 40%, decaying over 8s.",
+          "effects": [
+            {
+              "stat": "movementSpeedPct",
+              "value": 20,
+              "condition": "on kill",
+              "perStar": null,
+              "duration": 2
+            },
+            {
+              "stat": "elementalDmgPct",
+              "value": 40,
+              "condition": "on kill; linear decay over 8s",
+              "perStar": null,
+              "duration": 8
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "Within 5m, each enemy grants you DMG Reduction +4%. Effect can stack up to 4 stacks.",
+          "effects": [
+            {
+              "stat": "dmgReductionPct",
+              "value": 4,
+              "condition": "per enemy within 5m",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 4
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://www.oncehumandb.com/armor-sets/heavy-duty-set",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Snow Panther Set",
+      "aliases": [
+        "Snow Leopard Set"
+      ],
+      "rarity": "epic",
+      "style": "Beyonder",
+      "addedIn": "Way of Winter (2024-10)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Snow Panther Helmet",
+          "baseStats": {
+            "maxHp": 54,
+            "pollutionResist": 3,
+            "psiIntensity": 14,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Snow Panther Mask",
+          "baseStats": {
+            "maxHp": 27,
+            "pollutionResist": 4,
+            "psiIntensity": 18,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Snow Panther Top",
+          "baseStats": {
+            "maxHp": 140,
+            "pollutionResist": 4,
+            "psiIntensity": 10,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Snow Panther Gloves",
+          "baseStats": {
+            "maxHp": 81,
+            "pollutionResist": 3,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Snow Panther Pants",
+          "baseStats": {
+            "maxHp": 130,
+            "pollutionResist": 3,
+            "psiIntensity": 12,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Snow Panther Boots",
+          "baseStats": {
+            "maxHp": 108,
+            "pollutionResist": 3,
+            "psiIntensity": 7,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Torso DMG Reduction +10%",
+          "effects": [
+            {
+              "stat": "torsoDmgTakenReductionPct",
+              "value": 10,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Melee, Status, and Weapon DMG +8% when an ally player is within 10 meters or within allied Territory.",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 8,
+              "condition": "ally within 10m or in allied territory",
+              "perStar": null
+            },
+            {
+              "stat": "statusDmgPct",
+              "value": 8,
+              "condition": "ally within 10m or in allied territory",
+              "perStar": null
+            },
+            {
+              "stat": "meleeDmgPct",
+              "value": 8,
+              "condition": "ally within 10m or in allied territory",
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "When you are within allied territory and help defeat an enemy, Melee, Status, and Weapon DMG +8% for 10 seconds, stacking up to 3 stacks.",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 8,
+              "condition": "assist kill in allied territory",
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 3,
+              "duration": 10
+            },
+            {
+              "stat": "statusDmgPct",
+              "value": 8,
+              "condition": null,
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 3,
+              "duration": 10
+            },
+            {
+              "stat": "meleeDmgPct",
+              "value": 8,
+              "condition": null,
+              "perStar": null,
+              "perStack": true,
+              "maxStacks": 3,
+              "duration": 10
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "When within allied territory, sentry turrets within a 7-meter radius deal +50% more DMG.",
+          "effects": [
+            {
+              "stat": "sentryTurretDmgPct",
+              "value": 50,
+              "condition": "in allied territory, turrets within 7m",
+              "perStar": null
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json"
+      ],
+      "confidence": "medium-high"
+    },
+    {
+      "name": "Scout Set",
+      "rarity": "rare",
+      "style": "Huntsman",
+      "addedIn": "launch (2024-07)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Scout Hood",
+          "baseStats": {
+            "maxHp": 48,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Scout Mask",
+          "baseStats": {
+            "maxHp": 24,
+            "pollutionResist": 4,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Scout Jacket",
+          "baseStats": {
+            "maxHp": 125,
+            "pollutionResist": 4,
+            "psiIntensity": 9,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Scout Gloves",
+          "baseStats": {
+            "maxHp": 72,
+            "pollutionResist": 3,
+            "psiIntensity": 10,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Scout Pants",
+          "baseStats": {
+            "maxHp": 115,
+            "pollutionResist": 3,
+            "psiIntensity": 10,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Scout Survival Shoes",
+          "baseStats": {
+            "maxHp": 96,
+            "pollutionResist": 3,
+            "psiIntensity": 6,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Max HP +10%",
+          "effects": [
+            {
+              "stat": "maxHpPct",
+              "value": 10,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Weapon DMG +8%",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 8,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "Weapon and Tactical Item DMG +20% when not spotted by enemies",
+          "effects": [
+            {
+              "stat": "weaponDmgPct",
+              "value": 20,
+              "condition": "not spotted by enemies",
+              "perStar": null
+            },
+            {
+              "stat": "tacticalItemDmgPct",
+              "value": 20,
+              "condition": "not spotted by enemies",
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "Movement Speed +12%, Stamina Recovery Speed +20% when HP is below 50%",
+          "effects": [
+            {
+              "stat": "movementSpeedPct",
+              "value": 12,
+              "condition": "HP < 50%",
+              "perStar": null
+            },
+            {
+              "stat": "staminaRecoveryPct",
+              "value": 20,
+              "condition": "HP < 50%",
+              "perStar": null
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://once-human.fandom.com/wiki/Scout_Set",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "name": "Raid Set",
+      "rarity": "rare",
+      "style": "Wanderer",
+      "addedIn": "launch (2024-07)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Raid Helmet (Face Shield)",
+          "baseStats": {
+            "maxHp": 48,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Raid Mask",
+          "baseStats": {
+            "maxHp": 24,
+            "pollutionResist": 4,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Raid Top",
+          "baseStats": {
+            "maxHp": 125,
+            "pollutionResist": 4,
+            "psiIntensity": 9,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Raid Gloves",
+          "baseStats": {
+            "maxHp": 72,
+            "pollutionResist": 3,
+            "psiIntensity": 10,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Raid Pants",
+          "baseStats": {
+            "maxHp": 115,
+            "pollutionResist": 3,
+            "psiIntensity": 10,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Raid Shoes",
+          "baseStats": {
+            "maxHp": 96,
+            "pollutionResist": 3,
+            "psiIntensity": 6,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Gathering Speed +15%",
+          "effects": [
+            {
+              "stat": "gatheringSpeedPct",
+              "value": 15,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Max Load +20",
+          "effects": [
+            {
+              "stat": "maxLoad",
+              "value": 20,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "When the load is over 80, DMG taken -10%, Weapon and Tactical Item DMG +20%",
+          "effects": [
+            {
+              "stat": "dmgReductionPct",
+              "value": 10,
+              "condition": "load > 80",
+              "perStar": null
+            },
+            {
+              "stat": "weaponDmgPct",
+              "value": 20,
+              "condition": "load > 80",
+              "perStar": null
+            },
+            {
+              "stat": "tacticalItemDmgPct",
+              "value": 20,
+              "condition": "load > 80",
+              "perStar": null
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "Weapon and Tactical Item DMG +15%",
+              "source": "oncehumandb.com mirror",
+              "pick": false
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "Stamina cost -30% when gliding and rolling",
+          "effects": [
+            {
+              "stat": "glideRollStaminaCostPct",
+              "value": -30,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://once-human.fandom.com/wiki/Raid_Set_(Armor)",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json"
+      ],
+      "confidence": "medium-high"
+    },
+    {
+      "name": "Blast Set",
+      "rarity": "rare",
+      "style": "Operator",
+      "addedIn": "launch (2024-07)",
+      "maxPieces": 6,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Blast Helmet",
+          "baseStats": {
+            "maxHp": 48,
+            "pollutionResist": 3,
+            "psiIntensity": 13,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Mask",
+          "name": "Blast Mask",
+          "baseStats": {
+            "maxHp": 24,
+            "pollutionResist": 4,
+            "psiIntensity": 16,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Blast Top",
+          "baseStats": {
+            "maxHp": 125,
+            "pollutionResist": 4,
+            "psiIntensity": 9,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Blast Gloves",
+          "baseStats": {
+            "maxHp": 72,
+            "pollutionResist": 3,
+            "psiIntensity": 10,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Blast Pants",
+          "baseStats": {
+            "maxHp": 115,
+            "pollutionResist": 3,
+            "psiIntensity": 10,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Blast Shoes",
+          "baseStats": {
+            "maxHp": 96,
+            "pollutionResist": 3,
+            "psiIntensity": 6,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Heavy Melee DMG +20%",
+          "effects": [
+            {
+              "stat": "heavyMeleeDmgPct",
+              "value": 20,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Torso DMG Reduction +12%",
+          "effects": [
+            {
+              "stat": "torsoDmgTakenReductionPct",
+              "value": 12,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "After killing an enemy with a melee attack, DMG +25% for the next melee attack within 5s, Melee Swing Speed +15%.",
+          "effects": [
+            {
+              "stat": "meleeDmgPct",
+              "value": 25,
+              "condition": "next melee attack after melee kill",
+              "perStar": null,
+              "duration": 5
+            },
+            {
+              "stat": "meleeSwingSpeedPct",
+              "value": 15,
+              "condition": null,
+              "perStar": null
+            }
+          ],
+          "alternatives": [
+            {
+              "text": "After using Melee attack to kill an enemy, instantly gain 5 Prime Energy, and increase DMG of your next Melee attack by 20% within 5 seconds.",
+              "source": "oncehumandb.com mirror",
+              "pick": false
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "Melee kill an enemy to instantly recover 30 Stamina and increase Movement Speed by 20% for 2s (cooldown: 3s).",
+          "effects": [
+            {
+              "stat": "staminaOnKill",
+              "value": 30,
+              "condition": "melee kill",
+              "perStar": null
+            },
+            {
+              "stat": "movementSpeedPct",
+              "value": 20,
+              "condition": "melee kill",
+              "perStar": null,
+              "duration": 2,
+              "cooldown": 3
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/data/custom-datamine/all-old.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Rustic Set",
+      "rarity": "uncommon",
+      "style": "Wanderer",
+      "addedIn": "launch (2024-07)",
+      "maxPieces": 5,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Rustic Hat",
+          "baseStats": {
+            "maxHp": 42,
+            "pollutionResist": 3,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Rustic Jacket",
+          "baseStats": {
+            "maxHp": 109,
+            "pollutionResist": 4,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Rustic Gloves",
+          "baseStats": {
+            "maxHp": 63,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Rustic Pants",
+          "baseStats": {
+            "maxHp": 101,
+            "pollutionResist": 3,
+            "psiIntensity": 9,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Rustic Shoes",
+          "baseStats": {
+            "maxHp": 84,
+            "pollutionResist": 3,
+            "psiIntensity": 6,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Movement Speed +8%",
+          "effects": [
+            {
+              "stat": "movementSpeedPct",
+              "value": 8,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Melee DMG +15%",
+          "effects": [
+            {
+              "stat": "meleeDmgPct",
+              "value": 15,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "HP +600",
+          "effects": [
+            {
+              "stat": "maxHpFlat",
+              "value": 600,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "Gathering Speed +20%",
+          "effects": [
+            {
+              "stat": "gatheringSpeedPct",
+              "value": 20,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        }
+      ],
+      "notes": "No mask piece.",
+      "sources": [
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json"
+      ],
+      "confidence": "medium-high"
+    },
+    {
+      "name": "Snowland Rustic Set",
+      "aliases": [
+        "Rustic (Tundra) Set"
+      ],
+      "rarity": "uncommon",
+      "style": "Wanderer",
+      "addedIn": "Way of Winter (2024-10)",
+      "maxPieces": 5,
+      "pieces": [
+        {
+          "slot": "Helmet",
+          "name": "Snowland Rustic Hat",
+          "baseStats": {
+            "maxHp": 42,
+            "pollutionResist": 3,
+            "psiIntensity": 11,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Snowland Rustic Jacket",
+          "baseStats": {
+            "maxHp": 109,
+            "pollutionResist": 4,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Gloves",
+          "name": "Snowland Rustic Gloves",
+          "baseStats": {
+            "maxHp": 63,
+            "pollutionResist": 3,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Snowland Rustic Pants",
+          "baseStats": {
+            "maxHp": 101,
+            "pollutionResist": 3,
+            "psiIntensity": 9,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Shoes",
+          "name": "Snowland Rustic Shoes",
+          "baseStats": {
+            "maxHp": 84,
+            "pollutionResist": 3,
+            "psiIntensity": 6,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": [
+        {
+          "pieces": 1,
+          "text": "Movement Speed +8%",
+          "effects": [
+            {
+              "stat": "movementSpeedPct",
+              "value": 8,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 2,
+          "text": "Cold Resist +5",
+          "effects": [
+            {
+              "stat": "coldResist",
+              "value": 5,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 3,
+          "text": "HP +600",
+          "effects": [
+            {
+              "stat": "maxHpFlat",
+              "value": 600,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        },
+        {
+          "pieces": 4,
+          "text": "Gathering Speed +20%",
+          "effects": [
+            {
+              "stat": "gatheringSpeedPct",
+              "value": 20,
+              "condition": null,
+              "perStar": null
+            }
+          ]
+        }
+      ],
+      "notes": "No mask piece.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/data/menu/calc/bd_json/items_and_sets.json",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/details/sets.json"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Test Subject Set",
+      "rarity": "uncommon",
+      "style": "Beyonder (Meta-Human)",
+      "addedIn": "launch (2024-07)",
+      "maxPieces": 3,
+      "pieces": [
+        {
+          "slot": "Mask",
+          "name": "Test Subject Mask",
+          "baseStats": {
+            "maxHp": 21,
+            "pollutionResist": 4,
+            "psiIntensity": 14,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Top",
+          "name": "Test Subject Top",
+          "baseStats": {
+            "maxHp": 109,
+            "pollutionResist": 4,
+            "psiIntensity": 8,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        },
+        {
+          "slot": "Pants",
+          "name": "Test Subject Pants",
+          "baseStats": {
+            "maxHp": 101,
+            "pollutionResist": 3,
+            "psiIntensity": 9,
+            "reference": "Tier I 1-star (OHDB); scale with starScaling"
+          },
+          "effects": [],
+          "notes": "No individual special effect; set pieces only carry base stats + 1 armor mod slot."
+        }
+      ],
+      "setBonuses": null,
+      "notes": "Starter outfit; listed as a set in OHMM/Korean data but meta-builds marks pieces \"No set\". No set bonus text found.",
+      "sources": [
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/src/ui/registries/generated/armor-sets.generated.ts",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ],
+      "confidence": "low"
+    }
+  ],
+  "keyArmor": [
+    {
+      "name": "Cage Helmet",
+      "slot": "Helmet",
+      "rarity": "legendary",
+      "keyword": "Shrapnel",
+      "baseStats": {
+        "maxHp": 60,
+        "pollutionResist": 3,
+        "psiIntensity": 16,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When triggering Shrapnel, additionally triggers 1 time.",
+      "effects": [
+        {
+          "stat": "shrapnelExtraTriggers",
+          "value": 1,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ]
+    },
+    {
+      "name": "Gas-tight Helmet",
+      "slot": "Helmet",
+      "rarity": "legendary",
+      "keyword": "Shrapnel",
+      "baseStats": {
+        "maxHp": 60,
+        "pollutionResist": 3,
+        "psiIntensity": 16,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Limit the maximum hit parts of Shrapnel to 1. Shrapnel DMG Coefficient +150%.",
+      "effects": [
+        {
+          "stat": "shrapnelMaxHitParts",
+          "value": 1,
+          "condition": null,
+          "perStar": null
+        },
+        {
+          "stat": "shrapnelDmgFactorPct",
+          "value": 150,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [
+        {
+          "text": "Max Shrapnel target parts 1. Shrapnel DMG +120%",
+          "source": "meta-builds.net v3.0.5; Korean mirror (+120%)"
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ],
+      "notes": "0x91 flags the +150% as behaving like a separate multiplier (\"Final\" bucket) in their tests; others treat it as DMG Factor."
+    },
+    {
+      "name": "Beret",
+      "slot": "Helmet",
+      "rarity": "epic",
+      "keyword": "Shrapnel",
+      "baseStats": {
+        "maxHp": 54,
+        "pollutionResist": 3,
+        "psiIntensity": 14,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Shrapnel hit parts +1.",
+      "effects": [
+        {
+          "stat": "shrapnelHitParts",
+          "value": 1,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ]
+    },
+    {
+      "name": "Mayfly Goggles",
+      "slot": "Helmet",
+      "rarity": "epic",
+      "keyword": "Power Surge",
+      "baseStats": {
+        "maxHp": 54,
+        "pollutionResist": 3,
+        "psiIntensity": 14,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When triggering Power Surge, additionally triggers 1 time. Power Surge DMG Coefficient -30%.",
+      "effects": [
+        {
+          "stat": "powerSurgeExtraTriggers",
+          "value": 1,
+          "condition": null,
+          "perStar": null
+        },
+        {
+          "stat": "powerSurgeDmgFactorPct",
+          "value": -30,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ]
+    },
+    {
+      "name": "Gas Mask Hood",
+      "slot": "Helmet",
+      "rarity": "legendary",
+      "keyword": "Power Surge",
+      "baseStats": {
+        "maxHp": 60,
+        "pollutionResist": 3,
+        "psiIntensity": 16,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "After triggering Power Surge, Crit Rate +35%, Power Surge DMG Coefficient +15%, lasting 6s.",
+      "effects": [
+        {
+          "stat": "critRatePct",
+          "value": 35,
+          "condition": "after Power Surge trigger",
+          "perStar": null,
+          "duration": 6
+        },
+        {
+          "stat": "powerSurgeDmgFactorPct",
+          "value": 15,
+          "condition": null,
+          "perStar": null,
+          "duration": 6
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [
+        {
+          "text": "After triggering Power Surge, Crit Rate +35% for 3s",
+          "source": "meta-builds.net v3.0.5; Korean mirror"
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Yellow Paint Mask",
+      "slot": "Helmet",
+      "rarity": "legendary",
+      "keyword": "Power Surge",
+      "baseStats": {
+        "maxHp": 60,
+        "pollutionResist": 3,
+        "psiIntensity": 16,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Defeating enemies generates an EMP, dealing Power Surge 1 time to enemies in the area.",
+      "effects": [
+        {
+          "stat": "powerSurgeOnKillAoe",
+          "value": 1,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Yellow Painted Mask"
+      ],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ],
+      "notes": "Occupies the Helmet slot despite the name."
+    },
+    {
+      "name": "Wind Interpreter Cap",
+      "slot": "Helmet",
+      "rarity": "legendary",
+      "keyword": "Unstable Bomber",
+      "baseStats": {
+        "maxHp": 60,
+        "pollutionResist": 3,
+        "psiIntensity": 16,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When Unstable Bomber explodes/triggers, automatically load 1 bullet and Unstable Bomber DMG Rate +25%.",
+      "effects": [
+        {
+          "stat": "autoReloadBulletsOnUnstableBomber",
+          "value": 1,
+          "condition": null,
+          "perStar": null
+        },
+        {
+          "stat": "unstableBomberDmgRatePct",
+          "value": 25,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Wild Interpreter Cap"
+      ],
+      "addedIn": "Version 3.0.1 (2026-07-09)",
+      "alternatives": [],
+      "sources": [
+        "https://www.oncehuman.game/news/devBlog/20260702/40781_1306465.html",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/ohg_data.js"
+      ]
+    },
+    {
+      "name": "Oasis Mask",
+      "slot": "Mask",
+      "rarity": "legendary",
+      "keyword": "Fast Gunner",
+      "baseStats": {
+        "maxHp": 30,
+        "pollutionResist": 4,
+        "psiIntensity": 20,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Fast Gunner max stacks +10. Attack +1% per Fast Gunner stack.",
+      "effects": [
+        {
+          "stat": "fastGunnerMaxStacks",
+          "value": 10,
+          "condition": null,
+          "perStar": null
+        },
+        {
+          "stat": "attackPct",
+          "value": 1,
+          "condition": "per Fast Gunner stack",
+          "perStar": null,
+          "perStack": true
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Desert Dust Mask",
+      "slot": "Mask",
+      "rarity": "legendary",
+      "keyword": "Fast Gunner",
+      "baseStats": {
+        "maxHp": 30,
+        "pollutionResist": 4,
+        "psiIntensity": 20,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When triggering Fast Gunner, there is a 70% chance to automatically reload 1 bullet, with Attack +20%.",
+      "effects": [
+        {
+          "stat": "autoReloadChancePct",
+          "value": 70,
+          "condition": "on Fast Gunner trigger, 1 bullet",
+          "perStar": null
+        },
+        {
+          "stat": "attackPct",
+          "value": 20,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Dust Mask"
+      ],
+      "addedIn": null,
+      "alternatives": [
+        {
+          "text": "When triggering Fast Gunner, there is a 50% chance to automatically reload 1 bullet(s)",
+          "source": "meta-builds.net v3.0.5; Korean mirror"
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Precise Shot Mask",
+      "slot": "Mask",
+      "rarity": "epic",
+      "keyword": "Fast Gunner",
+      "baseStats": {
+        "maxHp": 27,
+        "pollutionResist": 4,
+        "psiIntensity": 18,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When triggering Fast Gunner, Reload Speed +25%, up to 10 stacks. Removed after reloading or switching weapons.",
+      "effects": [
+        {
+          "stat": "reloadSpeedPct",
+          "value": 25,
+          "condition": null,
+          "perStar": null,
+          "perStack": true,
+          "maxStacks": 10
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Viper Mask",
+      "slot": "Mask",
+      "rarity": "legendary",
+      "keyword": "Unstable Bomber",
+      "baseStats": {
+        "maxHp": 30,
+        "pollutionResist": 4,
+        "psiIntensity": 20,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Unstable Bomber range +50%. For every 2% Unstable Bomber range bonus, Unstable Bomber DMG coefficient +1%.",
+      "effects": [
+        {
+          "stat": "unstableBomberRangePct",
+          "value": 50,
+          "condition": null,
+          "perStar": null
+        },
+        {
+          "stat": "unstableBomberDmgFactorPct",
+          "value": 1,
+          "condition": "per 2% UB range bonus (25 from own +50%)",
+          "perStar": null,
+          "perStack": true
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ]
+    },
+    {
+      "name": "Ankh Mask",
+      "slot": "Mask",
+      "rarity": "legendary",
+      "keyword": "Reload",
+      "baseStats": {
+        "maxHp": 30,
+        "pollutionResist": 4,
+        "psiIntensity": 20,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When the magazine is emptied, there's a 40% chance to consume reserve ammo and refill the magazine with 20% bullets (rounded down).",
+      "effects": [
+        {
+          "stat": "refillMagazinePctOnEmpty",
+          "value": 20,
+          "condition": "40% chance when magazine emptied",
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": "Version 3.0.1 (2026-07-09)",
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/ohg_data.js"
+      ]
+    },
+    {
+      "name": "Charmed Mag Top",
+      "slot": "Top",
+      "rarity": "legendary",
+      "keyword": "Fast Gunner",
+      "baseStats": {
+        "maxHp": 156,
+        "pollutionResist": 4,
+        "psiIntensity": 11,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When in Fast Gunner status, the lower the Player's current ammo, the higher the chance to trigger an extra bullet when firing. Maximum chance 40% (at 1% ammo).",
+      "effects": [
+        {
+          "stat": "extraBulletChancePct",
+          "value": 40,
+          "condition": "max, scales inversely with remaining ammo while Fast Gunner active",
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ]
+    },
+    {
+      "name": "Explosive Front Top",
+      "slot": "Top",
+      "rarity": "legendary",
+      "keyword": "Unstable Bomber",
+      "baseStats": {
+        "maxHp": 156,
+        "pollutionResist": 4,
+        "psiIntensity": 11,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Unstable Bomber detonation delay +0.3s. Unstable Bomber DMG multiplier +30%.",
+      "effects": [
+        {
+          "stat": "unstableBomberDelaySeconds",
+          "value": 0.3,
+          "condition": null,
+          "perStar": null
+        },
+        {
+          "stat": "unstableBomberDmgFactorPct",
+          "value": 30,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Snowdrift Top",
+      "slot": "Top",
+      "rarity": "legendary",
+      "keyword": "Frost Vortex",
+      "baseStats": {
+        "maxHp": 156,
+        "pollutionResist": 4,
+        "psiIntensity": 11,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When picking up Deviant Particles, gain an additional charge stack, and Weapon and Status DMG +25% for 25s.",
+      "effects": [
+        {
+          "stat": "weaponDmgPct",
+          "value": 25,
+          "condition": "on Deviant Particle pickup",
+          "perStar": null,
+          "duration": 25
+        },
+        {
+          "stat": "statusDmgPct",
+          "value": 25,
+          "condition": "on Deviant Particle pickup",
+          "perStar": null,
+          "duration": 25
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ]
+    },
+    {
+      "name": "Covert Walker Shirt",
+      "slot": "Top",
+      "rarity": "legendary",
+      "keyword": "Frost Vortex",
+      "baseStats": {
+        "maxHp": 156,
+        "pollutionResist": 4,
+        "psiIntensity": 11,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Frost Vortex collapses in the center, continuously pulling enemies within 1.5x the range of Frost Vortex (pulls Players instead of applying strong control effects).",
+      "effects": [],
+      "perStar": null,
+      "aliases": [
+        "Stealth Walker Wrap"
+      ],
+      "addedIn": null,
+      "alternatives": [
+        {
+          "text": "keeps pulling enemies within 120% of Frost Vortex range",
+          "source": "meta-builds.net; Korean mirror"
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Shaman Vulture Top",
+      "slot": "Top",
+      "rarity": "legendary",
+      "keyword": "Unstable Bomber",
+      "baseStats": {
+        "maxHp": 156,
+        "pollutionResist": 4,
+        "psiIntensity": 11,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "After triggering Unstable Bomber, Crit Rate +35% for 3s.",
+      "effects": [
+        {
+          "stat": "critRatePct",
+          "value": 35,
+          "condition": "after UB trigger",
+          "perStar": null,
+          "duration": 3
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Sleek Leather Jacket",
+      "slot": "Top",
+      "rarity": "epic",
+      "keyword": "Unstable Bomber",
+      "baseStats": {
+        "maxHp": 140,
+        "pollutionResist": 4,
+        "psiIntensity": 10,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "For every 1m distance between the Player and the Unstable Bomber trigger point, Unstable Bomber Final DMG +2%.",
+      "effects": [
+        {
+          "stat": "unstableBomberFinalDmgPct",
+          "value": 2,
+          "condition": "per 1m distance to trigger point",
+          "perStar": null,
+          "perStack": true
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Frost Tactical Vest",
+      "slot": "Top",
+      "rarity": "epic",
+      "keyword": "Frost Vortex",
+      "baseStats": {
+        "maxHp": 140,
+        "pollutionResist": 4,
+        "psiIntensity": 10,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When Frost Vortex is created, additional Ice Spikes are generated, dealing Frost DMG equal to 120% Psi Intensity within an area.",
+      "effects": [
+        {
+          "stat": "iceSpikeDmgPctPsi",
+          "value": 120,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [
+        {
+          "text": "100% Psi Intensity Frost elemental DMG",
+          "source": "Korean mirror"
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Doyen's Cloak",
+      "slot": "Top",
+      "rarity": "legendary",
+      "keyword": "Frost Vortex",
+      "baseStats": {
+        "maxHp": 156,
+        "pollutionResist": 4,
+        "psiIntensity": 11,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When the Frozen effect on a target ends, it takes Frost DMG equal to 50% of the total DMG dealt to it during the Frozen duration.",
+      "effects": [
+        {
+          "stat": "frozenEndDmgPctOfDealt",
+          "value": 50,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Magnetic Moment Top",
+      "slot": "Top",
+      "rarity": "legendary",
+      "keyword": "Power Surge",
+      "baseStats": {
+        "maxHp": 156,
+        "pollutionResist": 4,
+        "psiIntensity": 11,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Targets affected by Power Surge continuously pull in other enemy units within a 7m radius.",
+      "effects": [],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": "2026-05 (v2.4.x/3.0 pre-season)",
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/ohg_data.js"
+      ]
+    },
+    {
+      "name": "Overloaded Pants",
+      "slot": "Pants",
+      "rarity": "legendary",
+      "keyword": "Power Surge",
+      "baseStats": {
+        "maxHp": 144,
+        "pollutionResist": 3,
+        "psiIntensity": 13,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "After triggering Power Surge 20 times, the next 6 shots consume reserve ammo directly and Shock Elemental DMG +20%. Cooldown: 4s. Power Surge triggers during the cooldown do not count.",
+      "effects": [
+        {
+          "stat": "shockDmgPct",
+          "value": 20,
+          "condition": "for 6 shots after 20 Power Surge triggers",
+          "perStar": null,
+          "cooldown": 4
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Overload Spark Pants"
+      ],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ]
+    },
+    {
+      "name": "Sharp Blade Pants",
+      "slot": "Pants",
+      "rarity": "legendary",
+      "keyword": "Bounce",
+      "baseStats": {
+        "maxHp": 144,
+        "pollutionResist": 3,
+        "psiIntensity": 13,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When triggering Bounce, additionally trigger 1 more time.",
+      "effects": [
+        {
+          "stat": "bounceExtraTriggers",
+          "value": 1,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Sharp Edge Pants"
+      ],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Hot Dog Shorts",
+      "slot": "Pants",
+      "rarity": "epic",
+      "keyword": "Bounce",
+      "baseStats": {
+        "maxHp": 130,
+        "pollutionResist": 3,
+        "psiIntensity": 12,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Bounce count +2.",
+      "effects": [
+        {
+          "stat": "bounceCount",
+          "value": 2,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [
+        {
+          "text": "Bounce target count +1",
+          "source": "Korean mirror"
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Tattoo Pants",
+      "slot": "Pants",
+      "rarity": "legendary",
+      "keyword": "Bounce",
+      "baseStats": {
+        "maxHp": 144,
+        "pollutionResist": 3,
+        "psiIntensity": 13,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Bounce can hit allies without dealing DMG, with a 70% chance to automatically refill 1 bullet.",
+      "effects": [],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [
+        {
+          "text": "Bounce has a 100% chance to bounce again upon a hit, dealing 100% Bounce DMG",
+          "source": "meta-builds.net v3.0.5; Korean mirror (text identical to Prickly Dance Pants - names may be swapped)"
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Prickly Dance Pants",
+      "slot": "Pants",
+      "rarity": "legendary",
+      "keyword": "Bounce",
+      "baseStats": {
+        "maxHp": 144,
+        "pollutionResist": 3,
+        "psiIntensity": 13,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Bounce has a 100% chance to bounce again upon a hit, dealing 100% Bounce DMG.",
+      "effects": [],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [
+        {
+          "text": "Bounce can hit allies without causing damage and automatically reloads 1 bullet on hit.",
+          "source": "bramsey679 data/armor.json"
+        }
+      ],
+      "sources": [
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/bramsey679/Once_Human_DPS_Calculator/main/data/armor.json"
+      ]
+    },
+    {
+      "name": "Glide Pants",
+      "slot": "Pants",
+      "rarity": "legendary",
+      "keyword": "Mobility",
+      "baseStats": {
+        "maxHp": 144,
+        "pollutionResist": 3,
+        "psiIntensity": 13,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When not in an Unarmed State, replaces Roll with Slide. After sliding, Reload Efficiency +100% and Movement Speed +30% for 2s. If holding a bow, sliding immediately loads 1 ammo and increases Draw Speed by 100% for 1.5s.",
+      "effects": [
+        {
+          "stat": "reloadSpeedPct",
+          "value": 100,
+          "condition": "after slide",
+          "perStar": null,
+          "duration": 2
+        },
+        {
+          "stat": "movementSpeedPct",
+          "value": 30,
+          "condition": "after slide",
+          "perStar": null,
+          "duration": 2
+        },
+        {
+          "stat": "bowDrawSpeedPct",
+          "value": 100,
+          "condition": "after slide with bow",
+          "perStar": null,
+          "duration": 1.5
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": "2026-05",
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/ohg_data.js"
+      ]
+    },
+    {
+      "name": "Gilded Gloves",
+      "slot": "Gloves",
+      "rarity": "legendary",
+      "keyword": "Burn",
+      "baseStats": {
+        "maxHp": 90,
+        "pollutionResist": 3,
+        "psiIntensity": 12,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Unlocks the Crit Hit ability for Burn (uses character's Crit Rate). Burn Crit Rate and Burn Crit DMG +20%.",
+      "effects": [
+        {
+          "stat": "burnCanCrit",
+          "value": true,
+          "condition": null,
+          "perStar": null
+        },
+        {
+          "stat": "burnCritRatePct",
+          "value": 20,
+          "condition": null,
+          "perStar": null
+        },
+        {
+          "stat": "burnCritDmgPct",
+          "value": 20,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Gilded Palm Shield",
+        "Gilded Gauntlets"
+      ],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ]
+    },
+    {
+      "name": "Hardy Gloves",
+      "slot": "Gloves",
+      "rarity": "legendary",
+      "keyword": "Burn",
+      "baseStats": {
+        "maxHp": 90,
+        "pollutionResist": 3,
+        "psiIntensity": 12,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When Burn reaches max stacks, remove Burn and trigger an Explosion dealing 300% Psi Intensity Blaze DMG in a small area.",
+      "effects": [
+        {
+          "stat": "burnMaxStackExplosionDmgPctPsi",
+          "value": 300,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Veteran Gloves"
+      ],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "BBQ Gloves",
+      "slot": "Gloves",
+      "rarity": "epic",
+      "keyword": "Burn",
+      "baseStats": {
+        "maxHp": 81,
+        "pollutionResist": 3,
+        "psiIntensity": 11,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Gain Burn frequency increase based on Burn stacks, up to +100%.",
+      "effects": [
+        {
+          "stat": "burnFrequencyPct",
+          "value": 100,
+          "condition": "max, scales with Burn stacks",
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "BBQ Grill Gloves"
+      ],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Drifter Gauntlets",
+      "slot": "Gloves",
+      "rarity": "legendary",
+      "keyword": "Burn",
+      "baseStats": {
+        "maxHp": 90,
+        "pollutionResist": 3,
+        "psiIntensity": 12,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When you are affected by Burn, Weapon DMG +15% and Crit Rate +15%.",
+      "effects": [
+        {
+          "stat": "weaponDmgPct",
+          "value": 15,
+          "condition": "self Burning",
+          "perStar": null
+        },
+        {
+          "stat": "critRatePct",
+          "value": 15,
+          "condition": "self Burning",
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Drifter Gloves"
+      ],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Snow Camo Gloves",
+      "slot": "Gloves",
+      "rarity": "legendary",
+      "keyword": "Frost Vortex",
+      "baseStats": {
+        "maxHp": 90,
+        "pollutionResist": 3,
+        "psiIntensity": 12,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When an Ice Crystal shatters, 4 additional ice missiles launch at nearby enemies, dealing Status DMG equal to 40% Psi Intensity (60% DMG to players; Frost Vortex DMG bonus applies).",
+      "effects": [
+        {
+          "stat": "iceMissileCount",
+          "value": 4,
+          "condition": null,
+          "perStar": null
+        },
+        {
+          "stat": "iceMissileDmgPctPsi",
+          "value": 40,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ]
+    },
+    {
+      "name": "Fire Rune Boots",
+      "slot": "Shoes",
+      "rarity": "legendary",
+      "keyword": "Burn",
+      "baseStats": {
+        "maxHp": 120,
+        "pollutionResist": 3,
+        "psiIntensity": 8,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When any target nearby is inflicted with Burn, there's a 50% chance to generate a Deviant Particle. Picking it up increases Blaze DMG +30% for 15s.",
+      "effects": [
+        {
+          "stat": "blazeDmgPct",
+          "value": 30,
+          "condition": "on particle pickup; 50% particle chance per nearby Burn",
+          "perStar": null,
+          "duration": 15
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ]
+    },
+    {
+      "name": "Hard Tactical Boots",
+      "slot": "Shoes",
+      "rarity": "legendary",
+      "keyword": "Fortress Warfare",
+      "baseStats": {
+        "maxHp": 120,
+        "pollutionResist": 3,
+        "psiIntensity": 8,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Automatically refill 1 bullet and Fire Rate +15% while in Fortress Warfare.",
+      "effects": [
+        {
+          "stat": "fireRatePct",
+          "value": 15,
+          "condition": "in Fortress Warfare",
+          "perStar": null
+        },
+        {
+          "stat": "autoReloadBulletsPerSecond",
+          "value": 1,
+          "condition": "in Fortress Warfare (Korean: 1 bullet/s)",
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Bloodstained Tracker Boots",
+      "slot": "Shoes",
+      "rarity": "legendary",
+      "keyword": "The Bull's Eye",
+      "baseStats": {
+        "maxHp": 120,
+        "pollutionResist": 3,
+        "psiIntensity": 8,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When applying The Bull's Eye to a target already marked, Attack +20% for 5s, and The Bull's Eye spreads to one other nearby target.",
+      "effects": [
+        {
+          "stat": "attackPct",
+          "value": 20,
+          "condition": "re-marking a Bull's Eye target",
+          "perStar": null,
+          "duration": 5
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Blood Trail Boots"
+      ],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ]
+    },
+    {
+      "name": "Leather Boots",
+      "slot": "Shoes",
+      "rarity": "epic",
+      "keyword": "Fortress Warfare",
+      "baseStats": {
+        "maxHp": 108,
+        "pollutionResist": 3,
+        "psiIntensity": 7,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Recover 2.5% HP per second while in Fortress Warfare; recovery doubles when HP is below 50%.",
+      "effects": [
+        {
+          "stat": "hpRegenPctPerSecond",
+          "value": 2.5,
+          "condition": "in Fortress Warfare; x2 below 50% HP",
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Earthly Boots",
+      "slot": "Shoes",
+      "rarity": "epic",
+      "keyword": "The Bull's Eye",
+      "baseStats": {
+        "maxHp": 108,
+        "pollutionResist": 3,
+        "psiIntensity": 7,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Additional DMG +30% to enemies under The Bull's Eye.",
+      "effects": [
+        {
+          "stat": "dmgVsMarkedPct",
+          "value": 30,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Stomp Boots"
+      ],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Cowboy Boots",
+      "slot": "Shoes",
+      "rarity": "legendary",
+      "keyword": "Fortress Warfare",
+      "baseStats": {
+        "maxHp": 120,
+        "pollutionResist": 3,
+        "psiIntensity": 8,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Fortress Warfare only affects self. When in Fortress Warfare, Attack +25%.",
+      "effects": [
+        {
+          "stat": "attackPct",
+          "value": 25,
+          "condition": "in Fortress Warfare (self-only)",
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Tactical Combat Shoes",
+      "slot": "Shoes",
+      "rarity": "legendary",
+      "keyword": "The Bull's Eye",
+      "baseStats": {
+        "maxHp": 120,
+        "pollutionResist": 3,
+        "psiIntensity": 8,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "When hitting a target marked by The Bull's Eye, 40% chance to automatically refill 1 bullet and restore 1% of lost HP.",
+      "effects": [
+        {
+          "stat": "autoReloadChancePct",
+          "value": 40,
+          "condition": "on hitting marked target; also heals 1% lost HP",
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Tactical Combat Boots",
+        "Tactical Step Shoes"
+      ],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Old Huntsman Boots",
+      "slot": "Shoes",
+      "rarity": "legendary",
+      "keyword": "The Bull's Eye",
+      "baseStats": {
+        "maxHp": 120,
+        "pollutionResist": 3,
+        "psiIntensity": 8,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "After marking a target with The Bull's Eye, the next 1 bullet hitting a marked target counts as a Weakspot hit. Weakspot DMG +30% to enemies affected by The Bull's Eye.",
+      "effects": [
+        {
+          "stat": "weakspotDmgPct",
+          "value": 30,
+          "condition": "vs Bull's Eye targets",
+          "perStar": null
+        },
+        {
+          "stat": "guaranteedWeakspotBulletsAfterMark",
+          "value": 1,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Seasoned Hunter Leather Boots",
+        "Veteran Hunter Boots"
+      ],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json",
+        "https://raw.githubusercontent.com/nohvenell2/oncehuman_module/main/src/data/armor_raw.json"
+      ]
+    },
+    {
+      "name": "Pivot Step Leather Boots",
+      "slot": "Shoes",
+      "rarity": "legendary",
+      "keyword": "Deviation",
+      "baseStats": {
+        "maxHp": 120,
+        "pollutionResist": 3,
+        "psiIntensity": 8,
+        "reference": "Tier I 1-star; same base-stat rules as set pieces"
+      },
+      "effectText": "Resets Battle Skill cooldown after using Deviation Ultimate.",
+      "effects": [
+        {
+          "stat": "battleSkillCooldownResetOnUltimate",
+          "value": true,
+          "condition": null,
+          "perStar": null
+        }
+      ],
+      "perStar": null,
+      "aliases": [
+        "Spin Step Boots"
+      ],
+      "addedIn": null,
+      "alternatives": [],
+      "sources": [
+        "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md",
+        "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json"
+      ]
+    }
+  ]
+}
