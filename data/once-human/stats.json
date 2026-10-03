@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "game": "Once Human",
+    "collected_on": "2026-10-03",
+    "note": "Werte aus öffentlichen Community-Quellen (Suchmaschinen-Snippets). Siehe SOURCES.md für Quellen und Unsicherheiten. Prozentwerte als Dezimalzahl (0.25 = 25 %).",
+    "confidence_scale": "high = mehrere unabhängige Quellen mit konkreten Zahlen; medium = eine Quelle mit konkreten Zahlen; low = abgeleitet oder nur grob angegeben"
+  },
+
+  "blueprint_stars": {
+    "max_stars_by_rarity": {
+      "standard": 1,
+      "rare": 4,
+      "epic": 5,
+      "legendary": 6
+    },
+    "xp_to_next_star": {
+      "1_to_2": { "fragment_xp": 1600, "starchrom": 3000 },
+      "2_to_3": { "fragment_xp": 4000, "starchrom": 6000 },
+      "3_to_4": { "fragment_xp": 6000, "starchrom": 9000 },
+      "4_to_5": { "fragment_xp": 8000, "starchrom": 12000 },
+      "5_to_6": { "fragment_xp": 10000, "starchrom": 15000 }
+    },
+    "fragment_xp_by_rarity": {
+      "same_name_legendary": 60,
+      "legendary": 30,
+      "epic": 10,
+      "rare": 3,
+      "standard": 1
+    },
+    "confidence": "high"
+  },
+
+  "weapon_star_scaling": {
+    "description": "Multiplikator auf den Basisschaden der Waffe pro Sternstufe. Abgeleitet aus den SOCR - The Last Valor Tabellen (Tier V und Tier III).",
+    "multiplier_by_star": { "1": 1.00, "2": 1.05, "3": 1.10, "4": 1.15, "5": 1.20, "6": 1.25 },
+    "observed_example": {
+      "weapon": "SOCR - The Last Valor (legendär, Sturmgewehr)",
+      "tier_V_damage_by_star": { "1": 264, "2": 277, "3": 290, "4": 304, "5": 317, "6": 330 },
+      "tier_III_damage_by_star": { "1": 111, "2": 117, "3": 122, "4": 128, "5": 133 }
+    },
+    "confidence": "high"
+  },
+
+  "weapon_tier_scaling": {
+    "description": "Basisschaden nach Blueprint-Tier (I bis V) bei 1 Stern. Beispiel SOCR - The Last Valor.",
+    "example_damage_by_tier": { "I": 45, "II": 70, "III": 111, "IV": 174, "V": 264 },
+    "approx_multiplier_vs_tier_I": { "I": 1.0, "II": 1.56, "III": 2.47, "IV": 3.87, "V": 5.87 },
+    "unlock_level_by_tier": { "I": 1, "II": 10, "III": 20, "IV": 30, "V": 40 },
+    "confidence": "medium"
+  },
+
+  "armor_star_scaling": {
+    "description": "Multiplikator auf HP und Psi-Intensität pro Sternstufe. Legendär: +5 % pro Stern (bestätigt über 1★ vs 6★ = +25 %). Zwischenwerte für legendär als lineare Annahme. Raid Set (Beispiel mit 4 Stufen) zeigt ca. +6 % pro Stern.",
+    "legendary_multiplier_by_star": { "1": 1.00, "2": 1.05, "3": 1.10, "4": 1.15, "5": 1.20, "6": 1.25 },
+    "observed_examples": {
+      "shelterer_hat_tier_V": {
+        "star_1": { "hp": 740, "psi_intensity": 92, "pollution_resist": 12 },
+        "star_6": { "hp": 925, "psi_intensity": 115, "pollution_resist": 12 }
+      },
+      "raid_helmet_tier_V": {
+        "star_1": { "hp": 592, "psi_intensity": 74 },
+        "star_2": { "hp": 628, "psi_intensity": 78 },
+        "star_3": { "hp": 669, "psi_intensity": 84 },
+        "star_4": { "hp": 704, "psi_intensity": 88 }
+      }
+    },
+    "note": "Pollution Resist skaliert NICHT mit Sternen.",
+    "confidence": "medium"
+  },
+
+  "armor_tier_V_base_stats": {
+    "description": "Basiswerte bei Tier V, 1 Stern. Quelle: Fandom-Wiki Set-Seiten.",
+    "shelterer_set": {
+      "hat":    { "hp": 740,  "pollution_resist": 12, "psi_intensity": 92 },
+      "jacket": { "hp": 1924, "pollution_resist": 16, "psi_intensity": 64 },
+      "pants":  { "hp": 1776, "pollution_resist": 12, "psi_intensity": 74 },
+      "gloves": { "hp": 1110, "pollution_resist": 12, "psi_intensity": 69 },
+      "shoes":  { "hp": 1480, "pollution_resist": 12, "psi_intensity": 46 },
+      "mask":   { "hp": 370,  "pollution_resist": 16, "psi_intensity": 115 }
+    },
+    "agent_set": {
+      "helmet": { "hp": 531,  "pollution_resist": 21, "psi_intensity": 83 },
+      "top":    { "hp": 1381, "pollution_resist": 28, "psi_intensity": 58 },
+      "mask":   { "hp": 266,  "pollution_resist": 28, "psi_intensity": 104 }
+    },
+    "blast_set": {
+      "helmet": { "hp": 472,  "pollution_resist": 21, "psi_intensity": 74 },
+      "top":    { "hp": 1227, "pollution_resist": 28, "psi_intensity": 52 },
+      "pants":  { "hp": 1133, "pollution_resist": 21, "psi_intensity": 59 },
+      "gloves": { "hp": 708,  "pollution_resist": 21, "psi_intensity": 55 },
+      "shoes":  { "hp": 944,  "pollution_resist": 21, "psi_intensity": 37 },
+      "mask":   { "hp": 236,  "pollution_resist": 28, "psi_intensity": 92 }
+    },
+    "raid_set": {
+      "helmet": { "hp": 592,  "pollution_resist": 12, "psi_intensity": 74 },
+      "pants":  { "hp": 1421, "pollution_resist": 12, "psi_intensity": 59 },
+      "gloves": { "hp": 888,  "pollution_resist": 12, "psi_intensity": 55 },
+      "shoes":  { "hp": 1184, "pollution_resist": 12, "psi_intensity": 37 }
+    },
+    "raid_helmet_by_tier": {
+      "I": { "hp": 48, "psi_intensity": 13 },
+      "II": { "hp": 64, "psi_intensity": 19 },
+      "III": { "hp": 128, "psi_intensity": 31 },
+      "IV": { "hp": 256, "psi_intensity": 48 },
+      "V": { "hp": 592, "psi_intensity": 74 }
+    },
+    "confidence": "medium"
+  },
+
+  "armor_set_bonuses": {
+    "falcon": {
+      "1": "Roll-Stamina -20 %, Crit DMG +12 %",
+      "2": "Crit DMG +12 %",
+      "3": "Über 90 % Stamina: Crit Rate +5 %, Crit DMG +20 %"
+    },
+    "lonewolf": {
+      "1": "Magazinkapazität +10 %",
+      "2": "Crit Rate +5 %",
+      "3": "Lone Shadow Stacks: Crit DMG bis zu +48 %",
+      "4": "Max Lone Shadow Stacks 10; Crit Rate +8 % für 2 s nach Nachladen"
+    },
+    "bastille": {
+      "1": "HP über 70 %: Waffenschaden +10 %",
+      "2": "Nachladegeschwindigkeit +20 %",
+      "3": "0,5 s geduckt still stehen = Bastille-Zustand: Waffenschaden +40 %",
+      "4": "3 s nach Verlassen des Bastille-Zustands 1 Rüstungs-Stack/s bis 60; im Bastille-Zustand Schild je Stack 1 % Max-HP"
+    },
+    "shelterer": {
+      "2": "Status-DMG-Reduktion +15 %, Elemental DMG +8 %",
+      "3": "Pro Waffentreffer 1 Deviant-Energy-Stack, je +1 % Elemental DMG, max 20",
+      "4": "Max 30 Stacks, Weakspot-Treffer geben 2 Stacks"
+    },
+    "confidence": "medium"
+  },
+
+  "weapon_base_stats": {
+    "description": "Tier-I-Basiswerte (1 Stern). Schaden pro Kugel (Schrotflinten: Schaden x Pellets). fire_rate = Schuss/min.",
+    "weapons": [
+      { "name": "AWS.338 - Bullseye", "type": "sniper", "damage": 316, "fire_rate": 40, "magazine": 5, "crit_rate": 0.02, "crit_dmg": 0.26, "weakspot_dmg": 0.95, "reload": 42, "stability": 45, "accuracy": 45, "range": 72 },
+      { "name": "HAMR - Brahminy", "type": "sniper", "damage": 218, "fire_rate": 85, "magazine": 8 },
+      { "name": "SOCR - The Last Valor", "type": "assault_rifle", "damage": 45, "fire_rate": 515, "magazine": 30 },
+      { "name": "KAM - Abyss Glance", "type": "assault_rifle", "damage": 39, "fire_rate": 600, "magazine": 50, "crit_rate": 0.06, "crit_dmg": 0.30 },
+      { "name": "MPS7 - Outer Space", "type": "smg", "damage": 33, "fire_rate": 850, "magazine": 35 },
+      { "name": "MG4 - Predator", "type": "lmg", "damage": 32, "fire_rate": 700, "magazine": 75, "crit_rate": 0.08, "crit_dmg": 0.30, "weakspot_dmg": 0.35 },
+      { "name": "KVD - Boom! Boom!", "type": "lmg", "damage": 44, "fire_rate": 500, "magazine": 100 },
+      { "name": "DBSG - Doombringer", "type": "shotgun", "damage": 62, "pellets": 6, "fire_rate": 180, "magazine": 2 },
+      { "name": "DB12 - Raining Cash", "type": "shotgun", "damage": 55, "pellets": 5, "fire_rate": 105, "magazine": 12 },
+      { "name": "ACS12 - Corrosion", "type": "shotgun", "damage": 36, "pellets": 5, "fire_rate": 180, "magazine": 18 },
+      { "name": "DE.50 - Jaws", "type": "pistol", "damage": 128, "fire_rate": 190, "magazine": 8 },
+      { "name": "R500 - Memento", "type": "pistol", "damage": 170, "fire_rate": 145, "magazine": 5 },
+      { "name": "Compound Bow", "type": "bow", "crit_rate": 0.02, "weakspot_dmg": 0.70 }
+    ],
+    "legendary_stat_ranges": { "crit_rate": [0.02, 0.10], "crit_dmg": [0.25, 0.45], "weakspot_dmg": [0.15, 0.95] },
+    "confidence": "medium"
+  },
+
+  "calibration": {
+    "slots_by_tier": { "I": 2, "II": 2, "III": 4, "IV": 4, "V": 6 },
+    "max_level_by_tier": { "I": 4, "II": 4, "III": 7, "IV": 7, "V": 10 },
+    "stat_pool": ["Weapon DMG", "Fire Rate", "Reload Speed", "Crit DMG", "Crit Rate", "Weakspot DMG", "Magazine Capacity", "Stability", "Mobility", "Elemental DMG", "Range", "Movement Speed (gun)", "Heavy Attack DMG", "Melee Attack Speed", "Melee Stamina Cost"],
+    "observed_secondary_ranges": {
+      "weakspot_dmg": { "lvl7": [0.072, 0.096], "lvl10": [0.108, 0.144] },
+      "crit_rate":    { "lvl7": [0.048, 0.064], "lvl10": [0.072, 0.096] },
+      "crit_dmg":     { "lvl7": [0.12, 0.16],   "lvl10": [0.18, 0.24] },
+      "crit_dmg_alt": { "lvl10": [0.15, 0.21] },
+      "weapon_dmg":   { "lvl10": [0.18, 0.25] }
+    },
+    "note": "Kalibrierung wurde 2026 überarbeitet (Dev Blog 13.01.2026): nicht mehr an der Werkbank, sondern beim Crafting als Kalibrier-Blueprint. Werte können sich geändert haben.",
+    "confidence": "low"
+  },
+
+  "mods": {
+    "slots_per_weapon": 4,
+    "examples": {
+      "Weakspot DMG Boost": "Weakspot DMG +30 %",
+      "Crit Amplifier": "Crit DMG +30 %",
+      "Precise Strike": "Weakspot-Treffer: Weakspot DMG +15 % für 3 s, max 3 Stacks",
+      "Fateful Strike": "Crit Rate +10 %, Crit DMG +30 % (laut einer Quelle auf Kosten von Weakspot DMG)"
+    },
+    "confidence": "low"
+  },
+
+  "damage_formula": {
+    "weapon_hit": {
+      "description": "Community-Konsens, nicht offiziell. Crit DMG und Weakspot DMG werden ADDITIV zusammengefasst und dann als ein Multiplikator angewendet. Eine Quelle beschreibt sie stattdessen als multiplikativ; für den Planer sollte additiv als Standard gelten mit Umschalter.",
+      "formula_additive": "dmg = base * star_mult * (1 + weapon_dmg_bonus) * (1 + crit_dmg + weakspot_dmg) [crit_dmg nur bei Crit, weakspot_dmg nur bei Weakspot-Treffer]",
+      "formula_multiplicative_alt": "dmg = base * star_mult * (1 + weapon_dmg_bonus) * (1 + crit_dmg) * (1 + weakspot_dmg)"
+    },
+    "status_effects": {
+      "description": "Statuseffekte skalieren mit Psi-Intensität, nicht mit Waffenschaden. Status DMG und Elemental DMG sind getrennte, MULTIPLIKATIVE Boni. Statuseffekte können nicht kritisch treffen und nutzen keinen Weakspot-Bonus.",
+      "formula": "status_dmg = psi_intensity * effect_pct * (1 + status_dmg_bonus) * (1 + elemental_dmg_bonus)",
+      "example": "400 * (1 + 0.20) * (1 + 0.06) = 508.8",
+      "effect_pct_of_psi": {
+        "burn": { "pct": 0.10, "tick": "alle 0,5 s", "duration_s": 6, "max_stacks": 5 },
+        "frost_vortex": { "pct": 0.50, "tick": "alle 0,5 s", "duration_s": 4 },
+        "power_surge": { "pct": 0.50, "tick": "einmalig pro Proc" },
+        "unstable_bomber": { "pct": 0.50, "tick": "einmalig" },
+        "shrapnel": { "note": "skaliert mit Waffenschaden, nicht mit Psi" },
+        "bounce_fast_gunner": { "note": "skalieren mit Waffenschaden" }
+      }
+    },
+    "confidence": "medium"
+  },
+
+  "food_buffs": {
+    "description": "Dauer standardmäßig 1800 s (30 min). Gleiche Buff-Slots überschreiben sich gegenseitig (z. B. Iced Tea überschreibt Whimsical Drink). Buff-Kategorien sind nicht offiziell dokumentiert.",
+    "default_duration_s": 1800,
+    "items": [
+      { "name": "Shattered Bread", "buff": "Weapon Pro", "effect": "Weapon DMG +25 %", "stat": "weapon_dmg", "value": 0.25, "condition": null },
+      { "name": "Stargazy Pie", "buff": "Full Stomach", "effect": "Crit DMG +25 % bei voller Energie", "stat": "crit_dmg", "value": 0.25, "condition": "energy_full" },
+      { "name": "Stardust Pumpkin Salad", "buff": "Swiftfooted", "effect": "Bewegungstempo +20 %, Sprint-Stamina -50 %", "stat": "movement_speed", "value": 0.20, "condition": null, "note": "Eine Quelle nennt stattdessen Crit DMG +15 %; Wiki sagt Swiftfooted." },
+      { "name": "Assorted Canned Fruit", "buff": null, "effect": "Weakspot DMG +25 % bei Sanity über 80 %", "stat": "weakspot_dmg", "value": 0.25, "condition": "sanity_above_80" },
+      { "name": "Honey Glazed Meat", "buff": null, "effect": "Crit Rate +15 % gegen Gegner im Frost Vortex", "stat": "crit_rate", "value": 0.15, "condition": "target_in_frost_vortex" },
+      { "name": "Mixed Fried Hot Dog", "buff": "Enhanced Marking", "effect": "DMG +20 % gegen Bull's-Eye-markierte Ziele", "stat": "dmg_vs_marked", "value": 0.20, "condition": "target_bulls_eye" },
+      { "name": "Bone-In Deviated Sausage", "buff": null, "effect": "DMG gegen Bosse +15 %", "stat": "dmg_vs_boss", "value": 0.15, "condition": "target_boss" },
+      { "name": "Ginger Poppers", "buff": null, "effect": "Shrapnel DMG +10 %", "stat": "shrapnel_dmg", "value": 0.10, "condition": null },
+      { "name": "Canned Meat", "buff": null, "effect": "Shrapnel DMG +10 %", "stat": "shrapnel_dmg", "value": 0.10, "condition": null },
+      { "name": "Shellfish Meat", "buff": null, "effect": "Getroffene Gegner erhalten 5 % Verwundbarkeit für 10 s", "stat": "target_vulnerability", "value": 0.05, "condition": null },
+      { "name": "Sparkling Pumpkin Soup", "buff": null, "effect": "Power Surge DMG +10 %", "stat": "power_surge_dmg", "value": 0.10, "condition": null },
+      { "name": "Whimsical Drink", "buff": null, "effect": "Status DMG +25 % (eine Quelle: Psi-Intensität +30 %), Hydration +100, Sanity +1000", "stat": "status_dmg", "value": 0.25, "condition": null, "note": "Widersprüchliche Quellen: +25 % Status DMG vs +30 % Psi Intensity" },
+      { "name": "French Fries", "buff": null, "effect": "Weapon DMG +20 % während Fortress Warfare", "stat": "weapon_dmg", "value": 0.20, "condition": "fortress_warfare" },
+      { "name": "Barracuda (Fisch-Zutat)", "buff": null, "effect": "Psi-Intensität +5 %", "stat": "psi_intensity", "value": 0.05, "condition": null },
+      { "name": "(unbekanntes Gericht)", "buff": "Status Resistance", "effect": "Status-DMG-Resistenz +5 % bei ausreichender Energie", "stat": "status_resist", "value": 0.05, "condition": "energy_sufficient" },
+      { "name": "(unbekanntes Gericht)", "buff": "Freshen-up", "effect": "Pollution Resist +30 %, Sanity-Regeneration außerhalb des Kampfes", "stat": "pollution_resist", "value": 0.30, "condition": "out_of_combat" }
+    ],
+    "confidence": "medium"
+  },
+
+  "combat_deviants": {
+    "description": "Seit Update 2.2.4 (23.12.2025) hat jeder Kampf-Deviant zusätzlich eine Battle Skill und ein Ultimate. Deviant-Wechsel setzt Deviation Power und Battle-Skill-Cooldown zurück. Grade: S, A, B (C in manchen Quellen).",
+    "items": [
+      { "name": "Butterfly's Emissary", "grade": "S", "effect": "Auto-Attack; markiert Weakspot, Ziel erhält +25 % / 30 % / 35 % Weakspot DMG für 5 s (skaliert mit Grade)", "stat": "weakspot_dmg_taken", "value_by_grade": { "low": 0.25, "mid": 0.30, "high": 0.35 }, "duration_s": 5 },
+      { "name": "Mr. Wish", "grade": "S", "effect": "Rapid Fire; markiert mit The Bull's Eye: +8 % DMG für 12 s, nächster Treffer zählt als Weakspot, Weakspot DMG +30 % gegen markierte Ziele", "stat": "dmg_taken", "value": 0.08, "duration_s": 12, "extra": { "weakspot_dmg_vs_marked": 0.30 } },
+      { "name": "Lonewolf's Whisper", "grade": "A", "effect": "Auto-Attack, zieht Aggro, spawnt Klon bei Kill; Ziel erhält +18,75 % (Lvl 1) / +25 % (Lvl 2) Weapon DMG", "stat": "weapon_dmg_taken", "value_by_level": { "1": 0.1875, "2": 0.25 } },
+      { "name": "Polar Jelly", "grade": "A", "effect": "Frost-Status-DMG an nahe Gegner, zieht sie heran, +36 % Frost DMG received, extra Ice Spikes bei Frost Vortex im Radius", "stat": "frost_dmg_taken", "value": 0.36 },
+      { "name": "Pyro Dino", "grade": "A", "effect": "Auto-Attack, Ziel erhält +24,5 % Blaze DMG, Explosion 1x bei Burn-Zielen", "stat": "blaze_dmg_taken", "value": 0.245 },
+      { "name": "Dr. Teddy", "grade": "A", "effect": "Remote Healing 50 % Max-HP sofort, Wiederbelebung, danach 8 % Max-HP/s", "stat": "heal", "value": 0.50, "extra": { "heal_per_s": 0.08 } },
+      { "name": "Festering Gel", "grade": "A", "effect": "Flawless Fortification: Rückstoß, blockt Fernkampf, heilt 10 % HP für Verbündete", "stat": "heal", "value": 0.10 },
+      { "name": "Mini Wonder", "grade": "A", "effect": "Bullet Absorption im Radius, Designated Target bufft Verbündeten", "stat": null },
+      { "name": "By-the-Wind", "grade": "B", "effect": "Schwebezone: Bewegungstempo +20 %, Sprungtempo +2, immun gegen Fallschaden und Stagger; Battle Skill: Windwand blockt Kugeln", "stat": "movement_speed", "value": 0.20 },
+      { "name": "Zapamander", "grade": null, "effect": "Battle Skill: blitzschneller Sprint", "stat": null },
+      { "name": "Frog the Leaper", "grade": "S (laut Tierliste)", "effect": "Spring Legs: stark erhöhte Sprunghöhe, kostet Stamina", "stat": null }
+    ],
+    "shiny_traits": {
+      "Butterfly's Emissary - Starry Night": "Nachts +6 % Weapon DMG und Status DMG",
+      "Butterfly's Emissary - Glistening Blue": "Weakspot-Treffer +1 Secured, 3 s Cooldown",
+      "Festering Gel - Spring Rose": "Heilung +20 % tagsüber, +10 % nachts"
+    },
+    "confidence": "medium"
+  }
+}
