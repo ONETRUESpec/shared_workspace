@@ -85,10 +85,14 @@ test('Lonewolf full set grants 1pc magazine, 2pc crit rate and toggled 3pc Lone 
   assert.equal(sum('magazinePct'), 10);
   assert.equal(sum('critRatePct') >= 5, true);
   const lone = fx.find(f => f.stat === 'critDmgPct' && /Lonewolf Set 3pc/.test(f.source));
-  assert.ok(lone && lone.perStack && lone.maxStacks === 8 && lone.enabled === false, 'Lone Shadow should be a conditional per-stack effect, off by default');
+  assert.ok(lone && lone.perStack && lone.enabled === false, 'Lone Shadow should be a conditional per-stack effect, off by default');
+  assert.equal(lone.maxStacks, 10, '4pc raises Lone Shadow to 10 stacks');
   b.toggles[lone.id] = true;
   const fx2 = A.collectEffects(b, cat, { includeFood: false });
-  assert.equal(fx2.find(f => f.id === lone.id).value, 48);
+  assert.equal(fx2.find(f => f.id === lone.id).value, 60);
+  b.armor.Shoes.pieceId = null; b.armor.Pants.pieceId = null; b.armor.Gloves.pieceId = null; // 3 pieces: cap back to 8
+  const fx3 = A.collectEffects(b, cat, { includeFood: false });
+  assert.equal(fx3.find(f => f.id === lone.id).value, 48);
 });
 
 test('food is excluded when includeFood is false and the comparison reports the delta', () => {
@@ -119,4 +123,99 @@ test('build round-trips through the URL encoding', async () => {
   const b = A.defaultBuild(cat);
   b.weapon.star = 3; b.cradle.nodeIds = [cat.cradle.nodes[0].id];
   assert.deepEqual(decode(encode(b)), b);
+});
+
+test('research stat names map onto the right engine stats (reviewer cases)', () => {
+  const t = (stat, v, m) => A.toEffects(stat, v, m).map(e => e.stat + (e.key ? ':' + e.key : '') + '=' + e.value).join(',');
+  assert.equal(t('crit_dmg_pct', 25), 'critDmgPct=25');
+  assert.equal(t('status_dmg_pct', 25), 'statusDmgPct=25');
+  assert.equal(t('weakspot_dmg_pct', 25), 'weakspotDmgPct=25');
+  assert.equal(t('melee_dmg_pct', 25), 'other=25');
+  assert.equal(t('powerSurgeDmgFactorPct', -30), 'keywordDmgPct:powerSurge=-30');
+  assert.equal(t('unstableBomberFinalDmgPct', 10), 'finalDmgPct:unstableBomber=10');
+  assert.equal(t('burnCritDmgPct', 20), 'keywordCritDmgPct:burn=20');
+  assert.equal(t('weaponDmgTakenPct', 50, { target: 'enemy' }), 'weaponVulnPct=50');
+  assert.equal(t('blastDmgTakenPct', 80, { target: 'enemy' }), 'elementalDmgPct:blast=80');
+  assert.equal(t('frostVulnerabilityPct', 39.2, { target: 'enemy' }), 'elementalDmgPct:frost=39.2');
+  assert.equal(t('DMG received from monsters', -30), 'dmgReductionPct=30');
+  assert.equal(t('shrapnel_weakspot_hit_weight_pct', 100), 'other=100');
+  assert.equal(t('autoReloadChancePct', 70), 'other=70');
+  assert.equal(t('celestial_thunder_shock_dmg_pct_psi', 200), 'other=200');
+  assert.equal(t('Elemental DMG (Blaze, Frost, Shock, Blast)', 15), 'elementalDmgPct:all=15');
+  assert.equal(t('Instant DMG (Power Surge and Unstable Bomber)', 25), 'keywordDmgPct:powerSurge=25,keywordDmgPct:unstableBomber=25');
+  assert.equal(t('DMG', 15, { condition: 'Normal enemies take +15% DMG' }), 'dmgVsPct:normal=15');
+  assert.equal(t('Shrapnel Crit DMG', 30), 'keywordCritDmgPct:shrapnel=30');
+  assert.equal(t('Vulnerability', 8), 'weaponVulnPct=8,statusVulnPct=8');
+  assert.equal(t('Attack', 25), 'attackPct=25');
+});
+
+test('the 113 test reproduces through the adapter with Mayfly Goggles on ACS12 Corrosion', () => {
+  const b = A.defaultBuild(cat);
+  b.weapon.id = 'acs12-corrosion'; b.weapon.calibration = { styleId: null, attackBonusPct: 0, random: null };
+  const mayfly = cat.armor.pieces.find(p => /Mayfly/.test(p.name));
+  b.armor[mayfly.slot].pieceId = mayfly.id;
+  for (const f of A.collectEffects(b, cat, { includeFood: false })) if (f.conditional) b.toggles[f.id] = true;
+  const r = A.computeBuild(b, cat, { includeFood: false });
+  const psi = r.psi.effective;
+  const intrinsic = (r.totals.keywordDmgPct && r.totals.keywordDmgPct.powerSurge || 0) + 30; // Corrosion's own +15% if modelled as an intrinsic
+  assert.ok(Math.abs(r.status.perProc - psi * 0.5 * (1 + (intrinsic - 30) / 100)) < 1e-9, `${r.status.perProc}`);
+  assert.ok(r.totals.keywordDmgPct && r.totals.keywordDmgPct.powerSurge <= -15, 'Mayfly -30% must be in the Power Surge factor pool');
+});
+
+test('mod stacks: value is the total at max stacks; Bullet Siphon keeps its unconditional base', () => {
+  const so = cat.mods.byId['shoot-out'];
+  assert.ok(so && so.effects[0].perStack && so.effects[0].maxStacks === 20 && so.effects[0].perStackValue === 1.5);
+  const b = A.defaultBuild(cat); b.weapon.mod = { id: 'shoot-out', substats: [] };
+  let fx = A.collectEffects(b, cat); const e = fx.find(f => /Shoot Out/.test(f.source));
+  assert.equal(e.enabled, false); b.toggles[e.id] = true;
+  fx = A.collectEffects(b, cat); assert.equal(fx.find(f => /Shoot Out/.test(f.source)).value, 30);
+  const pants = cat.armor.pieces.find(p => p.slot === 'Pants');
+  b.armor.Pants.pieceId = pants.id; b.armor.Pants.mod = { id: 'bullet-siphon', substats: [] };
+  fx = A.collectEffects(b, cat);
+  const bsx = fx.filter(f => /Bullet Siphon/.test(f.source));
+  assert.equal(bsx.filter(f => f.enabled).reduce((a, f) => a + f.value, 0), 5);
+  const st = bsx.find(f => f.perStack); b.toggles[st.id] = true; b.stacks[st.id] = 3;
+  fx = A.collectEffects(b, cat);
+  assert.equal(fx.filter(f => /Bullet Siphon/.test(f.source) && f.enabled).reduce((a, f) => a + f.value, 0), 17);
+});
+
+test('deviation debuffs scale with Skill Rating and Mini Feaster stacks to its cap', () => {
+  const lw = cat.deviants.list.find(d => /Lonewolf/.test(d.name));
+  const vuln = lw.effects.find(f => f.stat === 'weaponVulnPct');
+  assert.ok(vuln && vuln.valueBySkillRating[0] === 25 && vuln.valueBySkillRating[4] === 50);
+  const b = A.defaultBuild(cat); b.deviant = { id: cat.deviants.list.find(d => /Mini Feaster/.test(d.name)).id, skillRating: 5, active: true };
+  let fx = A.collectEffects(b, cat); const mf = fx.find(f => /Mini Feaster/.test(f.source) && f.stat === 'statusDmgPct');
+  b.toggles[mf.id] = true;
+  fx = A.collectEffects(b, cat); assert.equal(fx.find(f => f.id === mf.id).value, 80);
+  b.deviant.skillRating = 1; fx = A.collectEffects(b, cat); assert.equal(fx.find(f => f.id === mf.id).value, 40);
+});
+
+test('Cradle: Marked Strike is a toggle, Scavenging is DMG vs normal enemies', () => {
+  const ms = cat.cradle.nodes.find(n => n.id.startsWith('marked-strike'));
+  assert.ok(ms.effects[0].conditional && ms.effects[0].stat === 'weakspotDmgPct');
+  const sc = cat.cradle.nodes.find(n => n.id.startsWith('scavenging'));
+  assert.ok(sc.effects.some(f => f.stat === 'dmgVsPct' && f.key === 'normal'), JSON.stringify(sc.effects));
+});
+
+test('epic armor caps at 5 stars and uses the epic series; attack flat is added after Attack %', () => {
+  const may = cat.armor.pieces.find(p => /Mayfly/.test(p.name));
+  assert.equal(may.maxStars, 5);
+  const hp5 = cat.armor.baseStatsAt(may, 5).maxHp, hp6 = cat.armor.baseStatsAt(may, 6).maxHp;
+  assert.equal(hp5, hp6); assert.ok(Math.abs(hp5 - 814) <= 2, String(hp5));
+  const r = E.computeDamage({ attack: 1000, rpm: 60, magazine: 10, reloadTime: 1 }, 1, [E.effect('attackPct', 50), E.effect('attackFlat', 100)], {});
+  assert.equal(r.attack.final, 1600);
+});
+
+test('status trigger chance multiplies the weapon base and stays 0 when unknown', () => {
+  const w = { name: 'x', keyword: 'powerSurge', attack: 100, rpm: 600, magazine: 30, reloadTime: 2, statusChancePct: 25 };
+  const r = E.computeDamage(w, 1, [E.effect('psiIntensity', 100), E.effect('statusChancePct', 20)], { statusEffects: cat.statusEffects });
+  assert.equal(r.status.chancePct, 30);
+  const r0 = E.computeDamage(Object.assign({}, w, { statusChancePct: null }), 1, [E.effect('psiIntensity', 100), E.effect('statusChancePct', 20)], { statusEffects: cat.statusEffects });
+  assert.equal(r0.status.chancePct, 0); assert.equal(r0.dps.statusBurst, 0);
+});
+
+test('computeBuild tolerates partial builds (no options / target)', () => {
+  const b = A.defaultBuild(cat); delete b.options; delete b.target;
+  const r = A.computeBuild(b, cat, {});
+  assert.ok(r && r.hits.normal > 0);
 });

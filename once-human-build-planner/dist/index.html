@@ -402,7 +402,7 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
  *   DIRECT HIT
  *     hit = Attack(star, calibration)
  *         × (1 + ΣAttack%) × (1 + ΣWeaponDMG%)
- *         × (1 + ΣElementalDMG%[weapon element])      (optional, default OFF – unverified)
+ *         × (1 + ΣElementalDMG%[weapon element])      (elemental weapons only; option)
  *         × (crit ? 1 + ΣCritDMG% : 1) × (weakspot ? 1 + ΣWeakspotDMG% : 1)
  *         × (1 + ΣDmgVs[target type]%) × (1 + ΣWeaponVulnerability%) × (1 + ΣAllDMG%)
  *         × falloff × mitigation
@@ -529,7 +529,7 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
    */
   function effect(stat, value, opts) {
     const o = opts || {};
-    const r = resolveStat(stat, o.key || o.element || o.keyword || o.target);
+    const r = resolveStat(stat, o.key || o.element || o.keyword);
     return {
       stat: r.stat,
       key: r.key || null,
@@ -646,7 +646,7 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
       attackMult = 1 + (attackPct + weaponDmgPct) / 100;
       weaponDmgMult = 1;
     }
-    const attack = (attackBase + attackFlat) * attackMult;
+    const attack = attackBase * attackMult + attackFlat;
 
     // --- shared multipliers
     const element = weapon.element || KEYWORD_ELEMENT[weapon.keyword] || null;
@@ -710,7 +710,8 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
       const keywordPct = keyedSum(totals, 'keywordDmgPct', keyword);
       const finalPct = keyedSum(totals, 'finalDmgPct', keyword);
       const kwElementalPct = kwElement ? keyedSum(totals, 'elementalDmgPct', kwElement) : 0;
-      const chance = Math.min(100, (Number(weapon.statusChancePct) || def.triggerChancePct || 0) + flat(totals, 'statusChancePct'));
+      const baseChance = Number(weapon.statusChancePct) || def.triggerChancePct || 0;
+      const chance = Math.min(100, baseChance * (1 + flat(totals, 'statusChancePct') / 100));
       if (def.scalesWith === 'attack' || keyword === 'shrapnel' || keyword === 'bounce') {
         // bullet keyword: % of attack through the direct chain (can crit & weakspot)
         const f = factor != null ? factor : 0;
@@ -770,7 +771,7 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
 
     return {
       inputs: { star, targetType, options: opts, pellets },
-      attack: { base1Star: weaponAttackAtStar(weapon, 1, ctx && ctx.starTable), atStar: attackBase, starMultiplier: starMultiplier(star, ctx && ctx.starTable), flat: attackFlat, pct: attackPct, final: attack },
+      attack: { base1Star: weaponAttackAtStar(weapon, 1, ctx && ctx.starTable), atStar: attackBase, starMultiplier: weaponAttackAtStar(weapon, 1, ctx && ctx.starTable) ? attackBase / weaponAttackAtStar(weapon, 1, ctx && ctx.starTable) : 1, flat: attackFlat, pct: attackPct, final: attack },
       multipliers: {
         attackMult, weaponDmgMult, weaponDmgPct, elementalPct, elementalApplied: !!elementalOnBullets, weakspotZoneMult: zone, damagePoolModel: opts.damagePoolModel,
         critRatePct: critRate * 100, critDmgPct, critMult, weakspotPct, weakMult, critWeakMult,
@@ -831,6 +832,11 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
   const ELEMENT_IDS = { blaze: 'blaze', fire: 'blaze', frost: 'frost', ice: 'frost', blast: 'blast', explosive: 'blast', shock: 'shock', electric: 'shock', physical: 'physical' };
   const CLASS_TO_CALIB = { AR: 'Assault Rifle', SMG: 'Submachine Gun', LMG: 'Light Machine Gun', Shotgun: 'Shotgun', Sniper: 'Sniper Rifle', Pistol: 'Pistol', Crossbow: 'Crossbow', Launcher: 'Heavy Artillery', Melee: null };
   const OHDB_TO_CARD_RATIO = 1.52; // OHDB "Tier V" = official artLevel 4; in-game Tier V card = artLevel 5 (see research/calculators.md)
+  // Per-rarity star series from the official blueprint tables (research/verify-stars.json): epic caps at 5★, rare at 4★, standard at 3★.
+  const SERIES = { legendary: [1, 1.05, 1.1, 1.15, 1.2, 1.25], epic: [1, 1.05575, 1.1115, 1.16725, 1.223], rare: [1, 1.06266666667, 1.12533333333, 1.188], uncommon: [1, 1.0715, 1.143], standard: [1, 1.0715, 1.143] };
+  function rarityKeyOf(r) { r = String(r || '').toLowerCase(); return /legend/.test(r) ? 'legendary' : /epic/.test(r) ? 'epic' : /rare/.test(r) ? 'rare' : /uncommon/.test(r) ? 'uncommon' : 'standard'; }
+  // Weapon-specific keyword trigger chances (percent per shot) from research/verify-status.json; null = unknown (status DPS then omitted).
+  const TRIGGER_CHANCE = { 'MPS7 - Outer Space': 25, 'ACS12 - Corrosion': 75, 'SOCR - Outsider': 35, 'SOCR - The Last Valor': 25, 'DE.50 - Jaws': 25, 'KAM - Abyss Glance': 5, 'MG4 - Predator': 40, 'AWS.338 - Bullseye': 70, 'MPS5 - Kumawink': 25, 'HAMR - Brahminy': 60, 'KVD - Boom! Boom!': 18, 'ACS12 - Pyroclasm Starter': 27, 'DBSG - Doombringer': 30, 'KV-SBR - Little Jaws': 100, 'MG4 - Conflicting Memories': 17, 'M416 - Silent Anabasis': 11, 'DE.50 - Wildfire': 60 };
 
   function normSlot(s) { if (!s) return null; const k = String(s).toLowerCase(); return SLOT_ALIASES[k] || (SLOTS.find(x => x.toLowerCase() === k) || s); }
   function keywordId(s) { if (!s) return null; return KEYWORD_IDS[String(s).toLowerCase().trim()] || null; }
@@ -843,21 +849,60 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
   /**
    * Convert a raw (stat, value, unit, text) from any data file into zero or more engine effects.
    * Handles keyword-/element-/target-specific names that the engine alias table cannot express alone.
+   * meta: { unit, condition, source, sourceType, target ('player'|'enemy'), text }
    */
+  const KW_LIST = [["the bull's eye", 'bullsEye'], ["bull's eye", 'bullsEye'], ['bulls eye', 'bullsEye'], ['frost vortex', 'frostVortex'], ['power surge', 'powerSurge'], ['unstable bomber', 'unstableBomber'], ['fast gunner', 'fastGunner'], ['fortress warfare', 'fortressWarfare'], ['shrapnel', 'shrapnel'], ['bounce', 'bounce'], ['burn', 'burn']];
+  const MECHANIC_RE = /\b(weight|hit rate|refill|auto ?reload|shield|cooldown|lonely cortex|extra triggers?|triggers?\b|hit parts?|max stacks?|stacks? per|stacks? retained|spread|delay|durability|interval|usage speed|medicine|energy|sanity|stamina|resist(?!ance to)|yield|xp\b|rescue|jump|glide|accuracy|stability|mobility|melee|heavy attack|tactical item|sentry|suppression|purge|revive|clone|aggro|knockback|slow|root|immobil|confusion|pull|platform|wall|absorption|sprint|blink|share|bullets?\b|ammo|count\b|targets?\b|parts?\b|self.?dam|retained|frequency|guaranteed|applied|detonation|state|secured|securement|links?\b|items? gathered|resource|body size|full stomach|debuffs you inflict|duration|can crit|range\b)/;
+
   function toEffects(rawStat, value, meta) {
     const out = [];
     if (value == null || isNaN(Number(value))) return out;
     const m = Object.assign({}, meta || {});
     const name = String(rawStat || '');
-    const low = name.toLowerCase().replace(/_/g, ' ').trim();
-    const push = (stat, v, key, extra) => out.push(E.effect(stat, v, Object.assign({}, m, { key }, extra || {})));
-    const kw = (() => { for (const [k, id] of Object.entries(KEYWORD_IDS)) if (low.includes(k)) return id; return null; })();
-    const el = (() => { const r = low.match(/\b(blaze|frost|blast|shock)\b/); return r ? ELEMENT_IDS[r[1]] : null; })();
-    const unit = (m.unit || '').toLowerCase();
+    const low = name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/_/g, ' ').toLowerCase().replace(/\s+/g, ' ').trim();
+    const unit = String(m.unit || '').toLowerCase();
     const isFlat = unit === 'flat' || /\(flat\)/.test(low);
+    const enemy = m.target === 'enemy';
+    const push = (stat, v, key, extra) => out.push(E.effect(stat, v, Object.assign({}, m, { key }, extra || {})));
+    const other = () => { push('other', value, null, { text: name }); return out; };
 
-    // Target-specific damage
-    if (/^(dmg|damage)\s*(vs|against|to)\b/.test(low) || /dmg (vs|against|to) /.test(low)) {
+    // Psi-scaled procs and pure mechanics are not stats
+    if (/\bpsi$|pct psi\b|psi\b.*(dmg|damage)|(dmg|damage).*\bpsi\b/.test(low) && !/^psi intensity/.test(low)) return other();
+    if (unit.includes('psi')) return other();
+    const keywords = KW_LIST.filter(([k]) => low.includes(k)).map(([, id]) => id).filter((id, i, a) => a.indexOf(id) === i);
+    const elements = Array.from(new Set((low.match(/\b(blaze|frost|blast|shock)\b/g) || []).map(e => ELEMENT_IDS[e])));
+    const isDmgish = /\b(dmg|damage|factor|coefficient)\b/.test(low);
+    const ctxText = String(m.condition || m.text || '').toLowerCase();
+    // Generic "DMG" lines whose text names an enemy tier ("Normal enemies take +15% DMG") are DMG-vs-type
+    if (/^(dmg|damage|weapon dmg)$/.test(low)) {
+      const tier = ctxText.match(/\b(normal|elite|boss)\b[^.]{0,40}\btake/);
+      if (tier) { push('dmgVsPct', value, tier[1]); return out; }
+      if (/enemies affected by|targets affected by/.test(ctxText)) { push('weaponVulnPct', value, null, { condition: m.condition || m.text }); push('statusVulnPct', value, null, { condition: m.condition || m.text }); return out; }
+    }
+
+    // --- target-side debuffs ("X DMG taken", "vulnerability")
+    if (enemy || /\btaken\b|vulnerab/.test(low)) {
+      if (/weakspot dmg taken|weakspot damage taken/.test(low)) { push('weakspotDmgPct', value, null, { condition: m.condition || 'target debuff' }); return out; }
+      if (/status (dmg|damage) taken|status vulnerab/.test(low)) { push('statusVulnPct', value, null); return out; }
+      if (/weapon (dmg|damage) taken|weapon vulnerab/.test(low)) { push('weaponVulnPct', value, null); return out; }
+      if (elements.length && /taken|vulnerab/.test(low)) { push('elementalDmgPct', value, elements.length > 1 ? 'all' : elements[0], { condition: m.condition || 'target debuff' }); return out; }
+      if (keywords.length && /taken/.test(low)) { for (const k of keywords) push('keywordDmgPct', value, k, { condition: m.condition || 'target debuff' }); return out; }
+      if (/vulnerab/.test(low) || (enemy && /\b(dmg|damage) taken\b/.test(low))) { push('weaponVulnPct', value, null); push('statusVulnPct', value, null); return out; }
+      if (enemy) return other();
+    }
+    // --- player-side defence
+    if (/dmg reduction|damage reduction/.test(low)) { push('dmgReductionPct', value, null); return out; }
+    if (/(dmg|damage) (taken|received)|(dmg|damage) from (monsters|deviants|players|meta)/.test(low)) { push('dmgReductionPct', -value, null); return out; }
+
+    // --- combined / multi-keyword lines (before the keyword branch)
+    if (/weapon (and|&) status dmg|weapon.*status dmg/.test(low)) { push('weaponDmgPct', value, null); push('statusDmgPct', value, null); return out; }
+    if (/continuous dmg/.test(low)) { push('keywordDmgPct', value, 'burn'); push('keywordDmgPct', value, 'frostVortex'); return out; }
+    if (/instant dmg/.test(low)) { push('keywordDmgPct', value, 'powerSurge'); push('keywordDmgPct', value, 'unstableBomber'); return out; }
+
+    // --- target-type damage
+    if (/^(dmg|damage)\s*(vs|against|to)\b|\b(dmg|damage) (vs|against|to) /.test(low) || /^(normal|elite|boss) enemies take/.test(low)) {
+      if (/super anomaly|anomaly/.test(low)) return other();
+      if (/bull.?s eye|marked|hunter.?s mark/.test(low)) { push('weaponDmgPct', value, null, { condition: (m.condition || 'vs targets under The Bull\'s Eye') }); return out; }
       const keys = [];
       if (/deviant/.test(low)) keys.push('deviant');
       if (/human|meta/.test(low)) keys.push('human');
@@ -867,64 +912,73 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
       if (/boss|great one/.test(low)) keys.push('boss');
       if (/player/.test(low)) keys.push('player');
       if (/shield/.test(low)) keys.push('shield');
-      if (/bull.?s eye|marked|hunter.?s mark/.test(low)) { push('weaponDmgPct', value, null, { condition: (m.condition || '') + ' vs targets under The Bull\'s Eye' }); return out; }
       if (!keys.length) keys.push('all');
       for (const k of keys) push('dmgVsPct', value, k);
       return out;
     }
-    // "DMG taken" style (defensive) -> damage reduction
-    if (/dmg (taken|received)|damage (taken|received)|dmg reduction|damage reduction/.test(low) && !/vulnerab/.test(low)) {
-      push('dmgReductionPct', /reduction/.test(low) ? value : -value, null); return out;
-    }
-    // Vulnerability / damage taken by target
-    if (/vulnerab|dmg taken by|target.*taken|weakspot dmg taken|weapon dmg taken|dmg factor taken/.test(low)) {
-      if (/status/.test(low)) push('statusVulnPct', value, null);
-      else if (/weakspot dmg taken/.test(low)) push('weakspotDmgPct', value, null, { condition: m.condition || 'target debuff' });
-      else if (kw && /(blaze|frost|blast|shock) dmg taken/.test(low)) push('elementalDmgPct', value, el);
-      else push('weaponVulnPct', value, null);
-      return out;
-    }
-    if (/(blaze|frost|blast|shock) dmg taken/.test(low)) { push('elementalDmgPct', value, el); return out; }
+    if (/dmg vs marked|vs marked|marked enemy dmg/.test(low)) { push('weaponDmgPct', value, null, { condition: m.condition || 'vs marked targets' }); return out; }
 
-    // Keyword-specific
-    if (kw) {
-      if (/final dmg|final damage/.test(low)) { push('finalDmgPct', value, kw); return out; }
-      if (/crit dmg|critical dmg/.test(low)) { push('keywordCritDmgPct', value, kw); return out; }
-      if (/weakspot/.test(low)) { push('keywordWeakspotDmgPct', value, kw); return out; }
-      if (/trigger chance|chance/.test(low)) { push('statusChancePct', value, null, { condition: (m.condition || '') }); return out; }
-      if (/duration|stacks?\b|triggers?\b|hit parts|range|count|delay|loss|cooldown|interval|retained|self.?damage|frequency|self damage|weight/.test(low)) { push('other', value, null, { text: name }); return out; }
-      if (/dmg|damage|factor|coefficient/.test(low)) { push('keywordDmgPct', value, kw); return out; }
-      push('other', value, null, { text: name }); return out;
+    // --- keyword-specific
+    if (keywords.length) {
+      if (/final (dmg|damage)/.test(low)) { for (const k of keywords) push('finalDmgPct', value, k); return out; }
+      if (/crit (dmg|damage)/.test(low)) { for (const k of keywords) push('keywordCritDmgPct', value, k); return out; }
+      if (/crit rate|crit chance/.test(low)) return other();
+      if (/trigger chance|trigger factor|\bchance\b/.test(low) && !/extra stack|stack chance/.test(low)) { push('statusChancePct', value, null, { condition: m.condition || null, text: name }); return out; }
+      if (MECHANIC_RE.test(low) || /nth hit|every \d+|loss due to/.test(low)) return other();
+      if (/weakspot/.test(low)) { for (const k of keywords) push('keywordWeakspotDmgPct', value, k); return out; }
+      if (isDmgish || /\bdmg rate\b/.test(low)) { for (const k of keywords) push('keywordDmgPct', value, k); return out; }
+      return other();
     }
-    // Element-specific
-    if (el && /dmg|damage|elemental/.test(low) && !/taken/.test(low)) { push('elementalDmgPct', value, el); return out; }
-    if (/^elemental dmg|elemental dmg|element.?s dmg|elemental damage/.test(low)) { push('elementalDmgPct', value, 'all'); return out; }
-    // Combined
-    if (/weapon and status dmg|weapon & status dmg|weapon.*status dmg/.test(low)) { push('weaponDmgPct', value, null); push('statusDmgPct', value, null); return out; }
-    if (/continuous dmg/.test(low)) { push('keywordDmgPct', value, 'burn'); push('keywordDmgPct', value, 'frostVortex'); return out; }
-    if (/instant dmg/.test(low)) { push('keywordDmgPct', value, 'powerSurge'); push('keywordDmgPct', value, 'unstableBomber'); return out; }
-    if (/psi intensity dmg/.test(low)) { push('statusDmgPct', value, null); return out; }
-    if (/^psi intensity$|^psi$/.test(low)) { push(isFlat || unit === '' || unit === 'flat' ? 'psiIntensity' : 'psiIntensityPct', value, null); return out; }
-    if (/final dmg|final damage/.test(low)) { push('finalDmgPct', value, 'all'); return out; }
-    if (/^attack\b|attack pct|attack %/.test(low)) { push(isFlat ? 'attackFlat' : 'attackPct', value, null); return out; }
-    if (/^weapon dmg|weapon damage|^dmg$|^damage$|dmg pct|damage boost|weapon dmg and melee dmg/.test(low)) { push(isFlat ? 'attackFlat' : 'weaponDmgPct', value, null); return out; }
-    if (/status dmg|status damage/.test(low) && !/reduction|taken/.test(low)) { push('statusDmgPct', value, null); return out; }
+    // --- mechanics that are not stats
+    if (MECHANIC_RE.test(low) && !/^(max hp|hp|crit rate|crit dmg)/.test(low)) return other();
+
+    // --- element-specific
+    if (elements.length && (isDmgish || /elemental/.test(low))) { push('elementalDmgPct', value, elements.length > 1 ? 'all' : elements[0]); return out; }
+    if (/elemental (dmg|damage)|element.?s dmg|element dmg/.test(low)) { push('elementalDmgPct', value, 'all'); return out; }
+
+    // --- generic stats
+    if (/psi intensity (dmg|damage)/.test(low)) { push('statusDmgPct', value, null); return out; }
+    if (/^psi intensity|^psi$/.test(low)) { push(unit === 'percent' || unit === '%' || /pct|%/.test(low) ? 'psiIntensityPct' : 'psiIntensity', value, null); return out; }
+    if (/final (dmg|damage)/.test(low)) { push('finalDmgPct', value, 'all'); return out; }
+    if (/^attack\b|attack pct|attack %|\battack\b/.test(low) && !/speed|melee|heavy/.test(low)) { push(isFlat ? 'attackFlat' : 'attackPct', value, null); return out; }
+    if (/all (dmg|damage)|damage boost|final attack/.test(low)) { push('allDmgPct', value, null); return out; }
+    if (/status (dmg|damage)/.test(low)) { push('statusDmgPct', value, null); return out; }
     if (/crit rate|critical rate|crit chance/.test(low)) { push('critRatePct', value, null); return out; }
-    if (/crit dmg|critical dmg|critical damage|crit damage/.test(low)) { push('critDmgPct', value, null); return out; }
+    if (/crit (dmg|damage)|critical (dmg|damage)/.test(low)) { push('critDmgPct', value, null); return out; }
     if (/weakspot/.test(low)) { push('weakspotDmgPct', value, null); return out; }
+    if (/weapon (dmg|damage)|^dmg$|^damage$|^dmg pct$|^damage pct$|^dmg %$/.test(low)) { push(isFlat && unit === 'flat' && !/pct|%/.test(low) ? 'weaponDmgPct' : 'weaponDmgPct', value, null); return out; }
     if (/fire rate/.test(low)) { push('fireRatePct', value, null); return out; }
     if (/reload/.test(low)) { push('reloadEfficiencyPct', value, null); return out; }
     if (/magazine|mag capacity|mag cap/.test(low)) { push(isFlat ? 'magazineFlat' : 'magazinePct', value, null); return out; }
     if (/max hp|^hp$|hp pct/.test(low)) { push(isFlat || unit === 'flat' ? 'maxHp' : 'maxHpPct', value, null); return out; }
     if (/pollution|contamination/.test(low)) { push('pollutionResist', value, null); return out; }
-    if (/movement speed|move speed|sprint speed/.test(low)) { push('movementSpeedPct', value, null); return out; }
-    if (/healing|heal /.test(low)) { push('healingPct', value, null); return out; }
-    if (/range/.test(low)) { push('rangePct', value, null); return out; }
-    // Fallback: engine alias table, else 'other'
+    if (/movement speed|move speed/.test(low)) { push('movementSpeedPct', value, null); return out; }
+    if (/healing|heal\b/.test(low)) { push('healingPct', value, null); return out; }
+    if (/^range/.test(low)) { push('rangePct', value, null); return out; }
     const r = E.resolveStat(name);
-    if (r.stat !== 'other') push(r.stat, value, r.key);
+    if (r.stat !== 'other' && r.stat !== 'attackPct') push(r.stat, value, r.key);
     else push('other', value, null, { text: name });
     return out;
+  }
+
+  /** Does an effect's condition/text describe a situational trigger (so the UI should expose a toggle)? */
+  function isConditionalText(t) {
+    if (!t) return false;
+    return /\b(after|when|while|within|during|upon|each|every|per\b|stacks?|against|affected|marked|if\b|on (kill|hit|defeat|crit|weakspot|reload)|below|above|for \d+ ?s|lasts?|at night|daytime|airborne|full|empty|first|next|chance)\b/i.test(t);
+  }
+
+  /** Normalise stack semantics into {baseValue, perStackValue, maxStacks, maxValue}. Mod data stores
+   *  value = total-at-max with perStack = increment (or value = base with maxValue), set bonuses store value per stack. */
+  function stackify(fx, raw) {
+    if (!raw) return fx;
+    if (typeof raw.perStack === 'number') {
+      fx.perStack = true; fx.perStackValue = raw.perStack;
+      if (raw.maxValue != null) { fx.baseValue = raw.value; fx.maxStacks = raw.maxStacks || Math.max(1, Math.round((raw.maxValue - raw.value) / raw.perStack)); fx.maxValue = raw.maxValue; }
+      else { fx.maxStacks = raw.maxStacks || Math.max(1, Math.round(raw.value / raw.perStack)); fx.baseValue = Math.max(0, raw.value - raw.perStack * fx.maxStacks); fx.maxValue = raw.value >= raw.perStack * fx.maxStacks ? raw.value : null; }
+    } else if (raw.perStack === true || raw.perStackValue != null) {
+      fx.perStack = true; fx.perStackValue = raw.perStackValue != null ? raw.perStackValue : fx.value; fx.baseValue = 0; fx.maxStacks = raw.maxStacks || raw.stacks || null; fx.maxValue = raw.maxValue || null;
+    }
+    return fx;
   }
 
   // ---------------------------------------------------------------------------
@@ -932,8 +986,6 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
   // ---------------------------------------------------------------------------
   function buildWeapons(raw, official) {
     const starTable = { 1: 1, 2: 1.05, 3: 1.1, 4: 1.15, 5: 1.2, 6: 1.25 }; // legendary blueprint presetAttackRatio (official tables)
-    // Per-rarity series from the official blueprint tables (research/verify-stars.json): epic caps at 5★, rare at 4★, standard at 3★.
-    const SERIES = { legendary: [1, 1.05, 1.1, 1.15, 1.2, 1.25], epic: [1, 1.05575, 1.1115, 1.16725, 1.223], rare: [1, 1.06266666667, 1.12533333333, 1.188], standard: [1, 1.0715, 1.143] };
     const offByName = new Map();
     if (official && Array.isArray(official.weapons)) {
       for (const o of official.weapons) { offByName.set(o.name, o); for (const a of o.aliases || []) offByName.set(a, o); }
@@ -953,7 +1005,7 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
       const rpm = o && o.fireRateRPM ? Number(o.fireRateRPM) : (o && o.fireIntervalSec ? Math.round(60 / o.fireIntervalSec) : (w.fireRateRPM || null));
       const reload = o && o.reloadLoopTime ? Number(o.reloadLoopTime) : (w.reloadTimeSec || null);
       const magazine = (o && (o.magazine != null ? o.magazine : o.magazineOhdbMirror)) ?? w.magazine ?? null;
-      const rarityKey = /legend/i.test(w.rarity || '') ? 'legendary' : /epic/i.test(w.rarity || '') ? 'epic' : /rare/i.test(w.rarity || '') ? 'rare' : 'standard';
+      const rarityKey = rarityKeyOf(w.rarity);
       const series = starRatios || SERIES[rarityKey] || SERIES.legendary;
       const maxStars = series.length;
       const attackByStar = {};
@@ -970,7 +1022,7 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
         weakspotDmgPct: o && o.weakspotDmgPct != null ? o.weakspotDmgPct : (w.baseWeakspotDmg ?? null),
         falloff: o && o.falloff ? o.falloff : (w.effectiveRangeM ? { fullDamageRangeM: w.effectiveRangeM, minDamageRangeM: w.minDamageRangeM || null, minDamageFraction: w.minDamagePercent != null ? w.minDamagePercent / 100 : null } : null),
         ammoType: w.ammoType || null, dataQuality: w.dataQuality || null,
-        sources: w.sources || [], official: o || null,
+        sources: w.sources || [], official: o || null, triggerChancePct: TRIGGER_CHANCE[w.name] != null ? TRIGGER_CHANCE[w.name] : null,
       });
     }
     list.sort((a, b) => (a.rarity === b.rarity ? a.name.localeCompare(b.name) : (a.rarity === 'legendary' ? -1 : 1)));
@@ -998,10 +1050,10 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
     function makePiece(p, set, setId, kind) {
       const slot = normSlot(p.slot);
       const base = p.baseStats || {};
-      const effects = (p.effects || []).map(e => normaliseEffectDef(e, p.name, 'armor-piece')).flat();
+      const effects = (p.effects || []).map(e => normaliseEffectDef(Object.assign({}, e, { condition: e.condition || (kind === 'key' && isConditionalText(p.effectText) ? p.effectText : null) }), p.name, 'armor-piece')).flat();
       return {
         id: slug(p.name), name: p.name, slot, kind, setId, setName: set ? set.name : null, rarity: ((p.rarity || (set && set.rarity) || '')).toLowerCase(),
-        keyword: keywordId(p.keyword), effectText: p.effectText || null, effects, alternatives: p.alternatives || [],
+        keyword: keywordId(p.keyword), effectText: p.effectText || null, effects, alternatives: p.alternatives || [], maxStars: (SERIES[rarityKeyOf((p.rarity || (set && set.rarity) || ''))] || SERIES.legendary).length,
         baseTier1: { maxHp: base.maxHp ?? null, psiIntensity: base.psiIntensity ?? null, pollutionResist: base.pollutionResist ?? null },
         sources: p.sources || [],
       };
@@ -1013,7 +1065,9 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
       /** Tier V base stats at a star (post-2.3.1 HP re-base applied). */
       baseStatsAt(piece, star, opts) {
         const o = Object.assign({ tier: 'V', post231: true }, opts || {});
-        const sm = 1 + 0.05 * (Math.max(1, Math.min(6, star || 1)) - 1);
+        const series = SERIES[rarityKeyOf(piece.rarity)] || SERIES.legendary;
+        const st = Math.max(1, Math.min(series.length, star || 1));
+        const sm = series[st - 1];
         const hpT = (tierMult.maxHp && tierMult.maxHp[o.tier]) || hpTierV;
         const psiT = (tierMult.psiIntensity && tierMult.psiIntensity[o.tier]) || psiTierV;
         const hp = piece.baseTier1.maxHp != null ? Math.round(piece.baseTier1.maxHp * hpT * sm * (o.post231 ? post231Hp : 1)) : null;
@@ -1025,7 +1079,7 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
           const grp = /mask|top/i.test(piece.slot) ? 'maskTop' : 'helmetGlovesPantsShoes';
           pr = o.tier === 'V' ? (prp.tier5 && prp.tier5[grp]) : (prp.tier1 && prp.tier1[grp]);
         }
-        return { maxHp: hp, psiIntensity: psi, pollutionResist: pr ?? null, starMultiplier: sm };
+        return { maxHp: hp, psiIntensity: psi, pollutionResist: pr ?? null, starMultiplier: sm, star: st, maxStars: series.length };
       },
     };
   }
@@ -1033,12 +1087,11 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
   /** Normalise an effect definition {stat, value, condition, perStack, maxStacks, duration} into engine effects with metadata. */
   function normaliseEffectDef(e, source, sourceType) {
     if (!e || e.value == null) return [];
-    const perStack = !!(e.perStack || e.perStackValue);
-    const maxStacks = e.maxStacks || e.stacks || null;
     const effects = toEffects(e.stat, e.value, { unit: e.unit, condition: e.condition, source, sourceType });
     for (const fx of effects) {
-      fx.perStack = perStack; fx.maxStacks = maxStacks; fx.duration = e.duration || e.durationSeconds || null;
-      fx.conditional = !!(e.condition) || perStack;
+      stackify(fx, e);
+      fx.duration = e.duration || e.durationSeconds || null;
+      fx.conditional = !!(e.condition) || !!fx.perStack;
       fx.id = `${slug(source)}:${fx.stat}:${fx.key || ''}:${slug(e.stat)}`;
       fx.rawStat = e.stat;
     }
@@ -1048,8 +1101,22 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
   function buildMods(raw) {
     const conv = (m, kind) => {
       const eff = m.effect || {};
-      const effects = eff.value != null ? toEffects(eff.stat, eff.value, { unit: eff.unit, condition: eff.condition, source: m.name, sourceType: kind === 'weapon' ? 'weapon-mod' : 'armor-mod' }) : [];
-      for (const fx of effects) { fx.conditional = !!eff.condition && !/^\s*$/.test(eff.condition) && !/always/i.test(eff.condition); fx.perStack = !!eff.perStack; fx.maxStacks = eff.maxStacks || null; fx.maxValue = eff.maxValue || null; fx.id = `${slug(m.name)}:${fx.stat}:${fx.key || ''}`; fx.rawStat = eff.stat; }
+      const st = kind === 'weapon' ? 'weapon-mod' : 'armor-mod';
+      let effects = eff.value != null ? toEffects(eff.stat, eff.value, { unit: eff.unit, condition: eff.condition, source: m.name, sourceType: st }) : [];
+      const split = [];
+      for (const fx of effects) {
+        stackify(fx, eff);
+        fx.conditional = (!!eff.condition && !/^\s*$/.test(eff.condition) && !/always/i.test(eff.condition)) || !!fx.perStack;
+        fx.id = `${slug(m.name)}:${fx.stat}:${fx.key || ''}`; fx.rawStat = eff.stat;
+        if (fx.perStack && fx.baseValue > 0) {
+          // unconditional base part + stacking part
+          const base = Object.assign({}, fx, { value: fx.baseValue, perStack: false, baseValue: 0, perStackValue: null, maxStacks: null, maxValue: null, conditional: false, id: fx.id + ':base', condition: null });
+          fx.baseValue = 0; fx.maxValue = fx.maxValue != null ? fx.maxValue - base.value : null; fx.id += ':stacks';
+          split.push(base);
+        }
+        split.push(fx);
+      }
+      effects = split;
       return {
         id: slug(m.name), name: m.name, kind, slot: normSlot(m.slot) || (kind === 'weapon' ? 'Weapon' : null), rarity: (m.rarity || 'legendary').toLowerCase(),
         keyword: keywordId(m.keyword), keywordLabel: m.keyword || null, text: eff.text || null, effects, suffixVariants: m.suffixVariants || [], notes: m.notes || null, sources: m.sources || [],
@@ -1105,7 +1172,7 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
       const buffs = (it.buffs || []).filter(b => b && b.value != null && !isNaN(Number(b.value)));
       if (!buffs.length) continue;
       const effects = buffs.map(b => toEffects(b.stat, b.value, { unit: b.unit === 'flat' ? 'flat' : (b.unit || 'percent'), condition: b.condition || null, source: it.name, sourceType: 'food' })).flat();
-      for (const fx of effects) { fx.conditional = !!fx.condition; fx.id = `${slug(it.name)}:${fx.stat}:${fx.key || ''}`; }
+      for (const fx of effects) { fx.conditional = isConditionalText(fx.condition); fx.id = `${slug(it.name)}:${fx.stat}:${fx.key || ''}`; }
       const combat = effects.some(e => e.stat !== 'other');
       const slot = (it.buffSlot || (/(drink|beverage)/i.test(it.category) ? 'drink' : 'food')).toLowerCase();
       items.push({ id: slug(it.name), name: it.name, category: it.category || 'food', slot: slot === 'drink' ? 'drink' : 'food', combatRelevant: it.combatRelevant != null ? !!it.combatRelevant : combat, effects, durationSeconds: it.durationSeconds || null, chefRexNote: it.chefRexBoostedPower || null, disagreement: it.disagreement || null, confidence: it.confidence || null, rawBuffs: buffs });
@@ -1122,8 +1189,14 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
     for (const n of live) {
       const key = slug(n.name) + ':' + slug(n.effectText || '');
       if (seen.has(key)) continue; seen.add(key);
-      const effects = (n.effects || []).map(e => toEffects(e.stat, e.value, { unit: e.unit, condition: e.condition, source: n.name, sourceType: 'cradle' })).flat();
-      for (const fx of effects) { fx.conditional = !!(fx.condition && /after|when|for \d|while|within|during|upon|each|every|per|stack/i.test(fx.condition)); fx.perStack = /per stack|each stack|every stack|stack/i.test(fx.condition || '') && !!n.maxStacks; fx.maxStacks = n.maxStacks || null; fx.id = `${slug(n.name)}-${n.idSuffix || ''}:${fx.stat}:${fx.key || ''}`; }
+      const effects = (n.effects || []).map(e => toEffects(e.stat, e.value, { unit: e.unit, condition: e.condition, source: n.name, sourceType: 'cradle', text: n.effectText })).flat();
+      for (const fx of effects) {
+        const typeOnly = fx.stat === 'dmgVsPct';
+        fx.conditional = !typeOnly && isConditionalText(fx.condition || n.effectText);
+        const perStack = /per stack|each stack|every stack|per (hit|kill|shot|trigger)|stack/i.test(fx.condition || n.effectText || '') && !!n.maxStacks;
+        if (perStack) stackify(fx, { perStack: true, maxStacks: n.maxStacks });
+        fx.id = `${slug(n.name)}-${n.idSuffix || ''}:${fx.stat}:${fx.key || ''}`;
+      }
       nodes.push({ id: slug(n.name) + (n.idSuffix ? '-' + n.idSuffix : ''), name: n.name, style: n.style || null, pool: n.pool, text: n.effectText || '', effects, durationSec: n.durationSec || null, maxStacks: n.maxStacks || null, ohdbUrl: n.ohdbUrl || null });
     }
     nodes.sort((a, b) => a.name.localeCompare(b.name) || (a.pool || '').localeCompare(b.pool || ''));
@@ -1135,11 +1208,17 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
     for (const d of raw.deviants || []) {
       const skill = d.skill || {};
       const effects = [];
-      for (const e of skill.effects || []) {
+      const effList = skill.effects || [];
+      for (const e of effList) {
         if (e.value == null || isNaN(Number(e.value))) continue;
+        if (/cap$/i.test(e.stat)) continue; // handled with its sibling
         const bySR = Array.isArray(e.valueBySkillRating) && e.valueBySkillRating.length === 5 ? e.valueBySkillRating : null;
-        const fx = toEffects(e.stat, e.value, { unit: e.unit, condition: e.condition, source: d.name, sourceType: 'deviant' });
-        for (const f of fx) { f.target = e.target || 'player'; f.valueBySkillRating = bySR; f.conditional = true; f.id = `${slug(d.name)}:${f.stat}:${f.key || ''}`; f.rawStat = e.stat; }
+        const cap = effList.find(x => x.stat === e.stat + 'Cap');
+        const fx = toEffects(e.stat, e.value, { unit: e.unit, condition: e.condition, source: d.name, sourceType: 'deviant', target: e.target || 'player' });
+        for (const f of fx) {
+          f.target = e.target || 'player'; f.valueBySkillRating = bySR; f.conditional = true; f.id = `${slug(d.name)}:${f.stat}:${f.key || ''}`; f.rawStat = e.stat;
+          if (cap && cap.value) { f.perStack = true; f.perStackValue = f.value; f.baseValue = 0; f.maxValue = cap.value; f.maxStacks = Math.max(1, Math.round(cap.value / f.value)); f.capBySkillRating = Array.isArray(cap.valueBySkillRating) ? cap.valueBySkillRating : null; }
+        }
         effects.push(...fx);
       }
       list.push({ id: slug(d.name), name: d.name, type: d.type || 'Combat', text: skill.text || '', effects, damage: skill.damage || null, cooldownSeconds: d.cooldownSeconds || null, durationSeconds: d.durationSeconds || null, notes: d.notes || null, traits: d.traits || [], variants: d.variants || [] });
@@ -1225,13 +1304,17 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
     let value = fx.value;
     if (fx.perStack) {
       const stacks = build.stacks[fx.id] != null ? build.stacks[fx.id] : (fx.maxStacks || 1);
-      value = fx.value * stacks;
+      const per = fx.perStackValue != null ? fx.perStackValue : fx.value;
+      value = (fx.baseValue || 0) + per * stacks;
       if (fx.maxValue != null) value = Math.min(value, fx.maxValue);
     }
     return Object.assign({}, fx, { value, enabled });
   }
 
   function collectEffects(build, cat, { includeFood = true } = {}) {
+    build = Object.assign({ toggles: {}, stacks: {}, armor: {}, food: {}, deviant: {}, cradle: { nodeIds: [] }, target: {}, options: {} }, build || {});
+    build.weapon = Object.assign({ calibration: {}, mod: {} }, build.weapon || {});
+    build.toggles = build.toggles || {}; build.stacks = build.stacks || {}; build.food = build.food || {}; build.deviant = build.deviant || {}; build.cradle = build.cradle || { nodeIds: [] };
     const out = [];
     const push = (fx) => { if (fx && fx.stat && fx.stat !== 'other') out.push(fx); else if (fx) out.push(fx); };
     // Weapon special effect is part of the weapon card and handled via keyword; calibration:
@@ -1262,7 +1345,13 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
     for (const [setId, n] of Object.entries(setCounts)) {
       const set = cat.armor.setsById[setId];
       if (!set) continue;
-      for (const b of set.bonuses) if (n >= b.pieces) for (const fx of b.effects) push(applyEffect(fx, build));
+      const active = set.bonuses.filter(b => n >= b.pieces);
+      const stackRaise = active.flatMap(b => b.effects).find(fx => /MaxStacks$/i.test(fx.rawStat || '') && fx.stat === 'other');
+      for (const b of active) for (const fx of b.effects) {
+        let f = fx;
+        if (stackRaise && fx.perStack && fx.stat !== 'other') f = Object.assign({}, fx, { maxStacks: stackRaise.value });
+        push(applyEffect(f, build));
+      }
     }
     // Food & drink
     if (includeFood) {
@@ -1277,10 +1366,13 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
     if (build.deviant.id && build.deviant.active !== false) {
       const d = cat.deviants.byId[build.deviant.id];
       if (d) for (const fx of d.effects) {
-        const a = applyEffect(fx, build);
-        if (fx.valueBySkillRating) a.value = fx.valueBySkillRating[Math.max(1, Math.min(5, build.deviant.skillRating || 5)) - 1];
-        else if (fx.target === 'enemy' || fx.target === 'player') { /* keep */ }
-        push(a);
+        const sr = Math.max(1, Math.min(5, build.deviant.skillRating || 5));
+        let f = fx;
+        if (fx.valueBySkillRating) {
+          const v = fx.valueBySkillRating[sr - 1];
+          f = Object.assign({}, fx, { value: v, perStackValue: fx.perStack ? v : fx.perStackValue, maxValue: fx.capBySkillRating ? fx.capBySkillRating[sr - 1] : fx.maxValue });
+        }
+        push(applyEffect(f, build));
       }
     }
     // Cradle
@@ -1289,7 +1381,8 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
       if (n) for (const fx of n.effects) push(applyEffect(fx, build));
     }
     // Target debuffs
-    if (build.target.vulnerabilityPct) push(Object.assign(E.effect('weaponVulnPct', build.target.vulnerabilityPct, { source: 'Target: extra Vulnerability', sourceType: 'target' }), { id: 'target:vuln', enabled: true }));
+    const tgt = build.target || {};
+    if (tgt.vulnerabilityPct) { push(Object.assign(E.effect('weaponVulnPct', tgt.vulnerabilityPct, { source: 'Target: extra Vulnerability', sourceType: 'target' }), { id: 'target:vuln', enabled: true })); push(Object.assign(E.effect('statusVulnPct', tgt.vulnerabilityPct, { source: 'Target: extra Vulnerability', sourceType: 'target' }), { id: 'target:vuln-status', enabled: true })); }
     return out;
 
     function pushMod(modSel, kind) {
@@ -1306,16 +1399,17 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
   }
 
   function computeBuild(build, cat, { includeFood } = {}) {
-    const w = cat.weapons.byId[build.weapon.id];
+    const w = build && build.weapon && cat.weapons.byId[build.weapon.id];
     if (!w) return null;
-    const inc = includeFood != null ? includeFood : build.options.includeFood !== false;
+    const options = build.options || {}, target = build.target || {};
+    const inc = includeFood != null ? includeFood : options.includeFood !== false;
     const effects = collectEffects(build, cat, { includeFood: inc });
-    const weapon = Object.assign({}, w, { attackByStar: w.attackByStar, attackStar: 1 });
+    const weapon = Object.assign({}, w, { attackByStar: w.attackByStar, attackStar: 1, statusChancePct: build.weapon.triggerChancePct != null ? build.weapon.triggerChancePct : w.triggerChancePct });
     const ctx = {
-      targetType: [build.target.faction, build.target.tier].filter(Boolean),
+      targetType: [target.faction || 'deviant', target.tier || 'boss'].filter(Boolean),
       starTable: cat.weapons.starTable,
       statusEffects: cat.statusEffects,
-      options: Object.assign({}, build.options, { mitigation: (build.target.mitigation != null ? build.target.mitigation : 100) / 100 }),
+      options: Object.assign({}, options, { mitigation: (target.mitigation != null ? target.mitigation : 100) / 100 }),
     };
     const result = E.computeDamage(weapon, build.weapon.star || 1, effects, ctx);
     result.effects = effects;
@@ -1340,7 +1434,7 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
     return cat;
   }
 
-  global.Adapter = { SLOTS, buildCatalog, defaultBuild, exampleBuild, collectEffects, computeBuild, toEffects, applyEffect, keywordId, elementId, slug, OHDB_TO_CARD_RATIO };
+  global.Adapter = { SLOTS, SERIES, buildCatalog, defaultBuild, exampleBuild, collectEffects, isConditionalText, stackify, computeBuild, toEffects, applyEffect, keywordId, elementId, slug, OHDB_TO_CARD_RATIO };
 })(typeof window !== 'undefined' ? window : globalThis);
 
 </script>
@@ -1459,6 +1553,13 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
         stat('Weakspot DMG', w.weakspotDmgPct != null ? '+' + w.weakspotDmgPct + '%' : '–', null),
         stat('Keyword', w.keywordLabel || 'none', w.element ? `${w.element} element` : null),
       ));
+      if (w.keyword && cat.statusEffects[w.keyword] && cat.statusEffects[w.keyword].baseFactorPct != null) {
+        const tc = build.weapon.triggerChancePct != null ? build.weapon.triggerChancePct : w.triggerChancePct;
+        body.push(h('div.row',
+          h('div.field.narrow', h('label', { for: 'trigger-chance' }, `${w.keywordLabel} trigger chance % per shot`), numberInput(tc, { min: 0, max: 100, step: 1, attrs: { id: 'trigger-chance', placeholder: 'unknown' }, onChange: v => set(() => { build.weapon.triggerChancePct = v; }, { structural: false }) })),
+          h('p.note.small', { style: { flex: '1 1 240px' } }, w.triggerChancePct != null ? `Default ${w.triggerChancePct}% from the weapon's effect text (e.g. "every 4 hits" = 25%). "Trigger chance +X%" bonuses multiply this.` : 'Unknown for this weapon: enter it to include status damage in DPS; per-proc damage is shown regardless.'),
+        ));
+      }
       if (w.specialEffect && (w.specialEffect.text || w.specialEffect.summary)) body.push(h('p.note', h('b', (w.specialEffect.name || 'Special effect') + ': '), w.specialEffect.text || w.specialEffect.summary));
       body.push(h('p.note.small', w.attackSource === 'official' ? 'Base DMG from decoded official gun tables (Tier V, artLevel 5).' : w.attackSource === 'ohdb-scaled' ? `Base DMG = OHDB listed ${fmt.num(w.ohdbListedDmg)} × ${A.OHDB_TO_CARD_RATIO} (OHDB lists the Tier IV ladder; in-game Tier V cards are 1.52× higher, verified on 33 screenshots).` : 'No base DMG known for this weapon.'));
     }
@@ -1565,12 +1666,14 @@ window.OH_DATA = {"armor":{"_meta":{"facet":"armor","generatedAt":"2026-10-03","
       const pieces = cat.armor.pieces.filter(p => p.slot === slot);
       const opts = [{ value: '', label: 'Empty' }].concat(pieces.map(p => ({ value: p.id, label: p.name, group: p.kind === 'key' ? 'Key armor (unique effect)' : p.setName, class: 'rarity-' + p.rarity })));
       const card = h('div.slot');
-      card.append(h('div.slot-head', h('span.slot-name', slot), starPicker(sel.star || 1, 6, v => set(() => { sel.star = v; }))));
-      card.append(select(opts, sel.pieceId || '', v => set(() => { sel.pieceId = v || null; })));
       const p = sel.pieceId && cat.armor.piecesById[sel.pieceId];
+      const pMax = (p && p.maxStars) || 6;
+      if ((sel.star || 1) > pMax) sel.star = pMax;
+      card.append(h('div.slot-head', h('span.slot-name', slot), starPicker(sel.star || 1, pMax, v => set(() => { sel.star = v; }))));
+      card.append(select(opts, sel.pieceId || '', v => set(() => { sel.pieceId = v || null; })));
       if (p) {
         const bs = cat.armor.baseStatsAt(p, sel.star || 1);
-        card.append(h('div.note.small', `HP ${fmt.num(bs.maxHp)} · Psi ${fmt.num(bs.psiIntensity)} · Pollution ${bs.pollutionResist ?? '–'} (Tier V, ${sel.star}★)`));
+        card.append(h('div.note.small', `HP ${fmt.num(bs.maxHp)} · Psi ${fmt.num(bs.psiIntensity)} · Pollution ${bs.pollutionResist ?? '–'} (Tier V, ${bs.star}★${p.rarity === 'epic' ? ', Epic caps at 5★' : ''})`));
         if (p.effectText) card.append(h('p.note.small', p.effectText));
         if (p.effects.length) card.append(effectList(p.effects));
       }

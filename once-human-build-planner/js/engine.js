@@ -7,7 +7,7 @@
  *   DIRECT HIT
  *     hit = Attack(star, calibration)
  *         × (1 + ΣAttack%) × (1 + ΣWeaponDMG%)
- *         × (1 + ΣElementalDMG%[weapon element])      (optional, default OFF – unverified)
+ *         × (1 + ΣElementalDMG%[weapon element])      (elemental weapons only; option)
  *         × (crit ? 1 + ΣCritDMG% : 1) × (weakspot ? 1 + ΣWeakspotDMG% : 1)
  *         × (1 + ΣDmgVs[target type]%) × (1 + ΣWeaponVulnerability%) × (1 + ΣAllDMG%)
  *         × falloff × mitigation
@@ -134,7 +134,7 @@
    */
   function effect(stat, value, opts) {
     const o = opts || {};
-    const r = resolveStat(stat, o.key || o.element || o.keyword || o.target);
+    const r = resolveStat(stat, o.key || o.element || o.keyword);
     return {
       stat: r.stat,
       key: r.key || null,
@@ -251,7 +251,7 @@
       attackMult = 1 + (attackPct + weaponDmgPct) / 100;
       weaponDmgMult = 1;
     }
-    const attack = (attackBase + attackFlat) * attackMult;
+    const attack = attackBase * attackMult + attackFlat;
 
     // --- shared multipliers
     const element = weapon.element || KEYWORD_ELEMENT[weapon.keyword] || null;
@@ -315,7 +315,8 @@
       const keywordPct = keyedSum(totals, 'keywordDmgPct', keyword);
       const finalPct = keyedSum(totals, 'finalDmgPct', keyword);
       const kwElementalPct = kwElement ? keyedSum(totals, 'elementalDmgPct', kwElement) : 0;
-      const chance = Math.min(100, (Number(weapon.statusChancePct) || def.triggerChancePct || 0) + flat(totals, 'statusChancePct'));
+      const baseChance = Number(weapon.statusChancePct) || def.triggerChancePct || 0;
+      const chance = Math.min(100, baseChance * (1 + flat(totals, 'statusChancePct') / 100));
       if (def.scalesWith === 'attack' || keyword === 'shrapnel' || keyword === 'bounce') {
         // bullet keyword: % of attack through the direct chain (can crit & weakspot)
         const f = factor != null ? factor : 0;
@@ -375,7 +376,7 @@
 
     return {
       inputs: { star, targetType, options: opts, pellets },
-      attack: { base1Star: weaponAttackAtStar(weapon, 1, ctx && ctx.starTable), atStar: attackBase, starMultiplier: starMultiplier(star, ctx && ctx.starTable), flat: attackFlat, pct: attackPct, final: attack },
+      attack: { base1Star: weaponAttackAtStar(weapon, 1, ctx && ctx.starTable), atStar: attackBase, starMultiplier: weaponAttackAtStar(weapon, 1, ctx && ctx.starTable) ? attackBase / weaponAttackAtStar(weapon, 1, ctx && ctx.starTable) : 1, flat: attackFlat, pct: attackPct, final: attack },
       multipliers: {
         attackMult, weaponDmgMult, weaponDmgPct, elementalPct, elementalApplied: !!elementalOnBullets, weakspotZoneMult: zone, damagePoolModel: opts.damagePoolModel,
         critRatePct: critRate * 100, critDmgPct, critMult, weakspotPct, weakMult, critWeakMult,

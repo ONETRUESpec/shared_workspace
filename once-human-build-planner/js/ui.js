@@ -112,6 +112,13 @@
         stat('Weakspot DMG', w.weakspotDmgPct != null ? '+' + w.weakspotDmgPct + '%' : '–', null),
         stat('Keyword', w.keywordLabel || 'none', w.element ? `${w.element} element` : null),
       ));
+      if (w.keyword && cat.statusEffects[w.keyword] && cat.statusEffects[w.keyword].baseFactorPct != null) {
+        const tc = build.weapon.triggerChancePct != null ? build.weapon.triggerChancePct : w.triggerChancePct;
+        body.push(h('div.row',
+          h('div.field.narrow', h('label', { for: 'trigger-chance' }, `${w.keywordLabel} trigger chance % per shot`), numberInput(tc, { min: 0, max: 100, step: 1, attrs: { id: 'trigger-chance', placeholder: 'unknown' }, onChange: v => set(() => { build.weapon.triggerChancePct = v; }, { structural: false }) })),
+          h('p.note.small', { style: { flex: '1 1 240px' } }, w.triggerChancePct != null ? `Default ${w.triggerChancePct}% from the weapon's effect text (e.g. "every 4 hits" = 25%). "Trigger chance +X%" bonuses multiply this.` : 'Unknown for this weapon: enter it to include status damage in DPS; per-proc damage is shown regardless.'),
+        ));
+      }
       if (w.specialEffect && (w.specialEffect.text || w.specialEffect.summary)) body.push(h('p.note', h('b', (w.specialEffect.name || 'Special effect') + ': '), w.specialEffect.text || w.specialEffect.summary));
       body.push(h('p.note.small', w.attackSource === 'official' ? 'Base DMG from decoded official gun tables (Tier V, artLevel 5).' : w.attackSource === 'ohdb-scaled' ? `Base DMG = OHDB listed ${fmt.num(w.ohdbListedDmg)} × ${A.OHDB_TO_CARD_RATIO} (OHDB lists the Tier IV ladder; in-game Tier V cards are 1.52× higher, verified on 33 screenshots).` : 'No base DMG known for this weapon.'));
     }
@@ -218,12 +225,14 @@
       const pieces = cat.armor.pieces.filter(p => p.slot === slot);
       const opts = [{ value: '', label: 'Empty' }].concat(pieces.map(p => ({ value: p.id, label: p.name, group: p.kind === 'key' ? 'Key armor (unique effect)' : p.setName, class: 'rarity-' + p.rarity })));
       const card = h('div.slot');
-      card.append(h('div.slot-head', h('span.slot-name', slot), starPicker(sel.star || 1, 6, v => set(() => { sel.star = v; }))));
-      card.append(select(opts, sel.pieceId || '', v => set(() => { sel.pieceId = v || null; })));
       const p = sel.pieceId && cat.armor.piecesById[sel.pieceId];
+      const pMax = (p && p.maxStars) || 6;
+      if ((sel.star || 1) > pMax) sel.star = pMax;
+      card.append(h('div.slot-head', h('span.slot-name', slot), starPicker(sel.star || 1, pMax, v => set(() => { sel.star = v; }))));
+      card.append(select(opts, sel.pieceId || '', v => set(() => { sel.pieceId = v || null; })));
       if (p) {
         const bs = cat.armor.baseStatsAt(p, sel.star || 1);
-        card.append(h('div.note.small', `HP ${fmt.num(bs.maxHp)} · Psi ${fmt.num(bs.psiIntensity)} · Pollution ${bs.pollutionResist ?? '–'} (Tier V, ${sel.star}★)`));
+        card.append(h('div.note.small', `HP ${fmt.num(bs.maxHp)} · Psi ${fmt.num(bs.psiIntensity)} · Pollution ${bs.pollutionResist ?? '–'} (Tier V, ${bs.star}★${p.rarity === 'epic' ? ', Epic caps at 5★' : ''})`));
         if (p.effectText) card.append(h('p.note.small', p.effectText));
         if (p.effects.length) card.append(effectList(p.effects));
       }
