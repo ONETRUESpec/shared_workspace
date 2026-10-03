@@ -132,7 +132,7 @@
       if (w.keyword && cat.statusEffects[w.keyword] && cat.statusEffects[w.keyword].baseFactorPct != null) {
         const tc = build.weapon.triggerChancePct != null ? build.weapon.triggerChancePct : w.triggerChancePct;
         body.push(h('div.row',
-          h('div.field.narrow', h('label', { for: 'trigger-chance' }, `${w.keywordLabel} trigger chance % per shot`), numberInput(tc, { min: 0, max: 100, step: 1, attrs: { id: 'trigger-chance', placeholder: 'unknown' }, onChange: v => set(() => { build.weapon.triggerChancePct = v; }, { structural: false }) })),
+          h('div.field.narrow', h('label', { for: 'trigger-chance' }, 'Trigger chance % / shot'), numberInput(tc, { min: 0, max: 100, step: 1, attrs: { id: 'trigger-chance', placeholder: 'unknown' }, onChange: v => set(() => { build.weapon.triggerChancePct = v; }, { structural: false }) })),
           h('p.note.small', { style: { flex: '1 1 240px' } }, w.triggerChancePct != null ? `Default ${w.triggerChancePct}% from the weapon's effect text (e.g. "every 4 hits" = 25%). "Trigger chance +X%" bonuses multiply this.` : 'Unknown for this weapon: enter it to include status damage in DPS; per-proc damage is shown regardless.'),
         ));
       }
