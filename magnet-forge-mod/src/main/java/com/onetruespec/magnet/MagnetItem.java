@@ -29,9 +29,9 @@ import net.minecraft.world.phys.Vec3;
  * <p>The on/off state is stored in the {@code magnet:active} data component. A switched-on magnet also carries an
  * enchantment glint and shows "(Active)" in its name so the state is visible at a glance.
  *
- * <p>All pulling happens on the server. Each pulled entity gets its velocity pointed at the player and is flagged
- * with {@code hasImpulse}, which makes the server send its position and motion to clients every tick, so the
- * movement looks smooth without any client-side code.
+ * <p>All pulling happens on the server. Each pulled entity gets its velocity pointed at the player through
+ * {@code Entity#push}, which also marks the entity for an immediate network sync, so clients receive its position
+ * and motion every tick and the movement looks smooth without any client-side code.
  */
 public class MagnetItem extends Item {
     public MagnetItem(Item.Properties properties) {
@@ -70,7 +70,7 @@ public class MagnetItem extends Item {
             // Same click as a lever: higher pitch for on, lower for off. A null "except" entity means everyone in
             // range hears it, including the player who clicked (Player#playSound would exclude them on the server).
             level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.LEVER_CLICK, SoundSource.PLAYERS, 0.4F, active ? 0.7F : 0.5F);
-            player.displayClientMessage(Component.translatable(this.getDescriptionId() + (active ? ".enabled" : ".disabled")), true);
+            player.sendSystemMessage(Component.translatable(this.getDescriptionId() + (active ? ".enabled" : ".disabled")));
             player.awardStat(Stats.ITEM_USED.get(this));
         }
         return InteractionResult.SUCCESS;
@@ -143,8 +143,11 @@ public class MagnetItem extends Item {
         }
         // Move at the configured speed, but never past the target.
         double step = Math.min(speed, distance);
-        entity.setDeltaMovement(delta.scale(step / distance));
-        // Makes the server send position and motion updates for this entity every tick instead of every second.
-        entity.hasImpulse = true;
+        Vec3 wanted = delta.scale(step / distance);
+        Vec3 current = entity.getDeltaMovement();
+        // push() adds to the current motion and, unlike setDeltaMovement(), flags the entity for a network sync, so
+        // the server sends its position and motion every tick instead of once a second. Pushing by the difference
+        // leaves the entity moving at exactly the wanted velocity.
+        entity.push(wanted.x - current.x, wanted.y - current.y, wanted.z - current.z);
     }
 }

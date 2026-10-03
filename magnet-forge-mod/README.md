@@ -12,7 +12,7 @@ A toggleable magnet that pulls dropped items (and experience orbs) towards you f
 ## How it works
 
 * **Right-click** the magnet to switch it on or off. A switched-on magnet glows (enchantment glint) and is named
-  "Magnet (Active)"; the action bar confirms the change.
+  "Magnet (Active)"; a short chat message and a lever click confirm the change.
 * While it is **switched on and anywhere in your inventory** (hotbar, main inventory, off-hand), every dropped item
   within **10 blocks** (a sphere around you) flies towards you and you pick it up as usual. Experience orbs are
   pulled too.
