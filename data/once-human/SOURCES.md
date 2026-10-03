@@ -95,3 +95,12 @@ Deviants
 - https://www.oncehuman.game/news/devBlog/20251218/40781_1277420.html (Battle Skills / Ultimates)
 - https://www.oncehuman.game/news/update/20251223/40780_1278121.html (Version 2.2.4)
 - https://screenrant.com/once-human-all-shiny-deviations-traits-how-to-find/
+
+## Nachträge (2026-10-03, Abgleich mit Planer-Thread)
+
+- Unstable Bomber: 120 % Psi-Intensität (nicht 50 %), Quelle
+  https://once-human.fandom.com/wiki/Unstable_Bomber_(Status_Effect)
+- Lonewolf's Whisper: 16,2 / 21,6 / 27 / 32,4 / 37,8 % je Deviant-Level 1 bis 5
+  (https://theriagames.com/guide/once-human-lonewolfs-whisper/). 18,75 / 25 % sind die
+  Varianten Lunar Oracle / Radiant (wikily.gg).
+- Waffen-Tier: oncehumandb.com und meta-builds.net listen Tier-IV-Werte; Tier V = Tier IV × 1,52.
