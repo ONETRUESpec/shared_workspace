@@ -178,7 +178,27 @@
   // ---------------------------------------------------------------------------
   // Catalogue builders
   // ---------------------------------------------------------------------------
-  function buildWeapons(raw, official) {
+  // Keyword corrections documented in data/weapon_intrinsics.json (datamined text copied to the wrong weapon)
+  const KEYWORD_FIX = { 'Compound Bow': { keyword: 'unstableBomber', label: 'Unstable Bomber', element: 'blast' }, 'AWS.338 - Black Panther': { keyword: 'fortressWarfare', label: 'Fortress Warfare', element: null } };
+
+  function buildIntrinsics(entry, weaponName, weaponId) {
+    if (!entry) return { effects: [], mechanics: [], notes: null, confidence: null, triggerChancePct: null, triggerChanceBasis: null, triggerRule: null };
+    const effects = [];
+    (entry.effects || []).forEach((e, i) => {
+      if (e.value == null || isNaN(Number(e.value))) return;
+      const fx = E.effect(e.stat, e.value, { key: e.key || null, condition: e.condition || null, source: `${weaponName} (weapon effect)`, sourceType: 'weapon-intrinsic', text: e.quote || null });
+      if (fx.stat === 'other') return;
+      stackify(fx, e);
+      fx.conditional = !!e.condition || !!fx.perStack;
+      fx.id = `${weaponId}:intrinsic:${i}`; fx.rawStat = e.stat; fx.quote = e.quote || null;
+      effects.push(fx);
+    });
+    return { effects, mechanics: entry.mechanics || [], notes: entry.notes || null, confidence: entry.confidence || null, triggerChancePct: entry.triggerChancePct != null ? entry.triggerChancePct : null, triggerChanceBasis: entry.triggerChanceBasis || null, triggerRule: entry.triggerRule || null };
+  }
+
+  function buildWeapons(raw, official, intrinsicsRaw) {
+    const intrByName = new Map();
+    for (const e of (intrinsicsRaw && intrinsicsRaw.weapons) || []) intrByName.set(e.name, e);
     const starTable = { 1: 1, 2: 1.05, 3: 1.1, 4: 1.15, 5: 1.2, 6: 1.25 }; // legendary blueprint presetAttackRatio (official tables)
     const offByName = new Map();
     if (official && Array.isArray(official.weapons)) {
@@ -187,7 +207,9 @@
     const list = [];
     for (const w of raw.weapons || []) {
       const o = offByName.get(w.name) || (w.aliases || []).map(a => offByName.get(a)).find(Boolean) || null;
-      const keyword = keywordId(w.statusKeyword);
+      const fix = KEYWORD_FIX[w.name] || null;
+      const keyword = fix ? fix.keyword : keywordId(w.statusKeyword);
+      const intr = buildIntrinsics(intrByName.get(w.name), w.name, slug(w.name));
       let attack = null, attackSource = 'none';
       let starRatios = null;
       if (o && o.cardAttackTier5 != null) {
@@ -206,7 +228,8 @@
       if (attack != null) for (let s = 1; s <= maxStars; s++) attackByStar[s] = Math.round(attack * series[s - 1]);
       list.push({
         id: slug(w.name), name: w.name, aliases: w.aliases || [], rarity: (w.rarity || '').toLowerCase(), class: w.weaponClass || 'Other', frame: w.frame || null,
-        element: elementId(w.element) || E.KEYWORD_ELEMENT[keyword] || null, keyword, keywordLabel: w.statusKeyword || null,
+        element: fix ? fix.element : (elementId(w.element) || E.KEYWORD_ELEMENT[keyword] || null), keyword, keywordLabel: fix ? fix.label : (w.statusKeyword || null),
+        intrinsics: intr,
         specialEffect: w.specialEffect || null,
         attack, attackSource, attackStar: 1, attackByStar, starRatios: series, maxStars,
         ohdbListedDmg: w.baseDmg != null ? Number(w.baseDmg) : null, tier1Dmg: w.baseDmgTier1_game8 != null ? Number(w.baseDmgTier1_game8) : null,
@@ -216,7 +239,10 @@
         weakspotDmgPct: o && o.weakspotDmgPct ? o.weakspotDmgPct : (w.baseWeakspotDmg ?? (o && o.weakspotDmgPct != null ? o.weakspotDmgPct : null)),
         falloff: o && o.falloff ? o.falloff : (w.effectiveRangeM ? { fullDamageRangeM: w.effectiveRangeM, minDamageRangeM: w.minDamageRangeM || null, minDamageFraction: w.minDamagePercent != null ? w.minDamagePercent / 100 : null } : null),
         ammoType: w.ammoType || null, dataQuality: w.dataQuality || null,
-        sources: w.sources || [], official: o || null, triggerChancePct: TRIGGER_CHANCE[w.name] != null ? TRIGGER_CHANCE[w.name] : null,
+        sources: w.sources || [], official: o || null,
+        triggerChancePct: intr.triggerChancePct != null ? intr.triggerChancePct : (TRIGGER_CHANCE[w.name] != null ? TRIGGER_CHANCE[w.name] : null),
+        triggerChanceBasis: intr.triggerChanceBasis || (TRIGGER_CHANCE[w.name] != null ? 'hit' : null), triggerRule: intr.triggerRule || null,
+        keywordCanCrit: intr.effects.some(f => f.stat === 'keywordCritRatePct' && f.key === keyword),
       });
     }
     list.sort((a, b) => (a.rarity === b.rarity ? a.name.localeCompare(b.name) : (a.rarity === 'legendary' ? -1 : 1)));
@@ -525,8 +551,11 @@
       const def = cat.calibration.randomDefaults[cal.random.stat];
       if (def) push(Object.assign(E.effect(def.stat, cal.random.value, { key: cal.random.key || def.key || null, source: `Calibration: ${cal.random.stat}`, sourceType: 'calibration' }), { id: 'calibration:random', enabled: true }));
     }
-    const weaponKeyword = (cat.weapons.byId[build.weapon.id] || {}).keyword || null;
+    const curWeapon = cat.weapons.byId[build.weapon.id] || {};
+    const weaponKeyword = curWeapon.keyword || null;
     const keywordOk = (kw) => !kw || kw === weaponKeyword;
+    // Weapon's own effect (intrinsic bonuses)
+    for (const fx of (curWeapon.intrinsics && curWeapon.intrinsics.effects) || []) push(applyEffect(fx, build));
     // Weapon mod
     pushMod(build.weapon.mod, 'weapon-mod');
     // Armor pieces, set bonuses, mods
@@ -608,7 +637,7 @@
     const options = build.options || {}, target = build.target || {};
     const inc = includeFood != null ? includeFood : options.includeFood !== false;
     const effects = collectEffects(build, cat, { includeFood: inc });
-    const weapon = Object.assign({}, w, { attackByStar: w.attackByStar, attackStar: 1, statusChancePct: build.weapon.triggerChancePct != null ? build.weapon.triggerChancePct : w.triggerChancePct });
+    const weapon = Object.assign({}, w, { attackByStar: w.attackByStar, attackStar: 1, statusChancePct: build.weapon.triggerChancePct != null ? build.weapon.triggerChancePct : w.triggerChancePct, statusChanceBasis: build.weapon.triggerChancePct != null ? 'hit' : w.triggerChanceBasis });
     const ctx = {
       targetType: [target.faction || 'deviant', target.tier || 'boss'].filter(Boolean),
       starTable: cat.weapons.starTable,
@@ -625,7 +654,7 @@
     const cat = {};
     cat.meta = { generated: {}, versions: {} };
     for (const [k, v] of Object.entries(data)) if (v && v._meta) cat.meta.versions[k] = v._meta.gameVersion || null;
-    cat.weapons = buildWeapons(data.weapons || { weapons: [] }, data.official_weapons || null);
+    cat.weapons = buildWeapons(data.weapons || { weapons: [] }, data.official_weapons || null, data.weapon_intrinsics || null);
     cat.armor = buildArmor(data.armor || { sets: [], keyArmor: [], slots: [] });
     cat.mods = buildMods(data.mods || {});
     cat.food = buildFood(data.food || {});

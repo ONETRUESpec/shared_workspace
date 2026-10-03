@@ -1,0 +1,2268 @@
+{
+  "_meta": {
+    "facet": "weapon intrinsics: numeric stat bonuses granted by each weapon's own special effect, plus its keyword trigger rule",
+    "generatedAt": "2026-10-03",
+    "gameVersion": "Live v3.0.7 (2026-09-28). Effect text generations used: OHDB mirror 2024-25 (data/weapons.json), in-game Tier V cards 2026-03-02, CN/TW community sheet 2026-05-15, meta-builds.net export 2026-09-25, official patch notes to v3.0.7.",
+    "sources": [
+      "/home/user/shared_workspace/once-human-build-planner/data/weapons.json (specialEffect.text / summary; OHDB-mirrored wording via lReDragol)",
+      "/home/user/shared_workspace/once-human-build-planner/research/verify-status.json (keywords[*].triggerRule, base factors, patch history)",
+      "/home/user/shared_workspace/once-human-build-planner/research/weapons.md, research/formula.md, research/calculators.md, data/test_vectors.json (TV-TEXT-01 card coefficients, TV-PS-113)",
+      "/home/user/shared_workspace/once-human-build-planner/data/official_weapons.json (name cross-check only; it carries no effect text)",
+      "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/weapon_list.json (structured mechanics blocks: chance_percent / every_n_hits / cooldowns)",
+      "https://raw.githubusercontent.com/0x91CEA55/OnceHuman/main/research/INGAME_KNOWLEDGE_BIBLE.md (OCR of 19 in-game weapon cards, 2026-03-02) and the gh-pages bundle index-DXU_nBNN.js (per-weapon trigger definitions derived from it)",
+      "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/weapons.verified.json (CN/TW community sheet 七日世界 / 武器, imported 2026-05-15; 79 rows with Traditional-Chinese effect text, translated by the author of this file)",
+      "https://raw.githubusercontent.com/josephfmmarzin-ai/ONCE_HUMAN/main/data/metabuilds/allData.json (meta-builds.net api/get/allData export fetched 2026-09-25; gears[] descriptions for 73 weapons)",
+      "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/weapons.json (names only; effect field empty)",
+      "https://raw.githubusercontent.com/smus-rgb/once-human-guide/main/weapons.json (names/paraphrases for 2026 weapons)",
+      "Official notes quoted in research/: 2024-11-23 Bounce rework blog, 2025-05-21 Combat Balance (Shrapnel 50->60, Reload Efficiency), 2025-06-17 (Unstable Bomber 120%, Predator, Doombringer), 2026-02-12 dev blog (Pyroclasm/Pathfinder/Additional Rules status DMG), 2026-07-22 v3.0.2 (Finale Reverb), 2026-09-10 v3.0.6 dev blog (Conflicting Memories every 6 hits, Memory Storm)"
+    ],
+    "method": [
+      "One entry per weapon in data/weapons.json (same 'name', same order). For each weapon every numeric, stat-like bonus in its effect text was mapped onto the planner stat vocabulary; purely mechanical lines (extra bounces, hit parts, super armor, ammo refills, proc damage of special sub-effects) go to 'mechanics'.",
+      "Where several text generations exist, 'effects' follow the NEWEST dated text (in-game card 2026-03 and CN sheet 2026-05 when they agree; meta-builds 2026-09 export when it is demonstrably post-rebalance, e.g. Corrosion). Superseded values from data/weapons.json are kept in the effect 'condition' or in 'notes' so nothing is lost. Each effect carries a 'source' array naming the text generation(s) it was read from.",
+      "Stacking effects: 'value' is the bonus at full stacks (steady state) = perStack x maxStacks = maxValue; divide by maxStacks for one stack. Non-stacking effects have perStack/maxStacks/maxValue null. Per-step effects whose step count depends on the build (magazine size, bomb delay) give the intrinsic step count in 'value' and the step size in 'perStack' with maxStacks null.",
+      "Percent values are percentage points. dmgVsPct with key 'player' and a negative value encodes 'deals X% DMG to Meta-Humans' for the named proc (condition says which).",
+      "triggerChancePct = stated chance per event of the kind named in 'triggerChanceBasis' ('hit' = per bullet/pellet that connects, 'shot' = per trigger pull, 'crit' / 'weakspot' = per crit or weakspot hit, 'cooldown' = cooldown-limited, converted to an equivalent per-hit chance at the weapon's base fire rate as explained in triggerRule). 'every N hits' = 100/N; guaranteed = 100; unknown = null. Always-on chance multipliers ('base chance +30%') are folded into triggerChancePct; conditional ones (after crit/kill/reload) are listed as statusChancePct effects (relative %, key = keyword) and must NOT be applied on top of an already-boosted figure.",
+      "keywordFactorOverridePct is null for every weapon: all 'X% of Attack / Psi' figures found in the texts are either the keyword's own (often outdated) base factor (Shrapnel 50%, Bounce 60%, Unstable Bomber 100%, Frost Vortex 30%/s, Burn 10%) or a separate sub-proc (Dragon's Breath 95% Attack, Hazardous Object throw, Hammerhead chain, Orb Lightning 75% Psi, Boom! Boom! explosion 300% Psi) recorded under mechanics - not an override of the keyword factor used for every proc.",
+      "Keyword base effects (Fast Gunner +1% Fire Rate/+1% Attack per stack x5; Fortress Warfare Heavy Armor Weapon DMG +20%; The Bull's Eye Vulnerability +8%) are NOT duplicated in weapon effects; the planner's keyword model should supply them."
+    ],
+    "extensions": {
+      "keywordCritRatePct": "crit rate granted to a keyword's procs (key = keyword), e.g. 'Power Surge Crit Rate +15%', 'Unstable Bomber can crit, Crit Rate +35%', 'guaranteed crit' = 100. Not in the base vocabulary; added because several weapons define it.",
+      "meleeDmgPct": "Melee DMG % (melee weapons only). Added for Scourge and Crowbar.",
+      "effects[].source": "array of text generations the effect was read from (see sources).",
+      "triggerChanceBasis": "what triggerChancePct is a chance per: hit | shot | crit | weakspot | cooldown | melee ... (see method)."
+    },
+    "caveats": [
+      "No game site was reachable; every number comes from GitHub-hosted mirrors, OCR of in-game screenshots, a Chinese community sheet (translated here) and quoted patch notes. Translation and OCR errors are possible (e.g. EBR-14 'Crit Rate +20%' vs 'Burn crit rate +20%').",
+      "data/weapons.json effect text is the 2024-25 OHDB wording for most weapons; 24 weapons have a newer in-game (2026-03) or CN (2026-05) text with different numbers. Entries list which generation each effect follows; confidence is 'medium' wherever generations disagree.",
+      "Keyword conflicts found: Compound Bow is an Unstable Bomber crossbow (weapons.json says Fortress Warfare with text that belongs to AWS.338 - Black Panther); AWS.338 - Black Panther is a Fortress Warfare sniper (weapons.json says Shrapnel with text copied from SOCR - The Last Valor); OIC-8 - Last Carnival's text is a copy of Critical Pulse (unverified). G17 - Hazardous Object, PDW90, SKS - Pathfinder, EBR-14, MPS5 - Primal Rage, DB12 - Backfire, DBSG - Dual Fury, Kukri, Scourge, Masamune, Crowbar, Frozen Northern Pike, Warning Sign, MGL have effects here although weapons.json lists no keyword/text for them.",
+      "KAM - Burning Rage may be an alias of KAM - Crank (CN name 怒火攻心); left empty to avoid double counting.",
+      "ACS12 - Corrosion: meta-builds (70% / PS Crit Rate +15% / PS Crit DMG +15% x10) is treated as the current v3.0.5+ text; the 2026-03 card showed 80% / +25% / +40% x5.",
+      "Shotgun 'per hit' chances (Corrosion, Pyroclasm, Doombringer, Backfire) are assumed per pellet; unverified.",
+      "'Reload Speed +X%' legacy wording was converted to Reload Efficiency at the official maximum ratio (+10% -> +3%); the raw value is kept in the quote.",
+      "Cooldown-based triggers (Abyss Glance, Little Jaws, Pathfinder) are expressed as an equivalent per-hit chance at the weapon's base fire rate; recompute if fire rate changes.",
+      "11 weapons (Aurora Fort, G17 - Cash Only, DBSG - Format, KVK 3 - Bull, MPS7 - Chaos Domain, Star Vortex, HAMR - Hannya, R500 - Interfade, Flamethrower, SR2000 - Die Another Day, SOCR - Wildfire) plus KAM - Burning Rage have no effect text in any reachable source and are empty."
+    ],
+    "counts": {
+      "weapons": 67,
+      "withEffects": 50,
+      "withTriggerChancePct": 45,
+      "totalEffects": 92,
+      "byConfidence": {
+        "medium": 39,
+        "high": 14,
+        "low": 14
+      }
+    }
+  },
+  "weapons": [
+    {
+      "name": "AUG - Electron Cloud",
+      "effects": [
+        {
+          "stat": "elementalDmgPct",
+          "key": "shock",
+          "value": 30,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Shock Elemental DMG +30%",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 30,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "30% chance per weapon hit to apply Power Surge (CN sheet 2026-05 and meta-builds agree).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "First weapon hit after reloading creates a 4 m electromagnetic zone centred on the target (max 1 at a time, 7 s); each Power Surge triggered on a unit inside the zone spawns 1 electric orb moving randomly inside it.",
+        "Electric orb bounces off scenery/enemies up to 10 times; each enemy hit takes Shock Elemental DMG equal to 42% Psi Intensity."
+      ],
+      "notes": "weapons.json has no effect text for this weapon; numbers come from the CN/TW sheet (AUG-電子雲) and the meta-builds export, which agree.",
+      "confidence": "medium"
+    },
+    {
+      "name": "KAM - Abyss Glance",
+      "effects": [
+        {
+          "stat": "elementalDmgPct",
+          "key": "frost",
+          "value": 30,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Frost DMG increased by 30%.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "finalDmgPct",
+          "key": "frostVortex",
+          "value": 50,
+          "condition": "per hit on a non-Meta-Human standing inside your Frost Vortex (applies to vortices you create); 2026 card/CN text only",
+          "perStack": 5,
+          "maxStacks": 10,
+          "maxValue": 50,
+          "quote": "Hitting non-Metas units within Frost Vortex increases the final damage of Frost Vortex created by yourself by +5%, up to 10 stacks.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "dmgVsPct",
+          "key": "player",
+          "value": -70,
+          "condition": "Frost Vortex procs only (vortex triggered on Meta-Humans deals 30% damage)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Vortex triggered on Metas deals 30% damage",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": 8.3,
+      "triggerChanceBasis": "cooldown",
+      "triggerRule": "2026 card/CN text: every weapon hit triggers Frost Vortex subject to a 7 s cooldown, and each hit also shortens the cooldown by 0.5 s - at 600 RPM (0.1 s per hit) the cooldown expires after ceil(7/(0.1+0.5)) = 12 hits, i.e. ~8.3% per hit (one vortex per ~1.2 s). Legacy OHDB text (weapons.json): every 20 hits with weakspot hits counting as 2 (= 5%; 2024-11-23 blog lowered it to 15 hits = 6.7%).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Frost Vortex damage frequency +100% (2026 card/CN) - the vortex ticks twice as often, which doubles its DPS without changing the per-tick factor.",
+        "Legacy OHDB text: the closer the target to the vortex centre, the higher the Frost Vortex DMG, up to +200% (not present in the 2026 card text)."
+      ],
+      "notes": "weapons.json text is the 2024-25 OHDB wording ('30% Psi per second for 4 s', 'every 20 hits'); the March-2026 in-game card and the May-2026 CN sheet describe a cooldown-based trigger with +5% final DMG stacks and +100% tick frequency instead. Effects list follows the 2026 text; legacy numbers are kept in mechanics/notes. The '30% Psi Intensity per second' figure is the pre-buff Frost Vortex base factor (current 50% per 0.5 s), not a weapon override.",
+      "confidence": "medium"
+    },
+    {
+      "name": "M416 - Silent Anabasis",
+      "effects": [
+        {
+          "stat": "elementalDmgPct",
+          "key": "frost",
+          "value": 30,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Frost Elemental DMG +30%.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "elementalDmgPct",
+          "key": "frost",
+          "value": 24,
+          "condition": "per Ice Crystal shattered, 15 s (2026 card/CN)",
+          "perStack": 8,
+          "maxStacks": 3,
+          "maxValue": 24,
+          "quote": "For each Ice Crystal shattered, Frost Elemental DMG gains an additional +8%, lasting 15 seconds, stacking up to 3 stacks.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": 12,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "12% chance per hit to trigger Frost Vortex (2026 card/CN); OHDB text / meta-builds: 10%.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Weapon hits generate an Ice Crystal (1.5 s cooldown) lasting 15 s; on expiry it detonates for 100% Psi Intensity Frost Vortex DMG to nearby targets (Frost Vortex DMG bonuses apply; 40% DMG vs Meta-Humans).",
+        "Shooting an Ice Crystal detonates it early and raises its multiplier from 100% to 350% Psi (CN/card; meta-builds says 300%; OHDB text says 60% to players)."
+      ],
+      "notes": "weapons.json text (OHDB) says Frost Elemental DMG +60% and +20% per shattered crystal up to 15 stacks for 10 s; the March-2026 card and May-2026 CN sheet say +30% and +8% x3 for 15 s. Effects follow the 2026 text; the legacy values (+60%, +20% x15) are recorded here only.",
+      "confidence": "medium"
+    },
+    {
+      "name": "QBJ97 - Fiery Trees and Silver Flowers",
+      "effects": [
+        {
+          "stat": "statusChancePct",
+          "key": "unstableBomber",
+          "value": 3,
+          "condition": "while Spark is at 5 stacks; text gives +3% as additive percentage points on the 8% base (relative +37.5%)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "When Spark stacks are maxed, the chance of bullets and missiles to trigger Unstable Bomber increases by an additional 3%.",
+          "source": [
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 8,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "8% chance per weapon hit to apply Unstable Bomber; separately 8% chance per hit (rising with consecutive shots, reset when firing stops) to launch a missile dealing Unstable Bomber DMG of 500% Psi Intensity, and missiles themselves have a 5% chance to apply Unstable Bomber.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Missile: 500% Psi Intensity Unstable Bomber DMG; launch chance grows with successive shots and resets when firing stops.",
+        "Spark: each missile explosion grants 1 stack (max 5, 4 s); each stack reduces recoil and camera shake by 5%."
+      ],
+      "notes": "weapons.json has only a smus-rgb paraphrase; all numbers are from the meta-builds export (single source). Added v3.0.1 (2026-07-09).",
+      "confidence": "medium"
+    },
+    {
+      "name": "SOCR - The Last Valor",
+      "effects": [
+        {
+          "stat": "keywordCritDmgPct",
+          "key": "shrapnel",
+          "value": 30,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Shrapnel Crit DMG increased by 30%.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 25,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "Every 4 hits trigger Shrapnel; crit hits count as 2 hits, so hits per trigger = 4/(1+CritRate) and effective chance per hit = 25% x (1+CritRate). The meta-builds export's '4% chance' is a transcription error for 'every 4 hits' (card, CN, OHDB and Gledson/wikily all say 4 hits).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "After a crit hit, a Shrapnel trigger within 1 s triggers one additional time (card/CN wording); the OHDB mirror phrases this as 'Crit hits grant Shrapnel trigger chance +1% for 1 second'."
+      ],
+      "notes": "'Deals Weapon DMG of 50% Attack' in the weapons.json text is the pre-2025 Shrapnel base factor (now 60%), not a weapon-specific override.",
+      "confidence": "high"
+    },
+    {
+      "name": "SOCR - Wildfire",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "No effect text in any reachable dataset (smus-rgb guide only names it as a Shrapnel/crit-stacking AR). Nothing to extract.",
+      "confidence": "low"
+    },
+    {
+      "name": "Ultra Force",
+      "effects": [
+        {
+          "stat": "critRatePct",
+          "key": null,
+          "value": 24,
+          "condition": "for 10 s after heavy attacks (all weapons) - melee-template text, UNVERIFIED for this AR",
+          "perStack": 8,
+          "maxStacks": 3,
+          "maxValue": 24,
+          "quote": "Heavy attacks grant all weapons Crit Rate +8% for 10 seconds, up to 3 stacks.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)"
+          ]
+        }
+      ],
+      "triggerChancePct": null,
+      "triggerChanceBasis": "cooldown",
+      "triggerRule": "Heavy attacks activate Fortress Warfare once every 10 s (text identical to Long Axe; weapons.json flags the datamined block as a melee template).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "The datamined mechanics block appears copied from Long Axe; an assault rifle has no heavy attack. Treat as placeholder.",
+      "confidence": "low"
+    },
+    {
+      "name": "Compound Bow",
+      "effects": [
+        {
+          "stat": "critRatePct",
+          "key": null,
+          "value": 40,
+          "condition": "for 5 s after hitting a target (10 s cooldown; lost on weapon swap)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Hit grants enhancement: Crit Rate +40% for 5 s, cooldown 10 s, bonus removed on weapon switch.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "keywordDmgPct",
+          "key": "unstableBomber",
+          "value": 30,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Bomb DMG +30%",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": 100,
+      "triggerChanceBasis": "crit",
+      "triggerRule": "Crit hits trigger Unstable Bomber, and the bomb can crit using the character's Crit Rate (effective per-shot chance = your Crit Rate incl. the +40% buff). meta-builds variant text: at 3 stacks of a Crit Rate +10% / Reload Speed +6 on-hit buff, every hit triggers an enhanced Unstable Bomber that can crit.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Crit hits automatically reload one bolt (CN); meta-builds variant: weakspot hits have a 40% chance to reload 1 bolt.",
+        "meta-builds variant: each shot fired raises Unstable Bomber DMG +3% (max 6 stacks, halved on a miss); Crit Rate +10% and Reload Speed +6 per hit (3 stacks, 6 s; max stacks on a kill)."
+      ],
+      "notes": "KEYWORD CONFLICT: weapons.json lists Fortress Warfare with 'aim 3 s / Brutal Mayhem / Attack up to 30%' text - that text belongs to AWS.338 - Black Panther (CN sheet row AWM-黑豹 and meta-builds both carry it under Black Panther). The in-game March-2026 card (TV-TEXT-01: 'Compound Bow Crit Rate +40% buff, UB DMG +30%'), the CN sheet (複合弩, keyword 不穩定炸彈) and meta-builds all make Compound Bow an Unstable Bomber crossbow. Effects follow the card/CN text; the meta-builds wording differs (recorded in mechanics). Not to be confused with 'Compound Bow - The Burden of Betrayal' (a Bounce bow, listed by weapons.json as an alias).",
+      "confidence": "medium"
+    },
+    {
+      "name": "Critical Pulse",
+      "effects": [
+        {
+          "stat": "elementalDmgPct",
+          "key": "shock",
+          "value": 30,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Shock Elemental DMG +30%.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "dmgVsPct",
+          "key": "player",
+          "value": -40,
+          "condition": "Continuous Power Surge procs only (60% DMG to players)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "dealing 60% DMG to the player",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 100,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "Every hit applies Continuous Power Surge: a Power Surge proc on the current target every 0.5 s for 3 s; stacks (max 5) shorten the interval to a minimum of 0.26 s.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "70% chance per hit to spawn a Deviant Particle; picking one up grants Charge State (3 s).",
+        "While charged, hits consume a charge to create Orb Lightning: Shock Elemental Status DMG of 75% Psi Intensity to targets within 5 m every 0.5 s for 3 s (benefits from Power Surge DMG bonuses; 5% chance to spawn another particle)."
+      ],
+      "notes": "All four sources agree on the numbers; weapons.json omits the 70% particle chance that lReDragol's structured block, CN and meta-builds carry.",
+      "confidence": "high"
+    },
+    {
+      "name": "Aurora Fort",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "Placeholder in the datamined file ('mechanic extraction pending'); absent from the CN sheet and meta-builds. Possibly a CN/mobile-only name. Nothing to extract.",
+      "confidence": "low"
+    },
+    {
+      "name": "KVD - Boom! Boom!",
+      "effects": [
+        {
+          "stat": "elementalDmgPct",
+          "key": "blaze",
+          "value": 30,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Blaze DMG increased by 30%.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 18,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "18% chance per hit to apply Burn (all sources agree).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Explosion dealing Blaze DMG of 300% Psi Intensity in a 5 m radius and inflicting 1 Burn stack on non-Meta-Humans; OHDB/meta-builds text triggers it on killing a Burning enemy, the 2026 card/CN text triggers it on hit with a 2 s cooldown (40% DMG vs Meta-Humans)."
+      ],
+      "notes": "'10% Psi Intensity every 0.5 s' in the weapons.json text is the pre-2024-11-23 Burn base factor (now 12%), not a weapon override. Keyword conflict noted in weapons.json (bramsey679 says Bounce) is rejected - every other source says Burn.",
+      "confidence": "high"
+    },
+    {
+      "name": "MG4 - Conflicting Memories",
+      "effects": [
+        {
+          "stat": "magazineFlat",
+          "key": null,
+          "value": 40,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Magazine capacity increased by 40.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "keywordDmgPct",
+          "key": "shrapnel",
+          "value": 10,
+          "condition": "per 15 rounds of magazine capacity above 90 (base 75 + 40 = 115 -> 1 step = +10%; magazine mods add steps). OHDB/meta-builds wording: per 15 capacity above 100, +8% each (also 1 step at 115)",
+          "perStack": 10,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "If magazine capacity exceeds 90 rounds, for every additional 15 rounds, Shrapnel DMG multiplier +10%.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "dmgVsPct",
+          "key": "player",
+          "value": -40,
+          "condition": "Shrapnel procs only (60% Shrapnel DMG to Meta-Humans)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "deals 60% Shrapnel DMG to Metas",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": 16.7,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "Every 6 hits trigger Shrapnel since v3.0.6 (2026-09-16 dev blog: 'every 6 hits instead of every 12'); all older texts say every 12 hits. After a reload, or every 12 cumulative hits, the next Shrapnel is a Memory Storm hitting all targets in range.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Shrapnel hits +1 extra body part per 25 rounds of magazine capacity, up to +6 (2026 card/CN; OHDB text: +1 per 40 capacity up to +4).",
+        "Memory Storm (v3.0.6): after a reload or every 12 hits the next Shrapnel strikes every target in range.",
+        "Each Shrapnel application grants 0.5 s of stackable Super Armor (v3.0.6)."
+      ],
+      "notes": "'50% Attack' in the weapons.json text is the pre-2025 Shrapnel base (now 60%), not an override.",
+      "confidence": "medium"
+    },
+    {
+      "name": "MG4 - Predator",
+      "effects": [
+        {
+          "stat": "weaponDmgPct",
+          "key": null,
+          "value": 80,
+          "condition": "consecutive hits on the same target; stacks halved when the target changes (2026 card/CN: +4% x20; official 2025-06-19 notes: up to +80%; OHDB/meta-builds text: +2% per hit up to +40%)",
+          "perStack": 4,
+          "maxStacks": 20,
+          "maxValue": 80,
+          "quote": "Hitting the same target consecutively grants Weapon DMG +4%, up to 20 stacks; halved on target change.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "official oncehuman.game patch notes / dev blogs (via research notes)"
+          ]
+        },
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": 60,
+          "condition": "while remaining bullets exceed 40% of magazine capacity (2026 card/CN; OHDB/meta-builds text: Attack +40% above 50%)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "When the remaining bullets exceed 40% of the magazine capacity, Attack +60%.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": 40,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "40% chance per hit to trigger Fast Gunner (all sources; official 2025-06-19 rework).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Whenever Fast Gunner stacks reach a multiple of 5, gain infinite ammo for 0.5 s.",
+        "Fast Gunner's own +1% Fire Rate / +1% Attack per stack (max 5, 2 s) is the keyword base effect and is not duplicated here."
+      ],
+      "notes": "Two generations of text: weapons.json/OHDB (+2% x20 = +40%, Attack +40% above 50% mag) vs the 2026 card/CN (+4% x20 = +80%, Attack +60% above 40% mag). Effects follow the 2026 text, which also matches the official 2025-06-19 'up to +80%'.",
+      "confidence": "medium"
+    },
+    {
+      "name": "Kukri",
+      "effects": [
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": 30,
+          "condition": "for 10 s after defeating a target (applies to all weapons)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Defeating a target grants all weapons Attack +30% and Crit Rate +15% for 10s.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "critRatePct",
+          "key": null,
+          "value": 15,
+          "condition": "for 10 s after defeating a target (applies to all weapons)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Defeating a target grants all weapons Attack +30% and Crit Rate +15% for 10s.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "psiIntensityPct",
+          "key": null,
+          "value": 20,
+          "condition": "after defeating an enemy with a heavy strike (duration not stated)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "When defeating an enemy with heavy strike, Psi Intensity +20% and restores HP by 200% of Psi Intensity.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Heavy-strike kill restores HP equal to 200% of Psi Intensity."
+      ],
+      "notes": "weapons.json has no text (datamined placeholder); CN sheet (廓爾喀彎刀) and meta-builds agree.",
+      "confidence": "medium"
+    },
+    {
+      "name": "Scourge",
+      "effects": [
+        {
+          "stat": "meleeDmgPct",
+          "key": null,
+          "value": 200,
+          "condition": "scales with lost HP; +200% is the cap at very low HP",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Based on lost HP, gain extra Melee DMG bonus, up to +200%.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Heavy attacks briefly grant a shield of 300 + 200% Psi Intensity; defeating a target with a heavy attack converts the remaining shield into HP."
+      ],
+      "notes": "weapons.json has no text; CN sheet (剋星) only. 'meleeDmgPct' is an extension stat (see _meta.extensions).",
+      "confidence": "medium"
+    },
+    {
+      "name": "The Fabled Masamune",
+      "effects": [
+        {
+          "stat": "critDmgPct",
+          "key": null,
+          "value": 120,
+          "condition": "per 1% of weapon durability above 50% (cap +120% reached at 90% durability)",
+          "perStack": 3,
+          "maxStacks": 40,
+          "maxValue": 120,
+          "quote": "When Weapon Durability is above 50%, for every 1% higher, Crit DMG +3%, up to +120%.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": -40,
+          "condition": "per 1% of weapon durability below 20% (-40% at 0%)",
+          "perStack": -2,
+          "maxStacks": 20,
+          "maxValue": -40,
+          "quote": "When Weapon Durability is below 20%, for every 1% lower, Attack -2%.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": 30,
+          "condition": "quick attack right after drawing the weapon (once per 15 s); if it hits, the buff lingers 5 s while decaying",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "When dealing a quick attack after drawing weapon, Attack +30% and guaranteed critical hit (ineffective against Meta-Humans). Can be triggered once every 15s.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "critRatePct",
+          "key": null,
+          "value": 100,
+          "condition": "quick attack right after drawing the weapon (guaranteed crit; not vs Meta-Humans; once per 15 s)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "guaranteed critical hit (ineffective against Meta-Humans)",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "weapons.json has no text; CN sheet (名刀·正宗) and meta-builds agree.",
+      "confidence": "medium"
+    },
+    {
+      "name": "DE.50 - Jaws",
+      "effects": [
+        {
+          "stat": "keywordCritRatePct",
+          "key": "unstableBomber",
+          "value": 35,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Unlocks the crit capability for Unstable Bomber, increasing its Crit Rate by +35% (stacks with character's Crit Rate).",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": 33.3,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "2026 card/CN: every 3 hits trigger Unstable Bomber, crits count as 2 hits (hits per trigger = 3/(1+CritRate)), and each crit additionally has a 30% chance to trigger Unstable Bomber. Legacy (weapons.json/lReDragol/meta-builds/fandom): every 4 shots with crits counting toward the counter, Crit Rate +25%. Jaws was adjusted in v2.0.1 (2025-07-16); the March-2026 card is post-adjustment.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Unstable Bomber can crit (uses character Crit Rate + the intrinsic bonus).",
+        "Legacy OHDB text only: after a weakspot hit, Explosion (Blast) Elemental DMG +30% for 8 s - absent from the 2026 card and CN sheet."
+      ],
+      "notes": "weapons.json carries no text (summary only); lReDragol's structured block, fandom and meta-builds give the pre-v2.0.1 wording (every 4 shots, +25% crit rate, +30% blast after weakspot); the in-game card and CN sheet give the current wording. '100% Psi Intensity' in the legacy text is the pre-2025-06-19 Unstable Bomber base (now 120%).",
+      "confidence": "medium"
+    },
+    {
+      "name": "G17 - Cash Only",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "Placeholder in the datamined file; absent from the CN sheet and meta-builds. Nothing to extract.",
+      "confidence": "low"
+    },
+    {
+      "name": "G17 - Hazardous Object",
+      "effects": [
+        {
+          "stat": "keywordDmgPct",
+          "key": "unstableBomber",
+          "value": 50,
+          "condition": "per Unstable Bomber damage instance, 10 s (also +10% blast range per stack)",
+          "perStack": 10,
+          "maxStacks": 5,
+          "maxValue": 50,
+          "quote": "Unstable Bomber DMG and Range +10% for 10s each time Unstable Bomber deals damage, up to 50%",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "reloadEfficiencyPct",
+          "key": null,
+          "value": 66.7,
+          "condition": "the reload is replaced by a weapon throw; 'Reloading time -40%' converted via T = T0/(1+RE) -> RE = +66.7%",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Reloading time -40%",
+          "source": [
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 20,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "20% chance per hit to trigger Unstable Bomber (card, CN, meta-builds agree).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Reload is replaced by throwing the weapon: consumes all ammo to deal Unstable Bomber DMG in a 3 m radius equal to (50% + consumed ammo x 18%) of Psi Intensity, capped at 480% (card/CN) or 450% (meta-builds); 28% DMG vs Meta-Humans; benefits from Unstable Bomber DMG and range bonuses; deals 50% DMG to yourself (meta-builds).",
+        "After throwing: 75% chance to recover 75% of consumed ammo, 25% chance to recover 25%."
+      ],
+      "notes": "weapons.json lists no keyword and no text; card, CN sheet (Glock-危險品) and meta-builds all make it an Unstable Bomber pistol.",
+      "confidence": "medium"
+    },
+    {
+      "name": "R500 - Memento",
+      "effects": [
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": 100,
+          "condition": "only on the shots that consume an extra bullet (50% of shots per CN 2026-05); legacy lReDragol/meta-builds text: 40% of shots, Attack +80%",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Shots have a 50% chance to consume 1 extra bullet, and that hit has Attack +100%.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": 45,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "45% chance per hit to trigger Fast Gunner, raised to 80% on weakspot hits (CN 2026-05). lReDragol/meta-builds: 36% on hit, doubled (72%) on weakspot.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Triggering Fast Gunner loads 1 bullet from reserve into the magazine.",
+        "After a missed shot the next reload loads 1 extra bullet (max 5) (CN).",
+        "Fast Gunner's own +1%/+1% per stack (max 5) is the keyword base effect, not duplicated here."
+      ],
+      "notes": "weapons.json text only restates the Fast Gunner keyword. Datamined description wrongly calls the R500 a sniper rifle.",
+      "confidence": "medium"
+    },
+    {
+      "name": "ACS12 - Corrosion",
+      "effects": [
+        {
+          "stat": "keywordCritRatePct",
+          "key": "powerSurge",
+          "value": 15,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Power Surge can deal Crit hit, Power Surge Crit Rate +15%",
+          "source": [
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "keywordCritDmgPct",
+          "key": "powerSurge",
+          "value": 150,
+          "condition": "per Power Surge trigger (vs non-Meta-Humans), 6 s",
+          "perStack": 15,
+          "maxStacks": 10,
+          "maxValue": 150,
+          "quote": "When Power Surge is triggered, Power Surge Crit DMG +15% for 6s. Effect can stack up to 10 times",
+          "source": [
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "keywordDmgPct",
+          "key": "powerSurge",
+          "value": 15,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Power Surge DMG Factor +15%",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 70,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "70% chance per hit (per pellet, 5 pellets per shot) to trigger Power Surge without inflicting the Power Surge status on non-Meta-Humans (meta-builds v3.0.5 text; lReDragol also 70%). The March-2026 card and May-2026 CN sheet show the pre-rebalance values: 80% chance, PS Crit Rate +25%, PS Crit DMG +40% x5.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Power Surge can crit (character Crit Rate + intrinsic bonus).",
+        "Does not inflict the Power Surge status (Accuracy -40%) on non-Meta-Humans."
+      ],
+      "notes": "weapons.json text is a one-liner; the full effect comes from meta-builds (newest, v3.0.5 era) with the older card/CN numbers noted. Keyword conflict noted in weapons.json (bramsey679: Fortress Warfare) is rejected. The '113 test' (TV-PS-113) uses the +15% DMG Factor.",
+      "confidence": "medium"
+    },
+    {
+      "name": "ACS12 - Pyroclasm Starter",
+      "effects": [
+        {
+          "stat": "elementalDmgPct",
+          "key": "blaze",
+          "value": 20,
+          "condition": "while Dragon's Breath rounds are loaded (until the next reload); OHDB/meta-builds text: +10% per charge only",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Blaze DMG +20%, gains additional increase when consuming Charges",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "elementalDmgPct",
+          "key": "blaze",
+          "value": 32,
+          "condition": "per Charge stack expended on reload, until the next reload (OHDB/meta-builds text: +10% per stack x4)",
+          "perStack": 8,
+          "maxStacks": 4,
+          "maxValue": 32,
+          "quote": "+8% per stack, stackable up to 4 stacks until next reload",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": 27,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "27% chance per hit (per pellet) to apply Burn (all sources agree). 20% chance per hit to spawn a Deviant Particle (pick-up = Charging state, 60 s).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Reloading while charged consumes all Charge and loads Dragon's Breath rounds until the next reload: each hit deals Blaze Elemental Status DMG equal to 95% of Attack (card/CN; OHDB/meta-builds: 85% Weapon DMG) - Burn DMG bonuses apply, and since 2026-02-25 it is Status DMG that still takes Crit/Weakspot multipliers."
+      ],
+      "notes": "weapons.json text (OHDB) is the pre-2026 wording (85% Attack Weapon DMG, +10% per charge). Effects follow the 2026 card/CN text.",
+      "confidence": "medium"
+    },
+    {
+      "name": "DB12 - Raining Cash",
+      "effects": [
+        {
+          "stat": "critRatePct",
+          "key": null,
+          "value": 30,
+          "condition": "while in the Fortress Warfare state",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "While in Fortress Warfare, Crit Rate +30%",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "dmgReductionPct",
+          "key": null,
+          "value": 30,
+          "condition": "while in the Fortress Warfare state",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "While in Fortress Warfare, DMG Reduction +30%.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": 40,
+          "condition": "ramps up the longer Fortress Warfare is maintained (lReDragol: +8% per second), max +40% - OHDB/meta-builds text; absent from the CN 2026-05 text",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "The longer Fortress Warfare is maintained, the higher the Attack, up to +40%",
+          "source": [
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "allDmgPct",
+          "key": null,
+          "value": 80,
+          "condition": "per bullet loaded consecutively through the pump-reload mechanic (CN 2026-05 text: 'Final DMG +8% per consecutively loaded bullet, up to 10 stacks'; weapon swap counts as an empty reload)",
+          "perStack": 8,
+          "maxStacks": 10,
+          "maxValue": 80,
+          "quote": "Each consecutively loaded bullet grants Final DMG +8%, stackable 10 times.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": null,
+      "triggerChanceBasis": "cooldown",
+      "triggerRule": "Fortress Warfare on reload with a 10 s cooldown (OHDB/meta-builds); CN 2026-05: the first hit after a reload or weapon swap triggers it, 10 s cooldown.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Heavy Armor granted to allies in the 2 m zone = Super Armor + Weapon DMG +20% for 5 s (Fortress Warfare keyword base, not duplicated).",
+        "CN 2026-05: each pump action loads 1 bullet instantly on the next reload, up to 10 per reload (removed on weapon swap)."
+      ],
+      "notes": "weapons.json text only restates the Fortress Warfare zone; the lReDragol structured block adds Crit Rate +30%, DR +30% and the Attack ramp; the CN sheet replaces the Attack ramp with a Final DMG stacking mechanic. Both generations are listed and tagged by source. Keyword conflict in weapons.json (bramsey679: Shrapnel) is rejected - CN and meta-builds both say Fortress Warfare.",
+      "confidence": "medium"
+    },
+    {
+      "name": "DBSG - Doombringer",
+      "effects": [
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": 36,
+          "condition": "after all pellets of one shot hit a non-Meta-Human under The Bull's Eye, 15 s (official 2025-06-19 notes; card/CN). meta-builds variant: Attack +6 flat for 60 s x5 after killing a marked enemy",
+          "perStack": 12,
+          "maxStacks": 3,
+          "maxValue": 36,
+          "quote": "When all bullets hit a non-Metas unit under The Bull's Eye status, Attack +12%, Reload Efficiency +8% for 15 seconds, stackable up to 3 layers.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "official oncehuman.game patch notes / dev blogs (via research notes)"
+          ]
+        },
+        {
+          "stat": "reloadEfficiencyPct",
+          "key": null,
+          "value": 24,
+          "condition": "same trigger as the Attack stacks (all pellets hit a marked non-Meta-Human), 15 s",
+          "perStack": 8,
+          "maxStacks": 3,
+          "maxValue": 24,
+          "quote": "Reload Efficiency +8% for 15 seconds, stackable up to 3 layers.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "dmgReductionPct",
+          "key": null,
+          "value": 20,
+          "condition": "after applying The Bull's Eye to a target, 8 s",
+          "perStack": 5,
+          "maxStacks": 4,
+          "maxValue": 20,
+          "quote": "After applying The Bull's Eye to the target, DMG Reduction +5% for 8 seconds, stackable up to 4 layers.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "critRatePct",
+          "key": null,
+          "value": 30,
+          "condition": "vs targets under The Bull's Eye",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Crit Rate +30% when hitting marked enemies",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 30,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "30% chance per hit to apply The Bull's Eye, raised to 80% within 8 m (card/CN) or 5 m (weapons.json/meta-builds). Shotgun: the text says 'weapon hits', so the roll is most likely per pellet (6 pellets) - unverified.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "weapons.json text is a one-line summary ('increased chance within 5 m'). Full effect reconstructed from the March-2026 card, CN sheet (獵槍-厄運宣告), meta-builds and the official 2025-06-19 notes (Attack +12% x3). Keyword conflict in weapons.json (bramsey679: Burn) rejected.",
+      "confidence": "medium"
+    },
+    {
+      "name": "DBSG - Format",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "Placeholder in the datamined file; absent from the CN sheet and meta-builds. Nothing to extract.",
+      "confidence": "low"
+    },
+    {
+      "name": "KVK 3 - Bull",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "No effect text in any reachable dataset (smus-rgb only: 'Bounce Blast shotgun for close range'). Nothing to extract.",
+      "confidence": "low"
+    },
+    {
+      "name": "KV-SBR - Little Jaws",
+      "effects": [
+        {
+          "stat": "finalDmgPct",
+          "key": "unstableBomber",
+          "value": 20,
+          "condition": "per hit on an enemy carrying a pending Unstable Bomber - applies to that bomb (card/CN 2026: +20% per hit; OHDB/meta-builds text: +10% per hit, doubled to +20% on weakspot hits, 4 s)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Each time an enemy affected by Unstable Bomber is hit, the current Unstable Bomber Final DMG +20%.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "keywordDmgPct",
+          "key": "unstableBomber",
+          "value": 30,
+          "condition": "from the intrinsic +0.2 s delay (2 steps of 0.1 s x 15%); delay-extending gear adds +15% per further 0.1 s (e.g. Explosive Front Top +0.3 s -> +45% more). If the game counts total delay (0.1 s base + 0.2 s) the intrinsic value is +45%. OHDB/meta-builds text: delay +0.3 s and +20% per 0.1 s (= +60%)",
+          "perStack": 15,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Unstable Bomber delay +0.2s. For every +0.1s of Unstable Bomber delay, Unstable Bomber DMG +15%.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "dmgVsPct",
+          "key": "player",
+          "value": -60,
+          "condition": "Unstable Bomber procs only (bombs triggered on Meta-Humans deal 40% DMG)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "deals 40% damage against Meta-Humans",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": 6.7,
+      "triggerChanceBasis": "cooldown",
+      "triggerRule": "Card/CN 2026: every hit triggers Unstable Bomber subject to a 0.9 s cooldown - at 1000 RPM (16.7 hits/s) that is one bomb per 15 hits = 6.7% per hit; the weapons.json/lReDragol/meta-builds text says exactly 'every 15 hits'. The 2024-11-23 blog made Little Jaws trigger on hit.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "weapons.json text ('100% Psi after 0.4 s', '+10% final per hit', 'delay +0.3 s', '+20% per 0.1 s') is the pre-2025 wording; the '100% Psi' is the old Unstable Bomber base (now 120%), not an override. Effects follow the March-2026 card / May-2026 CN text.",
+      "confidence": "medium"
+    },
+    {
+      "name": "MPS5 - Kumawink",
+      "effects": [
+        {
+          "stat": "keywordDmgPct",
+          "key": "bounce",
+          "value": 75,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Bounce damage multiplier +75%",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "statusChancePct",
+          "key": "bounce",
+          "value": 60,
+          "condition": "on weakspot hits, relative to the weapon's own Bounce chance (25% -> 40% for that shot) - OHDB/meta-builds text; absent from the 2026 card/CN",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Bounce trigger factor for that shot is +60% (based on weapon's Trigger Chance) with a weakspot hit",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "dmgVsPct",
+          "key": "monster",
+          "value": 20,
+          "condition": "Impact: vs Protocell enemies (weapon damage-bonus tag; 'monster' is the closest available key)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Impact: Increases damage by 20% when attacking Protocell.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)"
+          ]
+        }
+      ],
+      "triggerChancePct": 25,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "25% chance per hit to trigger Bounce (all sources agree).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Bounce targets +3 (card/CN 2026).",
+        "When Bounce hits, a ricochet deals 100% of the Bounce damage back to the target that triggered it (card/CN).",
+        "After reloading, Bounce triggers one additional time when activated, for 6 s (removed on weapon swap) (card/CN); OHDB text: Bounce trigger count +1 while magazine is below 50%."
+      ],
+      "notes": "weapons.json text says 'Bounce base damage increased by 50%' (OHDB/meta-builds); the March-2026 card and May-2026 CN sheet say +75%. Effects use +75%. '60% Attack to a random enemy within 10 m' is the pre-2024-11-23 Bounce base (now 40% of Attack, 15 m), not an override.",
+      "confidence": "medium"
+    },
+    {
+      "name": "MPS5 - Primal Rage",
+      "effects": [
+        {
+          "stat": "weaponDmgPct",
+          "key": null,
+          "value": 80,
+          "condition": "per 1% of HP changed (loss or gain); each stack has its own 5 s timer",
+          "perStack": 1,
+          "maxStacks": 80,
+          "maxValue": 80,
+          "quote": "When HP changes by 1%, weapon DMG increases by +1% for 5 seconds. Each stack has an independent timer and can stack up to 80 stacks.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 35,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "35% chance per hit to gain a Fast Gunner stack (card, CN, meta-builds agree).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "When 1 bullet remains, can keep firing from reserve ammo at the cost of 1% max HP per shot (non-lethal).",
+        "Each hit restores lost HP equal to 0.1% x Fast Gunner stacks."
+      ],
+      "notes": "weapons.json has no keyword/text; three sources agree it is a Fast Gunner SMG.",
+      "confidence": "medium"
+    },
+    {
+      "name": "MPS7 - Chaos Domain",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "Placeholder in the datamined file; absent from the CN sheet and meta-builds. Nothing to extract.",
+      "confidence": "low"
+    },
+    {
+      "name": "MPS7 - Outer Space",
+      "effects": [
+        {
+          "stat": "elementalDmgPct",
+          "key": "shock",
+          "value": 30,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Shock Elemental DMG +30%.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "statusChancePct",
+          "key": "powerSurge",
+          "value": 40,
+          "condition": "for 6 s after reloading, relative to the weapon's own chance (card/CN 2026: 6 s; OHDB/meta-builds text: 3 s)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "After reloading, the weapon gains a Power Surge bonus 40% for 6 seconds.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)"
+          ]
+        },
+        {
+          "stat": "statusChancePct",
+          "key": "powerSurge",
+          "value": 30,
+          "condition": "for 12 s after defeating an enemy, relative to the weapon's own chance (OHDB/meta-builds text; absent from the 2026 card/CN)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Increases Power Surge trigger factor by 30% for 12 seconds after defeating an enemy.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 30,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "30% chance per hit to apply Power Surge (card/CN 2026). OHDB/meta-builds text: 25% base with a passive 'trigger factor +40% (based on weapon's chance)' = 35% effective; that passive bonus is folded into this figure's alternative, not listed as an effect.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "After hitting a Power-Surged target 12 times, lightning strikes it for 500% Psi Intensity Shock Elemental DMG (40% vs Meta-Humans) (card/CN)."
+      ],
+      "notes": "weapons.json text is the OHDB wording (25%/+30% after kill/+40% after reload for 3 s). Keyword conflict in weapons.json (bramsey679: Frost Vortex) rejected.",
+      "confidence": "medium"
+    },
+    {
+      "name": "PDW90 - Holographic Resonance",
+      "effects": [
+        {
+          "stat": "critRatePct",
+          "key": null,
+          "value": 20,
+          "condition": "vs targets under The Bull's Eye",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Crit Rate +20% against targets under The Bull's Eye status.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 20,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "20% chance per hit to apply The Bull's Eye (card, CN, meta-builds agree).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Every 12 hits: AoE Weapon DMG equal to 800% Attack to enemies within 8 m (30% DMG vs Meta-Humans).",
+        "AoE hits on marked targets reload 3% ammo each, up to 15% per instance."
+      ],
+      "notes": "weapons.json lists no keyword/text; card, CN sheet (P90-全息共振) and meta-builds agree on The Bull's Eye.",
+      "confidence": "medium"
+    },
+    {
+      "name": "Star Vortex",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "Placeholder in the datamined file; absent from the CN sheet and meta-builds. Nothing to extract.",
+      "confidence": "low"
+    },
+    {
+      "name": "TEC9 - Additional Rules",
+      "effects": [
+        {
+          "stat": "critRatePct",
+          "key": null,
+          "value": 15,
+          "condition": "while in the Fortress Warfare state",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "In Fortress state, Crit Rate +15%",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 100,
+      "triggerChanceBasis": "cooldown",
+      "triggerRule": "Every hit triggers Fortress Warfare, 10 s cooldown (one zone per 10 s while hitting).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "After using a Deviant skill, bullets deal Elemental Status DMG equal to 120% Attack (element depends on the Deviation).",
+        "Reloading an empty magazine restores 25% of magazine capacity as Deviant Power, max 20 points per reload."
+      ],
+      "notes": "weapons.json has keyword only (from smus-rgb); card, CN sheet and meta-builds agree on the full text. Also known as FP9 - Additional Rules.",
+      "confidence": "high"
+    },
+    {
+      "name": "AWS.338 - Bullseye",
+      "effects": [
+        {
+          "stat": "weakspotDmgPct",
+          "key": null,
+          "value": 100,
+          "condition": "per hit on a non-Meta-Human, 10 s; switching weapons removes half the stacks (card/CN 2026; weapons.json/OHDB text: +15% x3 for 10 s)",
+          "perStack": 25,
+          "maxStacks": 4,
+          "maxValue": 100,
+          "quote": "After hitting a non-Meta-Human unit with a weapon, Weakspot DMG +25% for 10 seconds, stacking up to 4 stacks.",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": 15,
+          "condition": "for 20 s after defeating a non-Meta-Human with a weakspot hit",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "After defeating an enemy with a weakspot hit, Attack +15% for 20 seconds.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 70,
+      "triggerChanceBasis": "weakspot",
+      "triggerRule": "70% chance per weakspot hit to apply The Bull's Eye (per-shot chance = 0.70 x weakspot-hit rate); the first hit after switching to this weapon always applies it.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "Two generations: OHDB (+15% x3) vs 2026 card/CN (+25% x4, halved on swap). Effects use the 2026 values. Also sold as 'AWS.338 - Bingo' on some wikis.",
+      "confidence": "high"
+    },
+    {
+      "name": "EBR-14 - Octopus! Grilled Rings!",
+      "effects": [
+        {
+          "stat": "keywordDmgPct",
+          "key": "burn",
+          "value": 75,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Burn DMG +75%",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "critRatePct",
+          "key": null,
+          "value": 20,
+          "condition": "card OCR reads 'Burn crit rate +20%' while CN and meta-builds read plain 'Crit Rate +20%'; Burn cannot crit without Gilded Gloves, so plain weapon Crit Rate is the likelier reading",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Crit Rate +20%",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 50,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "50% chance per hit to apply Burn (card, CN, meta-builds agree).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Max Burn stacks -3 (so 2 stacks on this weapon unless raised by gear).",
+        "At max Burn stacks the target emits a fire ring spreading 150% Burn DMG (CN) to enemies within 6 m at Burn frequency."
+      ],
+      "notes": "weapons.json has no keyword/text; card, CN sheet (MK14-章魚！烤圈圈！) and meta-builds agree it is a Burn sniper.",
+      "confidence": "high"
+    },
+    {
+      "name": "HAMR - Brahminy",
+      "effects": [
+        {
+          "stat": "dmgVsPct",
+          "key": "player",
+          "value": -65,
+          "condition": "Bounce procs only (35% Bounce DMG vs Meta-Humans; 2024-11-23 blog said 50%)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "75% chance to trigger Bounce (dealing 35% Bounce DMG to Metas)",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": 75,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "75% chance per hit to trigger Bounce (card/CN 2026). Official 2024-11-23 blog: 60%; weapons.json/lReDragol/meta-builds: 80% on weakspot hits only, with a 35% chance for a Bounce that hits a weakspot to ricochet again.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Bounce count +2 (card/CN/official 2024-11-23).",
+        "Bounce can trigger off scenery hits, with DMG -30% (-95% if the target is a Meta-Human).",
+        "Bounce weakspot weighting +100% (card/CN; official 2024-11-23: +50%).",
+        "Legacy OHDB text only: if a Bounce defeats nothing or finds no target, the next bullet's Weapon DMG +20%, up to 5 stacks; Bounce prioritises high-HP enemies - absent from the 2026 card/CN."
+      ],
+      "notes": "weapons.json text is the pre-rework wording ('60% Attack ... 10 m'); the legacy +20% x5 Weapon DMG stack is kept in mechanics rather than effects because the 2026 card/CN text no longer lists it. '60% Attack' is the pre-2024-11-23 Bounce base (now 40%), not an override.",
+      "confidence": "medium"
+    },
+    {
+      "name": "HAMR - Hannya",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "Placeholder in the datamined file; absent from the CN sheet and meta-builds. Nothing to extract.",
+      "confidence": "low"
+    },
+    {
+      "name": "SKS - Pathfinder",
+      "effects": [
+        {
+          "stat": "elementalDmgPct",
+          "key": "frost",
+          "value": 30,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Frost Elemental DMG +30%",
+          "source": [
+            "in-game Tier V card OCR 2026-03 (0x91CEA55 INGAME_KNOWLEDGE_BIBLE.md)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "elementalDmgPct",
+          "key": "frost",
+          "value": 24,
+          "condition": "per charged shot, 15 s",
+          "perStack": 8,
+          "maxStacks": 3,
+          "maxValue": 24,
+          "quote": "Each charged shot increases Frost Elemental DMG by 8% for 15s, stacking up to 3 times.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 20,
+      "triggerChanceBasis": "cooldown",
+      "triggerRule": "Every hit triggers Frost Vortex subject to a 5 s cooldown that each hit also shortens by 1 s - at 257 RPM (0.23 s per hit) the cooldown clears after ceil(5/(0.23+1)) = 5 hits, i.e. ~20% per hit.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "60% chance per hit to spawn a Deviant Particle (pick-up = Charging state); max held charges +10.",
+        "Charged shot: penetrating ice spike dealing Frost Elemental Status DMG equal to 110% Attack (Frost Vortex DMG bonuses apply; 20% DMG vs Meta-Humans) - Status DMG that still takes crit/weakspot per the 2026-02-12 dev blog."
+      ],
+      "notes": "weapons.json has no keyword/text; card, CN sheet (SKS-尋路者) and meta-builds agree.",
+      "confidence": "medium"
+    },
+    {
+      "name": "SN700 - Finale",
+      "effects": [
+        {
+          "stat": "weaponDmgPct",
+          "key": null,
+          "value": 20,
+          "condition": "last bullet in the magazine only, per Reverb stack (v3.0.2 2026-07-22: stacks 5 -> 4, 4% -> 5% per stack)",
+          "perStack": 5,
+          "maxStacks": 4,
+          "maxValue": 20,
+          "quote": "Each stack of Reverb increases the damage of the last bullet in the magazine by 5%",
+          "source": [
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)",
+            "official oncehuman.game patch notes / dev blogs (via research notes)"
+          ]
+        }
+      ],
+      "triggerChancePct": 40,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "40% chance per hit to trigger Shrapnel; weakspot hits always trigger it. If Reverb is at 3+ stacks, the last bullet's Shrapnel triggers additionally once per Reverb stack.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Shrapnel no longer excludes the part that was hit.",
+        "Reverb: +1 stack per Shrapnel trigger (max 4; removed on reload/swap); each stack adds +1 Shrapnel hit part and -7% recoil."
+      ],
+      "notes": "weapons.json has only a paraphrase; numbers from the meta-builds export plus the official v3.0.2 nerf note. Added v3.0.1 (2026-07-09).",
+      "confidence": "medium"
+    },
+    {
+      "name": "KAM - Burning Rage",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "No effect text anywhere (smus-rgb only). The CN sheet's Burn KAM is 'AKM-怒火攻心' (literally 'rage attacks the heart', plausibly localised as 'Burning Rage') whose text matches KAM - Crank (7 hits -> Burn, Burn DMG +15%, max stacks +2); this entry may be an alias of KAM - Crank rather than a separate weapon. Nothing extracted to avoid double counting.",
+      "confidence": "low"
+    },
+    {
+      "name": "KAM - Crank",
+      "effects": [
+        {
+          "stat": "keywordDmgPct",
+          "key": "burn",
+          "value": 15,
+          "condition": "for 8 s after the target reaches max Burn stacks (CN 2026-05); weapons.json/OHDB/meta-builds: for 5 s after killing a Burning enemy",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Grants Burn DMG +15% for 5 seconds.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "reloadEfficiencyPct",
+          "key": null,
+          "value": 6,
+          "condition": "for 5 s after killing a Burning enemy (OHDB/meta-builds text only; absent from CN 2026-05). 'Reload Speed +20%' converted at the official maximum ratio (Reload Speed +10% -> Reload Efficiency +3%, 2025-05-21 notes); the raw text value is 20",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Grants Reload Speed +20% for 5 seconds.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 14.3,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "Every 7 hits apply Burn (all sources agree).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Max Burn stacks +1 (weapons.json/OHDB/meta-builds) or +2 (CN 2026-05)."
+      ],
+      "notes": "'10% Psi Intensity every 0.5 s' is the pre-2024-11-23 Burn base (now 12%), not an override.",
+      "confidence": "medium"
+    },
+    {
+      "name": "M416 - Autumn Equinox",
+      "effects": [
+        {
+          "stat": "weaponDmgPct",
+          "key": null,
+          "value": 25,
+          "condition": "while HP is above 75%",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "When HP is above 75%, Weapon DMG +25%.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 14.3,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "Every 7 hits trigger Fortress Warfare, but with a 15 s cooldown - at 750 RPM the cooldown dominates (one zone per 15 s).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Allies inside the zone recover 4% of max HP per second."
+      ],
+      "notes": "All sources agree.",
+      "confidence": "high"
+    },
+    {
+      "name": "OIC-8 - Last Carnival",
+      "effects": [
+        {
+          "stat": "elementalDmgPct",
+          "key": "shock",
+          "value": 30,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Shock Elemental DMG +30%.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)"
+          ]
+        }
+      ],
+      "triggerChancePct": 100,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "Text says Continuous Power Surge on every hit (0.5 s cooldown) - but see notes.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "70% chance per hit to spawn a Deviant Particle; Charge State 3 s; while charged, hits spawn Orb Lightning for 75% Psi Intensity Shock DMG (per the copied text)."
+      ],
+      "notes": "weapons.json flags that the datamined mechanics block is copied from Critical Pulse (it even calls the OIC-8 a crossbow). The weapon is absent from the CN sheet, the 2026 card set and meta-builds, so nothing could be verified; everything here is UNVERIFIED.",
+      "confidence": "low"
+    },
+    {
+      "name": "SOCR - Outsider",
+      "effects": [
+        {
+          "stat": "statusChancePct",
+          "key": "powerSurge",
+          "value": 30,
+          "condition": "for 3 s after a crit hit, relative to the weapon's own chance",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Critical hits increase the chance to trigger Power Surge by 30% for 3 seconds.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "dmgVsPct",
+          "key": "human",
+          "value": 20,
+          "condition": "Penetration: vs Rosetta (weapon damage-bonus tag; weapons.json/lReDragol text only)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Penetration: Increases damage by 20% when attacking Rosetta.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)"
+          ]
+        }
+      ],
+      "triggerChancePct": 45.5,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "35% base chance per hit, multiplied by the always-on 'base chance to trigger Power Surge +30% (based on weapon's trigger chance)' = 45.5% effective; +30% more (relative) for 3 s after a crit (-> 59.2%). The always-on bonus is folded into triggerChancePct and not listed as an effect.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "weapons.json, CN sheet (SCAR-門扉之外) and meta-builds agree on 35% / +30% / +30%. '50% Psi Intensity ... 6 s ... accuracy -40%' is the Power Surge keyword base.",
+      "confidence": "high"
+    },
+    {
+      "name": "Recurve Crossbow",
+      "effects": [
+        {
+          "stat": "critRatePct",
+          "key": null,
+          "value": 15,
+          "condition": "all weapons, vs targets under The Bull's Eye, for 10 s after this weapon applies it",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "all weapons have Crit Rate +15% against targets with The Bull's Eye for 10 seconds.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 100,
+      "triggerChanceBasis": "weakspot",
+      "triggerRule": "Every weakspot hit applies The Bull's Eye (once per target per 15 s).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "All sources agree.",
+      "confidence": "high"
+    },
+    {
+      "name": "Flamethrower",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "Placeholder in the datamined file; absent from the CN sheet and meta-builds. Nothing to extract.",
+      "confidence": "low"
+    },
+    {
+      "name": "MGL",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": "cooldown",
+      "triggerRule": "Landing 6 hits from one magazine grants 'Tumult'; Fortress Warfare can then be activated once after the next reload completes.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "While in Fortress Warfare, automatically reload 1 grenade every 1 s.",
+        "CN: strong structure damage vs stability 2 and below, reduced vs stability 3+."
+      ],
+      "notes": "weapons.json has no keyword/text; CN sheet (榴彈發射器, keyword 重裝陣地 = Fortress Warfare) and meta-builds agree. No stat-like bonus.",
+      "confidence": "medium"
+    },
+    {
+      "name": "MG4 - Mr Squid",
+      "effects": [
+        {
+          "stat": "weaponDmgPct",
+          "key": null,
+          "value": 50,
+          "condition": "per Bounce hit; 1 stack lost every 5 s (CN 2026-05: +1% x50; weapons.json/OHDB/meta-builds: +2% x50; official 2024-11-23 blog: +2% x25 - all cap at about +50%)",
+          "perStack": 1,
+          "maxStacks": 50,
+          "maxValue": 50,
+          "quote": "When Bounce hits, Weapon DMG +1%, up to 50 stacks. 1 stack is removed every 5 seconds.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "official oncehuman.game patch notes / dev blogs (via research notes)"
+          ]
+        },
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": 40,
+          "condition": "while remaining bullets exceed 50% of magazine capacity (weapons.json/lReDragol text only; absent from CN 2026-05 and meta-builds)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "When remaining bullets are more than 50% of the magazine capacity, Attack +40%.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)"
+          ]
+        }
+      ],
+      "triggerChancePct": 70,
+      "triggerChanceBasis": "crit",
+      "triggerRule": "70% chance per crit hit to trigger Bounce (CN 2026-05 and official 2024-11-23 blog); weapons.json/lReDragol/meta-builds: 90% per crit. Effective per-shot chance = 0.70 x Crit Rate.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "After firing continuously for 2 s, Bounce targets +1."
+      ],
+      "notes": "'60% Attack ... 10 m' is the pre-rework Bounce base (now 40%), not an override. Per-stack value is uncertain (1% vs 2%), cap is consistently ~+50%.",
+      "confidence": "medium"
+    },
+    {
+      "name": "MG4 - Wrath Of Hades",
+      "effects": [],
+      "triggerChancePct": 40,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "40% chance per hit to trigger Fast Gunner (weapons.json/lReDragol, CN, meta-builds agree).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Triggering Fast Gunner loads 1 bullet from reserve into the secondary weapon; defeating a target does the same.",
+        "Fast Gunner's own +1%/+1% per stack (max 5) is the keyword base effect, not duplicated here."
+      ],
+      "notes": "No stat-like intrinsic bonus beyond the keyword.",
+      "confidence": "high"
+    },
+    {
+      "name": "Crowbar",
+      "effects": [
+        {
+          "stat": "meleeDmgPct",
+          "key": null,
+          "value": 30,
+          "condition": "for 5 s after drawing the weapon (once per 15 s)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Within 5 s of drawing, Melee DMG +30%, Melee Crit Rate +50%; crits inflict Laceration; at most once per 15 s.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "critRatePct",
+          "key": null,
+          "value": 50,
+          "condition": "melee crit rate, for 5 s after drawing the weapon (once per 15 s)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Melee Crit Rate +50%",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Swing speed +10%.",
+        "Crits during the draw window inflict Laceration (physical Status DMG over time)."
+      ],
+      "notes": "weapons.json has no text; CN sheet (鐵撬) only, translated here. 'meleeDmgPct' is an extension stat.",
+      "confidence": "medium"
+    },
+    {
+      "name": "Frozen Northern Pike",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": "cooldown",
+      "triggerRule": "Charge attacks and heavy attacks freeze the primary target (2 hits needed vs players) and create a Frost Vortex, at most once every 4 s.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Attacking a target inside a Frost Vortex restores 5% of lost HP but costs 2 extra Stamina.",
+        "CN: lowers body temperature 5 degrees while held; hits lower the target's temperature by 20 degrees."
+      ],
+      "notes": "weapons.json has no keyword/text; CN sheet (霜之白斑狗魚) and meta-builds agree on Frost Vortex. No stat-like bonus.",
+      "confidence": "medium"
+    },
+    {
+      "name": "Long Axe",
+      "effects": [
+        {
+          "stat": "critRatePct",
+          "key": null,
+          "value": 24,
+          "condition": "for 10 s after heavy-attack hits (applies to all weapons; CN/meta-builds: one stack per target hit)",
+          "perStack": 8,
+          "maxStacks": 3,
+          "maxValue": 24,
+          "quote": "Heavy attacks grant Crit Rate +8% for 10 seconds, up to 3 stacks.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": null,
+      "triggerChanceBasis": "cooldown",
+      "triggerRule": "Heavy attacks activate Fortress Warfare, at most once every 10 s.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "CN/meta-builds: the same stacks also grant Melee Swing Speed +5% each."
+      ],
+      "notes": "All sources agree.",
+      "confidence": "high"
+    },
+    {
+      "name": "Stun Baton",
+      "effects": [],
+      "triggerChancePct": 80,
+      "triggerChanceBasis": "melee light attack",
+      "triggerRule": "Light attacks and charge attacks have an 80% chance to inflict Power Surge (CN/meta-builds; weapons.json text omits the chance).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Heavy attacks on a Power-Surged target deal an extra instance of Shock Status DMG equal to 100% Psi Intensity to nearby enemies (lReDragol block: 5 m)."
+      ],
+      "notes": "No stat-like bonus.",
+      "confidence": "high"
+    },
+    {
+      "name": "Warning Sign",
+      "effects": [
+        {
+          "stat": "dmgReductionPct",
+          "key": null,
+          "value": 50,
+          "condition": "after applying The Bull's Eye with a charge attack or the 2nd/3rd light-attack swing, 10 s",
+          "perStack": 25,
+          "maxStacks": 2,
+          "maxValue": 50,
+          "quote": "Charge and the 2nd/3rd light attack apply The Bull's Eye; at the same time DMG Reduction +25% and Movement Speed +15%; stacks up to 2, lasts 10 s.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "movementSpeedPct",
+          "key": null,
+          "value": 30,
+          "condition": "same trigger and duration as the DMG Reduction stacks",
+          "perStack": 15,
+          "maxStacks": 2,
+          "maxValue": 30,
+          "quote": "Movement Speed +15%, stacks up to 2, lasts 10 s.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        }
+      ],
+      "triggerChancePct": 100,
+      "triggerChanceBasis": "melee charge / 2nd-3rd light attack",
+      "triggerRule": "Charge attacks and the 2nd/3rd light-attack swings apply The Bull's Eye.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "weapons.json has no keyword/text; CN sheet (警示牌, keyword 獵人標記 = The Bull's Eye) only, translated here.",
+      "confidence": "medium"
+    },
+    {
+      "name": "DE.50 - Wildfire",
+      "effects": [
+        {
+          "stat": "weaponDmgPct",
+          "key": null,
+          "value": 25,
+          "condition": "for 10 s when a hit on a marked target finds no other enemy within 15 m to spread The Bull's Eye to",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "There is an 80% chance to spread The Bull's Eye to 1 enemy within a 15m area, Weapon DMG +25% for 10s.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)",
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)"
+          ]
+        },
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": 9,
+          "condition": "per weakspot hit on a marked enemy, 10 s",
+          "perStack": 3,
+          "maxStacks": 3,
+          "maxValue": 9,
+          "quote": "When hitting a Weakpoint of marked enemies, Attack +3% for 10s, up to 3 stacks.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)",
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)"
+          ]
+        }
+      ],
+      "triggerChancePct": 60,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "60% chance per hit to apply The Bull's Eye; hitting a marked target has an 80% chance to spread the mark to 1 enemy within 15 m.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "weapons.json text is a one-liner; lReDragol's structured block, CN sheet (沙鷹-藍焰) and meta-builds agree on the numbers.",
+      "confidence": "high"
+    },
+    {
+      "name": "G17 - Dusty",
+      "effects": [
+        {
+          "stat": "weakspotDmgPct",
+          "key": null,
+          "value": 15,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Weakspot DMG +15%.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 30,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "CN 2026-05: 30% chance per hit to trigger Shrapnel, raised to 65% on weakspot hits. weapons.json/lReDragol/meta-builds: 55% on weakspot hits only.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "When triggered, Shrapnel no longer excludes the part that was hit."
+      ],
+      "notes": "'50% Attack' is the pre-2025 Shrapnel base (now 60%), not an override. The trigger rule differs between the OHDB mirror (weakspot-only 55%) and the CN sheet (30%/65%).",
+      "confidence": "medium"
+    },
+    {
+      "name": "R500 - Hammerhead Shark",
+      "effects": [],
+      "triggerChancePct": 40,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "CN 2026-05: 40% chance per hit to apply Power Surge, 90% on weakspot hits. weapons.json/lReDragol/meta-builds: 80% on weakspot hits only.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Hitting a Power-Surged target deals Shock Elemental DMG to every Power-Surged enemy nearby: 80% Psi Intensity each, 150% to the main target (CN); meta-builds says 100% Psi Intensity.",
+        "Every 4 instances of Shock DMG dealt automatically reload 1 round."
+      ],
+      "notes": "No stat-like bonus. Datamined description wrongly calls it a sniper rifle.",
+      "confidence": "medium"
+    },
+    {
+      "name": "R500 - Interfade",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "Placeholder in the datamined file; absent from the CN sheet and meta-builds. Nothing to extract.",
+      "confidence": "low"
+    },
+    {
+      "name": "ACS12 - Netherworld",
+      "effects": [
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": 20,
+          "condition": "the first 12 shots after reloading from an empty magazine",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "The first 12 bullets after reloading from an empty magazine have Attack +20%.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 50,
+      "triggerChanceBasis": "shot (all pellets hit)",
+      "triggerRule": "50% chance to gain a Fast Gunner stack when all 5 pellets of a shot hit.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "After 2 Fast Gunner triggers the next shot is enhanced: consumes 1 extra shell and fires 5 additional pellets.",
+        "Fast Gunner's own +1%/+1% per stack (max 5) is the keyword base effect, not duplicated here."
+      ],
+      "notes": "All sources agree.",
+      "confidence": "high"
+    },
+    {
+      "name": "DB12 - Backfire",
+      "effects": [
+        {
+          "stat": "allDmgPct",
+          "key": null,
+          "value": 60,
+          "condition": "vs Frozen targets (frozen 3 s by hitting an enemy inside your Frost Vortex; 4 s per-target cooldown)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "When hitting Frozen enemies, DMG +60%",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 20,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "Every 5 hits trigger Frost Vortex (shotgun - whether pellets count individually is unverified).",
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "weapons.json has no keyword/text; CN sheet (DP12-逆火, Frost Vortex) and meta-builds agree.",
+      "confidence": "medium"
+    },
+    {
+      "name": "DBSG - Dual Fury",
+      "effects": [
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": 20,
+          "condition": "for 8 s after all pellets hit 4 times (enters a self-Burn state: you lose HP, non-lethal, and take Vulnerability +10%)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Attack +20% and Vulnerability +10% for 8s",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 50,
+      "triggerChanceBasis": "shot",
+      "triggerRule": "The last shot of each (2-round) magazine applies 1 Burn stack, +1 more if all pellets hit - roughly one application per 2 shots.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Hitting a Burning enemy with all pellets has a 50% chance to refill 1 shell."
+      ],
+      "notes": "weapons.json has no keyword/text; CN sheet (獵槍-雙倍怒火, Burn) and meta-builds agree. The +10% Vulnerability is a self-debuff, not a bonus.",
+      "confidence": "medium"
+    },
+    {
+      "name": "KV-SBR - Icy Rain",
+      "effects": [
+        {
+          "stat": "keywordDmgPct",
+          "key": "frostVortex",
+          "value": 30,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Frost Vortex DMG coefficient +30%",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)"
+          ]
+        },
+        {
+          "stat": "dmgVsPct",
+          "key": "human",
+          "value": 20,
+          "condition": "Penetration: vs Rosetta (weapon damage-bonus tag; weapons.json/lReDragol text only)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Penetration: Increases damage by 20% when attacking Rosetta.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)"
+          ]
+        }
+      ],
+      "triggerChancePct": 30,
+      "triggerChanceBasis": "crit",
+      "triggerRule": "30% chance per crit hit to trigger Frost Vortex (CN 2026-05); weapons.json/lReDragol/meta-builds: 40% per crit. Effective per-shot chance = chance x Crit Rate.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Up to 2 Frost Vortices may exist at once (+1 over the keyword base).",
+        "Creating a Frost Vortex automatically reloads 15% (OHDB) / 20% (CN) of the magazine."
+      ],
+      "notes": "'30% Psi per second' is the old Frost Vortex base, not an override. The +30% Frost Vortex DMG line appears only in the CN sheet.",
+      "confidence": "medium"
+    },
+    {
+      "name": "MPS7 - Div-Evo",
+      "effects": [
+        {
+          "stat": "statusChancePct",
+          "key": "shrapnel",
+          "value": 80,
+          "condition": "for 12 s after defeating an enemy, relative to the weapon's chance (weapons.json/OHDB/meta-builds); CN 2026-05 instead: every hit triggers Shrapnel for 4 s after a kill",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Increases the chance to trigger Shrapnel by 80% for 12 seconds after defeating an enemy.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 30,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "30% chance per hit to trigger Shrapnel (CN 2026-05); weapons.json/lReDragol/meta-builds: 25%.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [
+        "Weakspot hits grant Shrapnel target parts +1 for 4 s (OHDB) / 6 s (CN)."
+      ],
+      "notes": "'50% Attack' is the pre-2025 Shrapnel base, not an override.",
+      "confidence": "medium"
+    },
+    {
+      "name": "AWS.338 - Black Panther",
+      "effects": [
+        {
+          "stat": "attackPct",
+          "key": null,
+          "value": 40,
+          "condition": "scales with time spent aiming, max after ~2 s (CN 2026-05: up to +40%; meta-builds: up to +30%)",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Attack increases with aiming time, up to +40%.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "weakspotDmgPct",
+          "key": null,
+          "value": 25,
+          "condition": "while Brutal Mayhem stacks remain: 3 stacks granted when Fortress Warfare triggers, 1 consumed per shot",
+          "perStack": null,
+          "maxStacks": 3,
+          "maxValue": null,
+          "quote": "After triggering Fortress Warfare, gain 3 stacks of Brutal Mayhem and Weakspot DMG +25%. Every shot reduces the stacks by 1.",
+          "source": [
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": null,
+      "triggerChanceBasis": "cooldown",
+      "triggerRule": "Aiming for 2 s (CN) / 3 s (meta-builds) triggers Fortress Warfare, 10 s cooldown.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "KEYWORD CONFLICT: weapons.json lists Shrapnel with text identical to SOCR - The Last Valor (datamined copy error). The CN sheet (AWM-黑豹, keyword 重裝陣地) and meta-builds both give the Fortress Warfare aim-trigger text - the same text weapons.json wrongly attributes to Compound Bow. Effects follow CN/meta-builds; nothing from the copied Shrapnel text is used.",
+      "confidence": "medium"
+    },
+    {
+      "name": "SN700 - Gulped Lore",
+      "effects": [
+        {
+          "stat": "keywordDmgPct",
+          "key": "unstableBomber",
+          "value": 100,
+          "condition": "per enemy defeated, 30 s (each stack also shrinks the blast range by 10%)",
+          "perStack": 20,
+          "maxStacks": 5,
+          "maxValue": 100,
+          "quote": "Defeating an enemy decreases explosion range by 10% and increases DMG by 20% for 30 seconds, up to 5 stacks.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "keywordCritRatePct",
+          "key": "unstableBomber",
+          "value": 100,
+          "condition": null,
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "Unstable Bomber is guaranteed to deal Crit DMG.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "CN/TW community sheet 2026-05 (TeeReckzi/OHMM weapons.verified.json, translated here)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        },
+        {
+          "stat": "keywordDmgPct",
+          "key": "unstableBomber",
+          "value": 90,
+          "condition": "dynamic: equal to your total Weakspot DMG % (base card 90% -> +90%; add Weakspot DMG bonuses). CN 2026-05 reads it as Unstable Bomber CRIT DMG +1% per 1% Weakspot DMG instead",
+          "perStack": null,
+          "maxStacks": null,
+          "maxValue": null,
+          "quote": "With every 1% Weakspot DMG, Unstable Bomber DMG increases by 1%.",
+          "source": [
+            "weapons.json (OHDB-mirrored text via lReDragol, 2024-25 wording)",
+            "meta-builds.net export fetched 2026-09-25 (josephfmmarzin-ai allData.json)"
+          ]
+        }
+      ],
+      "triggerChancePct": 30,
+      "triggerChanceBasis": "hit",
+      "triggerRule": "CN 2026-05: 30% chance per hit to trigger Unstable Bomber, 90% on weakspot hits. weapons.json/lReDragol/meta-builds: 80% on weakspot hits only.",
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "'100% Psi Intensity' is the pre-2025-06-19 Unstable Bomber base (now 120%), not an override. The weakspot-scaling line is ambiguous between UB DMG (OHDB/meta-builds) and UB Crit DMG (CN).",
+      "confidence": "medium"
+    },
+    {
+      "name": "SR2000 - Die Another Day",
+      "effects": [],
+      "triggerChancePct": null,
+      "triggerChanceBasis": null,
+      "triggerRule": null,
+      "keywordFactorOverridePct": null,
+      "mechanics": [],
+      "notes": "Placeholder in the datamined file; absent from the CN sheet and meta-builds. Nothing to extract.",
+      "confidence": "low"
+    }
+  ]
+}

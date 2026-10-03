@@ -157,9 +157,9 @@ test('the 113 test reproduces through the adapter with Mayfly Goggles on ACS12 C
   for (const f of A.collectEffects(b, cat, { includeFood: false })) if (f.conditional) b.toggles[f.id] = true;
   const r = A.computeBuild(b, cat, { includeFood: false });
   const psi = r.psi.effective;
-  const intrinsic = (r.totals.keywordDmgPct && r.totals.keywordDmgPct.powerSurge || 0) + 30; // Corrosion's own +15% if modelled as an intrinsic
-  assert.ok(Math.abs(r.status.perProc - psi * 0.5 * (1 + (intrinsic - 30) / 100)) < 1e-9, `${r.status.perProc}`);
-  assert.ok(r.totals.keywordDmgPct && r.totals.keywordDmgPct.powerSurge <= -15, 'Mayfly -30% must be in the Power Surge factor pool');
+  assert.equal(r.totals.keywordDmgPct.powerSurge, -15, 'Corrosion +15% intrinsic and Mayfly -30% in one pool');
+  assert.ok(Math.abs(r.status.perProc - psi * 0.5 * 0.85) < 1e-9, `${r.status.perProc}`);
+  assert.ok(r.status.canCrit && r.status.critRatePct > 0, 'Corrosion grants Power Surge crit');
 });
 
 test('mod stacks: value is the total at max stacks; Bullet Siphon keeps its unconditional base', () => {
@@ -253,4 +253,15 @@ test('deviation effects apply with the active switch alone and stacks are clampe
   b.toggles[lone.id] = true; b.stacks[lone.id] = 99;
   fx2 = A.collectEffects(b, cat); assert.equal(fx2.find(f => f.id === lone.id).value, 60);
   b.stacks[lone.id] = -5; fx2 = A.collectEffects(b, cat); assert.equal(fx2.find(f => f.id === lone.id).value, 0);
+});
+
+test('weapon intrinsic bonuses: The Last Valor adds +30% Shrapnel Crit DMG; Compound Bow is Unstable Bomber', () => {
+  const b = A.defaultBuild(cat);
+  const r = A.computeBuild(b, cat, { includeFood: false });
+  assert.equal(r.totals.keywordCritDmgPct.shrapnel, 30);
+  assert.ok(r.status.perProcCrit / r.status.perProc > r.hits.crit / r.hits.normal, 'shrapnel crit multiplier exceeds the bullet crit multiplier');
+  const bow = cat.weapons.list.find(w => w.name === 'Compound Bow');
+  assert.equal(bow.keyword, 'unstableBomber'); assert.equal(bow.element, 'blast');
+  const bp = cat.weapons.list.find(w => w.name === 'AWS.338 - Black Panther');
+  assert.equal(bp.keyword, 'fortressWarfare');
 });

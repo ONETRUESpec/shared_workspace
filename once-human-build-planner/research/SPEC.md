@@ -77,6 +77,10 @@ Official blueprint table (`weaponBlueprintCalibrations.presetAttackRatio`), conf
 - Tier and star are independent: `displayed = round(tierV_1★ × starRatio)`. The in-game Tier V card equals the official `artLevel 5` attack; OHDB's listed "Tier 5" DMG is the artLevel 4 (Tier IV) value, 1.52× lower. The planner uses the official value where mapped (61 of 67 weapons) and OHDB × 1.52 otherwise.
 - Legendary star-ups cost 1,600 / 4,000 / 6,000 / 8,000 / 10,000 XP (29,600 total) or 3,000 / 6,000 / 9,000 / 12,000 / 15,000 Starchrom; Starchrom only since v2.3.5 (2026-03-25).
 
+### 3b. Weapon effect bonuses (intrinsics)
+
+Each weapon's own special effect often carries stat bonuses (The Last Valor: Shrapnel Crit DMG +30 %; Corrosion: Power Surge DMG +15 %, Power Surge Crit Rate +15 %, Crit DMG +15 % × 10; Predator: Weapon DMG +4 % × 20, Attack +60 % above 40 % magazine; Jaws: Unstable Bomber can crit, +35 % crit rate). `data/weapon_intrinsics.json` lists them per weapon (92 effects on 50 weapons, newest text generation, older numbers kept in notes) plus the per-shot trigger chance (45 weapons) and non-stat mechanics. Unconditional bonuses are always on; conditional or stacking ones are toggles with stack counts. Two extension stats come from this file: `keywordCritRatePct` (crit rate for a keyword's procs; Psi procs crit only when a source grants it) and `meleeDmgPct` (not applied). Two datamined text mix-ups are corrected in the adapter: Compound Bow is an Unstable Bomber (Blast) crossbow and AWS.338 Black Panther is Fortress Warfare.
+
 ## 4. Calibration (v2.3.1, January 2026)
 
 Post-craft calibration is gone. A calibration blueprint is consumed when crafting and its attributes are permanent:
@@ -175,6 +179,7 @@ Legacy "Reload Speed" lines are treated as Reload Efficiency (current tooltips);
 | Star ratios (weapon DMG, armor HP/Psi) | high – official tables + 33 screenshots | §3 table |
 | Tier V card attack for 61 weapons | high – official tables | `official_weapons.json` |
 | 6 weapons added after the 2026-05 snapshot (AUG Electron Cloud, QBJ97, SOCR Wildfire, KVK 3 Bull, SN700 Finale, KAM Burning Rage) | no base DMG | disabled in the picker |
+| Weapon effect bonuses where text generations disagree (Corrosion 70/15/15×10 vs 80/25/40×5, Compound Bow, Little Jaws, KAM Crank) | medium/low | newest dated text, alternatives in notes |
 | Crit + Weakspot additive | medium – community-observed, no raw log reachable | additive, toggle |
 | Attack % vs Weapon DMG % separate | medium | separate, toggle |
 | Elemental % on elemental bullets | medium | on, toggle |
@@ -195,6 +200,7 @@ Legacy "Reload Speed" lines are treated as Reload Efficiency (current tooltips);
 | `data/formula.json` | buckets, final-damage expression, status effects (verified), conversions, defence notes, corrections | 14 buckets, 13 status entries |
 | `data/weapons.json` | weapon catalogue (OHDB-derived stats, effect texts, frames) | 67 weapons |
 | `data/official_weapons.json` | decoded official tables: attack ladder by artLevel, star ratios, blueprint attrs, fire interval, reload, falloff | 126 mapped weapons |
+| `data/weapon_intrinsics.json` | per-weapon effect bonuses as engine effects, trigger chance and basis, mechanics, confidence | 67 weapons |
 | `data/calibration.json` | 2026 calibration system, 23 style blueprints, legacy system, star costs | 25 |
 | `data/armor.json` | 23 sets (133 pieces), 41 key-armor pieces, slot base stats by tier/star, set bonuses with alternatives | 197 |
 | `data/mods.json` | 37 weapon mods, 64 armor mods, 24 substats, 16 suffix families, levelling rules | 101 + |

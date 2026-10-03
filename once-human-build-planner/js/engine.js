@@ -34,6 +34,8 @@
     keywordDmgPct:    { label: 'Keyword DMG %',         unit: 'pct', bucket: 'statusDmg', keyed: 'keyword' },
     finalDmgPct:      { label: 'Final DMG %',           unit: 'pct', bucket: 'finalDmg', keyed: 'keyword' },
     keywordCritDmgPct: { label: 'Keyword Crit DMG %',   unit: 'pct', bucket: 'crit', keyed: 'keyword' },
+    keywordCritRatePct: { label: 'Keyword Crit Rate %', unit: 'pct', bucket: 'crit', keyed: 'keyword' },
+    meleeDmgPct:      { label: 'Melee DMG %',           unit: 'pct', bucket: 'utility' },
     keywordWeakspotDmgPct: { label: 'Keyword Weakspot DMG %', unit: 'pct', bucket: 'weakspot', keyed: 'keyword' },
     critRatePct:      { label: 'Crit Rate %',           unit: 'pct', bucket: 'crit' },
     critDmgPct:       { label: 'Crit DMG %',            unit: 'pct', bucket: 'crit' },
@@ -50,7 +52,7 @@
     magazinePct:      { label: 'Magazine %',            unit: 'pct', bucket: 'rate' },
     magazineFlat:     { label: 'Magazine (flat)',       unit: 'flat', bucket: 'rate' },
     rangePct:         { label: 'Range %',               unit: 'pct', bucket: 'rate' },
-    statusChancePct:  { label: 'Status trigger chance %', unit: 'pct', bucket: 'statusDmg' },
+    statusChancePct:  { label: 'Status trigger chance %', unit: 'pct', bucket: 'statusDmg', keyed: 'keyword' },
     maxHp:            { label: 'Max HP',                unit: 'flat', bucket: 'defense' },
     maxHpPct:         { label: 'Max HP %',              unit: 'pct', bucket: 'defense' },
     pollutionResist:  { label: 'Pollution Resist',      unit: 'flat', bucket: 'defense' },
@@ -315,8 +317,10 @@
       const keywordPct = keyedSum(totals, 'keywordDmgPct', keyword);
       const finalPct = keyedSum(totals, 'finalDmgPct', keyword);
       const kwElementalPct = kwElement ? keyedSum(totals, 'elementalDmgPct', kwElement) : 0;
-      const baseChance = Number(weapon.statusChancePct) || def.triggerChancePct || 0;
-      const chance = Math.min(100, baseChance * (1 + flat(totals, 'statusChancePct') / 100));
+      let baseChance = Number(weapon.statusChancePct) || def.triggerChancePct || 0;
+      if (weapon.statusChanceBasis === 'crit') baseChance = baseChance * critRate;          // "X% on crit" -> per shot
+      const chance = Math.min(100, baseChance * (1 + keyedSum(totals, 'statusChancePct', keyword) / 100));
+      const kwCritRate = Math.max(0, Math.min(1, critRate + keyedSum(totals, 'keywordCritRatePct', keyword) / 100));
       if (def.scalesWith === 'attack' || keyword === 'shrapnel' || keyword === 'bounce') {
         // bullet keyword: % of attack through the direct chain (can crit & weakspot)
         const f = factor != null ? factor : 0;
@@ -324,9 +328,9 @@
         const kwCritMult = 1 + (critDmgPct + keyedSum(totals, 'keywordCritDmgPct', keyword)) / 100;
         const kwWeakMult = 1 + (weakspotPct + keyedSum(totals, 'keywordWeakspotDmgPct', keyword)) / 100;
         status = {
-          keyword, model: 'attack', element: kwElement, factor: f, chancePct: chance,
+          keyword, model: 'attack', element: kwElement, factor: f, chancePct: chance, critRatePct: kwCritRate * 100,
           perProc: procBase, perProcCrit: procBase * kwCritMult, perProcWeakspot: procBase * kwWeakMult,
-          expected: procBase * (1 - critRate) + procBase * kwCritMult * critRate,
+          expected: procBase * (1 - kwCritRate) + procBase * kwCritMult * kwCritRate,
           canCrit: true, canWeakspot: true,
           tickSeconds: def.tickSeconds || null, durationSeconds: def.durationSeconds || null,
           note: def.notes || null,
@@ -337,9 +341,13 @@
           * (1 + statusVulnPct / 100) * commonMult;
         const ticks = def.tickSeconds && def.durationSeconds ? Math.round(def.durationSeconds / def.tickSeconds) : 1;
         const maxStacks = def.maxStacks || 1;
+        // Psi procs cannot crit unless the weapon/gear grants it (Jaws, Corrosion, Gilded Gauntlets)
+        const grantsCrit = !!def.canCrit || keyedSum(totals, 'keywordCritRatePct', keyword) > 0 || !!weapon.keywordCanCrit;
+        const kwCritMultPsi = 1 + (critDmgPct + keyedSum(totals, 'keywordCritDmgPct', keyword)) / 100;
+        const expectedPsi = grantsCrit ? proc * (1 - kwCritRate) + proc * kwCritMultPsi * kwCritRate : proc;
         status = {
-          keyword, model: 'psi', element: kwElement, factor, chancePct: chance,
-          perProc: proc, expected: proc, canCrit: !!def.canCrit, canWeakspot: !!def.canWeakspot,
+          keyword, model: 'psi', element: kwElement, factor, chancePct: chance, critRatePct: grantsCrit ? kwCritRate * 100 : 0,
+          perProc: proc, perProcCrit: grantsCrit ? proc * kwCritMultPsi : null, expected: expectedPsi, canCrit: grantsCrit, canWeakspot: !!def.canWeakspot,
           tickSeconds: def.tickSeconds || null, durationSeconds: def.durationSeconds || null, ticksPerApplication: ticks,
           perApplication: proc * ticks, maxStacks, perTickAtMaxStacks: proc * maxStacks,
           note: def.notes || null, trigger: def.trigger || null,

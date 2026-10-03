@@ -133,10 +133,19 @@
         const tc = build.weapon.triggerChancePct != null ? build.weapon.triggerChancePct : w.triggerChancePct;
         body.push(h('div.row',
           h('div.field.narrow', h('label', { for: 'trigger-chance' }, 'Trigger chance % / shot'), numberInput(tc, { min: 0, max: 100, step: 1, attrs: { id: 'trigger-chance', placeholder: 'unknown' }, onChange: v => set(() => { build.weapon.triggerChancePct = v; }, { structural: false }) })),
-          h('p.note.small', { style: { flex: '1 1 240px' } }, w.triggerChancePct != null ? `Default ${w.triggerChancePct}% from the weapon's effect text (e.g. "every 4 hits" = 25%). "Trigger chance +X%" bonuses multiply this.` : 'Unknown for this weapon: enter it to include status damage in DPS; per-proc damage is shown regardless.'),
+          h('p.note.small', { style: { flex: '1 1 240px' } }, w.triggerChancePct != null ? `Default ${w.triggerChancePct}%${w.triggerChanceBasis && w.triggerChanceBasis !== 'hit' && w.triggerChanceBasis !== 'shot' ? ` per ${w.triggerChanceBasis}` : ' per shot'} from the weapon's effect text. "Trigger chance +X%" bonuses multiply this.` : 'Unknown for this weapon: enter it to include status damage in DPS; per-proc damage is shown regardless.'),
         ));
       }
       if (w.specialEffect && (w.specialEffect.text || w.specialEffect.summary)) body.push(h('p.note', h('b', (w.specialEffect.name || 'Special effect') + ': '), w.specialEffect.text || w.specialEffect.summary));
+      const intr = w.intrinsics || { effects: [], mechanics: [] };
+      if (intr.effects.length || intr.mechanics.length) {
+        body.push(h('div.slot',
+          h('div.slot-head', h('span.slot-name', 'Weapon effect bonuses'), intr.confidence ? h('span.confidence', { class: intr.confidence }, intr.confidence + ' confidence') : null),
+          intr.effects.length ? effectList(intr.effects) : null,
+          intr.mechanics.length ? h('ul.note.small', { style: { margin: '0', paddingLeft: '18px' } }, intr.mechanics.slice(0, 4).map(mch => h('li', mch))) : null,
+          intr.triggerRule ? h('p.note.small', 'Trigger: ' + intr.triggerRule) : null,
+        ));
+      }
       body.push(h('p.note.small', w.attackSource === 'official' ? 'Base DMG from decoded official gun tables (Tier V, artLevel 5).' : w.attackSource === 'ohdb-scaled' ? `Base DMG = OHDB listed ${fmt.num(w.ohdbListedDmg)} × ${A.OHDB_TO_CARD_RATIO} (OHDB lists the Tier IV ladder; in-game Tier V cards are 1.52× higher, verified on 33 screenshots).` : 'No base DMG known for this weapon.'));
     }
     // Calibration
@@ -400,7 +409,7 @@
         kpi('Weakspot crit', r.hits.weakspotCrit, build.options.critWeakspotModel === 'additive' ? 'additive crit+weakspot' : 'multiplicative', 'weak'),
         kpi('Expected / shot (body)', r.expectedBody * r.inputs.pellets, r.inputs.pellets > 1 ? `${r.inputs.pellets} pellets` : 'crit-weighted average'),
         kpi('Expected / shot (weakspot)', r.expectedWeak * r.inputs.pellets, 'crit-weighted average'),
-        r.status && r.status.perProc != null ? kpi(`${prettyKey(r.status.keyword)} proc`, r.status.perProc, r.status.model === 'psi' ? `Psi ${fmt.num(r.psi.effective)} × ${(r.status.factor * 100).toFixed(0)}%${r.status.tickSeconds ? ` per ${r.status.tickSeconds}s tick` : ''}` : `${(r.status.factor * 100).toFixed(0)}% of hit, can crit/weakspot`, 'status') : (w.keyword ? kpi(`${prettyKey(w.keyword)}`, null, 'no numeric model yet', 'status') : null),
+        r.status && r.status.perProc != null ? kpi(`${prettyKey(r.status.keyword)} proc`, r.status.perProc, r.status.model === 'psi' ? `Psi ${fmt.num(r.psi.effective)} × ${(r.status.factor * 100).toFixed(0)}%${r.status.tickSeconds ? ` per ${r.status.tickSeconds}s tick` : ''}${r.status.canCrit ? ` · crits ${r.status.critRatePct.toFixed(0)}% → ${fmt.num(r.status.perProcCrit)}` : ''}` : `${(r.status.factor * 100).toFixed(0)}% of hit · crit ${fmt.num(r.status.perProcCrit)} (${r.status.critRatePct.toFixed(0)}%)`, 'status') : (w.keyword ? kpi(`${prettyKey(w.keyword)}`, null, 'no numeric model yet', 'status') : null),
         kpi('Max HP', r.defense.maxHp, `Psi ${fmt.num(r.psi.effective)} · Pollution ${fmt.num(r.defense.pollutionResist)}`),
       ),
       r.rate.rpm > 0 ? h('div.kpi-grid', { style: { marginTop: '8px' } },
