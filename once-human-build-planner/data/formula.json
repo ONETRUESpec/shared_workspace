@@ -1,0 +1,453 @@
+{
+  "_meta": {
+    "facet": "formula",
+    "generatedAt": "2026-10-03",
+    "gameVersion": "Version 3.0.7 (2026-09-28). Status-effect base factors reflect the 2025-06-19 balance patch (Unstable Bomber 100%->120%) as documented on the fandom wiki / Steam guide; Reload Efficiency conversion reflects the 2025-05-21 Combat Balance Adjustments (v1.6.1, live 2025-05-22); vulnerability split (Weapon vs Status Vulnerability) reflects the 2025-12-23 combat-Deviation upgrade as described in the 2026-02-12 dev blog.",
+    "sources": [
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=3479671509",
+      "https://once-human.fandom.com/wiki/Burn_(Status_Effect)",
+      "https://once-human.fandom.com/wiki/Frost_Vortex_(Status_Effect)",
+      "https://once-human.fandom.com/wiki/Unstable_Bomber_(Status_Effect)",
+      "https://once-human.fandom.com/wiki/Shrapnel_(Status_Effect)",
+      "https://once-human.fandom.com/wiki/Fast_Gunner_(Status_Effect)",
+      "https://once-human.fandom.com/wiki/The_Bull's_Eye_(Status_Effect)",
+      "https://once-human.fandom.com/wiki/Bounce_(Status_Effect)",
+      "https://once-human.fandom.com/wiki/Crit_DMG_Enhancement",
+      "https://once-human.fandom.com/wiki/Weakspot_DMG_Boost",
+      "https://once-human.fandom.com/wiki/Vulnerability_Amplifier",
+      "https://once-human.fandom.com/wiki/AWS.338_-_Bingo",
+      "https://sportskeeda.com/mmo/once-human-status-damage-vs-elemental-damage-explained",
+      "https://gamerant.com/once-human-status-damage-explained/",
+      "https://gamerant.com/once-human-all-weapon-stats-explained-accuracy-stability-mobility/",
+      "https://www.gameleap.com/articles/once-human-status-damage-explained",
+      "https://www.oncehuman.game/news/update/20250521/40780_1235763.html",
+      "https://www.oncehuman.game/news/update/20250617/40780_1241054.html",
+      "https://www.oncehuman.game/news/devBlog/20241123/40781_1195665.html",
+      "https://www.oncehuman.game/news/devBlog/20260212/40781_1287008.html",
+      "https://www.oncehuman.game/news/update/20250716/40780_1247675.html",
+      "https://www.oncehuman.game/news/update/20260924/40780_1315053.html",
+      "https://www.oncehuman.game/news/devBlog/20260916/40781_1314019.html",
+      "https://www.oncehumandb.com/weapons/awm",
+      "https://theriagames.com/guide/once-human-kam-pioneer-bp/",
+      "https://game8.co/games/Once-Human/archives/464007",
+      "https://game8.co/games/Once-Human/archives/Builds-Sniper",
+      "https://www.thegamer.com/once-human-frost-vortex-build-guide-how-to/",
+      "https://gamersandgeek.com/once-human-best-highest-damage-dps-build/",
+      "https://www.noobfeed.com/articles/once-human-guide-bingo-sniper-build",
+      "https://www.bluestacks.com/blog/game-guides/once-human/ohn-shrapnel-build-en.html",
+      "https://steamcommunity.com/app/2139460/discussions/0/4514380788156617173/",
+      "https://steamcommunity.com/app/2139460/discussions/0/4514381493108126337/",
+      "https://steamcommunity.com/app/2139460/discussions/0/7073555334572500765",
+      "https://steamcommunity.com/app/2139460/discussions/0/4631484923305267653",
+      "https://meta-builds.net/damage-calculator",
+      "https://github.com/thachvn0296/OH-Calculator",
+      "https://github.com/KremaOps/once-human-calculator",
+      "https://github.com/getzity/dmgcalculator_oh",
+      "https://github.com/Abhijanbasyal/OncehUmanCalculator",
+      "https://github.com/serhatalmez/oncehuman-damagecalc",
+      "https://github.com/bramsey679/Once_Human_DPS_Calculator",
+      "https://github.com/smus-rgb/once-human-guide"
+    ],
+    "notes": "Research environment limits: the web-search budget was exhausted mid-task and the egress proxy blocked direct fetches of every game site (oncehuman.game, fandom, wiki.gg, Steam, Game8, GameRant, Sportskeeda, meta-builds, wikily, oncehumandb, reddit, archive.org). Numbers from those sites were captured from search-engine snippets that quote the pages, and were cross-checked across 2+ snippets where possible. Only GitHub (community calculator source code) could be read verbatim. Values marked null were not found. Percentages are plain numbers (12 = +12%); multipliers are decimals; fire rate in RPM; times in seconds."
+  },
+  "buckets": [
+    {
+      "id": "attack",
+      "name": "Attack (weapon base DMG) and Attack %",
+      "stacking": "additive",
+      "appliesTo": "weapon hits, Shrapnel (60% of Attack), Bounce (40% of Attack)",
+      "baseValue": null,
+      "notes": "The weapon card 'DMG' value (e.g. AWS.338 Bullseye 'DMG 1216.0' on fandom; KAM Abyss Glance '39 DMG, 600 RPM, 50 mag' in smus-rgb data) is the Attack. Buffs phrased 'Attack +X%' exist separately from 'Weapon DMG +X%': Fast Gunner 'each stack grants Fire Rate +1% and Attack +1% for 2s, up to 5 stacks'; Doombringer (2025-06-19) 'after hitting a non-Meta-Human with all pellets, Attack +12% for 15s, up to 3 stacks'. Whether Attack% and Weapon DMG% share one additive bucket or multiply is NOT confirmed by any source; the keyword descriptions ('Weapon DMG equal to 40% of your Attack') imply Attack is the base that Weapon DMG% multiplies, so this file models Attack% as its own (1+sum) factor applied to base Attack."
+    },
+    {
+      "id": "weaponDmg",
+      "name": "Weapon DMG %",
+      "stacking": "additive",
+      "appliesTo": "direct bullet/melee hits and bullet-keyword damage (Shrapnel, Bounce, Fast Gunner-boosted shots); does NOT scale Psi-based status procs",
+      "baseValue": 0,
+      "notes": "GameRant: 'Status and Elemental DMG does not affect bullet effects like Bounce, Shrapnel, and Fast Gunner, as they scale off Weapon DMG.' Sources of Weapon DMG%: Bullet Siphon V 'Weapon DMG +5%. Every 5 bullets consumed grants +4% Weapon DMG, capped at 20%'; Predator 'consecutive hits on the same target grant Weapon DMG +2% per hit (up to +80%)'; Squidward 'each Bounce trigger Weapon DMG +2%, up to 25 stacks, 1 stack lost every 5s'; Treacherous Tides 2pc (v3.0.7) '12% Weapon DMG and Status DMG'; Covered Advance V '+20% Melee, Weapon, and Status DMG for 30s'. Community calculators (OH-Calculator, KremaOps, getzity, meta-builds) all sum Weapon DMG% into one (1+sum) factor."
+    },
+    {
+      "id": "elementalDmg",
+      "name": "Elemental DMG % (Blaze / Frost / Blast / Shock)",
+      "stacking": "additive",
+      "appliesTo": "status procs of the matching element (Burn=Blaze, Frost Vortex=Frost, Unstable Bomber=Blast, Power Surge=Shock); application to the weapon's own bullets is unverified",
+      "baseValue": 0,
+      "notes": "Sportskeeda worked example: Psi 800, Power Surge 50% -> 400; 'If your Status Damage is 20% and Shock Elemental Damage is 6%: 400 x (1 + 20/100) x (1 + 6/100) = 508.8' -> Elemental and Status are SEPARATE multiplicative factors. GameLeap: 'both Status and Elemental Damage multipliers are multiplicative and function identically with minimal difference'. GameRant: 'anything that increases your Blaze, Frost, Shock, and Blast DMG stats will also improve your outgoing DPS' but also 'Status and Elemental DMG does not affect bullet effects like Bounce, Shrapnel, and Fast Gunner'. Fandom Shrapnel: 'The element type is the same as the weapon's element' -> bullets do carry an element tag, so Elemental DMG% MAY apply to elemental-weapon bullets; no test found. Modelled here as applying to status procs only (conservative)."
+    },
+    {
+      "id": "statusDmg",
+      "name": "Status DMG %",
+      "stacking": "additive",
+      "appliesTo": "Psi-based status procs (Burn, Frost Vortex, Power Surge, Unstable Bomber), Tactical Item DMG, Deviation DMG, charged shots of Pyroclasm Starter / Pathfinder / Additional Rules (since 2026-02-25)",
+      "baseValue": 0,
+      "notes": "Fandom: 'PSI Intensity ... serves as the base value for various types of damage, including Status DMG, Tactical Item DMG, and Deviation DMG.' Fandom status formulas write this layer as '(1 + <Keyword> DMG Factor Bonus)'; keyword-specific DMG bonuses (e.g. 'Burn DMG +X%') are assumed to sum with generic Status DMG% inside the same factor (community convention, not dev-confirmed). Psychic Kid Deviation was changed from 'Psi Intensity +5%' to 'Status DMG +5%' (2026 patch note), showing the devs treat them as different buckets."
+    },
+    {
+      "id": "finalDmg",
+      "name": "Final DMG % (per keyword) / Element Final Damage",
+      "stacking": "additive",
+      "appliesTo": "status procs; separate multiplicative layer after the DMG Factor layer",
+      "baseValue": 0,
+      "notes": "Fandom formulas for Burn, Frost Vortex, Power Surge, Unstable Bomber, Shrapnel all end with 'x (1 + <Keyword> Final DMG Bonus)' as a layer distinct from '(1 + <Keyword> DMG Factor Bonus)'. The community OH-Calculator defines a separate 'Element Final Damage (%)' category. Which in-game mods/sets feed this layer could not be enumerated."
+    },
+    {
+      "id": "crit",
+      "name": "Crit Rate / Crit DMG",
+      "stacking": "additive",
+      "appliesTo": "weapon hits, Shrapnel, Bounce (Super Bullet: 'Bounce Crit Rate +10%, Bounce Crit DMG +25%'), charged shots of Pyroclasm Starter/Pathfinder/Additional Rules; NOT Burn/Frost Vortex/Power Surge/Unstable Bomber (except Burn with Gilded Gauntlets)",
+      "baseValue": null,
+      "notes": "Crit multiplier = 1 + sum(Crit DMG%). Crit Rate capped at 100%. Base Crit DMG with no bonuses was NOT found; one guide shows a character sheet 'Crit Rate 25% and Crit DMG 84%' as that build's totals. Weapon cards carry their own Crit DMG attribute (AWS.338 Bullseye 'Crit Rate +2.0%, Crit DMG +26.0%'). Mods: Crit DMG Enhancement I/II/III 'Crit Rate +2.0%, Crit DMG +4/8/12%'; Crit Amplifier IV/V 'Crit Rate +5/10%, Crit DMG +15%'; Crit Boost I-IV 'Crit Rate +3/6/9/12%'; Resonance 'weakspot hit grants 1.6% Crit DMG per stack, up to 10 stacks (16%), 8s'; Retribution Explosion '+40% Crit DMG vs enemies suffering Burn'; Deer Hide 4pc '+15% crit damage'. OH-Calculator default factor 'Crit DMG 1.70' is a typical endgame total, not a base."
+    },
+    {
+      "id": "weakspot",
+      "name": "Weakspot DMG %",
+      "stacking": "additive",
+      "appliesTo": "weapon hits on weakspots, Shrapnel ('can hit weakspots'), Bounce ('Bounce Weakspot Priority +50%' on Brahminy), charged shots of Pyroclasm Starter/Pathfinder/Additional Rules; NOT Psi-based status procs",
+      "baseValue": null,
+      "notes": "Weakspot multiplier = 1 + sum(Weakspot DMG%) where the weapon card's own 'Weakspot DMG' stat is part of the sum (AWS.338 Bullseye 'Weakspot DMG +95.0%'; KAM Pioneer BP 'weakspot damage of 55%'). Whether there is an additional hidden per-body-part base multiplier was NOT found. Other sources: Weakspot DMG Boost mod '+25%'; Renegade 2pc 'Weakspot DMG +10%', 4pc Archer's Focus '+4% per stack up to 10 stacks (+40%)'; AWS.338 '+15% weakspot DMG per hit for 10s, up to 3 stacks'; Rabbit Fur 4pc '+20% airborne weakspot damage'; Wolf Skin 4pc '+6% weakspot damage'. Seasoned Hunter boots: 'the next shot after triggering Bull's Eye will be considered a weakspot hit' even on enemies without a weakspot. OH-Calculator default factor 'Weakspot DMG 1.59' is a typical total."
+    },
+    {
+      "id": "critWeakspotInteraction",
+      "name": "How Crit and Weakspot combine on one hit",
+      "stacking": "multiplicative",
+      "appliesTo": "a hit that is both a crit and a weakspot hit",
+      "baseValue": null,
+      "notes": "DISPUTED among community calculators. OH-Calculator (thachvn0296) multiplies every factor: base x (1+WeaponDMG) x (1+Weakspot) x (1+CritDMG). KremaOps calculator ADDS them: critHit = adjustedBase x (1 + critDmg + weakspot). getzity calculator multiplies (1+vulnerability)(1+critDamage) with weakspot as a flat 8% input. The 2026-02-12 dev blog confirms a single damage instance can 'benefit from Crit Hit/Crit DMG and Weakspot/Weakspot DMG bonuses' simultaneously but does not state the arithmetic. PICK: multiplicative (majority of calculators, consistent with every other bucket being its own (1+sum) factor); confidence low-medium. Flag in UI."
+    },
+    {
+      "id": "dmgVsType",
+      "name": "DMG Bonus vs enemy type (Deviants / Humans / Monsters / Elites / Shields)",
+      "stacking": "additive",
+      "appliesTo": "all damage to a target of that type",
+      "baseValue": 0,
+      "notes": "Examples: Stardust Energy Drink 'grants 20% damage against deviants and 10% against their shields'; 'Defeating a non-meta human with a weak spot hit grants a 15% attack bonus for 20 seconds'. getzity calculator models it as its own factor '(1 + enemyDamageBonus)'. No test found on whether it shares a bucket with Weapon DMG%; modelled as a separate multiplicative factor."
+    },
+    {
+      "id": "vulnerability",
+      "name": "Vulnerability (target debuff): Weapon Vulnerability / Status Vulnerability",
+      "stacking": "additive",
+      "appliesTo": "Weapon Vulnerability -> Weapon DMG instances; Status Vulnerability -> Status DMG instances (split introduced 2025-12-23)",
+      "baseValue": 0,
+      "notes": "The Bull's Eye: 'increasing their Vulnerability by 8%, lasting 12 seconds'; Vulnerability Amplifier mod: 'The Bull's Eye adds Vulnerability +8%'; Whalepup Deviation 'applies 40% Status Vulnerability to the target for 5 seconds from each hit'. Dev blog 2026-02-12: 'In the December 23, 2025 combat Deviation upgrade, vulnerability types of combat Deviations were standardized into Weapon Vulnerability and Status Vulnerability ... Weapon Vulnerability Deviations pair with weapons dealing Weapon DMG, while Status Vulnerability Deviations pair with weapons dealing Status DMG ... weapons like Pathfinder, Pyroclasm Starter, and Additional Rules deal both Weapon DMG and Status DMG, and most combat Deviations cannot simultaneously enhance both damage types, resulting in partial damage loss.' Community calculators model vulnerability as its own (1+sum) factor (getzity, OH-Calculator 'Debuff (%)'). Whether different vulnerability sources add or multiply with each other is unverified; modelled additive."
+    },
+    {
+      "id": "allDmg",
+      "name": "All DMG / generic DMG % and 'Psi Intensity DMG'",
+      "stacking": "additive",
+      "appliesTo": "everything (All DMG) or all Psi-based damage (Psi Intensity DMG)",
+      "baseValue": 0,
+      "notes": "OH-Calculator defines an 'All Damage Bonus (%)' category. Blaze Amplifier IV/V: 'Every stack of Burn grants +2.5% / +3% Psi Intensity DMG' - a bonus to Psi-scaled damage distinct from Status DMG%. Exact in-game membership of this bucket not enumerated."
+    },
+    {
+      "id": "psiIntensity",
+      "name": "Psi Intensity (flat) and Psi Intensity %",
+      "stacking": "additive",
+      "appliesTo": "base value for Status DMG, Tactical Item DMG, Deviation DMG",
+      "baseValue": null,
+      "notes": "Fandom: 'PSI Intensity indicates the degree to which Players have mastered their Status abilities, primarily provided by Armor.' Effective Psi = (sum of flat Psi) x (1 + sum Psi Intensity%) is the assumed model (Psychic Kid formerly 'Psi Intensity +5%'); no source gives the flat/percent order explicitly."
+    },
+    {
+      "id": "falloff",
+      "name": "Distance falloff",
+      "stacking": "multiplicative",
+      "appliesTo": "weapon bullets, Shrapnel, Bounce (per GameRant also Unstable Bomber - disputed)",
+      "baseValue": 1.0,
+      "notes": "GameRant: 'Range ... how far you can hit an enemy and still do full damage. If you pass a certain range threshold, your damage will start to taper off.' oncehumandb AWM: 'full damage range of 59m and a minimum damage range of 107m with 10% minimum damage' (linear interpolation between the two is assumed). Status DMG procs (Burn, Power Surge, Frost Vortex) ignore range; fandom says Unstable Bomber 'will not decay with distance' while GameRant lists Unstable Bomber among falloff-affected effects - fandom (post-2025-06 numbers) preferred."
+    },
+    {
+      "id": "targetMitigation",
+      "name": "Enemy-side mitigation (level gap, armor/DR, PvP)",
+      "stacking": "multiplicative",
+      "appliesTo": "all damage",
+      "baseValue": null,
+      "notes": "No formula found. Steam discussion: 'level controls health and damage modifiers, with higher level enemies having buffs to health and defense'. PvP: per-keyword PvP modifiers exist (Brahminy 'deals 50% Bounce DMG to players'; environment bounce '-30% (95% against players)'). bramsey679's target profiles (armor 0.1-0.3, DR 0.05-0.25, weakspot 1.15-1.5) are unsourced placeholders - do not use."
+    }
+  ],
+  "finalDamageFormula": "DIRECT HIT: DMG_hit = Attack x (1 + sum AttackPct) x (1 + sum WeaponDMGPct) x [ (1 + sum ElementalDMGPct) if weapon element matches - UNVERIFIED, default off ] x (isCrit ? (1 + sum CritDMGPct) : 1) x (isWeakspot ? (1 + sum WeakspotDMGPct) : 1) x (1 + sum DmgVsTypePct) x (1 + sum WeaponVulnerabilityPct) x (1 + sum AllDMGPct) x Falloff(distance) x TargetMitigation.  EXPECTED HIT: E[hit] = DMG_noncrit x (1 - CritRate) + DMG_crit x CritRate, CritRate clamped to [0,1].  STATUS PROC (Burn/Frost Vortex/Power Surge/Unstable Bomber): DMG_status = PsiIntensity_flat x (1 + sum PsiIntensityPct) x BaseFactor_keyword x (1 + sum StatusDMGPct + sum KeywordDMGFactorPct) x (1 + sum ElementalDMGPct[matching element]) x (1 + sum FinalDMGPct) x (1 + sum StatusVulnerabilityPct) x (1 + sum DmgVsTypePct) x (1 + sum AllDMGPct) x TargetMitigation; no crit, no weakspot, no falloff (exceptions: Burn can crit with Gilded Gauntlets; Pyroclasm Starter/Pathfinder/Additional Rules charged shots are Status DMG that still take Crit and Weakspot).  BULLET KEYWORDS (Shrapnel = 0.60 x Attack, Bounce = 0.40 x Attack) use the DIRECT HIT chain (they can crit, weakspot and suffer falloff) and are NOT scaled by Status DMG or Psi Intensity.",
+  "statusEffects": [
+    {
+      "id": "burn",
+      "name": "Burn",
+      "element": "Blaze",
+      "trigger": "Weapon keyword proc (per-weapon trigger chance); stackable (Burning Wrath V: 'Triggering Burn has a 25% chance to grant +1 Burn stack'; Blaze Amplifier: '+2.5%/+3% Psi Intensity DMG per Burn stack')",
+      "baseFactorPctOfPsi": 12,
+      "tickInterval": 0.5,
+      "duration": 6,
+      "ticks": 12,
+      "totalPctOfPsiPerApplication": 144,
+      "damageFormula": "per tick: 12% x PsiIntensity x (1 + Burn DMG Factor Bonus) x (1 + Burn Final DMG Bonus)",
+      "scalesWith": ["psiIntensity", "statusDmg", "elementalDmg:Blaze", "finalDmg", "statusVulnerability"],
+      "canCrit": false,
+      "canWeakspot": false,
+      "affectedByRangeFalloff": false,
+      "notes": "Fandom + Steam guide 3479671509: 'Burn deals 12% PSI Intensity as Status DMG every 0.5s for 6s'. Steam thread: 'the gun itself can crit like any other weapon, but the elemental effect cannot crit nor do improved damage on weakpoints'. Exception: 'the Gilded Gauntlets unlock the Crit Hit ability for Burn'. Pyroclasm Starter (Blaze shotgun) does most DPS from its Dragon Breath ammo, not Burn; since 2026-02-25 its charged shots are Status DMG that still crit/weakspot."
+    },
+    {
+      "id": "frostVortex",
+      "name": "Frost Vortex",
+      "element": "Frost",
+      "trigger": "Weapon keyword proc; only 1 Frost Vortex may exist at any time; 4.5 m radius AoE",
+      "baseFactorPctOfPsi": 50,
+      "tickInterval": 0.5,
+      "duration": 4,
+      "ticks": 8,
+      "totalPctOfPsiPerApplication": 400,
+      "damageFormula": "per tick: 50% x PsiIntensity x (1 + Frost Vortex DMG Factor Bonus) x (1 + Frost Vortex Final DMG Bonus)",
+      "scalesWith": ["psiIntensity", "statusDmg", "elementalDmg:Frost", "finalDmg", "statusVulnerability"],
+      "canCrit": false,
+      "canWeakspot": false,
+      "affectedByRangeFalloff": false,
+      "notes": "Fandom (current): 'traps enemies within a 4.5m radius and inflicts 50% PSI intensity status damage every 0.5s for 4s ... Only 1 Frost Vortex may exist at any time.' OLDER value (TheGamer guide): 'Frost Vortex deals 30% PSI Intensity as Status DMG per second in a 4.5m radius'. Pick: 50% per 0.5 s (newer). canCrit/canWeakspot false by analogy with the other Psi procs; not explicitly stated for Frost Vortex."
+    },
+    {
+      "id": "powerSurge",
+      "name": "Power Surge",
+      "element": "Shock",
+      "trigger": "Weapon keyword proc; AoE Shock burst; applies a Shock state lasting 2 s",
+      "baseFactorPctOfPsi": 50,
+      "tickInterval": null,
+      "duration": 2,
+      "ticks": 1,
+      "totalPctOfPsiPerApplication": 50,
+      "damageFormula": "per proc: 50% x PsiIntensity x (1 + Power Surge DMG Factor Bonus) x (1 + Power Surge Final DMG Bonus)",
+      "scalesWith": ["psiIntensity", "statusDmg", "elementalDmg:Shock", "finalDmg", "statusVulnerability"],
+      "canCrit": false,
+      "canWeakspot": false,
+      "affectedByRangeFalloff": false,
+      "notes": "Steam guide: 'Power Surge Triggers AoE Shock damage equal to 50% of Psi Intensity ... ignores critical hits, weak spots, and distance reduction ... Actual Factor = 50% x (1+Power Surge DMG Factor Bonus) x (1+Power Surge Final DMG Bonus)'. Sportskeeda example: Psi 800 -> 400 base; with Status +20% and Shock +6% -> 508.8. Game8: 'Power Surge can't crit or hit weak spots'. Hence Crit Rate mods on Power Surge guns only help the bullet portion."
+    },
+    {
+      "id": "unstableBomber",
+      "name": "Unstable Bomber",
+      "element": "Blast",
+      "trigger": "Weapon keyword proc; 1 Status DMG blast 0.1 s after hit; 1.5 m blast radius; damage decays across the blast radius down to a minimum of 50%",
+      "baseFactorPctOfPsi": 120,
+      "tickInterval": null,
+      "duration": null,
+      "ticks": 1,
+      "totalPctOfPsiPerApplication": 120,
+      "damageFormula": "per blast: 120% x PsiIntensity x (1 + Explosive DMG Factor Bonus) x (1 + Explosive Final DMG Bonus) x radiusDecay(>=0.5)",
+      "scalesWith": ["psiIntensity", "statusDmg", "elementalDmg:Blast", "finalDmg", "statusVulnerability"],
+      "canCrit": false,
+      "canWeakspot": false,
+      "affectedByRangeFalloff": false,
+      "notes": "Fandom: 'triggers 1 Status DMG blast of 120% PSI Intensity after 0.1s with a blast radius of 1.5m. The damage decays over the explosion distance, down to a minimum of 50% ... it cannot cause crit damage, cannot strike enemy weakspots, and will not decay with distance.' Official 2025-06-19 patch: 'Unstable Bomber: Damage increased from 100% to 120%.' CONFLICT: GameRant (older) says Unstable Bomber IS affected by weapon range falloff; fandom (newer) says it is not - fandom preferred. Weapons: DE.50 Jaws, KV-SBR Little Jaws, QBJ97 line."
+    },
+    {
+      "id": "shrapnel",
+      "name": "Shrapnel",
+      "element": "same as weapon",
+      "trigger": "On bullet hit (per-weapon trigger chance) deals extra Weapon DMG to a different random body part of the same enemy",
+      "baseFactorPctOfAttack": 60,
+      "damageFormula": "per proc: 60% x Attack x (1 + Shrapnel DMG Factor Bonus) x (1 + Shrapnel Final DMG Bonus), then the normal Weapon-DMG chain (Weapon DMG%, crit, weakspot, falloff)",
+      "scalesWith": ["attack", "weaponDmg", "crit", "weakspot", "weaponVulnerability", "falloff"],
+      "canCrit": true,
+      "canWeakspot": true,
+      "affectedByRangeFalloff": true,
+      "notes": "Fandom: 'Upon hitting an enemy with a bullet, Shrapnel deals +60% Attack as Weapon DMG to a different random part. The element type is the same as the weapon's element ... The additional damage can cause crit damage, hit weakspots, and will decay with distance.' NOT scaled by Status DMG or Psi Intensity (GameRant)."
+    },
+    {
+      "id": "bounce",
+      "name": "Bounce",
+      "element": "same as weapon",
+      "trigger": "Weapon keyword proc; shot bounces to 1 enemy within 15 m (or off the environment), then can bounce once more",
+      "baseFactorPctOfAttack": 40,
+      "damageFormula": "per bounce: 40% x Attack x (1 + Bounce DMG bonuses) then the normal Weapon-DMG chain; Chain Bounce +7.5% per bounce up to +45%; Bounce Rampage +15% per selectable target up to +45%; Super Bullet: Bounce Crit Rate +10%, Bounce Crit DMG +25%",
+      "scalesWith": ["attack", "weaponDmg", "crit", "weakspot", "weaponVulnerability", "falloff"],
+      "canCrit": true,
+      "canWeakspot": true,
+      "affectedByRangeFalloff": true,
+      "notes": "Official dev blog 2024-11-23: 'Each bounce deals Weapon DMG equal to 40% of your Attack.' Brahminy: '60% chance to trigger Bounce on hit. Bounces +2; deals 50% Bounce DMG to players. Hitting the environment can also trigger Bounce; damage decreases by 30% (95% against players). Bounce Weakspot Priority +50%.' Squidward: '70% chance to trigger Bounce on Crit Hits. Each time Bounce is triggered, Weapon DMG +2%, stacking up to 25 times; 1 stack is lost every 5s.' Gear: Hot Dog Shorts 'Bounces +2'; Sharp Blade Pants 'Bounce trigger count +1'."
+    },
+    {
+      "id": "bullsEye",
+      "name": "The Bull's Eye",
+      "element": null,
+      "trigger": "Weakspot hit with a Bull's Eye weapon (AWS.338 Bullseye: 70% chance on weakspot hit); marks the target",
+      "damageFormula": null,
+      "vulnerabilityPct": 8,
+      "duration": 12,
+      "scalesWith": [],
+      "canCrit": null,
+      "canWeakspot": null,
+      "affectedByRangeFalloff": null,
+      "notes": "Debuff, not a damage instance: 'marks and highlights a target, increasing their Vulnerability by 8%, lasting 12 seconds.' Vulnerability Amplifier mod: 'The Bull's Eye adds Vulnerability +8%' (total 16%). Seasoned Hunter boots: 'the next shot after triggering bull eye will be considered a weakspot hit ... even to mobs that do not have a weakspot'. AWS.338 Bullseye card: DMG 1216.0, Crit Rate +2.0%, Crit DMG +26.0%, Weakspot DMG +95.0%; '+15% weakspot damage for 10 seconds with each hit, stacking up to three times'."
+    },
+    {
+      "id": "fastGunner",
+      "name": "Fast Gunner",
+      "element": null,
+      "trigger": "Weapon keyword proc on hit (Predator: 40% chance); passive weapon status",
+      "damageFormula": null,
+      "perStack": {"fireRatePct": 1, "attackPct": 1},
+      "maxStacks": 5,
+      "duration": 2,
+      "scalesWith": [],
+      "canCrit": null,
+      "canWeakspot": null,
+      "affectedByRangeFalloff": null,
+      "notes": "Fandom: 'each stack grants Fire Rate +1% and Attack +1% for 2s. The effect can stack up to 5 times.' Blitzkrieg IV/V: 'Fast Gunner stacks +4/+5 and additional Fire Rate +0.8%/+1% for each stack.' Cowboy V: 'After reloading when the magazine is empty, Fast Gunner trigger chance 100% for 5s'. Predator (2025-06-19): 'Unlimited Ammo granted when stacks reach multiples of 5 for 0.5s'. Scales off Weapon DMG, not Status/Psi (GameRant)."
+    },
+    {
+      "id": "fortressWarfare",
+      "name": "Fortress Warfare",
+      "element": null,
+      "trigger": null,
+      "damageFormula": null,
+      "scalesWith": [],
+      "canCrit": null,
+      "canWeakspot": null,
+      "affectedByRangeFalloff": null,
+      "notes": "No numeric description found in reachable sources. GameRant groups it with raw Weapon DMG buff keywords ('weapon effects like Fortress Warfare'); smus-rgb data: 'Defensive/offensive fortress status used by FP9 and snipers'; ACS12 Corrosion carries it. Treat as a Weapon DMG%-type buff pending verification."
+    },
+    {
+      "id": "pyroclasmChargedShot",
+      "name": "Pyroclasm Starter / Pathfinder / Additional Rules charged shot",
+      "element": "Blaze (Pyroclasm)",
+      "trigger": "Charged shot",
+      "damageFormula": null,
+      "scalesWith": ["statusDmg", "crit", "weakspot"],
+      "canCrit": true,
+      "canWeakspot": true,
+      "affectedByRangeFalloff": null,
+      "notes": "Dev blog 2026-02-12 / 2026-02-25 update: 'the damage type of Pyroclasm Starter was changed from Weapon DMG to Status DMG when charged, while still allowing it to benefit from Crit Hit/Crit DMG and Weakspot/Weakspot DMG bonuses' (same for Pathfinder and Additional Rules). The only known Status DMG instances that crit/weakspot."
+    },
+    {
+      "id": "jaws",
+      "name": "Jaws (DE.50 Jaws / KV-SBR Little Jaws)",
+      "element": "Blast",
+      "trigger": null,
+      "damageFormula": null,
+      "scalesWith": [],
+      "canCrit": null,
+      "canWeakspot": null,
+      "affectedByRangeFalloff": null,
+      "notes": "Jaws is an Unstable Bomber weapon line, not a separate status keyword (bramsey679 data: keywords ['Unstable Bomber']). 'Jaws was included in adjustments implemented in the July 16 (PT) update' (v2.0.1, 2025-07-16) - specifics not retrieved."
+    },
+    {
+      "id": "blazingBolts",
+      "name": "Blazing Bolts",
+      "element": "Blaze",
+      "trigger": null,
+      "damageFormula": null,
+      "scalesWith": [],
+      "canCrit": null,
+      "canWeakspot": null,
+      "affectedByRangeFalloff": null,
+      "notes": "Not found in any reachable source."
+    },
+    {
+      "id": "voodooDollUltimate",
+      "name": "Voodoo Doll (combat Deviation) ultimate",
+      "element": null,
+      "trigger": "Deviation ultimate",
+      "baseFactorPctOfPsi": 250,
+      "damageFormula": "250% x PsiIntensity as Status DMG (v3.0.7); previously 200% x PsiIntensity + 10",
+      "scalesWith": ["psiIntensity", "statusDmg"],
+      "canCrit": null,
+      "canWeakspot": null,
+      "affectedByRangeFalloff": null,
+      "notes": "Official v3.0.7 (2026-09-28): 'the actual Status DMG Multiplier for Voodoo Doll's ultimate was increased from 200% Psi Intensity + 10 to 250% Psi Intensity.' Confirms Deviation DMG uses the Psi x factor model."
+    }
+  ],
+  "weakspotBaseMultipliers": {
+    "model": "weakspotHit = hit x (1 + sum WeaponWeakspotDMGPct + sum GearWeakspotDMGPct); no hidden per-body-part constant found",
+    "head": null,
+    "torso": null,
+    "limbs": null,
+    "perWeaponClassBase": null,
+    "weaponCardExamples": {
+      "AWS.338 - Bullseye": 95,
+      "KAM - Pioneer BP": 55
+    },
+    "gearExamples": {
+      "Weakspot DMG Boost (mod)": 25,
+      "Renegade 2pc": 10,
+      "Renegade 4pc Archer's Focus per stack": 4,
+      "Renegade 4pc Archer's Focus max stacks": 10,
+      "AWS.338 per-hit buff": 15,
+      "AWS.338 per-hit buff max stacks": 3,
+      "Rabbit Fur 4pc (airborne)": 20,
+      "Wolf Skin 4pc": 6
+    },
+    "notes": "Searches for a base headshot/body-part multiplier returned nothing for Once Human. Enemies may lack a weakspot entirely (Seasoned Hunter boots text). Community calculators treat the weapon's displayed Weakspot DMG as the whole weakspot bonus."
+  },
+  "critBase": {
+    "baseCritRatePct": null,
+    "baseCritDmgPct": null,
+    "perWeaponBases": null,
+    "critRateCapPct": 100,
+    "critMultiplierModel": "1 + sum CritDMGPct",
+    "weaponCardExamples": {
+      "AWS.338 - Bullseye": {"critRatePct": 2.0, "critDmgPct": 26.0}
+    },
+    "characterSheetExample": {"critRatePct": 25, "critDmgPct": 84, "source": "gamersandgeek.com build guide (a geared build's totals, NOT a base)"},
+    "notes": "No source states the naked base Crit DMG. Weapon cards carry Crit Rate/Crit DMG attributes that differ per weapon, so per-weapon bases exist but values were not retrievable (fandom/oncehumandb blocked)."
+  },
+  "psiIntensity": {
+    "role": "Base value for Status DMG, Tactical Item DMG and Deviation DMG; 'primarily provided by Armor'",
+    "statusDamageModel": "proc damage = Psi x BaseFactor x (1 + DMG Factor Bonus) x (1 + Final DMG Bonus)",
+    "perPointValue": "linear: each status proc deals BaseFactor% of Psi (Burn 12%/tick, Frost Vortex 50%/tick, Power Surge 50%, Unstable Bomber 120%, Voodoo Doll ult 250%)",
+    "flatVsPercent": "Effective Psi = flat Psi x (1 + sum Psi Intensity%) (assumed; order not stated by any source)",
+    "workedExample": {"psi": 800, "effect": "Power Surge", "base": 400, "statusDmgPct": 20, "shockDmgPct": 6, "result": 508.8},
+    "sourcesOfPsi": ["armor (primary)", "armor mods", "food / whim potions", "Deviations (Psychic Kid formerly Psi Intensity +5%, now Status DMG +5%)"],
+    "typicalEndgameValue": null,
+    "notes": "Sportskeeda/Steam guide example confirms linearity and separate multiplication of Status DMG and Elemental DMG. Blaze Amplifier mods grant 'Psi Intensity DMG' per Burn stack, a further multiplier on Psi-scaled damage."
+  },
+  "conversions": {
+    "shotsPerSecond": "RPM / 60",
+    "fireRatePct": "effectiveRPM = baseRPM x (1 + sum FireRatePct)  [ASSUMPTION - no official conversion found; Fast Gunner gives Fire Rate +1%/stack, Blitzkrieg +0.8-1%/stack, Agent set weakspot kill +10% fire rate]",
+    "reloadEfficiency": {
+      "formula": "FinalReloadTime = BaseReloadTime / (1 + ReloadEfficiencyPct/100)",
+      "legacyConversion": {"ReloadSpeed+10 (flat)": "Reload Efficiency +8% (maximum; varies by weapon type)", "ReloadSpeed+10%": "Reload Efficiency +3% (maximum; varies by weapon type)"},
+      "example": {"baseReload": 3.634, "reloadEfficiencyPct": 15, "finalReload": 3.16},
+      "source": "Official Combat Balance Adjustments 2025-05-21 (v1.6.1, live 2025-05-22): 'consolidated everything into a single Reload Efficiency stat'",
+      "notes": "Agent set: 'every kill gives +20 percent reload speed' (legacy wording)."
+    },
+    "magazinePct": "effectiveMag = floor(baseMag x (1 + sum MagazinePct)) [assumed]; Lonewolf set 'Magazine +10%'",
+    "dps": {
+      "burstDPS": "E[hit] x RPM/60",
+      "sustainedDPS": "E[hit] x mag / (mag / (RPM/60) + reloadTime)",
+      "statusDPS": "sum over procs: procsPerSecond x procDamage, where procsPerSecond = shotsPerSecond x triggerChance (x pellets for shotguns if each pellet rolls - unverified)",
+      "source": "KremaOps community calculator implementation (reference only)"
+    },
+    "shotgunPellets": {"pelletCount": null, "perPelletDamage": null, "notes": "Weapon card DMG is per shot or per pellet - not determined. Doombringer condition 'all pellets from a single shot' and ACS12 Netherworld 'launch 5 projectiles' confirm multi-pellet mechanics."},
+    "burstFire": {"notes": "No burst-fire RPM convention found."}
+  },
+  "defense": {
+    "maxHP": null,
+    "dmgReductionModel": "Multiple DMG Reduction stats exist (generic 'DMG Reduction', 'Head DMG Reduction +10.0%' on Agent set, Weapon DMG Reduction, Status DMG Reduction); community calculator (getzity) multiplies them: taken = dmg x (1 - weaponDR) x (1 - torsoDR) x (1 - statusDR). Official formula not found; 'Damage Reduction decreases overall incoming damage, stacking with other defensive perks.'",
+    "dmgReductionCapPct": null,
+    "proximityDR": "some sets: DR increases within 5m of enemies, +4% per enemy (set text)",
+    "pollutionResist": {
+      "formula": null,
+      "notes": "March 2025: 'sanity loss is now calculated precisely with a new formula, depending on the player's contamination resistance'; 'Reduced Pollution Resistance provided by gears and adjusted the values of certain dishes with Pollution Resist effects, changing them from percentage-based to fixed values'; 'Resistance is not immunity'; 2026-01-15 dev blog: with resistance lower than the zone's Pollution value, Sanity loss slows significantly vs the old version. Pollution affects Sanity primarily, HP incidentally."
+    },
+    "healing": {
+      "examples": {"Dr. Teddy": "Remote Healing 50% + revive, continuous heal 8% max HP/s", "Blaze Blessing IV": "recover 5% HP when defeating a Burning enemy"},
+      "formula": null
+    }
+  },
+  "enemy": {
+    "levelScaling": null,
+    "armor": null,
+    "pvpModifier": null,
+    "notes": "Only qualitative statements found ('higher level enemies have buffs to health and defense'). Per-keyword PvP modifiers exist (Brahminy 50% Bounce DMG to players)."
+  },
+  "uncertainties": [
+    "Crit x Weakspot arithmetic on a single hit: multiplicative (OH-Calculator, picked) vs additive (KremaOps). No in-game test found.",
+    "Whether Elemental DMG % (Blaze/Frost/Blast/Shock) multiplies the weapon's own bullets when the weapon carries that element, or only the status procs. Modelled: procs only.",
+    "Whether Attack % and Weapon DMG % are one additive bucket or two multiplicative factors. Modelled: two factors.",
+    "Whether multiple Vulnerability sources (Bull's Eye 8% + Amplifier 8% + Deviation 40%) add inside one factor or multiply. Modelled: additive.",
+    "Whether keyword-specific 'X DMG +%' (e.g. Burn DMG) sums with generic Status DMG % or is its own factor; fandom's '(1 + X DMG Factor Bonus)' suggests one combined factor.",
+    "Base (naked) Crit DMG and any per-weapon-class base; base weakspot multiplier per body part - not found.",
+    "Flat Psi vs Psi Intensity % order of operations.",
+    "Fire Rate % -> RPM conversion (assumed linear multiplier).",
+    "Unstable Bomber range falloff: fandom 'will not decay with distance' vs GameRant 'affected by damage fall-off'.",
+    "Frost Vortex tick: fandom 50%/0.5s (picked) vs older 30%/s.",
+    "Enemy level-gap scaling, armor/DR formula, PvP global modifier, shotgun pellet count, burst-fire handling - not found.",
+    "Fortress Warfare, Blazing Bolts, Jaws numeric effects - not found.",
+    "All non-GitHub numbers were read from search-engine snippets of blocked pages; verify against the live wiki before shipping."
+  ]
+}
