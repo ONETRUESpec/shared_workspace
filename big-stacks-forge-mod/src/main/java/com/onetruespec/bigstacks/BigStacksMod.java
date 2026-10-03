@@ -24,7 +24,7 @@ import org.slf4j.Logger;
  *       chests, hoppers, furnaces and so on are untouched; armour slots keep their limit of one.</li>
  *   <li>{@code AbstractContainerMenuMixin} lets shift-clicking fill inventory stacks up to the limit (Forge caps
  *       that path at the item's own stack size).</li>
- *   <li>{@code ItemStackMixin} raises the "count must be between 1 and 99" limit of the item save format, so
+ *   <li>{@code ExtraCodecsMixin} raises the "count must be between 1 and 99" limit of the item save format, so
  *       the big stacks survive saving and loading.</li>
  * </ul>
  * The last point is the one that could lose items if it ever stopped applying on a new Minecraft version, so
@@ -60,7 +60,7 @@ public final class BigStacksMod {
         if (supported) {
             LOGGER.info("Big Stacks: item save format accepts big stacks; inventory stacks go up to the configured limit.");
         } else {
-            LOGGER.error("Big Stacks: the item save format still rejects stacks above 99 (the ItemStack mixin did not apply on this Minecraft version). Inventory stacks are limited to 99 so nothing can be lost on save.");
+            LOGGER.error("Big Stacks: the item save format still rejects stacks above 99 (the ExtraCodecs mixin did not apply on this Minecraft version). Inventory stacks are limited to 99 so nothing can be lost on save.");
         }
     }
 }

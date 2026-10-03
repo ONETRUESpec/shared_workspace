@@ -32,7 +32,7 @@ applied when the game starts):
 | `InventoryMixin`               | The player inventory reports the configured limit instead of vanilla's 99     |
 | `SlotMixin`                    | Menu slots that belong to a player inventory accept that many; other slots unchanged |
 | `AbstractContainerMenuMixin`   | Shift-click merging may fill inventory stacks up to the limit                 |
-| `ItemStackMixin`               | The item save format accepts counts above 99                                  |
+| `ExtraCodecsMixin`             | The item save format accepts counts above 99                                  |
 
 The last one is the only patch that could lose items if it ever stopped matching a future Minecraft version, so
 the mod checks at startup that a big stack survives a save/load round trip. If that check fails, it logs an error

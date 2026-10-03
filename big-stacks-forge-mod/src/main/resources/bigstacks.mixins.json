@@ -6,7 +6,7 @@
     "InventoryMixin",
     "SlotMixin",
     "AbstractContainerMenuMixin",
-    "ItemStackMixin"
+    "ExtraCodecsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

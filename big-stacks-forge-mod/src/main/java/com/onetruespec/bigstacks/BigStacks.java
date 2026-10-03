@@ -7,7 +7,7 @@ public final class BigStacks {
     /** Vanilla's hard limit for a saved stack count; the fallback when the save format could not be widened. */
     public static final int VANILLA_LIMIT = 99;
 
-    /** What the item save format accepts once {@code ItemStackMixin} has widened it (vanilla: 99). */
+    /** What the item save format accepts once {@code ExtraCodecsMixin} has widened it (vanilla: 99). */
     public static final int SERIALIZED_COUNT_LIMIT = 1_000_000;
 
     private static volatile boolean bigCountsSerializable;
