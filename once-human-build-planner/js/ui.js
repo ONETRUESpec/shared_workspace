@@ -34,7 +34,7 @@
     return migrate(saved) || A.exampleBuild(cat);
   }
   function fromHash() {
-    const m = location.hash.match(/[#&]b=([A-Za-z0-9_-]+)/);
+    const m = location.hash.match(/#b-([A-Za-z0-9_-]+)/);
     return m ? migrate(decodeState(m[1])) : null;
   }
   function migrate(b) {
@@ -57,7 +57,7 @@
   }
   function persist() { storage.set('build', build); }
   function shareLink() {
-    const url = location.origin + location.pathname + '#b=' + encodeState(build);
+    const url = (location.protocol === 'file:' ? location.href.split('#')[0] : location.origin + location.pathname) + '#b-' + encodeState(build);
     history.replaceState(null, '', url);
     const done = () => toast('Build link copied');
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, () => toast('Link is in the address bar'));
