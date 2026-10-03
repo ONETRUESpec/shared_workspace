@@ -107,13 +107,14 @@ for base_id, display, texture, tool in BASES:
         })
         write_json(f"assets/{NS}/items/{n}.json", {"model": {"type": "minecraft:model", "model": f"{NS}:block/{n}"}})
 
+        # No survives_explosion condition on purpose: a block holding up to 9^9 blocks always drops when blown up,
+        # like a shulker box does, instead of vanilla's 1-in-explosion-radius chance. (26.3 pools take a single
+        # "condition": {"type": ...} object, not the pre-26 "conditions" list.)
         write_json(f"data/{NS}/loot_table/blocks/{n}.json", {
             "type": "minecraft:block",
             "pools": [{
                 "rolls": 1,
-                "bonus_rolls": 0,
                 "entries": [{"type": "minecraft:item", "name": this_id}],
-                "conditions": [{"condition": "minecraft:survives_explosion"}],
             }],
             "random_sequence": f"{NS}:blocks/{n}",
         })
@@ -160,6 +161,9 @@ DIGITS = {  # 3x5 pixel font
     "8": ["111", "101", "111", "101", "111"],
     "9": ["111", "101", "111", "001", "111"],
 }
+# 6 and 9 are 180-degree rotations of each other; on the top and bottom faces of a block that is ambiguous,
+# so both get a baseline underline (the dice/tile convention).
+UNDERLINED = {6, 9}
 FRAME_COLORS = {
     1: (235, 235, 235), 2: (130, 225, 90), 3: (90, 205, 225), 4: (90, 125, 235), 5: (165, 95, 235),
     6: (235, 95, 205), 7: (245, 160, 60), 8: (235, 70, 70), 9: (255, 205, 50),
@@ -179,7 +183,7 @@ def overlay_pixels(tier):
         for (x, y) in ((i, 0), (i, 15), (0, i), (15, i)):
             px[y][x] = (r, g, b, 150)
     glyph = DIGITS[str(tier)]
-    scale, ox, oy = 2, 5, 3  # 6x10 digit centred in the 16x16 face
+    scale, ox, oy = 2, 5, 2  # 6x10 digit, leaving room for an underline above the bottom frame
     digit = set()
     for gy, row in enumerate(glyph):
         for gx, bit in enumerate(row):
@@ -187,6 +191,9 @@ def overlay_pixels(tier):
                 for dy in range(scale):
                     for dx in range(scale):
                         digit.add((ox + gx * scale + dx, oy + gy * scale + dy))
+    if tier in UNDERLINED:
+        for x in range(ox, ox + 3 * scale):
+            digit.add((x, oy + 5 * scale + 1))
     outline = set()
     for (x, y) in digit:
         for dx in (-1, 0, 1):

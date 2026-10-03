@@ -21,10 +21,12 @@ Registry ids follow `compressedblocks:compressed_<block>_<tier>`, for example `c
 for Triple Compressed Dirt.
 
 Compressed blocks look like the original block with a coloured frame and the tier number on every face, so you can
-always tell them apart. They sound like and map like the original, get harder and more blast resistant with every
-tier (vanilla strength times tier + 1), need the same tool as the original to drop (shovel blocks drop without a
-tool, stone-type blocks need a pickaxe), and compressed sand and gravel do not fall. They all have their own
-creative tab, "Compressed Blocks", right after Combat.
+always tell them apart (6 and 9 carry an underline so they cannot be confused on the top and bottom faces). They
+sound like and map like the original, get harder and more blast resistant with every tier (vanilla strength times
+tier + 1), need the same tool as the original to drop (shovel blocks drop without a tool, stone-type blocks need a
+pickaxe), and compressed sand and gravel do not fall. If one does get blown up, it always drops itself, like a
+shulker box, rather than taking vanilla's one-in-three chance of vanishing. They all have their own creative tab,
+"Compressed Blocks", right after Combat.
 
 ## Crafting
 
