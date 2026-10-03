@@ -1,0 +1,130 @@
+{
+  "facet": "Once Human food, drinks and consumable combat buffs, including stacking rules",
+  "dataFile": "/home/user/shared_workspace/once-human-build-planner/data/food.json",
+  "notesFile": "/home/user/shared_workspace/once-human-build-planner/research/food.md",
+  "gameVersionCovered": "TW community sheet snapshot imported 2026-05-17 (post Way of Winter / Eternal Dream / Sky Touch / Branch Path; Chefosaurus Rex Azure Melody event Jul 2025), cross-checked against English wiki/guide values from 2024-07..2025. The Oct-2026 live season was not identifiable from reachable sources.",
+  "confidence": "medium",
+  "recordCount": 130,
+  "keyClaims": [
+    {
+      "claim": "Only one FOOD buff and one DRINK buff can be active at once (eating/drinking another item of the same class overwrites it); food and drink buffs stack with each other. The Chef class 'Glutton' talent raises this to 2 food + 2 drink.",
+      "evidence": "Steam thread: 'If food buffs take the same buff slot they will overwrite; each of those little circles can hold 1 buff'. Chef Glutton: 'up to 2 food effects and 2 drink effects at the same time'. OHMM 2026 calculator models the loadout as {food, drink}.",
+      "sources": [
+        "https://steamcommunity.com/app/2139460/discussions/0/4514379914253028765/",
+        "https://game8.co/games/Once-Human/archives/544741",
+        "https://theriagames.com/guide/once-human-chef/",
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/src/resolvers/loadoutEffectResolver.ts"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Chefosaurus Rex (青龍) territory deviation multiplies the dish's effect value by (1 + bonus): rating 5 = +38% / +31% / +25% (activity >=90 / 20-89 / 0-19); rating 4 = +32/+26/+20%; rating 3 = +26/+21/+15%. E.g. Stargazy Pie 25% -> 34.5% Crit DMG.",
+      "evidence": "TW Deviations tab row 57 notes (verbatim table) and the food sheet's effect-power column (25->34.5, 20->27.6, 15->20.7, 10->13.8, 30->41.4). OHMM claims a 42% max that is not in the sheet.",
+      "sources": [
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/deviations.verified.json",
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/food-buffs.verified.json",
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/src/ui/registries/deviationRegistry.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Standard combat food/drink buffs last 1800 s (30 min); survival/resist buffs 3600 s; Stardust Tea's Full Stomach 7200 s. Cooking at the Stardust Fusion Stove multiplies buff duration by 1.75 (30 min -> 52.5 min).",
+      "evidence": "fandom Buffs page: 'Most combat and gathering buffs last 30 minutes, survival buffs run a full hour, Stardust Tea two hours'. TW sheet duration column reads 52.5 for every 30-min buff, 105 for 60-min, 26.25 for 15-min, 17.5 for 10-min.",
+      "sources": [
+        "https://once-human.fandom.com/wiki/Buffs_and_Effects",
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/food-buffs.verified.json"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Shattered Bread (a.k.a. Crumbly Bread) = Weapon DMG +25% for all guns, unconditional; the largest food weapon-damage buff.",
+      "evidence": "TW sheet: all gun damage +25%; fandom/TheGamer/allthings: 'Weapon DMG +25% for all weapons'. gameleap '+10' is an outlier.",
+      "sources": [
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/food-buffs.verified.json",
+        "https://once-human.fandom.com/wiki/Buffs_and_Effects",
+        "https://www.thegamer.com/once-human-top-best-dishes-cook/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Stargazy Pie = Crit DMG +25% only while the Energy bar is full; Stardust Pumpkin Salad = Crit DMG +15% unconditional; Assorted Canned Fruit = Weakspot DMG +25% only while Sanity > 80%.",
+      "evidence": "TW sheet rows 5, 7, 14 and fandom/gameplay.tips/sportskeeda quotes with identical numbers and conditions.",
+      "sources": [
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/food-buffs.verified.json",
+        "https://once-human.fandom.com/wiki/Stargazy_Pie",
+        "https://gameplay.tips/guides/once-human-food-list.html",
+        "https://www.sportskeeda.com/mmo/best-special-recipes-once-human"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Whimsical Drink (drink slot) = Status DMG +25%; the sheet-only 'Signature Beverage' (異想天開飲) = Weapon DMG +10%, so a drink can add gun damage on top of a food buff.",
+      "evidence": "TW sheet rows 61-62; fandom Whimsical Drink: '+25% status damage for 30 minutes'.",
+      "sources": [
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/food-buffs.verified.json",
+        "https://once-human.fandom.com/wiki/Whimsical_Drink"
+      ],
+      "confidence": "high (Whimsical) / medium (Signature Beverage; EN name unverified)"
+    },
+    {
+      "claim": "Targeted damage foods: Bone-In Deviated Sausage +15% vs bosses; Mixed Fried Hot Dog +20% vs targets under The Bull's Eye; Honey Glazed Meat +15% Crit Rate vs enemies in Frost Vortex; French Fries +20% Weapon DMG inside Fortress Warfare; Roulette Dumplings random +15% vs elites/bosses/Deviants (all three under Moon Omen).",
+      "evidence": "TW sheet rows 8, 10, 11, 18, 23 agree with fandom Buffs and Effects quotes.",
+      "sources": [
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/food-buffs.verified.json",
+        "https://once-human.fandom.com/wiki/Buffs_and_Effects",
+        "https://allthings.how/once-human-food-recipe-locations-for-50-free-damage-buffs/"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Element/status-specific foods: Canned Meat (Canned Steak) Shrapnel +20% (fandom: +10%), Ginger Poppers Shrapnel +10%, Hearty Meat Stew Blaze +15%, Canned Minty Meat Frost +15%, Canned Spicy Rabbit Dices Blaze +15% (ambient >30 C), Popcorn Unstable Bomber +10%, Flaming Eggtart Burn +10%, Sparkling Pumpkin Soup (drink) Power Surge +10%, Layered Galaxy Elemental +30% airborne (discontinued).",
+      "evidence": "TW sheet effect texts; fandom confirms Ginger Poppers 10% and Sparkling Pumpkin Soup 10%.",
+      "sources": [
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/food-buffs.verified.json",
+        "https://once-human.fandom.com/wiki/Sparkling_Pumpkin_Soup",
+        "https://once-human.fandom.com/wiki/Buffs_and_Effects"
+      ],
+      "confidence": "medium-high"
+    },
+    {
+      "claim": "Shellfish Meat applies a 5% Vulnerability (damage-taken increase) to any enemy you hit for 10 s, non-stacking: a food-sourced target debuff multiplicative with the player's own buffs.",
+      "evidence": "TW sheet row 40 (on hit, apply 5% vulnerability to the target for 10 s, cannot stack).",
+      "sources": [
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/food-buffs.verified.json"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Generic-ingredient dishes add a small ingredient sub-buff: Canned Lunch Meat (Max HP +10%) gains +2% Shrapnel/Melee/Frost Vortex/Power Surge/Bull's-Eye/Burn/Unstable Bomber/Bounce DMG depending on Bear/Beast/Beef/Crocodile/Deer/Goat/Pork/Poultry meat; the sheet marks 16 dishes as taking a meat sub-effect.",
+      "evidence": "fandom Canned Lunch Meat table; TW sheet ingredient-effect column.",
+      "sources": [
+        "https://once-human.fandom.com/wiki/Canned_Lunch_Meat",
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/food-buffs.verified.json"
+      ],
+      "confidence": "medium (Canned Lunch Meat) / low (other dishes' values)"
+    },
+    {
+      "claim": "Defensive consumables: Safety Sandwich -20% damage taken from players (PvP only); Seafood and Meat Platter Max HP +15% plus full heal over 30 s; Butter Matsutake -8% status damage taken (-12% when fed and hydrated); Miracle Tea (drink) +10% to all healing.",
+      "evidence": "TW sheet rows 21, 26, 32, 76; fandom: 'Safety Sandwich: Reduce DMG from other players by 20%'; charlieintel: 'Miracle Tea: Healing Effect +10'.",
+      "sources": [
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/food-buffs.verified.json",
+        "https://once-human.fandom.com/wiki/Buffs_and_Effects",
+        "https://www.charlieintel.com/games/all-special-recipes-in-once-human-where-to-find-them-332856/"
+      ],
+      "confidence": "medium-high"
+    }
+  ],
+  "openQuestions": [
+    "Current Oct-2026 season/patch and whether any 2026 balance patch changed food values (all data is <= May 2026 sheet / 2025 wikis).",
+    "Stardust Malt Ale: fandom says 'Quick Reflexes: all action speeds +20%, 1800 s' while the May-2026 TW sheet says Pollution Resist +100 - was the ale reworked, or does Quick Reflexes belong to Stardust Corn Ale?",
+    "Canned Meat Shrapnel bonus: 10% (fandom 2024-25) vs 20% (TW sheet 2026) - buffed or data error?",
+    "Does the Chef Rex bonus cap at 38% (sheet) or 42% (OHMM claim)? Sheet shows boosted power for drinks too, so it apparently applies to drinks as well.",
+    "Whether differently-typed food buffs (Combat vs Survival vs Gathering) can coexist, and whether Whim effects (Skybound, Full Stomach, body-size) occupy the food/drink slot.",
+    "Are food % bonuses additive with same-stat gear/mod bonuses (assumed) or a separate multiplier?",
+    "Complete ingredient sub-buff table (per meat/fish/fruit/egg/milk type; Pristine vs common ingredient values) beyond Canned Lunch Meat's +2% list.",
+    "Buff values for Fruit Cake, Mixed Fruit Pie, Snow Mushroom Fried Rice, Croquette, Curry and Rice, Yuanbao Dumplings, Ghoul Cookies, Securement Soup, Taco, Minty Meat Salad/Tartare, Fiery Meat Skewer, Spicy Grilled Fish, Spicy Roasted Meat, Stardust Pumpkin Soup, Nut Jam, Stardust Corn Ale, and all Chef 'Creative Cuisine' / 'Creative Beverages' items.",
+    "Whether lower-tier stoves give duration multipliers between 1.0 and the Stardust Fusion Stove's 1.75.",
+    "Official English name of 異想天開飲 (recorded as 'Signature Beverage').",
+    "Any medicine/'activator' consumables with combat stat buffs - none found; only restorative medicines located (no numbers)."
+  ]
+}

@@ -1,0 +1,3964 @@
+{
+  "_meta": {
+    "facet": "Once Human food, drinks and consumable combat buffs, including stacking rules",
+    "generatedAt": "2026-10-03",
+    "gameVersion": "Primary numbers: Taiwanese community sheet '七日世界.xlsx' (料理 tab) snapshot imported 2026-05-17 (covers Manibus/Evolution's Call, Way of Winter, Eternal Dream, Sky Touch, Branch Path scenarios; Chefosaurus Rex Azure Melody event Jul 2025). Cross-checks: English wikis/guides 2024-07 to 2025 (fandom Buffs and Effects, Steam guide 3339574420, TheGamer, gamerant, Game8). Current Oct-2026 season name not determined.",
+    "sources": [
+      "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/food-buffs.verified.json",
+      "https://once-human.fandom.com/wiki/Buffs_and_Effects",
+      "https://once-human.fandom.com/wiki/Food_and_Water/Cooked_Food_List",
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=3339574420",
+      "https://steamcommunity.com/app/2139460/discussions/0/4514379914253028765/",
+      "https://gameplay.tips/guides/once-human-food-list.html",
+      "https://www.thegamer.com/once-human-top-best-dishes-cook/",
+      "https://www.gameleap.com/articles/once-human-top-10-best-food-drink-recipes",
+      "https://www.gameleap.com/articles/once-human-all-special-recipes",
+      "https://gamerant.com/once-human-all-brewing-barrel-recipes/",
+      "https://allthings.how/once-human-food-recipe-locations-for-50-free-damage-buffs/",
+      "https://www.sportskeeda.com/mmo/best-special-recipes-once-human",
+      "https://www.charlieintel.com/games/all-special-recipes-in-once-human-where-to-find-them-332856/",
+      "https://game8.co/games/Once-Human/archives/544741",
+      "https://game8.co/games/Once-Human/archives/551548",
+      "https://theriagames.com/guide/once-human-chef/",
+      "https://www.bisecthosting.com/blog/once-human-chef-class-guide-best-cooking-recipes-ingredients-dishes-meals",
+      "https://once-human.fandom.com/wiki/Whimsical_Drink",
+      "https://once-human.fandom.com/wiki/Canned_Lunch_Meat",
+      "https://once-human.fandom.com/wiki/Stardust_Malt_Ale",
+      "https://once-human.fandom.com/wiki/Stargazy_Pie",
+      "https://once-human.fandom.com/wiki/Sparkling_Pumpkin_Soup",
+      "https://game8.co/games/Once-Human/archives/464371",
+      "https://github.com/TeeReckzi/OHMM",
+      "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/deviations.verified.json",
+      "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/src/resolvers/loadoutEffectResolver.ts",
+      "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/src/ui/registries/deviationRegistry.ts",
+      "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/food.json",
+      "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/deviations.json",
+      "https://raw.githubusercontent.com/ping-xiong/XingChuan-OnceHunamMap-Localization/main/en.js",
+      "https://game8.co/games/Once-Human/archives/494449"
+    ],
+    "sourceKeys": {
+      "sheet": "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/food-buffs.verified.json",
+      "fandomBuffs": "https://once-human.fandom.com/wiki/Buffs_and_Effects",
+      "fandomCooked": "https://once-human.fandom.com/wiki/Food_and_Water/Cooked_Food_List",
+      "steamFoodGuide": "https://steamcommunity.com/sharedfiles/filedetails/?id=3339574420",
+      "steamStack": "https://steamcommunity.com/app/2139460/discussions/0/4514379914253028765/",
+      "gameplayTips": "https://gameplay.tips/guides/once-human-food-list.html",
+      "theGamer": "https://www.thegamer.com/once-human-top-best-dishes-cook/",
+      "gameleapTop10": "https://www.gameleap.com/articles/once-human-top-10-best-food-drink-recipes",
+      "gameleapSpecial": "https://www.gameleap.com/articles/once-human-all-special-recipes",
+      "gamerantBrew": "https://gamerant.com/once-human-all-brewing-barrel-recipes/",
+      "allthings": "https://allthings.how/once-human-food-recipe-locations-for-50-free-damage-buffs/",
+      "sportskeeda": "https://www.sportskeeda.com/mmo/best-special-recipes-once-human",
+      "charlieintel": "https://www.charlieintel.com/games/all-special-recipes-in-once-human-where-to-find-them-332856/",
+      "game8Chef": "https://game8.co/games/Once-Human/archives/544741",
+      "game8ChefBuild": "https://game8.co/games/Once-Human/archives/551548",
+      "theriaChef": "https://theriagames.com/guide/once-human-chef/",
+      "bisectChef": "https://www.bisecthosting.com/blog/once-human-chef-class-guide-best-cooking-recipes-ingredients-dishes-meals",
+      "fandomWhimsical": "https://once-human.fandom.com/wiki/Whimsical_Drink",
+      "fandomLunchMeat": "https://once-human.fandom.com/wiki/Canned_Lunch_Meat",
+      "fandomStardustMaltAle": "https://once-human.fandom.com/wiki/Stardust_Malt_Ale",
+      "fandomStargazy": "https://once-human.fandom.com/wiki/Stargazy_Pie",
+      "fandomPumpkinSoup": "https://once-human.fandom.com/wiki/Sparkling_Pumpkin_Soup",
+      "game8Recipes": "https://game8.co/games/Once-Human/archives/464371",
+      "ohmmRepo": "https://github.com/TeeReckzi/OHMM",
+      "ohmmDeviations": "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/deviations.verified.json",
+      "ohmmResolver": "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/src/resolvers/loadoutEffectResolver.ts",
+      "ohmmDevRegistry": "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/src/ui/registries/deviationRegistry.ts",
+      "saitohFood": "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/food.json",
+      "saitohDeviations": "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/deviations.json",
+      "xingchuan": "https://raw.githubusercontent.com/ping-xiong/XingChuan-OnceHunamMap-Localization/main/en.js",
+      "game8Lunar": "https://game8.co/games/Once-Human/archives/494449"
+    },
+    "units": "percent = plain number meaning percent (25 => +25%); flat = absolute points; seconds = seconds; state = on/off effect with no number",
+    "notes": "WebFetch to all wiki/guide domains and WebSearch quota were blocked/exhausted during this session; the 84-row TW sheet (hosted in GitHub repo TeeReckzi/OHMM) was read in full in Chinese and hand-translated; English values come from WebSearch result summaries of the listed pages. Items from the sheet carry confidence 'high' when at least one English source agrees, 'medium' when only the sheet gives the value. Items with buffs:null could not be found. durationSeconds is the base duration (English sources: 30 min for most combat/gathering buffs, 60 min for survival/resist buffs); durationAtStardustFusionStoveSeconds is the sheet's value for dishes cooked at the top-tier Stardust Fusion Stove (x1.75). chefRexBoostedPower is the sheet's 青龍 column = effect value with a Chefosaurus Rex (rating 5, activity >=90, +38%) territory deviation."
+  },
+  "stackingRules": {
+    "slotModel": "One active FOOD buff + one active DRINK buff at a time (default). Eating another food replaces the current food buff; drinking another drink replaces the current drink buff (same-slot overwrite). Food and drink buffs stack with each other.",
+    "evidence": [
+      "Steam discussion 'How do food or drinks stack?' (4514379914253028765): 'If food buffs take the same buff slot they will overwrite. Each of those little circles at the bottom can hold 1 buff.'",
+      "OHMM calculator (TeeReckzi/OHMM, 2026) models the loadout as exactly { food: id, drink: id } and applies both simultaneously (loadoutEffectResolver.ts).",
+      "Chef class 'Glutton' talent description (Game8/theriagames/bisecthosting 2025): 'consume additional food and drink, gaining up to 2 food effects and 2 drink effects at the same time' — implies the non-Chef baseline is 1 food + 1 drink.",
+      "Steam guide 3339574420 labels each buff with a type (Combat / Survival / Gathering); whether differently-typed FOOD buffs can coexist is NOT confirmed — treat as one food slot."
+    ],
+    "maxFoodBuffs": 1,
+    "maxDrinkBuffs": 1,
+    "chefClassGlutton": {
+      "maxFoodBuffs": 2,
+      "maxDrinkBuffs": 2,
+      "source": "Chef job/class talent 'Glutton' (2025 Jobs system)",
+      "confidence": "medium"
+    },
+    "foodAndDrinkStack": true,
+    "sameSlotBehaviour": "overwrite (most recent wins)",
+    "additiveWithOtherSources": "Food percentages are assumed additive with same-named stat bonuses from gear/mods (standard Once Human stat bucketing); not independently verified for food.",
+    "specialEffectsNotInSlots": "Unknown whether 'Whim'-type effects (Skybound double jump, Full Stomach from Stardust Tea, body-size changes) occupy the food/drink buff slot — open question.",
+    "ingredientSubBuffs": {
+      "description": "Dishes whose recipe takes a generic 'Meat (any)', 'Fish', 'Fruit (any)', 'Egg' or 'Milk' get a small extra buff depending on the specific ingredient used (sheet column 食材效果). The only numeric table found is for Canned Lunch Meat (fandom).",
+      "cannedLunchMeatTable": {
+        "Bear Meat": "Shrapnel DMG +2%",
+        "Beast Meat": "Melee DMG +2%",
+        "Beef": "Frost Vortex DMG +2%",
+        "Crocodile Meat": "Power Surge DMG +2%",
+        "Deer Meat": "DMG +2% vs targets under The Bull's Eye",
+        "Goat Meat": "Burn DMG +2%",
+        "Pork": "Unstable Bomber DMG +2%",
+        "Poultry Meat": "Bounce DMG +2%"
+      },
+      "appliesToOtherMeatDishes": "Likely (fandom says Honey Glazed Meat, Mixed Fried Hot Dog, Bone-In Deviated Sausage have meat-dependent bonuses) but values unverified; Pristine meats may give larger values (unverified).",
+      "confidence": "low-medium"
+    },
+    "chefosaurusRex": {
+      "description": "Chefosaurus Rex (青龍) territory deviation: 'Boosts the effect of food cooked by the player; the higher its Ability Rating the stronger the boost.' Multiplies the dish's effect power (e.g., Stargazy Pie 25% -> 34.5% at +38%). Variants Azure Melody and Berserkosaurus Rex have the same ability.",
+      "bonusTable": {
+        "rating5": {
+          "activity>=90": 38,
+          "activity20-89": 31,
+          "activity0-19": 25
+        },
+        "rating4": {
+          "activity>=90": 32,
+          "activity20-89": 26,
+          "activity0-19": 20
+        },
+        "rating3": {
+          "activity>=90": 26,
+          "activity20-89": 21,
+          "activity0-19": 15
+        }
+      },
+      "unit": "percent increase of the food effect value (multiplicative on the dish value, not additive to the stat)",
+      "formula": "boostedValue = baseValue * (1 + bonus/100); sheet examples: 25->34.5, 20->27.6, 15->20.7, 10->13.8, 30->41.4, 100pts->138pts",
+      "ohmmNote": "OHMM hardcodes 'common bonus 38%, max observed 42%' — the 42% is not in the TW sheet (max there is 38%); treat 42% as unverified.",
+      "sources": [
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/verified/deviations.verified.json",
+        "https://raw.githubusercontent.com/TeeReckzi/OHMM/main/src/ohai/src/ui/registries/deviationRegistry.ts",
+        "https://raw.githubusercontent.com/saitoh183/once-human-build-planner/main/data/deviations.json"
+      ],
+      "confidence": "high (table) / low (42% cap)"
+    },
+    "cookingStationDuration": {
+      "description": "The TW sheet lists buff durations 'at the Stardust Fusion Stove' of 52.5 min for dishes whose English-wiki duration is 30 min, 105 min for 60-min survival buffs, 26.25 for 15-min, 17.5 for 10-min — i.e., the top-tier stove multiplies buff duration by 1.75. Whether lower stoves give intermediate multipliers is unknown.",
+      "multiplier": 1.75,
+      "confidence": "medium"
+    },
+    "conditionalBuffs": "Several top damage foods are conditional: Stargazy Pie requires Energy bar full; Assorted Canned Fruit requires Sanity > 80%; Butter Matsutake's 12% requires both Energy and Hydration full; Stardust Tea keeps Energy/Hydration full for 2 h and is the standard way to hold those conditions."
+  },
+  "items": [
+    {
+      "name": "Fish & Chips",
+      "nameOriginalZhTW": "炸魚薯條",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Body Size",
+          "value": null,
+          "unit": "state",
+          "note": "character becomes fat (cosmetic)"
+        }
+      ],
+      "effectTextZhTW": "會使得角色體型變胖",
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": "無",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": "Fish",
+      "ingredients": "1 Fish, 1 Deviated Peppercorn, 1 Potato, 3 Corn Oil",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (3036,-4901); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Canned Seafood in Oil",
+      "nameOriginalZhTW": "油浸魚貝罐頭",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Resource Yield (mining/logging final hit, chance-based)",
+          "value": 66,
+          "unit": "percent",
+          "note": "random 66% / 666% / 6666% bonus yield on final hit"
+        }
+      ],
+      "effectTextZhTW": "採礦與伐木最後一擊時， 有機率獲得66%、666%、6666%的資源產量加成",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": "Fish",
+      "ingredients": "1 Fish, 1 Deviated Onion, 1 Corn Oil, 1 Steel Ingot",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs/sportskeeda"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs/sportskeeda",
+          "quote": "gathering buff; most important gathering recipe"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Stargazy Pie",
+      "nameOriginalZhTW": "南瓜星空派",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Crit DMG",
+          "value": 25,
+          "unit": "percent",
+          "condition": "while Energy (satiety) is full"
+        }
+      ],
+      "effectTextZhTW": "自身處於飽食狀態時，暴擊傷害提升25%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "34.5%",
+      "ingredientSubEffectFrom": "Milk",
+      "ingredients": "1 Deviated Corn, 1 Milk, 1 Cabbage, 2 Pumpkin",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (4931,-4493); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomStargazy",
+        "theGamer"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomStargazy",
+          "quote": "+25% Crit DMG while Energy is full, 30 min; recipe listed as 1 Deviated Pumpkin, 1 Deviated Saffron, 3 Deviated Wheat (older recipe) — TW sheet recipe differs"
+        },
+        {
+          "source": "theGamer",
+          "quote": "Crit DMG +25% while Energy is full"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Canned Meat",
+      "nameOriginalZhTW": "肉排罐頭",
+      "aliases": [
+        "Canned Steak"
+      ],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Shrapnel DMG",
+          "value": 20,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "角色造成的碎彈傷害提高20%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "27.6%",
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "1 Deviated Cucumber, 2 Common Meat / 1 Pristine Meat, 2 Salt, 1 Steel Ingot",
+      "restores": {
+        "energy": 80
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (935,-5902); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs",
+          "quote": "Canned Meat: Shrapnel DMG +10%, 1800 s"
+        }
+      ],
+      "disagreement": "English wiki/TheGamer (2024-25): 'Canned Meat — Shrapnel Enhancement +10% for 1800 s'. TW sheet (May 2026): +20%. Pick 20% (newer); value may have been buffed or the two sources describe different versions.",
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Stardust Pumpkin Salad",
+      "nameOriginalZhTW": "星塵南瓜泥沙拉",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Crit DMG",
+          "value": 15,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "自身造成的暴擊傷害提高15%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "20.7%",
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "1 Deviated Pumpkin, 1 Meat (any), 1 (Cheese / Stardust Cheese), 2 Salt",
+      "restores": {
+        "energy": 80
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs",
+          "quote": "+80 Energy and +15% Crit DMG for 30 min"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Roulette Dumplings",
+      "nameOriginalZhTW": "轉盤餃子",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "DMG vs Elites",
+          "value": 15,
+          "unit": "percent",
+          "condition": "random: one of the four listed effects per consumption"
+        },
+        {
+          "stat": "DMG vs Bosses",
+          "value": 15,
+          "unit": "percent",
+          "condition": "random (see above)"
+        },
+        {
+          "stat": "DMG vs Deviants",
+          "value": 15,
+          "unit": "percent",
+          "condition": "random (see above)"
+        },
+        {
+          "stat": "Sanity on consumption",
+          "value": -150,
+          "unit": "flat",
+          "condition": "random (see above) — negative outcome"
+        }
+      ],
+      "effectTextZhTW": "食用後隨機獲得以下一項效果： 食用時理智值降低150 對菁英單位傷害増加15% 對首領單位傷害增加15% 對異變體單位傷害增加15%。 在受到月之預兆影響時將同時獲得以上效果",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "20.7%",
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "1 Deviated Corn, 1 Meat (any), 1 Wheat, 2 Sugar / 2 Peppercorn / 5 Moon's Whisper",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "discontinued (no longer obtainable)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "allthings/game8Lunar"
+      ],
+      "crossChecks": [
+        {
+          "source": "allthings/game8Lunar",
+          "quote": "random +15% DMG vs elites, bosses or Deviants; can roll a 150 Sanity penalty; all apply during Lunar Oracle"
+        }
+      ],
+      "disagreement": null,
+      "notes": "Under the Moon Omen (Lunar Oracle event) effect all four outcomes apply simultaneously. Recipe discontinued (Lunar Revelry 2025 event). Recipe marked discontinued in TW sheet.",
+      "confidence": "high"
+    },
+    {
+      "name": "Unusual Braised Meat",
+      "nameOriginalZhTW": "怪味紅燒肉",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "DMG Reduction",
+          "value": 15,
+          "unit": "percent",
+          "condition": "while Sanity below 40%"
+        }
+      ],
+      "effectTextZhTW": "理智值低於40%時，獲得15%免傷",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "1 Deviated Beet, 2 Common Meat / 1 Pristine Meat, 1 Seasoning, 2 Sugar / 2 Peppercorn / 5 Moon's Whisper",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "discontinued (no longer obtainable)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": "Recipe discontinued. Recipe marked discontinued in TW sheet.",
+      "confidence": "medium"
+    },
+    {
+      "name": "Bone-In Deviated Sausage",
+      "nameOriginalZhTW": "異變帶骨香腸",
+      "aliases": [
+        "Bone-in Deviated Sausage"
+      ],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "DMG vs Bosses",
+          "value": 15,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "自身對BOSS傷害提高15%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "20.7%",
+      "ingredientSubEffectFrom": "Meat (any) (not raw), Milk",
+      "ingredients": "1 Deviated Morel, 1 Meat (any), 1 Milk, 1 Seasoning",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (4171,-1326)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs/theGamer"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs/theGamer",
+          "quote": "DMG against bosses +15%, 30 min; extra sub-effect depends on meat used"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Mixed Fried Hot Dog",
+      "nameOriginalZhTW": "星塵炸肉",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "DMG vs targets under The Bull's Eye (Hunter's Mark)",
+          "value": 20,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "對處於獵人標記狀態下的敵人傷害提高20%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "27.6%",
+      "ingredientSubEffectFrom": "Meat (any) (not raw), Milk",
+      "ingredients": "1 Deviated Peppercorn, 1 Meat (any), 1 Milk, 1 Cabbage",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (3649,-4384); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs/theGamer"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs/theGamer",
+          "quote": "+20% damage to targets marked by The Bull's Eye, 30 min; extra sub-effect by meat"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Starry Pudding",
+      "nameOriginalZhTW": "星間布丁",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "DMG Reduction",
+          "value": 20,
+          "unit": "percent",
+          "condition": "while airborne"
+        }
+      ],
+      "effectTextZhTW": "在空中時獲得20%免傷",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "27.6%",
+      "ingredientSubEffectFrom": "Deviated Herb, Common Egg / Pristine Egg",
+      "ingredients": "1 Deviated Herb, 2 Common Egg / 1 Pristine Egg, 5 Gravity Crystal / 2 Sugar, 1 Butter",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "discontinued (no longer obtainable)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": "Recipe discontinued. Recipe marked discontinued in TW sheet.",
+      "confidence": "medium"
+    },
+    {
+      "name": "Spectral Canned Mushroom",
+      "nameOriginalZhTW": "幽光蘑菇罐頭",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "AoE Stun (nearby monsters)",
+          "value": 3,
+          "unit": "seconds",
+          "condition": "pulses every 5 s; does not affect elites or large animals"
+        }
+      ],
+      "effectTextZhTW": "每隔5秒身體會發出刺眼的光芒， 對附近的怪物造成3秒的暈眩效果(無法對菁英怪物、大型動物生效)",
+      "durationSeconds": 900,
+      "durationAtStardustFusionStoveSeconds": 1575,
+      "durationSheetRaw": "星塵融合灶台：26.25",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": "Deviated Herb",
+      "ingredients": "1 Deviated Herb, 2 Mushroom, 1 Caviar, 1 Steel Ingot",
+      "restores": {
+        "hydration": 100
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (3815,-3885); Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Assorted Canned Fruit",
+      "nameOriginalZhTW": "星塵水果罐頭",
+      "aliases": [
+        "Assorted Canned Food"
+      ],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Weakspot DMG",
+          "value": 25,
+          "unit": "percent",
+          "condition": "while Sanity above 80%"
+        }
+      ],
+      "effectTextZhTW": "角色理智值高於80%時弱點傷害提高25%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "34.5%",
+      "ingredientSubEffectFrom": "Fruit (any) (not Red Berries)",
+      "ingredients": "1 Deviated Tomato, 1 Fruit (any), 1 Morel, 1 Steel Ingot",
+      "restores": {
+        "energy": 80,
+        "hydration": 40
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (6084,-2596); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "gameplayTips/sportskeeda"
+      ],
+      "crossChecks": [
+        {
+          "source": "gameplayTips/sportskeeda",
+          "quote": "Weakspot DMG +25% when Sanity above 80%; 80 Energy, 40 Hydration"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Shattered Bread",
+      "nameOriginalZhTW": "碎裂麵包",
+      "aliases": [
+        "Crumbly Bread"
+      ],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Weapon DMG",
+          "value": 25,
+          "unit": "percent",
+          "note": "applies to all guns (槍械傷害)"
+        }
+      ],
+      "effectTextZhTW": "自身造成的所有槍械傷害增加25%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "34.5%",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Deviated Wheat, 2 Wheat, 2 Sugar, 2 Corn Oil",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (6963,-4260); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs/theGamer/allthings"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs/theGamer/allthings",
+          "quote": "Weapon DMG +25% for all weapons"
+        }
+      ],
+      "disagreement": "gameleap 'All Special Recipes' lists '+10 Weapon DMG' — outlier; fandom, TheGamer, allthings and TW sheet all say +25%.",
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Layered Galaxy",
+      "nameOriginalZhTW": "銀河千層",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Elemental DMG",
+          "value": 30,
+          "unit": "percent",
+          "condition": "while airborne"
+        }
+      ],
+      "effectTextZhTW": "在空中時獲得30%的元素傷害加成",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "41.4%",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Deviated Wheat, 5 Gravity Crystal / 2 Sugar, 1 Butter",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "discontinued (no longer obtainable)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": "Recipe discontinued. Recipe marked discontinued in TW sheet.",
+      "confidence": "medium"
+    },
+    {
+      "name": "Surprise Spring Roll",
+      "nameOriginalZhTW": "驚喜春捲",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Elemental DMG",
+          "value": 5,
+          "unit": "percent",
+          "valueMax": 15,
+          "condition": "random 5-15%; doubled while HP below 40%"
+        }
+      ],
+      "effectTextZhTW": "增加5% ~ 15%的元素傷害。生命值低於40%時，此效果翻倍",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "2 Deviated Wheat, 1 Cabbage, 1 Corn Oil, 2 Sugar / 2 Peppercorn / 5 Moon's Whisper",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "discontinued (no longer obtainable)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": "Recipe discontinued. Recipe marked discontinued in TW sheet.",
+      "confidence": "medium"
+    },
+    {
+      "name": "French Fries",
+      "nameOriginalZhTW": "炸薯條",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Weapon DMG",
+          "value": 20,
+          "unit": "percent",
+          "condition": "while inside Fortress Warfare"
+        }
+      ],
+      "effectTextZhTW": "自身在重裝陣地內造成槍械傷害提高20%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "27.6%",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Deviated Potato, 1 Potato, 1 Seasoning, 1 (Cheese / Stardust Cheese)",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (353,-7200)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs",
+          "quote": "Increase Weapon DMG by 20% when in Fortress Warfare (1800 s, Combat)"
+        }
+      ],
+      "disagreement": "gameleap claims 'decrease DMG taken from Deviants by 20%' — outlier; fandom Buffs page and TW sheet: Weapon DMG +20% in Fortress Warfare.",
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Stardust Ratatouille",
+      "nameOriginalZhTW": "星塵蔬菜雜燴",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Movement Speed",
+          "value": 20,
+          "unit": "percent"
+        },
+        {
+          "stat": "Sprint Stamina Cost",
+          "value": -50,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "角色移動速度提升20%，衝刺狀態下的耐力消耗減少50%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "27.6% / 69%",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Deviated Cabbage, 1 (Cheese / Stardust Cheese), 1 Butter, 2 Salt",
+      "restores": {
+        "energy": 80
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (4300,-2392); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Nalcott Easter Egg",
+      "nameOriginalZhTW": "奈克特彩蛋",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "60 Stardust Source, 15 (Bellflower / Scarlet Calamus / Coneflower / Honeysuckle / Sage / Yellow Lotus), 20 (Bellflower / Scarlet Calamus / Coneflower / Honeysuckle / Sage) / 10 (Cucumber / Onion / Tomato), 3 Common Egg / 1 Pristine Egg",
+      "restores": {
+        "energy": 100,
+        "hydration": 100,
+        "sanity": -500
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": null,
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Seafood and Meat Platter",
+      "nameOriginalZhTW": "豪華海陸煎燒",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Max HP",
+          "value": 15,
+          "unit": "percent"
+        },
+        {
+          "stat": "HP Restore",
+          "value": 100,
+          "unit": "percent",
+          "condition": "restores 100% HP over 30 s after eating"
+        }
+      ],
+      "effectTextZhTW": "生命值上限提高15%，且在30秒內恢復100%生命值",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "20.7%",
+      "ingredientSubEffectFrom": "Meat (any) (not raw), Fish",
+      "ingredients": "2 Common Meat / 1 Pristine Meat, 1 Fish, 1 Potato",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (5533,-5704); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Hearty Meat Stew",
+      "nameOriginalZhTW": "炙熱燉肉火鍋",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Blaze DMG",
+          "value": 15,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "自身造成的熾能傷害提高15%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "20.7%",
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "1 Meat (any), 1 Seasoning, 2 Purified Water",
+      "restores": {
+        "energy": 100,
+        "hydration": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Northern region (Way of Winter map): (-6458,4855); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Honey Glazed Meat",
+      "nameOriginalZhTW": "蜜釀燉肉",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Crit Rate",
+          "value": 15,
+          "unit": "percent",
+          "condition": "when hitting enemies affected by Frost Vortex"
+        }
+      ],
+      "effectTextZhTW": "命中處於冰霜漩渦狀態下的敵人時，暴擊率提升15%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "20.7%",
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "2 Common Meat / 1 Pristine Meat, 2 Aloe Vera, 1 Purified Water",
+      "restores": {
+        "energy": 100,
+        "hydration": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (6884,-1518); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs/theGamer"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs/theGamer",
+          "quote": "Crit Rate +15% against enemies caught in a Frost Vortex; sub-effect by meat type"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Canned Minty Meat",
+      "nameOriginalZhTW": "清涼薄荷肉罐頭",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Frost DMG",
+          "value": 15,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "自身造成的寒霜傷害提高15%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "20.7%",
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "2 Common Meat / 1 Pristine Meat, 1 Pickled Cucumber, 1 Steel Ingot",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Northern region (Way of Winter map): (-5180,4229); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Canned Spicy Rabbit Dices",
+      "nameOriginalZhTW": "麻辣兔肉罐頭",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Blaze DMG",
+          "value": 15,
+          "unit": "percent",
+          "condition": "while ambient temperature above 30°C"
+        }
+      ],
+      "effectTextZhTW": "自身所處環境溫度高於30度時，造成的熾能傷害提高15%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "20.7%",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Rabbit Meat, 1 Deviated Polar Pepper, 1 Steel Ingot",
+      "restores": {
+        "energy": 80
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Northern region (Way of Winter map): (-6780,4302); merchant/vendor",
+      "scenarioRestriction": "Temperature",
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Butter Matsutake Mushrooms",
+      "nameOriginalZhTW": "奶油松茸",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Status DMG Taken Reduction",
+          "value": 8,
+          "unit": "percent",
+          "valueMax": 12,
+          "condition": "12% while both Energy and Hydration are full"
+        }
+      ],
+      "effectTextZhTW": "自身對異常傷害的減免提高8%， 若處於飽食、飲水充足狀態時，異常傷害減免提高至12%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "11% / 15%",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "2 Mushroom, 1 Butter, 1 Corn",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Northern region (Way of Winter map): (-1190,5141); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": "Chinese text 對異常傷害的減免 = reduction of status (anomaly) damage TAKEN. OHMM's machine translation ('Status DMG Increase') is wrong.",
+      "confidence": "medium"
+    },
+    {
+      "name": "Popcorn",
+      "nameOriginalZhTW": "砰砰爆米花",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Unstable Bomber DMG",
+          "value": 10,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "自身造成的不穩定炸彈傷害提高10%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "13.8%",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Corn, 1 Corn Oil, 1 (Cheese / Stardust Cheese)",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Northern region (Way of Winter map): (2493,5927); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Flaming Eggtart",
+      "nameOriginalZhTW": "炙熱烈焰蛋撻",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Burn DMG",
+          "value": 10,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "自身造成的灼燒傷害提高10%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "13.8%",
+      "ingredientSubEffectFrom": "Common Egg / Pristine Egg",
+      "ingredients": "1 (Common Egg / Pristine Egg), 1 Butter",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Northern region (Way of Winter map): (830,6761); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Ginger Poppers",
+      "nameOriginalZhTW": "蜜蛋彈彈樂",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Shrapnel DMG",
+          "value": 10,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "自身造成的碎彈傷害增加10%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "13.8%",
+      "ingredientSubEffectFrom": "Milk, Common Egg / Pristine Egg",
+      "ingredients": "1 Milk, 1 (Common Egg / Pristine Egg), 1 Sugar",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Northern region (Way of Winter map): (2266,6004); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs/allthings"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs/allthings",
+          "quote": "Shrapnel DMG +10%"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Canned Lunch Meat",
+      "nameOriginalZhTW": "午餐肉罐頭",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Max HP",
+          "value": 10,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "角色生命值上限提高10%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "13.8%",
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "1 Meat (any), 1 Corn, 1 Steel Ingot",
+      "restores": {
+        "energy": 80
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "no unlock needed",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomLunchMeat"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomLunchMeat",
+          "quote": "+80 Energy, +10% Max HP for 30 min, plus meat-dependent +2% bonus"
+        }
+      ],
+      "disagreement": null,
+      "notes": "Plus an ingredient sub-buff by meat used (fandom): Bear +2% Shrapnel DMG; Beast +2% Melee DMG; Beef +2% Frost Vortex DMG; Crocodile +2% Power Surge DMG; Deer +2% DMG vs Bull's Eye targets; Goat +2% Burn DMG; Pork +2% Unstable Bomber DMG; Poultry +2% Bounce DMG. Does not spoil.",
+      "confidence": "high"
+    },
+    {
+      "name": "Fluffy Sweet",
+      "nameOriginalZhTW": "飄飄棉花糖",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Glide Horizontal Speed",
+          "value": 10,
+          "unit": "percent"
+        },
+        {
+          "stat": "Glide Stamina Cost",
+          "value": 15,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "滑翔水平速度提升10%，滑翔耐力消耗增加15%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "13.8% / 20.7%",
+      "ingredientSubEffectFrom": "Deviated Herb, Milk Fruit (any) (not Red Berries) / Ice Melon / Spikemato",
+      "ingredients": "1 Deviated Herb, 1 (Banana / Apple / Grape / Coconut / Orange / Ice Melon / Spikemato) / 2 (Red Berries / Blueberry), 1 Milk, 5 Gravity Crystal / 2 Sugar",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "discontinued (no longer obtainable)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": "Recipe discontinued. Recipe marked discontinued in TW sheet.",
+      "confidence": "medium"
+    },
+    {
+      "name": "Safety Sandwich",
+      "nameOriginalZhTW": "安全三明治",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "DMG Taken from Players",
+          "value": -20,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "受到來自玩家的傷害降低20%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "27.6%",
+      "ingredientSubEffectFrom": "Common Egg / Pristine Egg",
+      "ingredients": "1 (Common Egg / Pristine Egg), 1 Wheat, 1 Sugar",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (5526,-2981)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs/gameleapSpecial"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs/gameleapSpecial",
+          "quote": "Reduce DMG from other players by 20% (1800 s, Combat)"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Stargazy Pizza",
+      "nameOriginalZhTW": "深海魚片披薩",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Underwater Breathing",
+          "value": null,
+          "unit": "state",
+          "note": "no time limit underwater"
+        }
+      ],
+      "effectTextZhTW": "角色在水下活動不受時間限制",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": "Fish / listed meats",
+      "ingredients": "2 (Fish/Bear Meat/鱷FishMeat/Turtle Meat/Pristine Bear Meat/Pristine 鱷FishMeat), 2 Caviar, 2 Shellfish, 1 Wheat",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (1587,-7332); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs",
+          "quote": "Breathe underwater, 1800 s, Survival"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Preserved Deviated Chops",
+      "nameOriginalZhTW": "香噴噴的異變肉排",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Acid from defeated Deviants",
+          "value": 50,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "擊敗異變體獲得的酸液數量提高50%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "2 Common Meat / 1 Pristine Meat, 1 Peppercorn, 2 Salt",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (6097,-6844); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Fruity Pancake",
+      "nameOriginalZhTW": "水果餅",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "XP from kills",
+          "value": 25,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "角色擊敗怪物獲得的經驗值增加25%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": "Fruit (any) (not Red Berries)",
+      "ingredients": "2 Fruit (any), 1 Pumpkin, 2 Sugar",
+      "restores": {
+        "energy": 50,
+        "hydration": 80
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 24,
+      "recipeUnlock": "no unlock needed",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Bacon Burger",
+      "nameOriginalZhTW": "培根肉排漢堡",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "One-hit Mining/Logging",
+          "value": null,
+          "unit": "state"
+        }
+      ],
+      "effectTextZhTW": "採礦和伐木只需一下即可完成",
+      "durationSeconds": 600,
+      "durationAtStardustFusionStoveSeconds": 1050,
+      "durationSheetRaw": "星塵融合灶台：17.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "2 Common Meat / 1 Pristine Meat, 1 Onion, 1 Cabbage",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": "charlieintel lists Bacon Burger as '+30% chance to obtain ammo from crates' (older/different data); TW sheet: one-hit gathering, 17.5 min at Stardust Fusion Stove.",
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Spicy Sizzling Meat",
+      "nameOriginalZhTW": "香辣煎肉",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Cold Resist",
+          "value": 20,
+          "unit": "flat",
+          "note": "also clears Hypothermia"
+        }
+      ],
+      "effectTextZhTW": "自身的寒冷抗性提升20點(可以清除自身的失溫狀態)",
+      "durationSeconds": 3600,
+      "durationAtStardustFusionStoveSeconds": 6300,
+      "durationSheetRaw": "星塵融合灶台：105",
+      "chefRexBoostedPower": "27.6 pts",
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "1 Meat (any), 1 Polar Pepper, 1 Salt",
+      "restores": {
+        "energy": 80
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Way of Winter / Endless scenarios: Memetics (tech points)",
+      "scenarioRestriction": "Cold",
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Lunar Gummy",
+      "nameOriginalZhTW": "異味軟糖",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Shield (% of Max HP)",
+          "value": 60,
+          "unit": "percent",
+          "condition": "shield = (lost-Sanity %) x 60% Max HP, lasts 30 s; cannot re-eat for 60 s"
+        }
+      ],
+      "effectTextZhTW": "獲得已損失理智百分比*60%最大生命值的護盾，持續30s。 食用後60s內無法再次食用。",
+      "durationSeconds": 30,
+      "durationAtStardustFusionStoveSeconds": 52.5,
+      "durationSheetRaw": "星塵融合灶台：52.5秒",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Deviated Beet, 1 Purified Water, 2 Sugar, 10 Moon's Whisper",
+      "restores": {
+        "energy": 50,
+        "sanity": -300
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "discontinued (no longer obtainable)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": "Recipe discontinued. Recipe marked discontinued in TW sheet.",
+      "confidence": "medium"
+    },
+    {
+      "name": "Gingerdrop",
+      "nameOriginalZhTW": "硬邦邦薑糖",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Fortress Warfare Duration",
+          "value": 5,
+          "unit": "seconds"
+        }
+      ],
+      "effectTextZhTW": "自身觸發的重裝陣地持續時間增加5秒",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Deviated Sunny Ginger, 2 Sugar, 2 Corn Oil",
+      "restores": {
+        "energy": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Northern region (Way of Winter map): (-3467,3898); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Shellfish Meat",
+      "nameOriginalZhTW": "柔軟貝肉",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Target Vulnerability (DMG taken by hit target)",
+          "value": 5,
+          "unit": "percent",
+          "condition": "applied on hit for 10 s; does not stack"
+        }
+      ],
+      "effectTextZhTW": "命中敵人時，對目標施加5%的易傷效果(持續10秒，無法疊加)",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "2 Shellfish, 2 Sugar, 1 Purified Water",
+      "restores": {
+        "energy": 80
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (797,-4460); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Stardust Italian Soup Can",
+      "nameOriginalZhTW": "星塵通心粉罐頭",
+      "aliases": [
+        "Creamy Spaghetti Soup"
+      ],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Securement Level",
+          "value": 1,
+          "unit": "flat",
+          "note": "slightly higher Deviation securement chance"
+        }
+      ],
+      "effectTextZhTW": "自身抓捕等級提升1級，小幅提升抓捕機率",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Potato, 1 Seasoning, 1 Steel Ingot",
+      "restores": {
+        "energy": 100,
+        "hydration": 30
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (6078,-3091); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "charlieintel"
+      ],
+      "crossChecks": [
+        {
+          "source": "charlieintel",
+          "quote": "Creamy Spaghetti Soup: +20% successful Deviation Securement (older naming)"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Hug-in-a-Bowl",
+      "nameOriginalZhTW": "一碗美味",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 (Peppercorn / Deviated Peppercorn), 2 Cabbage, 3 Wheat, 1 Pork",
+      "restores": {
+        "energy": 100,
+        "hydration": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "no unlock needed",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Pickled Cucumber",
+      "nameOriginalZhTW": "醃黃瓜",
+      "aliases": [],
+      "category": "ingredient",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 (Cucumber / Deviated Cucumber), 3 Purified Water",
+      "restores": {
+        "inedible": true
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 48,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Cheese",
+      "nameOriginalZhTW": "起司",
+      "aliases": [],
+      "category": "ingredient",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "2 (Common Milk / Pristine Milk), 3 Purified Water",
+      "restores": {
+        "inedible": true
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 12,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Stardust Cheese",
+      "nameOriginalZhTW": "星塵起司",
+      "aliases": [],
+      "category": "ingredient",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "2 Stardust Milk, 3 Purified Water",
+      "restores": {
+        "inedible": true
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 12,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Butter",
+      "nameOriginalZhTW": "奶油",
+      "aliases": [],
+      "category": "ingredient",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "3 Common Milk / 1 (Pristine Milk / Stardust Milk / Honey / Nectar Honey)",
+      "restores": {
+        "inedible": true
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 2,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Caviar",
+      "nameOriginalZhTW": "魚子醬",
+      "aliases": [],
+      "category": "ingredient",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "3 Fish Roe",
+      "restores": {
+        "inedible": true
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 2,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Sanity Corrosion Capsule",
+      "nameOriginalZhTW": "理智腐壞膠囊",
+      "aliases": [],
+      "category": "medicine",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Spoiled Dish, 3 (Dirty Water / Seawater / Contaminated Water)",
+      "restores": {
+        "sanity": -100
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 4,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Sanity Gummy",
+      "nameOriginalZhTW": "理智軟糖",
+      "aliases": [],
+      "category": "medicine",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Purified Water, 1 Sugar",
+      "restores": {
+        "sanity": 60
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 4,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Bread with Jam",
+      "nameOriginalZhTW": "果醬麵包",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "2 Fruit (any), 1 Wheat",
+      "restores": {
+        "energy": 50
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 4,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Salty Roasted Spikemato",
+      "nameOriginalZhTW": "烤火刺果",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Cold Resist",
+          "value": 10,
+          "unit": "flat"
+        }
+      ],
+      "effectTextZhTW": "自身的寒冷抗性提升10點",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "13.8 pts",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Spikemato",
+      "restores": {
+        "energy": 20
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 4,
+      "recipeUnlock": "Way of Winter / Endless scenarios: no unlock needed",
+      "scenarioRestriction": "Cold",
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Large Jerky",
+      "nameOriginalZhTW": "醃肉(掛肉架)",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Meat (any), 1 Salt",
+      "restores": {
+        "energy": 60,
+        "hydration": -10
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": null,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Large Fish Jerky",
+      "nameOriginalZhTW": "醃魚(掛肉架)",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Fish, 1 Salt",
+      "restores": {
+        "energy": 60,
+        "hydration": -10
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": null,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Sugar",
+      "nameOriginalZhTW": "糖",
+      "aliases": [],
+      "category": "ingredient",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Beet",
+      "restores": {
+        "inedible": true
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 2,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Salt",
+      "nameOriginalZhTW": "鹽",
+      "aliases": [],
+      "category": "ingredient",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Seawater",
+      "restores": {
+        "inedible": true
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 2,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Roasted Berries",
+      "nameOriginalZhTW": "烤水果",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Fruit (any)",
+      "restores": {
+        "energy": 20
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 2,
+      "recipeUnlock": "no unlock needed",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Grilled Vegetables",
+      "nameOriginalZhTW": "烤蔬菜",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 (Pumpkin / Corn / Potato / Cabbage / Snow Fungus)",
+      "restores": {
+        "energy": 30
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 2,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Roasted Meat",
+      "nameOriginalZhTW": "烤肉",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Meat (any)",
+      "restores": {
+        "energy": 30
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 2,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Grilled Fish",
+      "nameOriginalZhTW": "烤魚",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Fish",
+      "restores": {
+        "energy": 30
+      },
+      "spoilHours": 16,
+      "craftTimeSeconds": 2,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Grilled Mushrooms",
+      "nameOriginalZhTW": "烤蘑菇",
+      "aliases": [],
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Mushroom",
+      "restores": {
+        "energy": 20,
+        "sanity": 40
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 2,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Whimsical Drink",
+      "nameOriginalZhTW": "奇思妙想飲",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Status DMG",
+          "value": 25,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "自身獲得25%的異常傷害加成",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "34.5%",
+      "ingredientSubEffectFrom": "Deviated Herb",
+      "ingredients": "1 Deviated Herb, 1 Sugar, 3 (Cactus / Snow Fungus), 2 Ice Cube",
+      "restores": {
+        "hydration": 100,
+        "sanity": 125
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (1926,-2991); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomWhimsical"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomWhimsical",
+          "quote": "+100 Hydration, Sanity +1000, +25% Status DMG for 30 min"
+        }
+      ],
+      "disagreement": "One search source says 'Psi Intensity +30%' — outlier; fandom, gamerant, TW sheet all say +25% Status DMG. Sanity restore: fandom +1000 vs TW sheet +125.",
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Signature Beverage",
+      "nameOriginalZhTW": "異想天開飲",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Weapon DMG",
+          "value": 10,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "自身獲得10%的槍械傷害加成",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "13.8%",
+      "ingredientSubEffectFrom": "Deviated Herb",
+      "ingredients": "1 Deviated Herb, 1 Butter, 1 Purified Water, 1 Ice Cube",
+      "restores": {
+        "hydration": 100,
+        "sanity": 125
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (4117,-1463); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": "Name confidence: low (OHMM owner-approved translation; official EN name not verified; literally 'Fanciful Drink')",
+      "confidence": "medium",
+      "nameConfidence": "low (OHMM owner-approved translation; official EN name not verified; literally 'Fanciful Drink')"
+    },
+    {
+      "name": "Stardust Mushroom Soup",
+      "nameOriginalZhTW": "星塵蘑菇濃湯",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Max Stamina",
+          "value": 20,
+          "unit": "percent"
+        },
+        {
+          "stat": "Stamina Recovery",
+          "value": 30,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "耐力上限提高20%，耐力恢復速度提升30%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "27.6%",
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "1 Deviated Mushroom, 1 Meat (any), 1 Beet, 1 Pickled Cucumber",
+      "restores": {
+        "hydration": 80,
+        "sanity": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (6063,-3670); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Fat-Burning Juice",
+      "nameOriginalZhTW": "消脂果汁",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Body Size",
+          "value": null,
+          "unit": "state",
+          "note": "character becomes thin (cosmetic)"
+        }
+      ],
+      "effectTextZhTW": "會使得角色體型變瘦",
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": "無",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "2 Deviated Cucumber, 5 Banana, 5 Blueberry, 5 Corn",
+      "restores": {
+        "hydration": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (5365,-3243); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Stardust Raspberry Shaved Ice",
+      "nameOriginalZhTW": "星塵樹莓刨冰",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Duration of debuffs you inflict",
+          "value": 20,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "自身造成的持續<負面效果>持續時間增加20%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Deviated Beet, 1 Fruit (any), 2 Red Berries, 5 Ice Cube",
+      "restores": {
+        "hydration": 100,
+        "sanity": 125
+      },
+      "spoilHours": 16,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Way of Winter / Endless scenarios: (-5770,7400); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Signature Ice Brew",
+      "nameOriginalZhTW": "特調冰釀",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Sprint Speed",
+          "value": 20,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "角色衝刺速度額外提高20%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "27.6%",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Deviated Aloe Vera, 1 Cucumber, 5 Ice Cube",
+      "restores": {
+        "hydration": 100,
+        "sanity": 125
+      },
+      "spoilHours": 16,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (1470,-3299); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "All-Weather Stew",
+      "nameOriginalZhTW": "暖暖涼涼燉湯",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Max Stamina",
+          "value": 30,
+          "unit": "percent"
+        },
+        {
+          "stat": "Heat Resist",
+          "value": 30,
+          "unit": "flat"
+        },
+        {
+          "stat": "Cold Resist",
+          "value": 30,
+          "unit": "flat",
+          "note": "also clears Heatstroke/Hypothermia"
+        }
+      ],
+      "effectTextZhTW": "自身的耐力上限提高30%， 炎熱、寒冷抗性提高30點(可以清除自身的中暑、失溫狀態)",
+      "durationSeconds": 3600,
+      "durationAtStardustFusionStoveSeconds": 6300,
+      "durationSheetRaw": "星塵融合灶台：105",
+      "chefRexBoostedPower": "41.4% / 41.4 pts",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "2 Ice Melon, 2 Spikemato, 2 Mint, 2 Sunny Ginger",
+      "restores": {
+        "energy": 100,
+        "hydration": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Way of Winter / Endless scenarios: Memetics (tech points)",
+      "scenarioRestriction": "Cold, Heat",
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Stardust Malt Ale",
+      "nameOriginalZhTW": "星塵麥芽蜜釀",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Pollution Resist",
+          "value": 100,
+          "unit": "flat",
+          "note": "sheet writes (100/105)"
+        }
+      ],
+      "effectTextZhTW": "角色的汙染抗性提高(100/105)點，從而顯著降低汙染區對理智的侵蝕速度",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Deviated Wheat / 15 Wheat, 2 Sugar, 2 Purified Water",
+      "restores": {
+        "hydration": 100,
+        "sanity": 125
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 16,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomStardustMaltAle"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomStardustMaltAle",
+          "quote": "Quick Reflexes: all action speeds +20%, 1800 s"
+        }
+      ],
+      "disagreement": "fandom Stardust_Malt_Ale page: grants 'Quick Reflexes' — all character action speeds +20% for 1800 s (and gamerant: deviated ales give Quick Reflexes). TW sheet (May 2026): pollution resist +100. Both recorded; pick TW sheet as newer but flag — the effect may have been changed in a patch.",
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Malt Ale",
+      "nameOriginalZhTW": "麥芽蜜釀",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Sanity Restore",
+          "value": 100,
+          "unit": "flat",
+          "note": "over 60 s"
+        },
+        {
+          "stat": "Pollution Resist",
+          "value": 70,
+          "unit": "flat"
+        }
+      ],
+      "effectTextZhTW": "1分鐘內恢復角色100點理智值 角色的汙染抗性提高70點，從而小幅降低汙染區對理智的侵蝕速度",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：105秒、52.5",
+      "chefRexBoostedPower": "138 pts",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "2 Wheat, 3 Purified Water",
+      "restores": {
+        "hydration": 100
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "gamerantBrew"
+      ],
+      "crossChecks": [
+        {
+          "source": "gamerantBrew",
+          "quote": "Malt Ale: Clearminded — fully protected from Stardust pollution for 30 min; restores 100 Hydration and Sanity"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Stardust Tea",
+      "nameOriginalZhTW": "星塵茶",
+      "aliases": [
+        "Herbal Tea (older EN naming)"
+      ],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Sanity Restore",
+          "value": 100,
+          "unit": "flat",
+          "note": "over 60 s"
+        },
+        {
+          "stat": "Full Stomach (keeps Energy & Hydration states full)",
+          "value": 7200,
+          "unit": "seconds"
+        }
+      ],
+      "effectTextZhTW": "1分鐘內恢復角色100點理智值 其他效果：角色目前的飽食、飲水充足狀態持續時間提高至2小時",
+      "durationSeconds": 60,
+      "durationAtStardustFusionStoveSeconds": 105,
+      "durationSheetRaw": "星塵融合灶台：105秒",
+      "chefRexBoostedPower": "138 pts",
+      "ingredientSubEffectFrom": "Deviated Herb",
+      "ingredients": "1 Deviated Herb, 2 Purified Water, 2 Sugar",
+      "restores": {
+        "hydration": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (6135,-1146); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs",
+          "quote": "Stardust Tea: Energy/Hydration top-up holds for two hours"
+        }
+      ],
+      "disagreement": "fandom: restores 800 Sanity; TW sheet: 100 over 1 min.",
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Stardust Energy Drink",
+      "nameOriginalZhTW": "星塵能量飲料",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Skybound (double jump)",
+          "value": null,
+          "unit": "state"
+        }
+      ],
+      "effectTextZhTW": "獲得二段跳能力",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": "Common Herb / Grafted Herb",
+      "ingredients": "3 Common Herb / 2 Grafted Herb, 2 Purified Water, 2 Sugar, 1 Steel Ingot",
+      "restores": {
+        "hydration": 100
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomBuffs"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomBuffs",
+          "quote": "Skybound: double jump for 30 min"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Starry Bubble Tea",
+      "nameOriginalZhTW": "星空泡泡奶茶",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Shield (% of Max HP per second while gliding out of combat)",
+          "value": 5,
+          "unit": "percent",
+          "valueMax": 50,
+          "condition": "caps at 50% Max HP"
+        }
+      ],
+      "effectTextZhTW": "在非戰鬥狀態下滑翔時，每秒獲得5%最大生命值的護盾， 最多維持50%最大生命值的護盾",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": "Deviated Herb, Milk, (Banana / Apple / Grape / Coconut / Orange/ Blueberry / Ice Melon / Spikemato)",
+      "ingredients": "1 Deviated Herb, 1 (Banana / Apple / Grape / Coconut / Orange / Ice Melon / Spikemato) / 2 (Red Berries / Blueberry), 1 Milk, 5 Gravity Crystal / 2 Sugar, 5 Ice Cube",
+      "restores": {
+        "hydration": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "discontinued (no longer obtainable)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": "Recipe discontinued. Recipe marked discontinued in TW sheet.",
+      "confidence": "medium"
+    },
+    {
+      "name": "Borscht Deluxe",
+      "nameOriginalZhTW": "燻肉羅宋湯",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Energy Links from weapon/gear crates",
+          "value": 100,
+          "unit": "percent",
+          "note": "doubled"
+        }
+      ],
+      "effectTextZhTW": "自身打開武器箱與裝備箱時，獲得轉能電池數量翻倍",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": "Meat (any) (not raw)",
+      "ingredients": "2 Common Meat / 1 Pristine Meat, 1 Tomato, 2 Purified Water",
+      "restores": {
+        "energy": 100,
+        "hydration": 50
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (7329,-5344); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "charlieintel"
+      ],
+      "crossChecks": [
+        {
+          "source": "charlieintel",
+          "quote": "Doubles Energy Links from Gear and Weapon Crates"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Anti-gravity Milkshake",
+      "nameOriginalZhTW": "反重力奶昔",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Carry Weight",
+          "value": null,
+          "unit": "state",
+          "note": "raised to maximum cap"
+        }
+      ],
+      "effectTextZhTW": "提升自身的負重至最大上限",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Deviated Cucumber, 1 Sugar, 2 Purified Water, 1 (Cheese / Stardust Cheese)",
+      "restores": {
+        "energy": 100,
+        "hydration": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Sparkling Pumpkin Soup",
+      "nameOriginalZhTW": "劈哩啪啦南瓜糊",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Power Surge DMG",
+          "value": 10,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "自身造成的電湧傷害提高10%",
+      "durationSeconds": 1980,
+      "durationAtStardustFusionStoveSeconds": 3465,
+      "durationSheetRaw": "星塵融合灶台：57.75",
+      "chefRexBoostedPower": "13.8%",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Pumpkin, 1 Deviated Mint, 1 Purified Water",
+      "restores": {
+        "hydration": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Northern region (Way of Winter map): (-2460,5087); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "fandomPumpkinSoup"
+      ],
+      "crossChecks": [
+        {
+          "source": "fandomPumpkinSoup",
+          "quote": "+100 Hydration and +10% Power Surge DMG for 30 min"
+        }
+      ],
+      "disagreement": null,
+      "notes": "Sheet duration at Stardust Fusion Stove is 57.75 min (not 52.5) — base would be 33 min; probably a sheet quirk, flagged.",
+      "confidence": "high"
+    },
+    {
+      "name": "Miracle Tea",
+      "nameOriginalZhTW": "奇蹟茶",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Healing Effect",
+          "value": 10,
+          "unit": "percent"
+        }
+      ],
+      "effectTextZhTW": "自身造成的所有恢復效果提高 10 %",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "13.8%",
+      "ingredientSubEffectFrom": "Common Herb / Grafted Herb",
+      "ingredients": "1 (Common Herb / Grafted Herb), 1 Aloe Vera, 2 Purified Water",
+      "restores": {
+        "hydration": 100
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "no unlock needed",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet",
+        "charlieintel"
+      ],
+      "crossChecks": [
+        {
+          "source": "charlieintel",
+          "quote": "Miracle Tea: Hydration 100, Healing Effect +10"
+        }
+      ],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Ice Tea",
+      "nameOriginalZhTW": "冰茶",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": true,
+      "buffs": [
+        {
+          "stat": "Sanity Restore",
+          "value": 100,
+          "unit": "flat",
+          "note": "over 60 s"
+        },
+        {
+          "stat": "Roll Speed",
+          "value": 25,
+          "unit": "percent"
+        },
+        {
+          "stat": "Movement Speed",
+          "value": 20,
+          "unit": "percent",
+          "condition": "for 2 s after rolling"
+        }
+      ],
+      "effectTextZhTW": "1分鐘內恢復角色100點理智值 翻滾速度提升25%，翻滾後2秒內移動速度提升20%",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：105秒、52.5",
+      "chefRexBoostedPower": "138 pts / 34.5% / 27.6%",
+      "ingredientSubEffectFrom": "Common Herb / Grafted Herb",
+      "ingredients": "2 Common Herb / 1 Grafted Herb, 1 Seasoning, 2 Ice Cube",
+      "restores": {
+        "hydration": 80
+      },
+      "spoilHours": 16,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Eastern region (Manibus/Evolution's Call map): (4860,-6913); merchant/vendor",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Iced Mint Tea",
+      "nameOriginalZhTW": "薄荷冰茶",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Heat Resist",
+          "value": 20,
+          "unit": "flat",
+          "note": "clears Heatstroke"
+        },
+        {
+          "stat": "Sprint Speed",
+          "value": 10,
+          "unit": "percent",
+          "condition": "in hot environments"
+        }
+      ],
+      "effectTextZhTW": "自身的炎熱抗性提升20點(可以清除自身的中暑狀態)， 並且炎熱環境下衝刺速度提高10%",
+      "durationSeconds": 3600,
+      "durationAtStardustFusionStoveSeconds": 6300,
+      "durationSheetRaw": "星塵融合灶台：105",
+      "chefRexBoostedPower": "27.6 pts / 13.8%",
+      "ingredientSubEffectFrom": "Common Herb / Grafted Herb",
+      "ingredients": "1 (Common Herb / Grafted Herb), 1 Mint, 1 Ice Cube",
+      "restores": {
+        "hydration": 80
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 8,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": "Heat",
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Pumpkin Porridge",
+      "nameOriginalZhTW": "南瓜粥",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Pumpkin, 2 Wheat",
+      "restores": {
+        "energy": 30,
+        "hydration": 20
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 4,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Corn Soup",
+      "nameOriginalZhTW": "玉米羹",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Corn, 2 Wheat",
+      "restores": {
+        "energy": 30,
+        "hydration": 20
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 4,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Fruit Soda",
+      "nameOriginalZhTW": "水果汽水",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "2 Fruit (any), 3 Glass",
+      "restores": {
+        "hydration": 35
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 4,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Fruit Tea",
+      "nameOriginalZhTW": "水果茶",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Sanity Restore",
+          "value": 60,
+          "unit": "flat",
+          "note": "over 60 s"
+        },
+        {
+          "stat": "Pollution Resist",
+          "value": 30,
+          "unit": "flat"
+        }
+      ],
+      "effectTextZhTW": "1分鐘內恢復角色60點理智值 角色的汙染抗性提高30點，從而略微降低汙染區對理智的侵蝕速度",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：105秒、52.5",
+      "chefRexBoostedPower": "82.8 pts",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "2 Common Herb / 1 Grafted Herb, 1 Purified Water",
+      "restores": {
+        "hydration": 50
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 4,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Chilled Icemelon Soup",
+      "nameOriginalZhTW": "冰瓜汁",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Heat Resist",
+          "value": 10,
+          "unit": "flat"
+        }
+      ],
+      "effectTextZhTW": "自身的炎熱抗性提升10點",
+      "durationSeconds": 1800,
+      "durationAtStardustFusionStoveSeconds": 3150,
+      "durationSheetRaw": "星塵融合灶台：52.5",
+      "chefRexBoostedPower": "13.8 pts",
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Ice Melon",
+      "restores": {
+        "hydration": 20
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 4,
+      "recipeUnlock": "Way of Winter / Endless scenarios: no unlock needed",
+      "scenarioRestriction": "Heat",
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "medium"
+    },
+    {
+      "name": "Boiled Water",
+      "nameOriginalZhTW": "白開水",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "3 (Dirty Water / Seawater / Contaminated Water)",
+      "restores": {
+        "hydration": 20
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 2,
+      "recipeUnlock": "no unlock needed",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Corn Oil",
+      "nameOriginalZhTW": "玉米油",
+      "aliases": [],
+      "category": "ingredient",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "1 Corn",
+      "restores": {
+        "inedible": true
+      },
+      "spoilHours": null,
+      "craftTimeSeconds": 2,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Juice",
+      "nameOriginalZhTW": "果汁",
+      "aliases": [],
+      "category": "drink",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [],
+      "effectTextZhTW": null,
+      "durationSeconds": null,
+      "durationAtStardustFusionStoveSeconds": null,
+      "durationSheetRaw": null,
+      "chefRexBoostedPower": null,
+      "ingredientSubEffectFrom": null,
+      "ingredients": "2 Fruit (any)",
+      "restores": {
+        "hydration": 20
+      },
+      "spoilHours": 48,
+      "craftTimeSeconds": 2,
+      "recipeUnlock": "Memetics (tech points)",
+      "scenarioRestriction": null,
+      "sources": [
+        "sheet"
+      ],
+      "crossChecks": [],
+      "disagreement": null,
+      "notes": null,
+      "confidence": "high"
+    },
+    {
+      "name": "Stardust Corn Ale",
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": true,
+      "buffs": null,
+      "durationSeconds": 1800,
+      "notes": "Deviated (Stardust) ale. gamerant: 'Deviated versions provide the Quick Reflexes buff'; fandom (Stardust Malt Ale page): Quick Reflexes = all character action speeds +20% for 1800 s. Not present in TW sheet; exact current effect unverified.",
+      "sources": [
+        "gamerantBrew",
+        "fandomStardustMaltAle"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Corn Ale",
+      "category": "drink",
+      "buffSlot": "drink",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Sanity Restore",
+          "value": 1000,
+          "unit": "flat"
+        }
+      ],
+      "restores": {
+        "hydration": 100,
+        "sanity": 1000
+      },
+      "durationSeconds": null,
+      "notes": "gamerant brewing-barrel guide: restores 100 Hydration and 1000 Sanity; no combat buff listed.",
+      "sources": [
+        "gamerantBrew"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Potato Salad",
+      "category": "food",
+      "buffSlot": "food",
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Chance to double items gathered in the wilderness",
+          "value": 15,
+          "unit": "percent"
+        }
+      ],
+      "restores": {
+        "energy": 80
+      },
+      "durationSeconds": 1800,
+      "notes": "charlieintel (2024 naming). Not in TW sheet under this name; may be a renamed/removed recipe.",
+      "sources": [
+        "charlieintel"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Homemade Noodles",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": false,
+      "buffs": [
+        {
+          "stat": "Sanity Restore",
+          "value": null,
+          "unit": "state",
+          "note": "restores all Sanity"
+        }
+      ],
+      "notes": "Produced by the Hug-in-a-Bowl crafting deviation (TW deviations sheet: 家常麵：恢復所有理智值).",
+      "sources": [
+        "ohmmDeviations",
+        "saitohDeviations"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "name": "Fruit Cake",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Mixed Fruit Pie",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Snow Mushroom Fried Rice",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Croquette",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Curry and Rice",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Yuanbao Dumplings",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Ghoul Cookies",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Securement Soup",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Taco",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Minty Meat Salad",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Minty Tartare",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Fiery Meat Skewer",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Spicy Grilled Fish",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Spicy Roasted Meat",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Stardust Pumpkin Soup",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Nut Jam",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Fruity Sanity Capsule",
+      "category": "food",
+      "buffSlot": null,
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Listed as a Food item on oncehumandb.com (via saitoh183 planner dataset) and/or Way of Winter recipe lists (Game8), but its buff text could not be retrieved (sites blocked). Fruit Cake / Mixed Fruit Pie / Snow Mushroom Fried Rice are Way of Winter recipes.",
+      "sources": [
+        "saitohFood",
+        "game8Recipes"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Aromatic Fruit and Roasted Meat",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Aromatic Land & Sea Vegetable Platter",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Fish-Flavored Fried Eggs",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Fruit and Roasted Meat Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Grilled Fish Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Land & Sea Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Mixed Vegetable Grilled Fish Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Mixed Vegetable Roasted Meat Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Mixed Vegetable Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Roasted Meat Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Vegetable Grilled Fish Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Vegetable Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Veggie Roasted Meat Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Wild Vegetable Grilled Fish Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Wild Vegetable Roasted Meat Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Exquisite Wild Vegetable Skewer",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Luxury All-Fish Feast",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Luxury All-Meat Feast",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Rich Land & Sea Fruit Platter",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Supreme Meat Platter",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Supreme Vegetable Platter",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Supreme Wild Vegetable Platter",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Source of Deviation",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Ultraman",
+      "category": "creative-cuisine",
+      "buffSlot": "food",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "Chef-class 'Creative Cooking' output (oncehumandb category 'Creative Cuisine'). Effects are composed from ingredient tags; numeric values not retrievable.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    },
+    {
+      "name": "Miracle Recovery Milk",
+      "category": "creative-beverage",
+      "buffSlot": "drink",
+      "combatRelevant": null,
+      "buffs": null,
+      "durationSeconds": null,
+      "notes": "oncehumandb category 'Creative Beverages' (Chef class). Effect unknown.",
+      "sources": [
+        "saitohFood"
+      ],
+      "confidence": "low"
+    }
+  ]
+}
