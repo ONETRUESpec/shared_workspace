@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "multitool",
+  "key": {
+    "P": "minecraft:golden_pickaxe",
+    "A": "minecraft:golden_axe",
+    "S": "minecraft:golden_shovel",
+    "#": "minecraft:stick"
+  },
+  "pattern": [
+    "PAS",
+    " # ",
+    " # "
+  ],
+  "result": {
+    "id": "multitool:golden_multitool"
+  }
+}

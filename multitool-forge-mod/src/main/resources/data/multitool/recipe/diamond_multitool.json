@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "multitool",
+  "key": {
+    "P": "minecraft:diamond_pickaxe",
+    "A": "minecraft:diamond_axe",
+    "S": "minecraft:diamond_shovel",
+    "#": "minecraft:stick"
+  },
+  "pattern": [
+    "PAS",
+    " # ",
+    " # "
+  ],
+  "result": {
+    "id": "multitool:diamond_multitool"
+  }
+}

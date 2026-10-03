@@ -1,0 +1,11 @@
+{
+  "values": [
+    "multitool:wooden_multitool",
+    "multitool:stone_multitool",
+    "multitool:copper_multitool",
+    "multitool:iron_multitool",
+    "multitool:golden_multitool",
+    "multitool:diamond_multitool",
+    "multitool:netherite_multitool"
+  ]
+}

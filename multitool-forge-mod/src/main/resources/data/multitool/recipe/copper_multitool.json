@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "multitool",
+  "key": {
+    "P": "minecraft:copper_pickaxe",
+    "A": "minecraft:copper_axe",
+    "S": "minecraft:copper_shovel",
+    "#": "minecraft:stick"
+  },
+  "pattern": [
+    "PAS",
+    " # ",
+    " # "
+  ],
+  "result": {
+    "id": "multitool:copper_multitool"
+  }
+}

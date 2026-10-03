@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "multitool",
+  "key": {
+    "P": "minecraft:iron_pickaxe",
+    "A": "minecraft:iron_axe",
+    "S": "minecraft:iron_shovel",
+    "#": "minecraft:stick"
+  },
+  "pattern": [
+    "PAS",
+    " # ",
+    " # "
+  ],
+  "result": {
+    "id": "multitool:iron_multitool"
+  }
+}

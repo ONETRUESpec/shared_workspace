@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "multitool",
+  "key": {
+    "P": "minecraft:wooden_pickaxe",
+    "A": "minecraft:wooden_axe",
+    "S": "minecraft:wooden_shovel",
+    "#": "minecraft:stick"
+  },
+  "pattern": [
+    "PAS",
+    " # ",
+    " # "
+  ],
+  "result": {
+    "id": "multitool:wooden_multitool"
+  }
+}

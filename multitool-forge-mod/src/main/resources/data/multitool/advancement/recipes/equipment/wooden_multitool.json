@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_wooden_pickaxe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:wooden_pickaxe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_wooden_axe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:wooden_axe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_wooden_shovel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:wooden_shovel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipes": "multitool:wooden_multitool"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_wooden_pickaxe",
+      "has_wooden_axe",
+      "has_wooden_shovel"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "multitool:wooden_multitool"
+    ]
+  }
+}
