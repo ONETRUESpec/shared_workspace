@@ -1,0 +1,130 @@
+{
+  "facet": "Once Human combat deviations (deviants): skills, buffs, debuffs, scaling",
+  "dataFile": "/home/user/shared_workspace/once-human-build-planner/data/deviants.json",
+  "notesFile": "/home/user/shared_workspace/once-human-build-planner/research/deviants.md",
+  "gameVersionCovered": "Game-client datamine <= March 2026 (post Dec-18-2025 Combat Deviations overhaul) for formulas; official Steam patch notes Versions 2.0-2.2.3 (Jul-Dec 2025); community model at Version 2.3.8 (May 2026); roster/traits snapshots Sep 2026; Version 3.0.7 (Sep 28 2026) only via search summaries",
+  "confidence": "medium",
+  "recordCount": 27,
+  "keyClaims": [
+    {
+      "claim": "Combat-deviation effect magnitudes are linear in Skill Rating (deviation_degree): value = base + step*SR with base = 3*step in every captured case, so SR5 = 2x SR1.",
+      "evidence": "Game-client formulas: Butterfly '18.9+deviation_degree*6.3', Lonewolf '18.75+deviation_degree*6.25', Snowsprite '37.5+deviation_degree*12.5' & '18+deviation_degree*6', Shattered Maiden '30+deviation_degree*10', Mini Feaster '7.5+deviation_degree*2.5' cap '30+deviation_degree*10', Whalepup '16.875+deviation_degree*5.625'. Pyro Dino external endpoints 19.6% -> 39.2% = 4.9*4 -> 4.9*8 match SR=1..5.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/lReDragol/OnceHuman_Tools/blob/master/tools/extract_once_human_deviations.py",
+        "https://theriagames.com/guide/once-human-pyro-dino/"
+      ],
+      "confidence": "high for formulas, medium for 1-based indexing"
+    },
+    {
+      "claim": "Butterfly's Emissary marks the target's Weakspot: Weakspot DMG taken +25.2/31.5/37.8/44.1/50.4% (SR1-5) for 5 s.",
+      "evidence": "Client string '标记该目标的弱点部位，使其受到的弱点伤害+{0}%，持续{1}秒' with {0}=18.9+6.3*deviation_degree, {1}=5. Older wiki values 15-40% superseded.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://once-human.fandom.com/wiki/Butterfly's_Emissary"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Lonewolf's Whisper makes its target take +25/31.25/37.5/43.75/50% Weapon DMG (SR1-5), pulls aggro, and spawns 1 clone when the target dies.",
+      "evidence": "Client string '攻击的目标受到枪械伤害+{0}%' with 18.75+deviation_degree*6.25.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Mini Feaster gives the PLAYER +10/12.5/15/17.5/20% Status DMG per tentacle (one tentacle every 1.5 s), capped at 40/50/60/70/80% (SR1-5) - the largest player-side offensive buff among combat deviations.",
+      "evidence": "Client string '每生成{2}个触手，提升玩家{3}%的异常伤害，上限{4}%' with interval 1.5, 7.5+deviation_degree*2.5, 30+deviation_degree*10.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Shattered Maiden makes non-boss enemies in its frontal cone take +40/50/60/70/80% Explosion (Blast) DMG and slows/roots them; Snowsprite makes targets take +24-48% Frost DMG and its ice crystals shatter for 50-100% Frost DMG every 3 s; Whalepup makes targets take +22.5-45% Weapon DMG plus +15% Vulnerability while Drowning.",
+      "evidence": "Client formulas 30+10*deg; 18+6*deg and 37.5+12.5*deg (interval 3); 16.875+5.625*deg and flat 15.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Deviation attack damage is Psi-Intensity-scaled Status/Elemental DMG: Polar Jelly 'Attacks deal 800% Psi Intensity as Frost Status DMG and inflict 39.2% Frost Vulnerability'; Ice Spikes 250% Psi Intensity when a Frost Vortex is generated in range (buffed Aug 28 2025 from 640%/36%/215%).",
+      "evidence": "Official 'Update Preview: August Balance Adjustments' (Steam news, 2025-08-25) verbatim.",
+      "sources": [
+        "https://github.com/DanII1Mg/Text_analysis_cw/blob/main/data/once_human_news.csv",
+        "https://store.steampowered.com/news/app/2139460"
+      ],
+      "confidence": "high for the SR-max numbers; SR scaling inferred"
+    },
+    {
+      "claim": "Community damage model: deviation skill damage = PsiIntensity x baseFactor with no crit/weakspot/vulnerability; Butterfly's Emissary 1.2 (120%/hit), Soul Summoner 6.0 (600%), ZapCam/Lonewolf 8.0 (quarantined).",
+      "evidence": "OHMM mechanicRegistry.ts entries (damageScalingBucket 'deviation', scalingStat 'psiIntensity', canCrit false, canWeakspot false), all flagged 'reported_current_patch_needs_testing', Version 2.3.8.",
+      "sources": [
+        "https://github.com/TeeReckzi/OHMM/blob/main/src/ohai/src/engine/mechanicRegistry.ts",
+        "https://github.com/TeeReckzi/OHMM/blob/main/src/ohai/src/engine/formulaApplicator.ts"
+      ],
+      "confidence": "low-medium"
+    },
+    {
+      "claim": "Voodoo Doll: half of the player's damage taken is borne by the doll; at Skill Rating 5 its Vulnerability effect is 60%, it gains +100% of the player's Max HP, and its ultimate deals 250% Psi Intensity per second to the nearest 5 enemies within 20 m (3.0.7 corrected the tooltip from 500%).",
+      "evidence": "Client string '玩家所受伤害的一半由异常物承担'; fandom page + Version 3.0.7 notes (search summaries).",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://once-human.fandom.com/wiki/Voodoo_Doll",
+        "https://www.oncehuman.game/news/update/20260924/40780_1315053.html",
+        "https://allthings.how/once-human-patch-3-0-7-free-5-5-deviations-and-beastmaster-summon-buff/"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Post Dec-18-2025 overhaul: each combat deviation has a Battle Skill (cooldown) and an Ultimate that fires when Deviation Power is full and consumes Power; switching deviations clears Power and resets the Battle Skill cooldown.",
+      "evidence": "Official dev blog 'Combat Deviations Major Upgrade' (search summary); 2.2.0 bug fix 'Deviant Power was not consumed when the Soul Summoner used its skills'; Dark Resonance set text 'Consumes 30 Deviant Power when using Battle Skill, reduces cooldown by 50%'.",
+      "sources": [
+        "https://www.oncehuman.game/news/devBlog/20251218/40781_1277420.html",
+        "https://github.com/DanII1Mg/Text_analysis_cw/blob/main/data/once_human_news.csv",
+        "https://github.com/TeeReckzi/OHMM/blob/main/verified/INGAME_KNOWLEDGE_BIBLE.md"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Deviation traits are exact, stackable player modifiers: Crack Shot Weapon DMG +5%; Psychic Kid Status DMG +5%; Starfall Inversion variants +5% (7.5% airborne) Melee/Blaze/Frost/Status DMG; Lonewolf Lunar Oracle Weapon DMG +5% (x1.5 under 30% Sanity); Butterfly Starry Night +6% Weapon & Status DMG at night; Festering Gel Marine Star random +5% Weapon or Status DMG per reload; Covert Energy Max Deviant Power +10-35%; Power Rewind recovery +5/10%.",
+      "evidence": "ohwikiguide Deviation Trait Page snapshot (verbatim effect lines).",
+      "sources": [
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json",
+        "https://ohwikiguide.com/Deviation_Trait_Page"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Cradle/gear hooks for a calculator: 'Deviation Handling: Summoning Deviation grants Status DMG +30% for 20 seconds'; 'Deviation Master: While a Deviation is present, DMG against bosses and elites +50%' (alt. +25%); 'Energy Surge: every 8s at night Deviations recover 1 Deviant Power' (alt. airborne 6/s); TEC9 Additional Rules refunds 25% magazine as Deviant Power (max 20); Pivot Step Leather Boots reset Battle Skill cooldown after the Ultimate.",
+      "evidence": "OHDB cradle.json scrape and OHMM in-game OCR bible.",
+      "sources": [
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/cradle.json",
+        "https://github.com/TeeReckzi/OHMM/blob/main/verified/INGAME_KNOWLEDGE_BIBLE.md"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "The 2026 combat roster is ~27 entries: Butterfly's Emissary, Lonewolf's Whisper, Festering Gel, Pyro Dino, Mr. Wish, Shattered Maiden, Polar Jelly, Dr. Teddy, Enchanting Void, Voodoo Doll, Zeno-Purifier, Zapamander, By-the-Wind, Radiant One, Grumpy Bulb, Mini Feaster, Mini Wonder, Snowsprite, Invincible Sun, ZapCam, Soul Summoner, Whalepup, dogs (Brave George, Behemoth, Chuckles, Watcher) and Chaos variants; Frog the Leaper, Digby Boy, Hug-in-a-Bowl, Rebecca, Wish Box, Nutcracker, Electric Eel are not combat deviations.",
+      "evidence": "ohwikiguide combat list (23) + OHDB combat list (31 incl. Chaos ids 992xxxxx and dogs) + client is_combat flags.",
+      "sources": [
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "openQuestions": [
+    "Exact Battle Skill and Ultimate text, Deviation Power cost, cooldown and duration for every combat deviation after the Dec-18-2025 overhaul (official blog and 2026 wikis were unreachable; only Zapamander sprint, By-the-Wind wind wall, Voodoo Doll 250% Psi/s and Festering Gel 'Gel Shield' are partially known).",
+    "Is deviation_degree 1-based (Skill Rating 1-5, assumed) or 0-based? If 0-based, all SR1 values in the data file are ~20% too high.",
+    "Base max Deviation Power per deviation and its natural recovery rate; how Mood (Activity Rating) affects uptime or damage.",
+    "Missing coefficients: Pyro Dino Blaze-taken % (only 19.6/39.2 endpoints), Soul Summoner and Zapamander vulnerability %, Invincible Sun burn parameters, Enchanting Void melee speed/HP %, Mr. Wish/ZapCam/Zeno-Purifier/Dr. Teddy numbers.",
+    "Whether deviation damage can crit, hit weakspots, or benefit from Vulnerability/Bull's Eye (community model says none; unverified), and whether Skill Rating scales the Psi coefficients (800%/39.2% for Polar Jelly assumed to be SR5).",
+    "Version 3.0.7 (Sep 28 2026) specifics: what changed for Soul Summoner and Whalepup, Beastmaster triple-summon rules, any cooldown/Power retunes in 3.0.x.",
+    "Whether Lonewolf's Whisper and Mr. Wish actually apply The Bull's Eye (tier lists say yes; client string for Lonewolf does not mention it) and the base Bull's Eye vulnerability (8%?) and duration (10 or 12 s)."
+  ]
+}

@@ -1,0 +1,1957 @@
+{
+  "_meta": {
+    "facet": "existing Once Human community calculators / planners / spreadsheets and real in-game test vectors",
+    "generatedAt": "2026-10-03",
+    "gameVersion": "Mixed. In-game screenshots: 2026-03-02 (pre-3.0, after the 2026-01-21 v2.3.1 mod rework). Official runtime tables: decoded from the PC/MEmu script.npk in June-July 2026 (OHMM). meta-builds.net export: game v3.0.5 (fetched 2026-09-25). OHDB mirrors: 2026-05-15 and 2026-09-25. Calculator repos: 2024-09 to 2026-09-25.",
+    "sources": [
+      "https://github.com/KremaOps/once-human-calculator",
+      "https://raw.githubusercontent.com/KremaOps/once-human-calculator/main/index.html",
+      "https://github.com/getzity/dmgcalculator_oh",
+      "https://github.com/serhatalmez/oncehuman-damagecalc",
+      "https://github.com/Abhijanbasyal/OncehUmanCalculator",
+      "https://github.com/bramsey679/Once_Human_DPS_Calculator",
+      "https://github.com/TheDevilsKnock/OHCalc",
+      "https://github.com/thachvn0296/OH-Calculator",
+      "https://oh-calculator.vercel.app/",
+      "https://github.com/TeeReckzi/OHMM",
+      "https://github.com/0x91CEA55/OnceHuman",
+      "https://0x91cea55.github.io/OnceHuman",
+      "https://github.com/lReDragol/OnceHuman_Tools",
+      "https://github.com/josephfmmarzin-ai/ONCE_HUMAN",
+      "https://github.com/saitoh183/once-human-build-planner",
+      "https://github.com/Heirloom146/omni-human-db-planner",
+      "https://github.com/moabdrabou/OnceHuman-Builds",
+      "https://meta-builds.net/damage-calculator",
+      "https://meta-builds.net/api/get/allData",
+      "https://www.oncehumandb.com/build",
+      "https://wikily.gg/once-human/build-planner/",
+      "https://ohdex.gg/build-tool",
+      "https://www.oncehuman.game/news/update/20250521/40780_1235763.html",
+      "https://www.oncehuman.game/news/update/20260121/40780_1282991.html",
+      "https://www.oncehuman.game/news/devBlog/20241123/40781_1195665.html",
+      "https://www.oncehuman.game/news/devBlog/20250922/40781_1260687.html",
+      "https://www.oncehuman.game/news/devBlog/20260212/40781_1287008.html",
+      "https://www.reddit.com/r/OnceHumanOfficial/comments/1ergsub/detailed_info_about_damages/",
+      "https://www.reddit.com/r/OnceHumanOfficial/comments/1eayowm/once_human_weapon_features/",
+      "https://steamcommunity.com/sharedfiles/filedetails/?id=3479671509",
+      "https://steamcommunity.com/app/2139460/discussions/0/4514381493108126337/",
+      "https://sportskeeda.com/mmo/once-human-status-damage-vs-elemental-damage-explained",
+      "https://www.youtube.com/watch?v=vB7BukhR9O0",
+      "https://docs.google.com/spreadsheets/d/1bLqxzNMyZ9rQe3GbzFQ9nlqH9H_98zOCecPe7iV_0YU/",
+      "https://game8.co/games/Once-Human/archives/466957",
+      "https://game8.co/games/Once-Human/archives/466935"
+    ],
+    "notes": "Environment limits: WebSearch budget exhausted after ~12 queries and the egress proxy blocked meta-builds.net, oncehumandb.com, wikily.gg, ohdex.gg, steamcommunity.com, reddit.com, youtube.com, docs.google.com, the wikis, game8, maxroll, mobalytics, web.archive.org. Everything here was read from GitHub (github.com pages, raw.githubusercontent.com) including mirrored OHDB/meta-builds data, decoded official game tables (OHMM) and in-game screenshots (0x91CEA55), which were read as images. Units: percentages are plain numbers meaning percent; multipliers are decimals; fire rate RPM; times in seconds. 'star' is 1-based (1..6) as shown on the card. KEY FINDING: in-game Tier V weapon card DMG = round(officialGunPresetAttack[artLevel 5] x presetAttackRatio[star]) where ratio = 1 + 0.05 x (star-1) for epic/legendary; OHDB's listed damage is the artLevel-4 value (~1/1.52 of the card)."
+  },
+  "calculators": [
+    {
+      "name": "Meta-Builds Damage Calculator / Build Planner (meta-builds.net)",
+      "url": "https://meta-builds.net/damage-calculator",
+      "accessible": false,
+      "formula": "NOT READABLE (site egress-blocked). Site blurb (via search snippet): 'calculate non-critical hits, average critical damage, weakspot damage, burst DPS, sustained DPS, magazine damage, and reload downtime'. Its public data export (https://meta-builds.net/api/get/allData, mirrored in josephfmmarzin-ai/ONCE_HUMAN data/metabuilds/allData.json, fetched 2026-09-25) contains NO formula and no weapon base-damage numbers; weapon 'gears' entries carry only effect text.",
+      "inputs": [
+        "weapon",
+        "armor set pieces",
+        "mods (123 mod records incl. legacy/current title)",
+        "cradle (58)",
+        "calibrations (37, legacy numeric effects + 'verified_family' text)",
+        "deviations (295)",
+        "build type",
+        "server difficulty"
+      ],
+      "dataCovered": [
+        "weapons (231 gear rows incl. armor)",
+        "sets (20)",
+        "mods + mod_system levels 1-17 with sub-stat level table",
+        "cradles",
+        "calibrations",
+        "deviations",
+        "food? (not in export)",
+        "metaPicks/recommended builds"
+      ],
+      "lastUpdated": "allData export fetched 2026-09-25; metaPicks reviewed 2026-09-04 for game version 3.0.5",
+      "criticisms": "Formula not published; mod_system.stats rows say 'numeric_level_values_unresolved' (stat keys known, per-level values not). Calibration rows marked legacy_effect vs verified_family (post-rework calibrations only have text)."
+    },
+    {
+      "name": "Once Human Database (OHDB) Build Planner (oncehumandb.com)",
+      "url": "https://www.oncehumandb.com/build",
+      "accessible": false,
+      "formula": "NOT READABLE (site egress-blocked). Search snippet: 'Plan your Once Human loadout with weapons, armor, mods, deviations, and memetics. See DPS calculations, armor set bonuses, cradle overrides, and share builds via URL.' Weapon pages expose Damage, RPM, Magazine, Reload, Crit Rate, Crit DMG, Weakspot DMG, Full/Min Damage Range, Min Damage % (parsed by lReDragol tools/import_once_human_db.py).",
+      "inputs": [
+        "weapons",
+        "armor",
+        "mods",
+        "deviations",
+        "memetics",
+        "cradle overrides",
+        "calibration",
+        "food",
+        "animal skins"
+      ],
+      "dataCovered": [
+        "126 weapons with T5 damage/RPM (mirrored in saitoh183 data/weapons.json)",
+        "armor",
+        "mods (393 KB mirror)",
+        "calibration blueprints (37, names only in mirror)",
+        "cradle",
+        "deviations",
+        "food (2,800+ recipes per Heirloom146)",
+        "animal skins"
+      ],
+      "lastUpdated": "mirror snapshots 2026-05-15 (saitoh183) and 2026-09-25 (josephfmmarzin-ai); site itself updated continuously",
+      "criticisms": "Its 'Tier 5' Damage values equal the official gunPresetAttack at artLevel 4 (e.g. DE.50 Jaws 494, SOCR 174), NOT what the in-game endgame Tier V weapon card shows (751 / 264 at 1 star): every in-game card is ~1.52x the OHDB number before star scaling. Any calculator seeded from OHDB (OHCalc examples, lReDragol, saitoh183, joseph) inherits this offset."
+    },
+    {
+      "name": "Wikily Once Human Build Planner & Calculator",
+      "url": "https://wikily.gg/once-human/build-planner/",
+      "accessible": false,
+      "formula": "NOT READABLE (egress-blocked). Search snippet: 'create, manage, and optimize character builds for PvE and PvP ... gear, mods, stats'.",
+      "inputs": [
+        "gear",
+        "mods",
+        "stats"
+      ],
+      "dataCovered": [
+        "item pages, mods, armor/weapon blueprints, comparisons (per OHMM research notes)"
+      ],
+      "lastUpdated": null,
+      "criticisms": "No published formula found."
+    },
+    {
+      "name": "OhDex Build Tool",
+      "url": "https://ohdex.gg/build-tool",
+      "accessible": false,
+      "formula": "NOT READABLE (egress-blocked). 'choose weapons, mods, armor, and more; save and share builds'. Used by bramsey679 as weapon/mod name source.",
+      "inputs": [
+        "weapons",
+        "mods",
+        "armor"
+      ],
+      "dataCovered": [
+        "weapon list",
+        "mod list"
+      ],
+      "lastUpdated": null,
+      "criticisms": "No DPS formula evidence; appears to be a loadout sharer."
+    },
+    {
+      "name": "OH Calculator (thachvn0296/OH-Calculator, live at oh-calculator.vercel.app)",
+      "url": "https://github.com/thachvn0296/OH-Calculator",
+      "accessible": true,
+      "formula": "Sidebar.tsx: base = activeBase=='weapon' ? baseWeaponDmg : psi; elementMult = elementModifierEnabled ? elementModifier : 1; totalMultiplier = product(factors.map(v => 1 + v)) * elementMult; finalDamage = base * totalMultiplier. Default INITIAL_FACTORS: Weapon DMG 1.43, Weakspot DMG 1.59, Crit DMG 1.70 (i.e. +143%, +159%, +170% buckets). Grid: per stat category rows Flat/Bonus/Total across 14 columns (Gun, Hat, Mask, Top, Glove, Pant, Shoes, 3x Star, 2x Food, 2x Drink); Min = sum of flats, Max = sum of flats+bonuses.",
+      "inputs": [
+        "Base Weapon DMG or PSI Intensity (one active)",
+        "Element modifier toggle",
+        "free-form factor list (Weapon DMG %, Weakspot DMG %, Crit DMG %, Elemental DMG %, Status DMG %, Element Final DMG %, All Damage Bonus %, Debuff %)",
+        "per-slot flat/bonus grid"
+      ],
+      "dataCovered": [
+        "no weapon/mod database; user-entered numbers only"
+      ],
+      "lastUpdated": "2026-06-15 (7 commits, master)",
+      "criticisms": "Purely multiplicative generic model; no crit chance, no fire rate/DPS, no additive crit+weakspot bucket, no target mitigation. OHCalc spec rates its Once Human fidelity 'insufficient'."
+    },
+    {
+      "name": "KremaOps Community Damage & Build Calculator",
+      "url": "https://github.com/KremaOps/once-human-calculator",
+      "accessible": true,
+      "formula": "index.html calculateDPS(): adjustedBase = baseDmg * (1 + totalWeaponPct) where totalWeaponPct = hide flat Weapon DMG (Shark Hide +4.5%, Starfall Cowhide mask +16%, Starfall Down +10%) + sum of custom multipliers; normalHit = adjustedBase * (1 + weakspotMult); critHit = adjustedBase * (1 + critDmg + weakspotMult)  [crit and weakspot ADDITIVE]; avgHit = normalHit*(1-critRate) + critHit*critRate; burstDPS = avgHit * RPM/60; standardDPS = avgHit*mag / (mag/(RPM/60) + reload); sustained3Mags = 3*mag*avgHit / (3*magFireTime + 2*reload). 4-piece hide sets: Rabbit +20% weakspot (airborne), Wolf +6% weakspot (team), Deer +15% crit DMG, Bear +6% Frost/Shock, Wool +6% status (team).",
+      "inputs": [
+        "Base Damage",
+        "Crit Damage %",
+        "Weakspot Damage %",
+        "Crit Chance %",
+        "Fire Rate RPM",
+        "Magazine Size",
+        "Reload Time s",
+        "weakspot toggle",
+        "custom multipliers (food, whims, cradle)",
+        "6 armor-slot animal hide selections"
+      ],
+      "dataCovered": [
+        "animal hide set bonuses only; no weapon/mod/deviation database"
+      ],
+      "lastUpdated": "2026-09-24 (27 commits, all same day)",
+      "criticisms": "All custom multipliers are summed into one additive Weapon-DMG bucket (no separate Attack/Elemental/Status/Enemy-type/Vulnerability buckets); no target mitigation; hide numbers unsourced."
+    },
+    {
+      "name": "getzity dmgcalculator_oh",
+      "url": "https://github.com/getzity/dmgcalculator_oh",
+      "accessible": true,
+      "formula": "finalDamage = baseDamage * (1 + weaponDamageBonus) * (1 + enemyDamageBonus) * (1 + weakspotMultiplier) * (1 + critDamage); reducedDamage = finalDamage * (1 - weaponDamageReduction) * (1 - torsoDamageReduction) * (1 - statusDamageReduction). Defaults 300 / 20% / 8% / 8% / 30% / 10% / 10% / 5%.",
+      "inputs": [
+        "Base Damage",
+        "Weapon Damage Bonus %",
+        "Damage Bonus Against Enemies %",
+        "Weakspot Multiplier %",
+        "Critical Damage %",
+        "Weapon/Torso/Status Damage Reduction %"
+      ],
+      "dataCovered": [
+        "none (manual inputs)"
+      ],
+      "lastUpdated": "2024-09-05 (1 commit)",
+      "criticisms": "Treats crit and weakspot as MULTIPLICATIVE with each other (conflicts with community additive model); multiplies three reductions that may not stack that way; no crit chance or DPS."
+    },
+    {
+      "name": "serhatalmez oncehuman-damagecalc",
+      "url": "https://github.com/serhatalmez/oncehuman-damagecalc",
+      "accessible": true,
+      "formula": "script.js: damage = base (Base Damage or PSI Intensity); if Kukri buff: base*1.3 (weapon) or psi*1.2; then for each user multiplier m>0: damage *= (1 + m/100); DPS = damage * fireRate(shots/s). Up to 10 multipliers, presets in localStorage.",
+      "inputs": [
+        "Damage type (Base Damage | PSI Intensity)",
+        "value",
+        "Kukri buff toggle",
+        "Fire Rate shots/s",
+        "N multipliers %"
+      ],
+      "dataCovered": [
+        "none"
+      ],
+      "lastUpdated": "2025-10-19 (1 commit; repo updated 2025-12-02)",
+      "criticisms": "Every bonus multiplicative (no additive buckets), no crit/weakspot modelling."
+    },
+    {
+      "name": "Abhijanbasyal OncehUmanCalculator (Java Swing)",
+      "url": "https://github.com/Abhijanbasyal/OncehUmanCalculator",
+      "accessible": true,
+      "formula": "Not read (Java source not fetched). README: inputs Psi Intensity (required), Elemental Damage, Status Damage, Weapon Bonus, Weakspot Bonus, Crit Rate, Crit Damage; 'enter 30 for 30%'.",
+      "inputs": [
+        "Psi Intensity",
+        "Elemental DMG %",
+        "Status DMG %",
+        "Weapon Bonus %",
+        "Weakspot Bonus %",
+        "Crit Rate %",
+        "Crit DMG %"
+      ],
+      "dataCovered": [
+        "none"
+      ],
+      "lastUpdated": "2025-07-20",
+      "criticisms": "Psi-centric; formula unverified."
+    },
+    {
+      "name": "bramsey679 Once_Human_DPS_Calculator (starter)",
+      "url": "https://github.com/bramsey679/Once_Human_DPS_Calculator",
+      "accessible": true,
+      "formula": "PLACEHOLDER only: score = 1000 * weaponMultiplier * (1 + star*0.08 + tier*0.05 + calibration*0.03) * (1 + armorPieces*0.03) * (1 + mods*0.02) * (1 + cradle*0.015) * enemyMultiplier * (pvp?0.88:1) * patchMultiplier. README: 'Replace the placeholder score in app.js with real Once Human formula branches'. data/formulas.json only lists layers (base, flat additions, percent additions, crit branch, weakspot branch, target mitigation, mode reduction, keyword overrides) and one constant bounce_base_multiplier 0.4 (official dev blog 2024-11-23).",
+      "inputs": [
+        "weapon",
+        "patch (2024-11-23 bounce rework, 2025-06-17 balance, 2026-01-21 v2.3.1)",
+        "star 0-5",
+        "tier 0-5",
+        "calibration 0-5",
+        "enemy profile",
+        "mode",
+        "6 armor slots",
+        "mods",
+        "cradle"
+      ],
+      "dataCovered": [
+        "weapons.json (names only, all stats null)",
+        "mods.json (Game8-derived effect text)",
+        "armor.json (3 bounce pants)",
+        "cradles.json (1)",
+        "targets.json (modelled HP/armor/DR profiles, invented)"
+      ],
+      "lastUpdated": "2026-06-04 (2 commits)",
+      "criticisms": "No real formula; target profiles are invented placeholders."
+    },
+    {
+      "name": "TheDevilsKnock/OHCalc weapon-calculation-spec (spec pack, no implementation)",
+      "url": "https://github.com/TheDevilsKnock/OHCalc",
+      "accessible": true,
+      "formula": "02-core-formulas.md: effectiveDamagePerShot = damagePerShot*(1+attackBonus)*(1+weaponDamageBonus)*(1+allDamageBonus)*(1+enemyTypeDamageBonus) [assumption]; effectiveRpm = rpm*(1+fireRateBonus); effectiveMagazine = floor(mag*(1+magBonus)); finalReloadingTime = baseReloadingTime/(1+reloadEfficiencyBonus) [canonical, official 2025-05-21 note], reloadSpeed also divides [assumption]; range: piecewise linear from effectiveRange to minDamageRange down to minRangeDamageMultiplier; hitQualityBonus = (isWeakspot?weakspotTotal:0)+(isCrit?critTotal:0); physicalWeaponHit = effectiveDamagePerShot*rangeMultiplier*(1+hitQualityBonus)*target.armorMultiplier*target.weaponDamageTakenMultiplier*(1+vulnerabilityBonus) [crit+weakspot additive: observed]; expectedBulletDamage = four-outcome weighted sum with pWeak and pCrit; sustainedDps = mag*expectedShot/(mag/sps + reload); magDumpDps = cycleDamage/((mag-1)*shotInterval). 03-weapon-effects: effectDamage = base(coefficient) * damageTypeMult * elementMult * statusMult * targetResist * pvpMult; Shrapnel 0.55x weapon dmg per part (SOCR); Burn tick = psi*coef*(1+status)*(1+blaze), 0.5s tick, 6s, 5 stacks; Boom!Boom! explosion 300% Psi; Power Surge coefficients 60%/100%/150%; Frost Vortex 30% Psi/s; Unstable Bomber delay +20% per 0.1s; Bull's Eye vulnerability 8%.",
+      "inputs": [
+        "weapon record (damage, rpm, mag, reload, crit, critDmg, weakspot, ranges, pellets)",
+        "BuildStats (attack, weaponDmg, allDmg, weakspot, critRate, critDmg, elemental{}, status, psi, reloadSpeed, reloadEfficiency, fireRate, magCap, vulnerability, enemyType{}, pvp)",
+        "Target (enemyType, distance, armorMultiplier, damageTaken multipliers, resistances, statusImmune, weakspotAvailable)",
+        "HitProfile (weakspotChance, forceCrit/forceWeakspot, pellets hit)"
+      ],
+      "dataCovered": [
+        "2 example payloads: KVD Boom!Boom! (168 dmg, 500 rpm, 100 mag, 5.1 s reload, 10/30/40, range 27-81 m, 30% min) and SOCR Last Valor (174, 515, 30, 2.3 s, 6/27/60, range 27-76 m, 30%) using OHDB T5 numbers",
+        "JSON schema"
+      ],
+      "lastUpdated": "2026-06-25 (2 commits)",
+      "criticisms": "Self-labelled confidence: core hit model 'assumption/observed', armor/defense 'unknown', rounding 'unknown'. Uses OHDB T5 values that are ~1.52x below in-game cards."
+    },
+    {
+      "name": "OHMM / OHAI Once Human Master Calculator (TeeReckzi/OHMM)",
+      "url": "https://github.com/TeeReckzi/OHMM",
+      "accessible": true,
+      "formula": "formulaTemplates.ts (patch context 'May 2026 / Version 2.3.8', confidence reported_current_patch_needs_testing): Physical = Base Weapon DMG x (1+Attack%) x (1+Weapon DMG Bonus%) x (1 + Crit DMG% + Weakspot DMG%) x (1+Weapon Vulnerability%) x (1+Enemy Type DMG%); Charged hybrid status = (Psi x Status Base Factor) x (1+Elemental%) x (1+Status%) x (1+Keyword/Suffix%) x (1+Crit/Weakspot modifier) x (1+Status Vulnerability%) x (1+Enemy Type%); Burn stack DoT = (Psi x 0.12 + flat) x stacks x (1+Status%) x (1+Elemental%) x (1+Keyword%) x (1+Human%) x (1-DoT resist) x (1-0.15 x BurnResistDebuffLevel) x (1+StatusVuln) x (1+EnemyType) x crit/weakspot if eligible; tick 0.5 s / frequency multiplier (README older model: weaponDMG x 0.04 x stacks). Deviation skill = Psi x base factor (Butterfly 1.2, ZapCam/Lone Wolf 8.0, Soul Summoner 6.0). Universal bucket resolver: damage = base x intrinsicScaling x PRODUCT over buckets of (1 + sum(contributor%)/100). Recovered OFFICIAL terminal formula (soul_id 331): final_attack = max(base_attack * final_attack_additional_rate * final_attack_ignore_dam_rate * final_special_regulate_factor, 0); sub-recipe final_attack_additional_rate = 1 + use_final_dam_add_rate x (weapon_attack_add_rate + attack_type_dam_add_rate + gun_type_dam_add_rate + element_type_dam_add_rate + keyword_proc_dam_add_rate + species/human/debuff add rates). Default leaves: pvp_adjust_factor 1, special_regulate_factor 1, crit/anomaly/weak_random_speed_factor 0.8 (PRD).",
+      "inputs": [
+        "weapon (blueprint, stars, tier, calibration, attachments, ammo)",
+        "6 armor slots",
+        "7 mod slots (core + suffix tier 1-5)",
+        "cradle perks",
+        "deviation",
+        "food/drink + Chef Rex",
+        "PvE target / PvP mode"
+      ],
+      "dataCovered": [
+        "verified registries from CN/TW community sheet 七日世界.xlsx: weapons (79 rows, CN names), armor, armor sets, mod core/suffix effects, food buffs, deviations, star-tier scaling (upgrade costs), fur materials",
+        "decoded script.npk official runtime catalog: 2,289 weapon equipment rows, 1,993 gun preset attack rows (per equipOriginId/artLevel), 315 gun runtime rows (fire interval, reload times, falloff), 342 bullet rows, 1,488 buff definitions, 1,075 blueprint-calibration rows (presetAttackRatio per strengthLv + base crit/critDmg/weakspot), calibration global config",
+        "OFFICIAL_WEAPON_STAT_AUDIT.json (110 weapons, 67 matched to official attack ladders)"
+      ],
+      "lastUpdated": "2026-07-14 (first push 2026-06-30)",
+      "criticisms": "All 23 'observed damage cases' are tagged SYNTHETIC PLACEHOLDER (no real in-game hits); 3 documented expected-FAILs (EBR fire ring, Frost Vortex, Power Surge model conflicts); UI audit 2026-07-04 found Psi Intensity stat weight negative (bug) and 'Data confidence: Placeholder'; PvP mitigation engine not wired."
+    },
+    {
+      "name": "0x91CEA55/OnceHuman combat simulator (live: 0x91cea55.github.io/OnceHuman)",
+      "url": "https://github.com/0x91CEA55/OnceHuman",
+      "accessible": true,
+      "formula": "damage-formula-engine-abstraction.md: DMG = PRODUCT{Ci}; Elemental: DMG = (KwIntrinsicScaling * PsiIntensity) * PRODUCT{PFi}; Non-elemental: DMG = (KwIntrinsicScaling * AttackDMG) * PRODUCT{PFi}. ADR-002 universal buckets (each = 1 + sum%/100, all multiplied): WeaponDamage, ElementalDamage, StatusDamage, AttackPercent, HitAmplifier (Crit DMG + Weakspot DMG + keyword crit DMG ADDITIVE inside), TargetNormal/Elite/Boss, Vulnerability, per-keyword Factor and Final buckets (Burn, Frost Vortex, Power Surge, Shrapnel, Unstable Bomber, Bounce). 'DMG Coefficient' text = Factor bucket; 'Ultimate DMG' = Final bucket. keywords.ts intrinsic scaling: Burn 0.12 x Psi (trigger 18%, no crit/weakspot by default), Shrapnel 0.6 x projectile dmg (crit+weakspot ok), Frost Vortex 0.5 x Psi, Power Surge 1.0 x Psi, Unstable Bomber 0.7 x Psi (can crit), Bounce 0.6 x projectile dmg. Expected damage = four-outcome scan weighted by crit rate and weakspot hit rate.",
+      "inputs": [
+        "weapon (star, tier, calibration, mod with 4 substats)",
+        "6 armor pieces (star/tier/calibration + mod)",
+        "ammo type (Steel +5% weapon/psi)",
+        "encounter conditions (enemy type, HP%, shield%, sanity, ammo%)",
+        "seeded RNG Monte Carlo"
+      ],
+      "dataCovered": [
+        "typed registry of ~20 legendary weapons with T5/6-star card stats from screenshots",
+        "47-weapon datamine JSON (Tier-I-like base stats)",
+        "all_armor_stats.json (HP/pollution/psi per slot x rarity x star 1-6 x level 1-5 + calibration bonuses)",
+        "91 mods",
+        "12 armor set bonuses + 33 key armor effects (OCR from in-game)",
+        "Lunar/Crescent suffix caps"
+      ],
+      "lastUpdated": "2026-03-10 (started 2026-03-01)",
+      "criticisms": "Datamine README warns data may be inaccurate/outdated; only one real in-game validation (the '113 Test'); 'enhancing accuracy of ingested data via in-game testing' commit but no published hit logs."
+    },
+    {
+      "name": "lReDragol OnceHuman_Tools Portable Calculator V2.8 (desktop, Python/DearPyGui)",
+      "url": "https://github.com/lReDragol/OnceHuman_Tools",
+      "accessible": true,
+      "formula": "context_module.py DamageCalculator: damage = damage_per_projectile; damage *= (1 + (weapon_damage_percent + status_damage_percent [+ melee_damage_percent if melee])/100)  [weapon and status % summed in ONE bucket]; damage *= (1 + damage_bonus_<normal|elite|boss>/100); crit roll (random <= crit_rate_percent): damage *= (1 + crit_damage_percent/100); if weakspot: damage *= (1 + weakspot_damage_percent/100)  [crit and weakspot MULTIPLICATIVE]; then apply_dynamic_damage_bonuses: x(1+vulnerability%) x(1+marked_target% [+weakspot/crit variants] if Bull's Eye) x(1+damage_to_shocked_target%) x(1+fast_gunner_weapon_damage%) x element/keyword-specific %. Status: calculate_status_damage = base x(1+status%) x(1+elemental%) x prod(1+bonus_stat%) x dynamic. Keyword defaults (resolve_damage_formula): Shrapnel 0.5 x attack x(1+weapon%)x(1+shrapnel%), can crit/weakspot; Power Surge 0.5 x Psi (+shock%, +power_surge%), 6 s status; Celestial Thunder 2.0 x Psi; Explosion 1.0 x Psi then Burn; Burn tick 0.4 x Psi per stack, tick 1.0 s, 6 s; Frost Vortex 0.6 x Psi single hit (no DoT); Bounce 0.6 x attack per hit. Simulation runs against a target dummy with DPS graph.",
+      "inputs": [
+        "weapon (star, level, calibration, attachments: sight/muzzle/underbarrel/magazine/stock)",
+        "6 armor items (star/level/calibration)",
+        "7 mods + secondary attributes (108 families decoded from game)",
+        "deviation (from decompiled deviation tables)",
+        "dummy enemy type, HP",
+        "character stat inputs (crit chance, crit dmg, weapon/status/weakspot %)"
+      ],
+      "dataCovered": [
+        "131 weapons (OHDB-imported base stats incl. ranges, reload)",
+        "armor stats + sets",
+        "mods_config (91) + mod_secondary_attributes (627 KB)",
+        "weapon_attachments",
+        "deviations (game-extracted)",
+        "example_builds.json (5 presets from Game8/Gameplay.tips at 6-star/level 5/calibration 6)"
+      ],
+      "lastUpdated": "2026-03-19 (30 commits; calculator work 2026-03-16..19)",
+      "criticisms": "Weapon+status % additive in one bucket and crit x weakspot multiplicative both contradict the additive-hit-amplifier model used by OHMM/0x91CEA55/OHCalc; keyword coefficients are hard-coded defaults; OHDB-based damage understates in-game cards by ~1.52x."
+    },
+    {
+      "name": "josephfmmarzin-ai/ONCE_HUMAN bilingual build planner + optimizer",
+      "url": "https://github.com/josephfmmarzin-ai/ONCE_HUMAN",
+      "accessible": true,
+      "formula": "optimizer.js estimate(): base = damage*rpm/60; mult(x) = (1+wd/100)*(1+fr/100)*(1+min(1,cr0+cr/100)*(cd0+cd/100))*(1+whr*(ws0+ws/100)) with cr0 = (weapon crit +5)/100, cd0 = (weapon critDmg + 50)/100, ws0 = weapon weakspot/100, whr = weakspot-hit-rate guess by weapon type (melee 0.2, default 0.4); statusIdx = (1+st/100)*(1+kw/100). README: 'Scoring engine (game effects weighted), not the game's exact formula: displayed gains are indicative'; conditional effects counted ~70%.",
+      "inputs": [
+        "weapon",
+        "goal (dps, crit dmg, crit rate, weakspot, elemental/status, keyword, survival)",
+        "HP style (normal / <=50% / <30% Lunar)",
+        "allow key armor"
+      ],
+      "dataCovered": [
+        "OHDB JSON mirror (weapons, armor, calibrations, cradle, deviations, mods, food, animal skins)",
+        "meta-builds allData export (game v3.0.5)",
+        "sets, unique pieces, deviations FR, hide sets, 4 preloaded builds"
+      ],
+      "lastUpdated": "2026-09-25 (5 commits)",
+      "criticisms": "Explicitly not the game formula; crit model treats crit DMG as (critDmg+0.5) multiplier guess; no in-game validation."
+    },
+    {
+      "name": "saitoh183 once-human-build-planner (OHBot)",
+      "url": "https://github.com/saitoh183/once-human-build-planner",
+      "accessible": true,
+      "formula": "NONE - loadout tracker only (no damage computation).",
+      "inputs": [
+        "primary/secondary weapon + mods + calibrations",
+        "mask/head/legs/shoes/top + animal skins + armor mods",
+        "combat deviation",
+        "8 cradle overrides",
+        "2 food + 2 Chef food",
+        "HP type"
+      ],
+      "dataCovered": [
+        "OHDB JSON: weapons (126 with T5 damage/rpm), armor, calibrations (37), cradle, deviations, food, mods, animal skins"
+      ],
+      "lastUpdated": "2026-05-15 (23 commits since 2026-04-30)",
+      "criticisms": "No math; useful only as an OHDB data mirror."
+    },
+    {
+      "name": "Heirloom146 omni-human-db-planner (PROJECT TITAN)",
+      "url": "https://github.com/Heirloom146/omni-human-db-planner",
+      "accessible": true,
+      "formula": "NONE found (tools/README describes an OHDB scraper producing weapons/armor/mods/calibrations/deviations/cradle/food/animal-skins JSON; database/ folder only has SCHEMA.md).",
+      "inputs": [],
+      "dataCovered": [
+        "planned OHDB mirror"
+      ],
+      "lastUpdated": null,
+      "criticisms": "Empty database in repo."
+    },
+    {
+      "name": "moabdrabou/OnceHuman-Builds",
+      "url": "https://github.com/moabdrabou/OnceHuman-Builds",
+      "accessible": true,
+      "formula": "Not inspected (React + Supabase build database; description: 'custom UI for theorycrafting').",
+      "inputs": [],
+      "dataCovered": [
+        "community builds"
+      ],
+      "lastUpdated": "2026-03-22",
+      "criticisms": "Not a calculator."
+    },
+    {
+      "name": "Community spreadsheets referenced but NOT reachable",
+      "url": "https://docs.google.com/spreadsheets/d/1bLqxzNMyZ9rQe3GbzFQ9nlqH9H_98zOCecPe7iV_0YU/",
+      "accessible": false,
+      "formula": "Unknown. 'MOD SHEET LIST' Google Sheet linked from YouTube 'DAMAGE TYPES EXPLAINED, HOW TO INCREASE YOUR DAMAGE! - NOOB TO PRO #18'; 0x91CEA55 raw.json cites 'Community spreadsheets (Farmerzez, Mawn, OhDex)'; OHMM's locked registries come from the CN/TW sheet '七日世界.xlsx' (43 sheets incl. 武器防具星級 = Weapon & Armor Stars).",
+      "inputs": [],
+      "dataCovered": [],
+      "lastUpdated": null,
+      "criticisms": "docs.google.com and youtube.com are egress-blocked in this environment; contents unverified."
+    }
+  ],
+  "testVectors": [
+    {
+      "id": "TV-CARD-01",
+      "description": "In-game weapon card (Gear panel, Tier V, 2-star): DE.50 - Jaws shows DMG 789, Fire Rate 190, MAG 9, Crit Rate 6%, Crit DMG 25%, Weakspot DMG 60%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-2.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "DE.50 - Jaws",
+        "tier": 5,
+        "star": 2,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10112301,
+        "blueprintNo": 13112301,
+        "officialGunPresetAttack_artLevel5": 751.0,
+        "officialGunPresetAttack_artLevel4": 494.0,
+        "ohdbListedDamageTier5": 494,
+        "officialPresetAttackRatioForStar": 1.05,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.06,
+          "E0200_critDmg": 0.25,
+          "E0300_weakspotDmg": 0.6
+        }
+      },
+      "expected": {
+        "displayedDMG": 789,
+        "fireRateRPM": 190,
+        "magazine": 9,
+        "critRatePct": 6,
+        "critDmgPct": 25,
+        "weakspotDmgPct": 60
+      },
+      "modelCheck": "round(751.0 x 1.05) = 789 vs displayed 789 (delta 0.45)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-02",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): DE.50 - Jaws shows DMG 939, Fire Rate 190, MAG 9, Crit Rate 6%, Crit DMG 25%, Weakspot DMG 60%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-FullStarsFullCalibsLvl5.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "DE.50 - Jaws",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10112301,
+        "blueprintNo": 13112301,
+        "officialGunPresetAttack_artLevel5": 751.0,
+        "officialGunPresetAttack_artLevel4": 494.0,
+        "ohdbListedDamageTier5": 494,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.06,
+          "E0200_critDmg": 0.25,
+          "E0300_weakspotDmg": 0.6
+        }
+      },
+      "expected": {
+        "displayedDMG": 939,
+        "fireRateRPM": 190,
+        "magazine": 9,
+        "critRatePct": 6,
+        "critDmgPct": 25,
+        "weakspotDmgPct": 60
+      },
+      "modelCheck": "round(751.0 x 1.25) = 939 vs displayed 939 (delta 0.25)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-03",
+      "description": "In-game weapon card (Gear panel, Tier V, 2-star): SOCR - The Last Valor shows DMG 277, Fire Rate 515, MAG 30, Crit Rate 6%, Crit DMG 27%, Weakspot DMG 60%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-2.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "SOCR - The Last Valor",
+        "tier": 5,
+        "star": 2,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10411301,
+        "blueprintNo": 13411301,
+        "officialGunPresetAttack_artLevel5": 264.0,
+        "officialGunPresetAttack_artLevel4": 174.0,
+        "ohdbListedDamageTier5": 174,
+        "officialPresetAttackRatioForStar": 1.05,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.06,
+          "E0200_critDmg": 0.27,
+          "E0300_weakspotDmg": 0.6
+        }
+      },
+      "expected": {
+        "displayedDMG": 277,
+        "fireRateRPM": 515,
+        "magazine": 30,
+        "critRatePct": 6,
+        "critDmgPct": 27,
+        "weakspotDmgPct": 60
+      },
+      "modelCheck": "round(264.0 x 1.05) = 277 vs displayed 277 (delta -0.2)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-04",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): SOCR - The Last Valor shows DMG 330, Fire Rate 515, MAG 30, Crit Rate 6%, Crit DMG 27%, Weakspot DMG 60%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "SOCR - The Last Valor",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10411301,
+        "blueprintNo": 13411301,
+        "officialGunPresetAttack_artLevel5": 264.0,
+        "officialGunPresetAttack_artLevel4": 174.0,
+        "ohdbListedDamageTier5": 174,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.06,
+          "E0200_critDmg": 0.27,
+          "E0300_weakspotDmg": 0.6
+        }
+      },
+      "expected": {
+        "displayedDMG": 330,
+        "fireRateRPM": 515,
+        "magazine": 30,
+        "critRatePct": 6,
+        "critDmgPct": 27,
+        "weakspotDmgPct": 60
+      },
+      "modelCheck": "round(264.0 x 1.25) = 330 vs displayed 330 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-05",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): AWS.338 - Bullseye shows DMG 2310, Fire Rate 40, MAG 5, Crit Rate 2%, Crit DMG 26%, Weakspot DMG 95%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-2.png + FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "AWS.338 - Bullseye",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10521401,
+        "blueprintNo": 13521401,
+        "officialGunPresetAttack_artLevel5": 1848.0,
+        "officialGunPresetAttack_artLevel4": 1216.0,
+        "ohdbListedDamageTier5": 1216,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.02,
+          "E0200_critDmg": 0.26,
+          "E0300_weakspotDmg": 0.95
+        }
+      },
+      "expected": {
+        "displayedDMG": 2310,
+        "fireRateRPM": 40,
+        "magazine": 5,
+        "critRatePct": 2,
+        "critDmgPct": 26,
+        "weakspotDmgPct": 95
+      },
+      "modelCheck": "round(1848.0 x 1.25) = 2310 vs displayed 2310 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-06",
+      "description": "In-game weapon card (Gear panel, Tier V, 2-star): ACS12 - Corrosion shows DMG 220x5, Fire Rate 180, MAG 18, Crit Rate 8%, Crit DMG 27%, Weakspot DMG 15%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-1.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "ACS12 - Corrosion",
+        "tier": 5,
+        "star": 2,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10231301,
+        "blueprintNo": 13231301,
+        "officialGunPresetAttack_artLevel5": 210.0,
+        "officialGunPresetAttack_artLevel4": 138.0,
+        "ohdbListedDamageTier5": 138,
+        "officialPresetAttackRatioForStar": 1.05,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.27,
+          "E0300_weakspotDmg": 0.15
+        }
+      },
+      "expected": {
+        "displayedDMG": 220,
+        "fireRateRPM": 180,
+        "magazine": 18,
+        "critRatePct": 8,
+        "critDmgPct": 27,
+        "weakspotDmgPct": 15,
+        "pelletsPerShot": 5
+      },
+      "modelCheck": "round(210.0 x 1.05) = 220 vs displayed 220 (delta -0.5)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-07",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): ACS12 - Corrosion shows DMG 262x5, Fire Rate 180, MAG 18, Crit Rate 8%, Crit DMG 27%, Weakspot DMG 15%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "ACS12 - Corrosion",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10231301,
+        "blueprintNo": 13231301,
+        "officialGunPresetAttack_artLevel5": 210.0,
+        "officialGunPresetAttack_artLevel4": 138.0,
+        "ohdbListedDamageTier5": 138,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.27,
+          "E0300_weakspotDmg": 0.15
+        }
+      },
+      "expected": {
+        "displayedDMG": 262,
+        "fireRateRPM": 180,
+        "magazine": 18,
+        "critRatePct": 8,
+        "critDmgPct": 27,
+        "weakspotDmgPct": 15,
+        "pelletsPerShot": 5
+      },
+      "modelCheck": "round(210.0 x 1.25) = 262 vs displayed 262 (delta -0.5)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-08",
+      "description": "In-game weapon card (Gear panel, Tier V, 2-star): ACS12 - Pyroclasm Starter shows DMG 220x5, Fire Rate 180, MAG 18, Crit Rate 8%, Crit DMG 27%, Weakspot DMG 15%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-2.png (star row not captured; same value as Corrosion 2-star) (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "ACS12 - Pyroclasm Starter",
+        "tier": 5,
+        "star": 2,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10234301,
+        "blueprintNo": 13234301,
+        "officialGunPresetAttack_artLevel5": 210.0,
+        "officialGunPresetAttack_artLevel4": 138.0,
+        "ohdbListedDamageTier5": 138,
+        "officialPresetAttackRatioForStar": 1.05,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.27,
+          "E0300_weakspotDmg": 0.15
+        }
+      },
+      "expected": {
+        "displayedDMG": 220,
+        "fireRateRPM": 180,
+        "magazine": 18,
+        "critRatePct": 8,
+        "critDmgPct": 27,
+        "weakspotDmgPct": 15,
+        "pelletsPerShot": 5
+      },
+      "modelCheck": "round(210.0 x 1.05) = 220 vs displayed 220 (delta -0.5)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-09",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): ACS12 - Pyroclasm Starter shows DMG 262x5, Fire Rate 180, MAG 18, Crit Rate 8%, Crit DMG 27%, Weakspot DMG 15%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "ACS12 - Pyroclasm Starter",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10234301,
+        "blueprintNo": 13234301,
+        "officialGunPresetAttack_artLevel5": 210.0,
+        "officialGunPresetAttack_artLevel4": 138.0,
+        "ohdbListedDamageTier5": 138,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.27,
+          "E0300_weakspotDmg": 0.15
+        }
+      },
+      "expected": {
+        "displayedDMG": 262,
+        "fireRateRPM": 180,
+        "magazine": 18,
+        "critRatePct": 8,
+        "critDmgPct": 27,
+        "weakspotDmgPct": 15,
+        "pelletsPerShot": 5
+      },
+      "modelCheck": "round(210.0 x 1.25) = 262 vs displayed 262 (delta -0.5)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-10",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): KVD - Boom! Boom! shows DMG 319, Fire Rate 500, MAG 100, Crit Rate 10%, Crit DMG 30%, Weakspot DMG 40%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-1.png + FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "KVD - Boom! Boom!",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10631301,
+        "blueprintNo": 13631301,
+        "officialGunPresetAttack_artLevel5": 255.0,
+        "officialGunPresetAttack_artLevel4": 168.0,
+        "ohdbListedDamageTier5": 168,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.1,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.4
+        }
+      },
+      "expected": {
+        "displayedDMG": 319,
+        "fireRateRPM": 500,
+        "magazine": 100,
+        "critRatePct": 10,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 40
+      },
+      "modelCheck": "round(255.0 x 1.25) = 319 vs displayed 319 (delta 0.25)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-11",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): MPS7 - Outer Space shows DMG 240, Fire Rate 850, MAG 35, Crit Rate 8%, Crit DMG 30%, Weakspot DMG 50%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-1.png + FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "MPS7 - Outer Space",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10333401,
+        "blueprintNo": 13333401,
+        "officialGunPresetAttack_artLevel5": 192.0,
+        "officialGunPresetAttack_artLevel4": 126.0,
+        "ohdbListedDamageTier5": 126,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.5
+        }
+      },
+      "expected": {
+        "displayedDMG": 240,
+        "fireRateRPM": 850,
+        "magazine": 35,
+        "critRatePct": 8,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 50
+      },
+      "modelCheck": "round(192.0 x 1.25) = 240 vs displayed 240 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-12",
+      "description": "In-game weapon card (Gear panel, Tier V, 2-star): MPS5 - Kumawink shows DMG 227, Fire Rate 750, MAG 30, Crit Rate 8%, Crit DMG 30%, Weakspot DMG 55%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-2.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "MPS5 - Kumawink",
+        "tier": 5,
+        "star": 2,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10321301,
+        "blueprintNo": 13321301,
+        "officialGunPresetAttack_artLevel5": 216.0,
+        "officialGunPresetAttack_artLevel4": 142.0,
+        "ohdbListedDamageTier5": 142,
+        "officialPresetAttackRatioForStar": 1.05,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.55
+        }
+      },
+      "expected": {
+        "displayedDMG": 227,
+        "fireRateRPM": 750,
+        "magazine": 30,
+        "critRatePct": 8,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 55
+      },
+      "modelCheck": "round(216.0 x 1.05) = 227 vs displayed 227 (delta 0.2)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-13",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): MPS5 - Kumawink shows DMG 270, Fire Rate 750, MAG 30, Crit Rate 8%, Crit DMG 30%, Weakspot DMG 55%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "MPS5 - Kumawink",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10321301,
+        "blueprintNo": 13321301,
+        "officialGunPresetAttack_artLevel5": 216.0,
+        "officialGunPresetAttack_artLevel4": 142.0,
+        "ohdbListedDamageTier5": 142,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.55
+        }
+      },
+      "expected": {
+        "displayedDMG": 270,
+        "fireRateRPM": 750,
+        "magazine": 30,
+        "critRatePct": 8,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 55
+      },
+      "modelCheck": "round(216.0 x 1.25) = 270 vs displayed 270 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-14",
+      "description": "In-game weapon card (Gear panel, Tier V, 1-star): MPS5 - Primal Rage shows DMG 216, Fire Rate 750, MAG 30, Crit Rate 8%, Crit DMG 30%, Weakspot DMG 55%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-1.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "MPS5 - Primal Rage",
+        "tier": 5,
+        "star": 1,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10323401,
+        "blueprintNo": 13323401,
+        "officialGunPresetAttack_artLevel5": 216.0,
+        "officialGunPresetAttack_artLevel4": 142.0,
+        "ohdbListedDamageTier5": 142,
+        "officialPresetAttackRatioForStar": 1.0,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.55
+        }
+      },
+      "expected": {
+        "displayedDMG": 216,
+        "fireRateRPM": 750,
+        "magazine": 30,
+        "critRatePct": 8,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 55
+      },
+      "modelCheck": "round(216.0 x 1.0) = 216 vs displayed 216 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-15",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): MPS5 - Primal Rage shows DMG 270, Fire Rate 750, MAG 30, Crit Rate 8%, Crit DMG 30%, Weakspot DMG 55%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "MPS5 - Primal Rage",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10323401,
+        "blueprintNo": 13323401,
+        "officialGunPresetAttack_artLevel5": 216.0,
+        "officialGunPresetAttack_artLevel4": 142.0,
+        "ohdbListedDamageTier5": 142,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.55
+        }
+      },
+      "expected": {
+        "displayedDMG": 270,
+        "fireRateRPM": 750,
+        "magazine": 30,
+        "critRatePct": 8,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 55
+      },
+      "modelCheck": "round(216.0 x 1.25) = 270 vs displayed 270 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-16",
+      "description": "In-game weapon card (Gear panel, Tier V, 1-star): KAM - Abyss Glance shows DMG 228, Fire Rate 600, MAG 50, Crit Rate 6%, Crit DMG 30%, Weakspot DMG 55%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-2.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "KAM - Abyss Glance",
+        "tier": 5,
+        "star": 1,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10422301,
+        "blueprintNo": 13422301,
+        "officialGunPresetAttack_artLevel5": 228.0,
+        "officialGunPresetAttack_artLevel4": 150.0,
+        "ohdbListedDamageTier5": 150,
+        "officialPresetAttackRatioForStar": 1.0,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.06,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.55
+        }
+      },
+      "expected": {
+        "displayedDMG": 228,
+        "fireRateRPM": 600,
+        "magazine": 50,
+        "critRatePct": 6,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 55
+      },
+      "modelCheck": "round(228.0 x 1.0) = 228 vs displayed 228 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-17",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): KAM - Abyss Glance shows DMG 285, Fire Rate 600, MAG 50, Crit Rate 6%, Crit DMG 30%, Weakspot DMG 55%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "KAM - Abyss Glance",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10422301,
+        "blueprintNo": 13422301,
+        "officialGunPresetAttack_artLevel5": 228.0,
+        "officialGunPresetAttack_artLevel4": 150.0,
+        "ohdbListedDamageTier5": 150,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.06,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.55
+        }
+      },
+      "expected": {
+        "displayedDMG": 285,
+        "fireRateRPM": 600,
+        "magazine": 50,
+        "critRatePct": 6,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 55
+      },
+      "modelCheck": "round(228.0 x 1.25) = 285 vs displayed 285 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-18",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): HAMR - Brahminy shows DMG 1596, Fire Rate 85, MAG 8, Crit Rate 2%, Crit DMG 30%, Weakspot DMG 80%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-1.png + FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "HAMR - Brahminy",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10532401,
+        "blueprintNo": 13532401,
+        "officialGunPresetAttack_artLevel5": 1277.0,
+        "officialGunPresetAttack_artLevel4": 840.0,
+        "ohdbListedDamageTier5": 840,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.02,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.8
+        }
+      },
+      "expected": {
+        "displayedDMG": 1596,
+        "fireRateRPM": 85,
+        "magazine": 8,
+        "critRatePct": 2,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 80
+      },
+      "modelCheck": "round(1277.0 x 1.25) = 1596 vs displayed 1596 (delta -0.25)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-19",
+      "description": "In-game weapon card (Gear panel, Tier V, 1-star): MG4 - Conflicting Memories shows DMG 188, Fire Rate 700, MAG 75, Crit Rate 8%, Crit DMG 30%, Weakspot DMG 35%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-1.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "MG4 - Conflicting Memories",
+        "tier": 5,
+        "star": 1,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10624301,
+        "blueprintNo": 13624301,
+        "officialGunPresetAttack_artLevel5": 188.0,
+        "officialGunPresetAttack_artLevel4": 124.0,
+        "ohdbListedDamageTier5": 124,
+        "officialPresetAttackRatioForStar": 1.0,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.35
+        }
+      },
+      "expected": {
+        "displayedDMG": 188,
+        "fireRateRPM": 700,
+        "magazine": 75,
+        "critRatePct": 8,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 35
+      },
+      "modelCheck": "round(188.0 x 1.0) = 188 vs displayed 188 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-20",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): MG4 - Conflicting Memories shows DMG 235, Fire Rate 700, MAG 75, Crit Rate 8%, Crit DMG 30%, Weakspot DMG 35%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "MG4 - Conflicting Memories",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10624301,
+        "blueprintNo": 13624301,
+        "officialGunPresetAttack_artLevel5": 188.0,
+        "officialGunPresetAttack_artLevel4": 124.0,
+        "ohdbListedDamageTier5": 124,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.35
+        }
+      },
+      "expected": {
+        "displayedDMG": 235,
+        "fireRateRPM": 700,
+        "magazine": 75,
+        "critRatePct": 8,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 35
+      },
+      "modelCheck": "round(188.0 x 1.25) = 235 vs displayed 235 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-21",
+      "description": "In-game weapon card (Gear panel, Tier V, 1-star): G17 - Hazardous Object shows DMG 350, Fire Rate 410, MAG 13, Crit Rate 8%, Crit DMG 28%, Weakspot DMG 55%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-1.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "G17 - Hazardous Object",
+        "tier": 5,
+        "star": 1,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10133401,
+        "blueprintNo": 13133401,
+        "officialGunPresetAttack_artLevel5": 350.0,
+        "officialGunPresetAttack_artLevel4": 230.0,
+        "ohdbListedDamageTier5": 230,
+        "officialPresetAttackRatioForStar": 1.0,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.28,
+          "E0300_weakspotDmg": 0.55
+        }
+      },
+      "expected": {
+        "displayedDMG": 350,
+        "fireRateRPM": 410,
+        "magazine": 13,
+        "critRatePct": 8,
+        "critDmgPct": 28,
+        "weakspotDmgPct": 55
+      },
+      "modelCheck": "round(350.0 x 1.0) = 350 vs displayed 350 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-22",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): G17 - Hazardous Object shows DMG 438, Fire Rate 410, MAG 13, Crit Rate 8%, Crit DMG 28%, Weakspot DMG 55%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "G17 - Hazardous Object",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10133401,
+        "blueprintNo": 13133401,
+        "officialGunPresetAttack_artLevel5": 350.0,
+        "officialGunPresetAttack_artLevel4": 230.0,
+        "ohdbListedDamageTier5": 230,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.28,
+          "E0300_weakspotDmg": 0.55
+        }
+      },
+      "expected": {
+        "displayedDMG": 438,
+        "fireRateRPM": 410,
+        "magazine": 13,
+        "critRatePct": 8,
+        "critDmgPct": 28,
+        "weakspotDmgPct": 55
+      },
+      "modelCheck": "round(350.0 x 1.25) = 438 vs displayed 438 (delta 0.5)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-23",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): PDW90 - Holographic Resonance shows DMG 171, Fire Rate 900, MAG 50, Crit Rate 8%, Crit DMG 45%, Weakspot DMG 30%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-2.png + FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "PDW90 - Holographic Resonance",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10341401,
+        "blueprintNo": 13341401,
+        "officialGunPresetAttack_artLevel5": 137.0,
+        "officialGunPresetAttack_artLevel4": 90.0,
+        "ohdbListedDamageTier5": 90,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.08,
+          "E0200_critDmg": 0.45,
+          "E0300_weakspotDmg": 0.3
+        }
+      },
+      "expected": {
+        "displayedDMG": 171,
+        "fireRateRPM": 900,
+        "magazine": 50,
+        "critRatePct": 8,
+        "critDmgPct": 45,
+        "weakspotDmgPct": 30
+      },
+      "modelCheck": "round(137.0 x 1.25) = 171 vs displayed 171 (delta -0.25)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-24",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): TEC9 - Additional Rules shows DMG 449, Fire Rate 450, MAG 30, Crit Rate 10%, Crit DMG 30%, Weakspot DMG 45%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-2.png + FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "TEC9 - Additional Rules",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10361401,
+        "blueprintNo": 13361401,
+        "officialGunPresetAttack_artLevel5": 359.0,
+        "officialGunPresetAttack_artLevel4": 236.0,
+        "ohdbListedDamageTier5": 236,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.1,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.45
+        }
+      },
+      "expected": {
+        "displayedDMG": 449,
+        "fireRateRPM": 450,
+        "magazine": 30,
+        "critRatePct": 10,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 45
+      },
+      "modelCheck": "round(359.0 x 1.25) = 449 vs displayed 449 (delta 0.25)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-25",
+      "description": "In-game weapon card (Gear panel, Tier V, 3-star): KV-SBR - Little Jaws shows DMG 184, Fire Rate 1000, MAG 30, Crit Rate 10%, Crit DMG 30%, Weakspot DMG 45%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-1.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "KV-SBR - Little Jaws",
+        "tier": 5,
+        "star": 3,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10311301,
+        "blueprintNo": 13311301,
+        "officialGunPresetAttack_artLevel5": 167.0,
+        "officialGunPresetAttack_artLevel4": 110.0,
+        "ohdbListedDamageTier5": 110,
+        "officialPresetAttackRatioForStar": 1.1,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.1,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.45
+        }
+      },
+      "expected": {
+        "displayedDMG": 184,
+        "fireRateRPM": 1000,
+        "magazine": 30,
+        "critRatePct": 10,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 45
+      },
+      "modelCheck": "round(167.0 x 1.1) = 184 vs displayed 184 (delta 0.3)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-26",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): KV-SBR - Little Jaws shows DMG 209, Fire Rate 1000, MAG 30, Crit Rate 10%, Crit DMG 30%, Weakspot DMG 45%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "KV-SBR - Little Jaws",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10311301,
+        "blueprintNo": 13311301,
+        "officialGunPresetAttack_artLevel5": 167.0,
+        "officialGunPresetAttack_artLevel4": 110.0,
+        "ohdbListedDamageTier5": 110,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.1,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.45
+        }
+      },
+      "expected": {
+        "displayedDMG": 209,
+        "fireRateRPM": 1000,
+        "magazine": 30,
+        "critRatePct": 10,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 45
+      },
+      "modelCheck": "round(167.0 x 1.25) = 209 vs displayed 209 (delta 0.25)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-27",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): M416 - Silent Anabasis shows DMG 240, Fire Rate 750, MAG 36, Crit Rate 6%, Crit DMG 27%, Weakspot DMG 60%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-2.png + FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "M416 - Silent Anabasis",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10442301,
+        "blueprintNo": 13442301,
+        "officialGunPresetAttack_artLevel5": 192.0,
+        "officialGunPresetAttack_artLevel4": 126.0,
+        "ohdbListedDamageTier5": 126,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.06,
+          "E0200_critDmg": 0.27,
+          "E0300_weakspotDmg": 0.6
+        }
+      },
+      "expected": {
+        "displayedDMG": 240,
+        "fireRateRPM": 750,
+        "magazine": 36,
+        "critRatePct": 6,
+        "critDmgPct": 27,
+        "weakspotDmgPct": 60
+      },
+      "modelCheck": "round(192.0 x 1.25) = 240 vs displayed 240 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-28",
+      "description": "In-game weapon card (Gear panel, Tier V, 1-star): Compound Bow shows DMG 1812, Fire Rate 90, MAG 1, Crit Rate 2%, Crit DMG 28%, Weakspot DMG 70%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-2.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "Compound Bow",
+        "tier": 5,
+        "star": 1,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10731401,
+        "blueprintNo": 13731401,
+        "officialGunPresetAttack_artLevel5": 1812.0,
+        "officialGunPresetAttack_artLevel4": 1192.0,
+        "ohdbListedDamageTier5": 1192,
+        "officialPresetAttackRatioForStar": 1.0,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.02,
+          "E0200_critDmg": 0.28,
+          "E0300_weakspotDmg": 0.7
+        }
+      },
+      "expected": {
+        "displayedDMG": 1812,
+        "fireRateRPM": 90,
+        "magazine": 1,
+        "critRatePct": 2,
+        "critDmgPct": 28,
+        "weakspotDmgPct": 70
+      },
+      "modelCheck": "round(1812.0 x 1.0) = 1812 vs displayed 1812 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-29",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): Compound Bow shows DMG 2265, Fire Rate 90, MAG 1, Crit Rate 2%, Crit DMG 28%, Weakspot DMG 70%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "Compound Bow",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10731401,
+        "blueprintNo": 13731401,
+        "officialGunPresetAttack_artLevel5": 1812.0,
+        "officialGunPresetAttack_artLevel4": 1192.0,
+        "ohdbListedDamageTier5": 1192,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.02,
+          "E0200_critDmg": 0.28,
+          "E0300_weakspotDmg": 0.7
+        }
+      },
+      "expected": {
+        "displayedDMG": 2265,
+        "fireRateRPM": 90,
+        "magazine": 1,
+        "critRatePct": 2,
+        "critDmgPct": 28,
+        "weakspotDmgPct": 70
+      },
+      "modelCheck": "round(1812.0 x 1.25) = 2265 vs displayed 2265 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-30",
+      "description": "In-game weapon card (Gear panel, Tier V, 2-star): Critical Pulse shows DMG 1903, Fire Rate 90, MAG 1, Crit Rate 2%, Crit DMG 28%, Weakspot DMG 70%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-1.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "Critical Pulse",
+        "tier": 5,
+        "star": 2,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10732401,
+        "blueprintNo": 13732401,
+        "officialGunPresetAttack_artLevel5": 1812.0,
+        "officialGunPresetAttack_artLevel4": 1192.0,
+        "ohdbListedDamageTier5": 1192,
+        "officialPresetAttackRatioForStar": 1.05,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.02,
+          "E0200_critDmg": 0.28,
+          "E0300_weakspotDmg": 0.7
+        }
+      },
+      "expected": {
+        "displayedDMG": 1903,
+        "fireRateRPM": 90,
+        "magazine": 1,
+        "critRatePct": 2,
+        "critDmgPct": 28,
+        "weakspotDmgPct": 70
+      },
+      "modelCheck": "round(1812.0 x 1.05) = 1903 vs displayed 1903 (delta 0.4)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-31",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): Critical Pulse shows DMG 2265, Fire Rate 90, MAG 1, Crit Rate 2%, Crit DMG 28%, Weakspot DMG 70%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/FullStars (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "Critical Pulse",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10732401,
+        "blueprintNo": 13732401,
+        "officialGunPresetAttack_artLevel5": 1812.0,
+        "officialGunPresetAttack_artLevel4": 1192.0,
+        "ohdbListedDamageTier5": 1192,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.02,
+          "E0200_critDmg": 0.28,
+          "E0300_weakspotDmg": 0.7
+        }
+      },
+      "expected": {
+        "displayedDMG": 2265,
+        "fireRateRPM": 90,
+        "magazine": 1,
+        "critRatePct": 2,
+        "critDmgPct": 28,
+        "weakspotDmgPct": 70
+      },
+      "modelCheck": "round(1812.0 x 1.25) = 2265 vs displayed 2265 (delta 0.0)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-32",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): EBR-14 - Octopus! Grilled Rings! shows DMG 589, Fire Rate 300, MAG 20, Crit Rate 5%, Crit DMG 40%, Weakspot DMG 50%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-1.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "EBR-14 - Octopus! Grilled Rings!",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10561401,
+        "blueprintNo": 13561401,
+        "officialGunPresetAttack_artLevel5": 471.0,
+        "officialGunPresetAttack_artLevel4": 310.0,
+        "ohdbListedDamageTier5": 310,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.05,
+          "E0200_critDmg": 0.4,
+          "E0300_weakspotDmg": 0.5
+        }
+      },
+      "expected": {
+        "displayedDMG": 589,
+        "fireRateRPM": 300,
+        "magazine": 20,
+        "critRatePct": 5,
+        "critDmgPct": 40,
+        "weakspotDmgPct": 50
+      },
+      "modelCheck": "round(471.0 x 1.25) = 589 vs displayed 589 (delta 0.25)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-33",
+      "description": "In-game weapon card (Gear panel, Tier V, 6-star): DBSG - Doombringer shows DMG 452x6, Fire Rate 180, MAG 2, Crit Rate 10%, Crit DMG 30%, Weakspot DMG 25%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-2.png + FullStars (452x6 pellets) (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "DBSG - Doombringer",
+        "tier": 5,
+        "star": 6,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10213401,
+        "blueprintNo": 13213401,
+        "officialGunPresetAttack_artLevel5": 362.0,
+        "officialGunPresetAttack_artLevel4": 238.0,
+        "ohdbListedDamageTier5": 238,
+        "officialPresetAttackRatioForStar": 1.25,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.1,
+          "E0200_critDmg": 0.3,
+          "E0300_weakspotDmg": 0.25
+        }
+      },
+      "expected": {
+        "displayedDMG": 452,
+        "fireRateRPM": 180,
+        "magazine": 2,
+        "critRatePct": 10,
+        "critDmgPct": 30,
+        "weakspotDmgPct": 25,
+        "pelletsPerShot": 6
+      },
+      "modelCheck": "round(362.0 x 1.25) = 452 vs displayed 452 (delta -0.5)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-CARD-34",
+      "description": "In-game weapon card (Gear panel, Tier V, 2-star): SKS - Pathfinder shows DMG 574, Fire Rate 257, MAG 20, Crit Rate 5%, Crit DMG 40%, Weakspot DMG 50%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Weapon/WeaponsOverview-2.png (screenshots dated 2026-03-02; star count read from the card's star row); official ladder values from TeeReckzi/OHMM src/ohai/data/official/canonical_runtime/official-runtime-catalog.json (decoded script.npk)",
+      "inputs": {
+        "weapon": "SKS - Pathfinder",
+        "tier": 5,
+        "star": 2,
+        "level": "max (screenshot folder name 'Lvl5'; player Lv.50)",
+        "calibrationPerks": "unknown (6-star screenshot named 'FullCalibs')",
+        "equipOriginId_1star": 10551401,
+        "blueprintNo": 13551401,
+        "officialGunPresetAttack_artLevel5": 547.0,
+        "officialGunPresetAttack_artLevel4": 360.0,
+        "ohdbListedDamageTier5": 360,
+        "officialPresetAttackRatioForStar": 1.05,
+        "blueprintBaseCombatAttrs": {
+          "E0100_critRate": 0.05,
+          "E0200_critDmg": 0.4,
+          "E0300_weakspotDmg": 0.5
+        }
+      },
+      "expected": {
+        "displayedDMG": 574,
+        "fireRateRPM": 257,
+        "magazine": 20,
+        "critRatePct": 5,
+        "critDmgPct": 40,
+        "weakspotDmgPct": 50
+      },
+      "modelCheck": "round(547.0 x 1.05) = 574 vs displayed 574 (delta -0.35)",
+      "confidence": "high (displayed numbers read directly from screenshot; model reproduces all 33 readings within +/-0.5)"
+    },
+    {
+      "id": "TV-LADDER-01",
+      "description": "Official per-weapon base-attack ladder (gunPresetAttack by artLevel 0..9) for DE.50 - Jaws (gunNo 10112xxx, blueprint 13112301) and plain DE.50 (uncommon, blueprint 13111101). OHDB's 'Tier 5' value equals artLevel 4; in-game Tier V cards use artLevel 5; artLevel 6-9 hold a capped value (2x artLevel 4).",
+      "source": "TeeReckzi/OHMM official-runtime-catalog.json (gunPresetStats + weaponEquipments, decoded from script.npk 02913_64d8a7df.pyc / 02548_58575b3c.pyc)",
+      "inputs": {
+        "DE.50 - Jaws equipOriginId 10112300..10112309": "artLevel 0..9",
+        "DE.50 equipOriginId 10111100..10111105": "artLevel 0..5",
+        "equipOriginId 10112396": "equipLevel 50, artLevel 1"
+      },
+      "expected": {
+        "jawsAttackByArtLevel": [
+          99,
+          128,
+          198,
+          316,
+          494,
+          751,
+          988,
+          988,
+          988,
+          988
+        ],
+        "de50AttackByArtLevel": [
+          79,
+          102,
+          158,
+          252,
+          394,
+          599
+        ],
+        "jawsEquipLevel50Attack": 751,
+        "stepRatios_jaws": [
+          1.293,
+          1.547,
+          1.596,
+          1.563,
+          1.52,
+          1.316
+        ]
+      },
+      "confidence": "high for the numbers (official table); medium for the interpretation that artLevel = gear level bracket (artLevel 4 ~ level 40 'Tier V as listed by OHDB', artLevel 5 ~ level 50 endgame card)"
+    },
+    {
+      "id": "TV-STAR-01",
+      "description": "Official star (strengthLv) attack multiplier ladder from weapon_blueprint_calibration table: epic/legendary blueprints have 6 levels with presetAttackRatio 1.00, 1.05, 1.10, 1.15, 1.20, 1.25 (perkSlotCalibrationMax 2,3,4,5,6,7); uncommon DE.50 has 3 levels 1.0, 1.0625, 1.125; AA12 (common) 3 levels all 1.0. Other ratios present in the table: 1.05575, 1.06266, 1.0715, 1.1115, 1.12533, 1.143, 1.16725, 1.188, 1.223.",
+      "source": "TeeReckzi/OHMM official-runtime-catalog.json weaponBlueprintCalibrations (02106_493f74ec.pyc); confirmed by screenshot ratios 6-star/1-star = 1.25 (Compound Bow 2265/1812, KAM Abyss Glance 285/228, MG4 CM 235/188, Primal Rage 270/216, G17 438/350), 6-star/2-star = 1.1905, 6-star/3-star = 1.136 (Little Jaws 209/184)",
+      "inputs": {
+        "star": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "expected": {
+        "presetAttackRatio_epicLegendary": [
+          1.0,
+          1.05,
+          1.1,
+          1.15,
+          1.2,
+          1.25
+        ],
+        "presetAttackRatio_uncommonDE50": [
+          1.0,
+          1.0625,
+          1.125
+        ],
+        "calibrationSlotsUnlocked": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "confidence": "high"
+    },
+    {
+      "id": "TV-RUNTIME-01",
+      "description": "Official gun runtime record for DE.50 family (gunNo 10110011): autoTimeInterval 0.315 s (= 190.5 RPM, card shows 190), reloadLoopTime 1.78 s, reloadAddBulletTime 1.691 s, bulletSpeed 450, bulletFlyMaxDistance 200 m, distanceDamageValue1 [20.0, 1.0] and distanceDamageValue2 [32.0, 0.25] (full damage to 20 m, 25% at 32 m). Other matched ladders: ACS12/AA12 fireRate 109.1/180.2 RPM, reload loop 2/2.4/3 s; SOCR 333/400/500/514.6/600 RPM, reload 2.0-2.32 s; MG4 reload 3.47-5.5 s.",
+      "source": "TeeReckzi/OHMM official-runtime-catalog.json gunRuntimeStats (05509_bc5aafa8.pyc) and docs/OFFICIAL_WEAPON_STAT_AUDIT.json",
+      "inputs": {
+        "gunNo": 10110011
+      },
+      "expected": {
+        "autoTimeIntervalSec": 0.315,
+        "fireRateRPM": 190.5,
+        "reloadLoopTimeSec": 1.78,
+        "reloadAddBulletTimeSec": 1.691,
+        "fullDamageRangeM": 20,
+        "minDamageRangeM": 32,
+        "minDamageMultiplier": 0.25
+      },
+      "confidence": "high (official table); range semantics medium"
+    },
+    {
+      "id": "TV-PS-113",
+      "description": "'The 113 Test' (Power Surge, in-game): Psi Intensity 267, ACS12 - Corrosion (+15% Power Surge DMG Factor), Mayfly Goggles (-30% Power Surge DMG Coefficient), intrinsic Power Surge scaling 0.50 x Psi -> Factor bucket = 1 + (15-30)/100 = 0.85 -> 267 x 0.50 x 0.85 = 113.475, observed hit 113. Proves 'DMG Factor' and 'DMG Coefficient' are additive inside one multiplicative bucket.",
+      "source": "0x91CEA55/OnceHuman research/INGAME_KNOWLEDGE_BIBLE.md + ADR-002 (reported as in-game test by project lead, ~2026-03); re-stated in TeeReckzi/OHMM docs/ONCEHUMAN_MAIN_ARCHIVE_REPORT.md",
+      "inputs": {
+        "psiIntensity": 267,
+        "weapon": "ACS12 - Corrosion",
+        "powerSurgeDmgFactorPct": 15,
+        "helmet": "Mayfly Goggles (Power Surge DMG Coefficient -30%)",
+        "powerSurgeIntrinsicScaling": 0.5,
+        "otherBonuses": "assumed 0"
+      },
+      "expected": {
+        "powerSurgeHit": 113,
+        "computed": 113.475
+      },
+      "confidence": "medium (single community-reported in-game observation; not independently reproduced; note Corrosion's scaling 0.5 contradicts 0x91CEA55 weapons.ts value 0.35 and lReDragol default 0.5)"
+    },
+    {
+      "id": "TV-STATS-01",
+      "description": "Character stat sheet (Lv.50, Burn build with EBR-14 Octopus, BBQ Gloves, Flame Resonance core): Basic: Attack 20, Psi Intensity 915, HP 14107, Pollution Resist 80. Battle: Crit Rate 0.0%, Crit DMG 0.0%, Weakspot DMG 0.0%; Weapon DMG Bonus 36.0%, Melee DMG Bonus 36.0%, Status DMG Bonus 96.0%; Blaze Elemental 75.4%, Frost 65.6%, Shock 65.6%; Burn DMG Bonus 6.0%; Bonus vs Elite 13.5%, Boss 11.4%, Common 9.0%, Boss (2nd row) 13.5%; Burning Time 15.0%; Sprint Speed 24%. Defense: DMG Reduction 7.0%, Weapon DMG Reduction 7.2%, DMG from Deviants/Rosetta/Vultures -12%. Primary weapon panel: Attack 1011, Fire Rate 300, Magazine 20, Psi 915. Gear ratings: weapons 1724/1512/1704, armor 1396/1396/1438/1420/1396/1420.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/LoadoutUI/VariousLoadoutPanelWeaponModArmorHoverDetailsUI.png (2026-03-02)",
+      "inputs": {
+        "weapon": "EBR-14 - Octopus! Grilled Rings! (6-star card DMG 589)",
+        "mods": "Flame Resonance (weapon core: max Burn stack +2, Burn duration -20%), BBQ Gloves (Elemental Overload core: Elemental DMG +18%; suffix Elemental DMG +4% + extra 6.4% on shield; Status DMG +4% + 6% on shield; Weapon DMG Reduction +1.2%; DMG vs Elite +4.5%)"
+      },
+      "expected": {
+        "attackBasic": 20,
+        "psiIntensity": 915,
+        "maxHP": 14107,
+        "weaponDmgBonusPct": 36,
+        "statusDmgBonusPct": 96,
+        "blazeElementalPct": 75.4,
+        "burnDmgBonusPct": 6,
+        "primaryWeaponAttackPanel": 1011,
+        "primaryWeaponFireRate": 300,
+        "primaryWeaponMagazine": 20
+      },
+      "confidence": "high for the displayed numbers; the relation between weapon card DMG (589) and loadout 'Attack 1011' is UNRESOLVED (ratio 1.716)"
+    },
+    {
+      "id": "TV-STATS-02",
+      "description": "Character stat sheet with Gilded Gloves (same player, EBR-14 Burn build): Primary weapon Attack 902, Fire Rate 300, Magazine 20, Psi 1070, Max HP 15529; Crit Rate 50.0%, Crit DMG 101.4%, Weakspot DMG 0.0%, Burn Crit Rate 20.0%, Burn Crit DMG Bonus 20.0%; Weapon DMG Bonus 95.9%, Melee 36.0%, Status DMG Bonus 94.6%, Blaze Elemental 73.5%; Burn DMG Bonus 86.0%; Bonus vs Elite 31.5%, Boss 3.0% / 31.5%, Common 21.0%; Burning Time -5.0%; Sprint 39%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/CustomBuilds/GildedGloves.png",
+      "inputs": {
+        "gloves": "Gilded Gloves (Burn can crit; Burn Crit Rate/Crit DMG +20%)",
+        "weapon": "EBR-14 - Octopus! Grilled Rings!"
+      },
+      "expected": {
+        "primaryWeaponAttackPanel": 902,
+        "psiIntensity": 1070,
+        "critRatePct": 50,
+        "critDmgPct": 101.4,
+        "burnCritRatePct": 20,
+        "burnCritDmgPct": 20,
+        "weaponDmgBonusPct": 95.9,
+        "statusDmgBonusPct": 94.6,
+        "blazeElementalPct": 73.5,
+        "burnDmgBonusPct": 86
+      },
+      "confidence": "high (screenshot); no hit numbers"
+    },
+    {
+      "id": "TV-STATS-03",
+      "description": "Character stat sheet with BBQ Gloves (same player, weapon Fire Rate 330 variant): Primary weapon Attack 902, Fire Rate 330, Magazine 20, Psi 1052, Max HP 15721; Crit Rate 25.0%, Crit DMG 40.0%, Weakspot DMG 50.0%; Weapon DMG Bonus 68.0%, Melee 36.0%, Status DMG Bonus 128.0%; Blaze 91.3%, Frost 81.5%, Shock 81.5%; Burn DMG Bonus 87.0%; Elite 13.5%, Boss 17.4% / 13.5%, Common 9.0%; Burning Time -5.0%; Burn Trigger Chance Bonus 2.4%; Sprint 40%.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/CustomBuilds/BBQGloves.png",
+      "inputs": {
+        "gloves": "BBQ Gloves (Burn frequency up to +100% with stacks)"
+      },
+      "expected": {
+        "primaryWeaponAttackPanel": 902,
+        "fireRate": 330,
+        "psiIntensity": 1052,
+        "critRatePct": 25,
+        "critDmgPct": 40,
+        "weakspotDmgPct": 50,
+        "weaponDmgBonusPct": 68,
+        "statusDmgBonusPct": 128,
+        "blazeElementalPct": 91.3,
+        "burnDmgBonusPct": 87,
+        "burnTriggerChanceBonusPct": 2.4
+      },
+      "confidence": "high (screenshot); no hit numbers"
+    },
+    {
+      "id": "TV-ARMOR-01",
+      "description": "Armor overview cards (Tier V, star level not shown): Legendary Mask HP 462 / Pollution Resist 16 / Psi 144; Helmet 925/12/115; Top 2405/16/80; Pants 2220/12/92; Gloves 1388/12/86; Boots 1850/12/58. Epic: Mask 406/16/127; Helmet 813/12/101; Top 2113/16/71; Pants 1950/12/81; Gloves 1219/12/76; Boots 1625/12/50. Legendary/Epic ratio ~1.138 for HP and Psi.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Armor/ArmorOverview-Legendary-Epic-Tier-Base.png; compare datamine all_armor_stats.json (helmet legendary star1 level5: HP 590, PR 21, Psi 92; star6 level5: HP 738, Psi 115 -> matches helmet Psi 115 => screenshot cards are likely 6-star)",
+      "inputs": {
+        "tier": 5,
+        "rarity": [
+          "legendary",
+          "epic"
+        ],
+        "star": "probably 6 (helmet Psi 115 matches datamine star-6/level-5 row)"
+      },
+      "expected": {
+        "legendary": {
+          "mask": [
+            462,
+            16,
+            144
+          ],
+          "helmet": [
+            925,
+            12,
+            115
+          ],
+          "top": [
+            2405,
+            16,
+            80
+          ],
+          "pants": [
+            2220,
+            12,
+            92
+          ],
+          "gloves": [
+            1388,
+            12,
+            86
+          ],
+          "boots": [
+            1850,
+            12,
+            58
+          ]
+        },
+        "epic": {
+          "mask": [
+            406,
+            16,
+            127
+          ],
+          "helmet": [
+            813,
+            12,
+            101
+          ],
+          "top": [
+            2113,
+            16,
+            71
+          ],
+          "pants": [
+            1950,
+            12,
+            81
+          ],
+          "gloves": [
+            1219,
+            12,
+            76
+          ],
+          "boots": [
+            1625,
+            12,
+            50
+          ]
+        },
+        "fields": [
+          "HP",
+          "PollutionResist",
+          "PsiIntensity"
+        ]
+      },
+      "confidence": "high for numbers, medium for star attribution"
+    },
+    {
+      "id": "TV-SUFFIX-01",
+      "description": "Mod suffix caps by rarity (green/blue/purple/gold) from in-game list: Lunar ('lower HP -> higher'): Weapon DMG up to +4.8/7.2/9.6/12%; Elemental +6.4/9.6/12.8/16%; Crit DMG +12/18/24/30%; Status +4.8/7.2/9.6/12%. Crescent (base + extra at 40% shield): Crit DMG +4/6/8/10 base, extra up to +6/9/12/15; Elemental +2/3/4/5 base, extra +3.2/4.8/6.4/8; Weapon DMG +1.6/2.4/3.2/4 base, extra up to +2.4/3.6/4.8/6; Status DMG same as Weapon.",
+      "source": "0x91CEA55/OnceHuman research/data/ingame-screenshots/Mod/LunarCrescentSubstatPercents.png",
+      "inputs": {
+        "suffix": [
+          "Lunar",
+          "Crescent"
+        ],
+        "rarity": [
+          "green",
+          "blue",
+          "purple",
+          "gold"
+        ]
+      },
+      "expected": {
+        "lunarCritDmgPct": [
+          12,
+          18,
+          24,
+          30
+        ],
+        "lunarElementalPct": [
+          6.4,
+          9.6,
+          12.8,
+          16
+        ],
+        "lunarWeaponPct": [
+          4.8,
+          7.2,
+          9.6,
+          12
+        ],
+        "lunarStatusPct": [
+          4.8,
+          7.2,
+          9.6,
+          12
+        ],
+        "crescentCritDmgBasePct": [
+          4,
+          6,
+          8,
+          10
+        ],
+        "crescentCritDmgExtraPct": [
+          6,
+          9,
+          12,
+          15
+        ],
+        "crescentElementalBasePct": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "crescentElementalExtraPct": [
+          3.2,
+          4.8,
+          6.4,
+          8
+        ],
+        "crescentWeaponBasePct": [
+          1.6,
+          2.4,
+          3.2,
+          4
+        ],
+        "crescentWeaponExtraPct": [
+          2.4,
+          3.6,
+          4.8,
+          6
+        ]
+      },
+      "confidence": "high (screenshot text); may predate the 2026-01-21 mod rework"
+    },
+    {
+      "id": "TV-SYN-01",
+      "description": "SYNTHETIC regression fixture (0x91CEA55 burn-build-fidelity.test.ts, NOT in-game): EBR-14 Octopus + Gilded Gloves, base 100, Elemental +30%, Status +40%, keyword crit DMG +50% with forced burn crit, Burn factor 0 -> 100 x 1.3 x 1.4 x 1.5 = 273.",
+      "source": "https://github.com/0x91CEA55/OnceHuman simulator/src/__tests__/burn-build-fidelity.test.ts",
+      "inputs": {
+        "base": 100,
+        "elementalPct": 30,
+        "statusPct": 40,
+        "keywordCritDmgPct": 50,
+        "critRatePct": 100,
+        "burnFactorPct": 0
+      },
+      "expected": {
+        "finalDamage": 273
+      },
+      "confidence": "low as game truth (unit test of the simulator's own bucket model)"
+    },
+    {
+      "id": "TV-SYN-02",
+      "description": "SYNTHETIC OHMM observed-case placeholder: physical weapon hit with crit+weakspot, base 100, critRate 0.5, critDMG 2.5 (x), weakspot 0.8 -> additive multiplier 1 + (2.5-1) + 0.8 = 2.55 -> 255. Also Burn baseline: weaponDMG 100 x 0.04 x stacks x 1.15 x 1.10 = 5.06 (1 stack), 15.18 (3), 25.30 (5).",
+      "source": "https://github.com/TeeReckzi/OHMM src/ohai/src/engine/formulaObservedCases.ts (all cases tagged 'synthetic','placeholder')",
+      "inputs": {
+        "base": 100,
+        "critDmgMultiplier": 2.5,
+        "weakspotDmgPct": 80
+      },
+      "expected": {
+        "critWeakspotHit": 255
+      },
+      "confidence": "low as game truth (explicitly synthetic)"
+    },
+    {
+      "id": "TV-COMM-01",
+      "description": "Community crit/weakspot relation (not numerically captured): weakspot and crit stack with crit DMG and weakspot DMG ADDITIVE: weakspotCrit/body = 1 + critDmg + weakspotDmg (OHCalc 05-validation-plan 'Pass condition'); Steam thread 'Can weakspot hits trigger critical hits?' reports (normal*weakspot)*crit with one player seeing weakspot crits (yellow, 1.7-2.4k) LOWER than plain weakspots (red, 2.4-2.7k).",
+      "source": "https://www.reddit.com/r/OnceHumanOfficial/comments/1ergsub/detailed_info_about_damages/ (cited by OHCalc sources.md, not accessible here); https://steamcommunity.com/app/2139460/discussions/0/4514381493108126337/ (search snippet only)",
+      "inputs": {
+        "bodyNonCrit": "B",
+        "critDmgPct": "C",
+        "weakspotDmgPct": "W"
+      },
+      "expected": {
+        "bodyCrit": "B*(1+C)",
+        "weakspotNonCrit": "B*(1+W)",
+        "weakspotCrit": "B*(1+C+W) [additive model] vs B*(1+C)*(1+W) [getzity/lReDragol]"
+      },
+      "confidence": "low-medium (additive model is the majority community/calculator consensus but no raw numbers were obtainable)"
+    },
+    {
+      "id": "TV-TEXT-01",
+      "description": "In-game weapon feature text with coefficients (from screenshot OCR, Tier V cards): KVD Boom!Boom! explosion = 300% Psi Intensity Blaze DMG in 5 m, 2 s cooldown, 40% vs Meta-Humans, 18% Burn chance, Blaze Elemental +30%; MPS7 Outer Space lightning = 500% Shock Elemental DMG of Psi after 12 hits on surged target (40% vs Metas), 30% surge chance, Shock +30%; PDW90 AoE = 800% Attack weapon DMG every 12 hits (30% vs Metas); G17 Hazardous throw = (50% + ammo x 18%) of Psi capped 480% (28% vs Metas); SOCR shrapnel every 4 hits (crit counts 2), Shrapnel Crit DMG +30%; ACS12 Corrosion 80% Power Surge chance, PS crit +25%, PS DMG Factor +15%; EBR-14 Octopus 50% burn, Burn DMG +75%, max stacks -3, Burn crit rate +20%; HAMR Brahminy 75% bounce (35% vs Metas); KAM Abyss Glance Frost Vortex every 7 s, Frost +30%, FV frequency +100%; M416 Silent Anabasis ice crystal 100%->350% Psi; SKS Pathfinder ice spike 110% Attack as Frost status DMG, FV cooldown 5 s; KV-SBR Little Jaws UB every 0.9 s, delay +0.2 s, +15% UB DMG per 0.1 s delay; TEC9 Additional Rules bullets 120% Attack as elemental status DMG after Deviant skill; AWS.338 Bullseye 70% Bull's Eye on weakspot, Weakspot +25% x4 stacks; DBSG Doombringer Bull's Eye 30%/80% within 8 m, Attack +12% x3; Compound Bow Crit Rate +40% buff, UB DMG +30%; Critical Pulse continuous Power Surge 75% Psi every 0.5 s for 3 s, Shock +30%.",
+      "source": "0x91CEA55/OnceHuman screenshots WeaponsOverview-1/2/FullStars (2026-03-02), transcribed in INGAME_KNOWLEDGE_BIBLE.md; meta-builds export (game 3.0.5) shows CHANGED text for Corrosion: 70% chance, PS crit rate +15%, PS crit DMG +15% x10 stacks (vs 80% / +25% / +40% x5 on the March-2026 card).",
+      "inputs": {
+        "patch": "March 2026 cards vs meta-builds v3.0.5 export"
+      },
+      "expected": {
+        "note": "coefficients listed in description; use as keyword-proc test inputs"
+      },
+      "confidence": "high for the March-2026 text; weapon effects were rebalanced by v3.0.5 (Corrosion example)"
+    }
+  ]
+}

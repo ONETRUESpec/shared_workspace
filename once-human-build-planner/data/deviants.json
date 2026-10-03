@@ -1,0 +1,1771 @@
+{
+  "_meta": {
+    "facet": "Once Human combat deviations (deviants): skills, buffs, debuffs, scaling",
+    "generatedAt": "2026-10-03",
+    "gameVersion": "Mixed: game-client datamine (combat profiles) from a decompile dated <= March 2026 (post Dec-18-2025 'Combat Deviations Major Upgrade'); official Steam patch notes Jul-Dec 2025 (Versions 2.0-2.2.3); community model OHMM at Version 2.3.8 (May 2026); roster/traits from ohwikiguide snapshot Sep 2026 and OHDB 2026; Version 3.0.7 (Sep 28 2026) changes known only from search summaries.",
+    "sources": [
+      "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+      "https://github.com/lReDragol/OnceHuman_Tools/blob/master/tools/extract_once_human_deviations.py",
+      "https://github.com/TeeReckzi/OHMM/blob/main/src/ohai/src/engine/mechanicRegistry.ts",
+      "https://github.com/TeeReckzi/OHMM/blob/main/verified/INGAME_KNOWLEDGE_BIBLE.md",
+      "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+      "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json",
+      "https://ohwikiguide.com/Deviation_Main_Page",
+      "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+      "https://www.oncehumandb.com/deviations",
+      "https://github.com/saitoh183/once-human-build-planner/blob/main/data/cradle.json",
+      "https://github.com/DanII1Mg/Text_analysis_cw/blob/main/data/once_human_news.csv",
+      "https://store.steampowered.com/news/app/2139460",
+      "https://www.oncehuman.game/news/devBlog/20251218/40781_1277420.html",
+      "https://www.oncehuman.game/news/update/20260924/40780_1315053.html",
+      "https://once-human.fandom.com/wiki/Voodoo_Doll",
+      "https://once-human.fandom.com/wiki/Butterfly's_Emissary",
+      "https://once-human.fandom.com/wiki/Festering_Gel",
+      "https://theriagames.com/guide/once-human-pyro-dino/",
+      "https://allthings.how/once-human-patch-3-0-7-free-5-5-deviations-and-beastmaster-summon-buff/",
+      "https://github.com/0x91CEA55/OnceHuman/blob/main/research/data/custom-datamine/raw.json",
+      "https://oncehumanwiki.com/articles/once-human-combat-deviations-2026",
+      "https://sportskeeda.com/mmo/once-human-best-combat-deviants-ranked",
+      "https://gamerant.com/once-human-status-damage-explained/",
+      "https://game8.co/games/Once-Human/archives/Deviants-Butterflys-Emissary"
+    ],
+    "notes": "Research environment could not open any game wiki / official site directly (network egress blocked; web-search quota exhausted). Primary numeric source is the game-client datamine (lReDragol/OnceHuman_Tools bd_json/deviations.json, extracted from deviation_combat_config_data.pyc etc.), whose 13 combat profiles expose formulas in 'deviation_degree'. Secondary: official Steam news text (Aug 28 2025 Polar Jelly coefficients), ohwikiguide trait text (exact player buffs), OHDB ability names, OHMM community formula model. Values marked 'inferred' follow the pattern value = step*(3+SR). Battle Skill / Ultimate texts from the Dec-2025 overhaul are only partially known (search summaries) - see openQuestions in the summary file. Percentages are plain numbers meaning percent; multipliers as decimals (8.0 = 800%)."
+  },
+  "scalingRules": {
+    "skillRating": {
+      "aka": [
+        "Deviant Power rating",
+        "Skill (Deviant Power)",
+        "异能评级",
+        "deviation_degree in game data"
+      ],
+      "range": [
+        1,
+        5
+      ],
+      "description": "Each secured deviation has a Skill Rating 1-5 (shown as 'Deviant Power (Skill)') and an Activity Rating 1-5 (Mood). Game-client combat formulas are linear in deviation_degree: value = base + step*degree, and in every captured case base = 3*step, so value(SR) = step*(3+SR) and the SR5 value is exactly 2x the SR1 value. Interpretation of degree as SR 1..5 is supported by two independent published endpoints (Pyro Dino 19.6% -> 39.2%). If the client indexes degree 0..4 the SR1 values would be 20% lower (e.g. Butterfly 18.9%).",
+      "confidence": "medium-high for the formulas, medium for the 1..5 indexing"
+    },
+    "activityRating": {
+      "aka": [
+        "Mood",
+        "Activity"
+      ],
+      "range": [
+        1,
+        5
+      ],
+      "description": "Mood/Activity governs how long the deviation stays active (it drains in use and recovers at rest); no captured formula ties Mood to damage. OHMM lists 'scaling from activity rating and level not yet modeled'.",
+      "confidence": "medium"
+    },
+    "deviationPower": {
+      "description": "Deviant Power (also 'Deviation Power' / 'Energy') is the resource consumed by Battle Skills and the Ultimate after the Dec-18-2025 overhaul: the Ultimate can be activated when Deviation Power reaches max and consumes energy based on its effect; Battle Skills enter cooldown after use; switching the deployed deviation clears Deviation Power and resets the Battle Skill cooldown. Typical max pool quoted by guides: 30-100 (unverified). Modifiers: traits Covert Energy +10/20/25/30/35% max, Growing Pains +30/40/50% max, Stable Energy +30% max, Worn-Out -5/-10% max, Power Rewind +5/10% recovery, 'Infrasonic Illusion' variants +10-20% recovery, Upper Hand (legendary: at 0 Power consume all Mood to refill Power); cradle Energy Surge (night: +1 Power / 8 s; alt. airborne +6 Power / s); Dark Resonance set: Battle Skill consumes 30 Deviant Power and has -50% cooldown, +0.6% Gun & Status DMG per 1 Energy consumed up to +30%, +12% Weapon & Status DMG while Power not full, ultimate grants 10% shield for 10 s; TEC9 Additional Rules: reloading an empty magazine restores 25% magazine capacity as Deviant Power (max 20 points); Pivot Step Leather Boots: resets Battle Skill cooldown after using the Deviation Ultimate; Voodoo Doll - Starfall Inversion trait: +1 Power / 8 s (1.5 airborne).",
+      "confidence": "medium"
+    },
+    "damageScaling": {
+      "description": "Deviation attack/skill damage is Psi-Intensity-scaled Status/Elemental DMG (official Aug-28-2025 patch text for Polar Jelly: 'Attacks deal 800% Psi Intensity as Frost Status DMG'); community model (OHMM v2.3.8): damage = PsiIntensity x baseFactor, with Status DMG% and Elemental DMG% multipliers and no crit/weakspot by default. Not verified in-game for every deviant. Community keyword seeds for reference (not deviation-specific): Burn 10-12% Psi/stack/0.5 s, Frost Vortex 50% Psi/0.5 s for 4 s (Aug 2025), Power Surge 50% Psi (x91) vs 100% (OHMM), Unstable Bomber 70-100% Psi. Vulnerability/'DMG taken' debuffs from deviations (Weapon DMG taken, Frost/Blaze/Blast DMG taken, Weakspot DMG taken) multiply the player's own damage of that type.",
+      "critWeakspot": "Community model: deviation skill damage cannot crit or hit weakspots (OHMM canCrit=false, canWeakspot=false) - unverified.",
+      "confidence": "medium-low"
+    },
+    "playerBuffsFromTraits": {
+      "description": "Combat-deviation trait slots give direct player buffs that a calculator should expose: Slot 2 general - Crack Shot: Weapon DMG +5%; Psychic Kid: Status DMG +5%; Run Fast: Movement Speed +5%; Heavy and Solid / Lighten your Mind: up to +15% torso/head DMG reduction by load. Slot 1/2 variant-locked - Starfall Inversion family: +5% (7.5% airborne) Melee DMG (Enchanting Void), Blaze Elemental (Invincible Sun), Frost Elemental (Polar Jelly), Status DMG (Mini Feaster), head/torso DR (Mini Wonder); Lonewolf Lunar Oracle: Weapon DMG +5% (x1.5 below 30% Sanity); Butterfly Starry Night: +6% Weapon & Status DMG at night (halved by day); Festering Gel Marine Star: random +5% Weapon or +5% Status DMG on each reload; Spring Rose: +20% healing received by day; Whalepup Don't Get Wet: +10% DR when wet. Slot 3 fused - Polar Beast: Attack +10% below 0C; Eureka Moment: attacker Weapon DMG -10% for 2 s (60 s CD).",
+      "source": "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json",
+      "confidence": "high (verbatim wiki text, Sep 2026)"
+    },
+    "arenaSkillsNotApplicable": {
+      "description": "The datamine's per-deviation 'skill_entries' (Psi Bullet, Flame Bullet, Healing Aura, ... with P.ATK/SP.ATK coefficients) belong to the 'Deviation: Survive, Capture, Preserve' arena pet-battle scenario, not to open-world combat, and their deviation-to-skill mapping in the extract is misaligned (e.g. Lonewolf's list matches Director Fox's). They are excluded from this file."
+    }
+  },
+  "deviants": [
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "common",
+      "gameId": "99000001",
+      "chineseName": "远归之蝶",
+      "abilityNames": [
+        "Tracking Missile",
+        "Fire Boost"
+      ],
+      "variants": [
+        {
+          "name": "Ancient Scroll",
+          "kind": "variation",
+          "trait": "Max Energy (Deviant Power) +40%"
+        },
+        {
+          "name": "Glistening Blue",
+          "kind": "variation",
+          "trait": "Weakspot Master: hitting a Weakspot increases Secured by 1 additional point, 3 s cooldown"
+        },
+        {
+          "name": "Infrasonic Illusion",
+          "kind": "variation",
+          "trait": "Energy Recovery Speed +10%"
+        },
+        {
+          "name": "Starry Night",
+          "kind": "variation",
+          "trait": "Praise the Moon: +6% Weapon & Status DMG at night, halved during daytime"
+        },
+        {
+          "name": "Ephemeral Dream",
+          "kind": "skin"
+        },
+        {
+          "name": "Before the Frost",
+          "kind": "skin"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Autonomously attacks hostile targets; on hit it marks the target's Weakspot so the target takes +{0}% Weakspot DMG for {1}s (game-client string, {0}=18.9+6.3*deviation_degree, {1}=5). OHDB (2026) lists its abilities as Tracking Missile / Fire Boost; wiki function text: 'Can participate in combat to mark enemy Weakspots, increasing the damage they receive.'",
+        "effects": [
+          {
+            "stat": "weakspotDmgTakenPct",
+            "value": 50.4,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "target marked by the Emissary's hit; lasts 5 s; value shown is Skill Rating 5. valueBySkillRating[SR1..SR5]=[25.2,31.5,37.8,44.1,50.4] (formula 18.9+6.3*SR). Older wiki/Game8 (2024-25) listed 15/20/25/30/40% for levels 1-5 - superseded by the datamine.",
+            "valueBySkillRating": [
+              25.2,
+              31.5,
+              37.8,
+              44.1,
+              50.4
+            ],
+            "formula": "18.9 + 6.3 * deviation_degree"
+          }
+        ],
+        "damage": {
+          "formula": "Community model (OHMM, Version 2.3.8): hit damage = 1.2 x PsiIntensity (120% Psi per hit), direct instance, no DoT, no crit/weakspot. UNVERIFIED in-game.",
+          "scalesWith": [
+            "psiIntensity",
+            "statusDmgPct"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": 5,
+      "synergies": [
+        "Weakspot-damage builds (snipers, crossbows, Bull's Eye weakspot mods such as Old Huntsman Boots +30% Weakspot DMG vs Bull's Eye targets, Renegade/Agent sets)",
+        "Starry Night variant adds a flat +6% Weapon & Status DMG at night"
+      ],
+      "notes": "Free from the tutorial; S-tier in every 2026 tier list for weakspot builds. Datamine behavior class: mark_weakspot.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json",
+        "https://github.com/TeeReckzi/OHMM/blob/main/src/ohai/src/engine/mechanicRegistry.ts",
+        "https://once-human.fandom.com/wiki/Butterfly's_Emissary",
+        "https://game8.co/games/Once-Human/archives/Deviants-Butterflys-Emissary"
+      ],
+      "name": "Butterfly's Emissary"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000011",
+      "chineseName": "低语孤狼",
+      "abilityNames": [
+        "Group Attraction",
+        "Plural Summon"
+      ],
+      "variants": [
+        {
+          "name": "Bursting Magma",
+          "kind": "variation",
+          "trait": "Max Energy (Skill) +40%"
+        },
+        {
+          "name": "Distant Tears",
+          "kind": "variation",
+          "trait": "Max Energy (Skill) +40%"
+        },
+        {
+          "name": "Frigid Touch",
+          "kind": "variation"
+        },
+        {
+          "name": "Lunar Oracle",
+          "kind": "variation",
+          "trait": "Weapon DMG +5%; x1.5 (7.5%) when Sanity is below 30%"
+        },
+        {
+          "name": "Radiant Variant",
+          "kind": "variation",
+          "trait": "Max Mood (Activity) +7%"
+        },
+        {
+          "name": "Stellar Remnant",
+          "kind": "skin"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Autonomously attacks hostile targets and draws the aggro of nearby enemies; when its target dies it spawns 1 clone. The attacked target takes +{0}% Weapon DMG ({0}=18.75+6.25*deviation_degree). Wiki: 'Will transform into a black wolf and attack enemies'. Tier lists (2026) also credit it with applying The Bull's Eye (unconfirmed in game data).",
+        "effects": [
+          {
+            "stat": "weaponDmgTakenPct",
+            "value": 50,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "target attacked by the wolf; Skill Rating 5 shown. valueBySkillRating=[25,31.25,37.5,43.75,50]",
+            "valueBySkillRating": [
+              25,
+              31.25,
+              37.5,
+              43.75,
+              50
+            ],
+            "formula": "18.75 + 6.25 * deviation_degree"
+          },
+          {
+            "stat": "aggroPull",
+            "value": null,
+            "unit": "flag",
+            "target": "enemy",
+            "condition": "draws nearby enemies' threat onto the wolf"
+          },
+          {
+            "stat": "cloneOnTargetDeath",
+            "value": 1,
+            "unit": "count",
+            "target": "player",
+            "condition": "spawns 1 clone when its target dies"
+          }
+        ],
+        "damage": {
+          "formula": "OHMM models a 'ZapCam / Lone Wolf' burst at 8.0 x PsiIntensity (800%) but flags it QUARANTINED/unverified. Official Aug-28-2025 notes say Lonewolf's Whisper was buffed (numbers not captured).",
+          "scalesWith": [
+            "psiIntensity"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Weapon-DMG builds; called best-in-slot for Shrapnel by 2026 tier lists",
+        "Lunar Oracle variant: +5% Weapon DMG (x1.5 below 30% Sanity) - a direct player buff",
+        "Bull's Eye mods if the Bull's Eye application is confirmed"
+      ],
+      "notes": "Datamine behavior class: weapon_vulnerability. Monolith drop: Monolith of Thirst (Shadow Hound).",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json",
+        "https://github.com/DanII1Mg/Text_analysis_cw/blob/main/data/once_human_news.csv",
+        "https://github.com/TeeReckzi/OHMM/blob/main/src/ohai/src/engine/mechanicRegistry.ts",
+        "https://sportskeeda.com/mmo/once-human-best-combat-deviants-ranked"
+      ],
+      "name": "Lonewolf's Whisper"
+    },
+    {
+      "type": "Combat",
+      "grade": "B",
+      "ohdbRarityLabel": "common",
+      "gameId": "99000008",
+      "chineseName": "活性凝胶",
+      "abilityNames": [
+        "Force Generation",
+        "Shelter Summon"
+      ],
+      "variants": [
+        {
+          "name": "Infrasonic Illusion",
+          "kind": "variation",
+          "trait": "Energy Recovery Speed +10%"
+        },
+        {
+          "name": "Lunar Oracle",
+          "kind": "variation"
+        },
+        {
+          "name": "Marine Star",
+          "kind": "variation",
+          "trait": "Starry Sky: when synced, each reload gives either +5% Weapon DMG or +5% Status DMG at random"
+        },
+        {
+          "name": "Milk Sugar",
+          "kind": "variation",
+          "trait": "Max Mood (Activity) +35%"
+        },
+        {
+          "name": "Phase",
+          "kind": "variation"
+        },
+        {
+          "name": "Spring Rose",
+          "kind": "variation",
+          "trait": "Praise the Sun: when synced you receive +20% healing during the day, halved at night"
+        },
+        {
+          "name": "Rainbow Pudding",
+          "kind": "skin"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Transforms into a fortification (Shelter) that blocks ranged attacks; allies near it recover HP and Sanity every second. Flawless Fortification: thrown, it knocks back enemies near the impact point and forms a new fortification. Overhaul-era ultimate reported as 'Gel Shield' (encases an ally in gel granting a shield) - numbers unconfirmed.",
+        "effects": [
+          {
+            "stat": "hpRecoveryPctPerSec",
+            "value": 10.5,
+            "unit": "percent",
+            "target": "player",
+            "condition": "allies near the fortification, per second; by level (fandom, pre-overhaul): L1 4.5, L2 6, L3 7.5, L4 9, L5 10.5. One search summary quoted a flat 10%/s.",
+            "valueBySkillRating": [
+              4.5,
+              6,
+              7.5,
+              9,
+              10.5
+            ]
+          },
+          {
+            "stat": "sanityRecoveryPctPerSec",
+            "value": 5.25,
+            "unit": "percent",
+            "target": "player",
+            "condition": "allies near the fortification, per second; L1 2.25, L2 3, L3 3.75, L4 4.5, L5 5.25",
+            "valueBySkillRating": [
+              2.25,
+              3,
+              3.75,
+              4.5,
+              5.25
+            ]
+          },
+          {
+            "stat": "knockback",
+            "value": null,
+            "unit": "flag",
+            "target": "enemy",
+            "condition": "Flawless Fortification throw impact"
+          },
+          {
+            "stat": "shieldPctMaxHp",
+            "value": null,
+            "unit": "percent",
+            "target": "player",
+            "condition": "'Gel Shield' ultimate; a search summary gave 3.3% Max HP and a 450 energy cost - treated as unreliable (null)"
+          }
+        ],
+        "damage": {
+          "formula": null,
+          "scalesWith": []
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Defensive pick for Pro-mode bosses (tier lists); Marine Star variant gives a random +5% Weapon or +5% Status DMG per reload"
+      ],
+      "notes": "Best defensive combat deviant per 2026 tier lists. Monolith drop: Ravenous Hunter. Game-client datamine has no combat_profile formulas for it.",
+      "sources": [
+        "https://once-human.fandom.com/wiki/Festering_Gel",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json",
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json"
+      ],
+      "name": "Festering Gel"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "epic",
+      "gameId": "99000030",
+      "chineseName": "红龙",
+      "abilityNames": [
+        "Straight-line Burn",
+        "Telekinetic Effects"
+      ],
+      "variants": [
+        {
+          "name": "Lunar Oracle",
+          "kind": "variation"
+        },
+        {
+          "name": "Scorching Echo",
+          "kind": "skin"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Breathes fire in a straight line. Autonomously attacks; the target takes +{0}% Blaze DMG, and when the attacked target receives Burn an extra burn detonation (燃爆) is triggered (game-client string; {0} formula not captured by the extractor). Theria Games: +19.6% Blaze damage taken, +39.2% at max skill level.",
+        "effects": [
+          {
+            "stat": "blazeDmgTakenPct",
+            "value": 39.2,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "target hit by Pyro Dino; 39.2% at max Skill Rating, 19.6% at minimum (external source). Intermediate values inferred from the step*(3+SR) pattern: [19.6,24.5,29.4,34.3,39.2]",
+            "valueBySkillRating": [
+              19.6,
+              24.5,
+              29.4,
+              34.3,
+              39.2
+            ],
+            "formula": "inferred: 14.7 + 4.9 * deviation_degree"
+          },
+          {
+            "stat": "burnDetonation",
+            "value": null,
+            "unit": "flag",
+            "target": "enemy",
+            "condition": "extra detonation when a target it attacks is inflicted with Burn"
+          }
+        ],
+        "damage": {
+          "formula": "Burn-type Status DMG scaled by Psi Intensity (coefficients not published). Deviation attack/skill damage is Psi-Intensity-scaled Status/Elemental DMG (official Aug-28-2025 patch text for Polar Jelly: 'Attacks deal 800% Psi Intensity as Frost Status DMG'); community model (OHMM v2.3.8): damage = PsiIntensity x baseFactor, with Status DMG% and Elemental DMG% multipliers and no crit/weakspot by default. Not verified in-game for every deviant.",
+          "scalesWith": [
+            "psiIntensity",
+            "statusDmgPct",
+            "blazeElementalDmgPct",
+            "burnDmgPct"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Burn builds (Burn = Psi-Intensity-scaled DoT: 10-12% Psi per stack per 0.5 s for 6 s, up to 5 stacks - sources disagree 10% vs 12%)",
+        "Blaze Elemental DMG"
+      ],
+      "notes": "Datamine behavior class: burn_vulnerability. Removed from the Deviation Master championship roster Nov 2025 'due to gameplay issues with Pyro Dino's skills'. Chaos variant exists as Chaosaurus.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://theriagames.com/guide/once-human-pyro-dino/",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/DanII1Mg/Text_analysis_cw/blob/main/data/once_human_news.csv"
+      ],
+      "name": "Pyro Dino"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "epic",
+      "gameId": "99000034",
+      "chineseName": "愿望先生",
+      "abilityNames": [
+        "Fire Boost",
+        "Battle Partner"
+      ],
+      "variants": [
+        {
+          "name": "Chaos",
+          "kind": "variation",
+          "trait": "Chaos variant with high Dex value"
+        },
+        {
+          "name": "Penguin Hope",
+          "kind": "variation"
+        },
+        {
+          "name": "Wish Chefosaurus Rex",
+          "kind": "variation"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Uses guns to attack and applies The Bull's Eye to enemies (OHDB/wiki). Tier lists: rapid-fire ranged attacks applying Bull's Eye - one of the highest sustained-damage combat deviants. Chaos Mr. Wish variant: 'high Dex value, rapid-fire attacks and applies The Bull's Eye'.",
+        "effects": [
+          {
+            "stat": "bullsEyeApplied",
+            "value": null,
+            "unit": "flag",
+            "target": "enemy",
+            "condition": "on its gun hits; The Bull's Eye is a marking debuff (community: ~8% vulnerability base, 12 s; Vulnerability Amplifier mod adds +8%; several boots/weapons add Crit Rate or Weakspot DMG vs marked targets) - base numbers unverified"
+          }
+        ],
+        "damage": {
+          "formula": "Gun attacks; coefficient not published. Deviation attack/skill damage is Psi-Intensity-scaled Status/Elemental DMG (official Aug-28-2025 patch text for Polar Jelly: 'Attacks deal 800% Psi Intensity as Frost Status DMG'); community model (OHMM v2.3.8): damage = PsiIntensity x baseFactor, with Status DMG% and Elemental DMG% multipliers and no crit/weakspot by default. Not verified in-game for every deviant.",
+          "scalesWith": [
+            "psiIntensity"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "The Bull's Eye builds: Earthly Boots (+30% additional DMG vs Bull's Eye), Old Huntsman Boots (+30% Weakspot DMG vs Bull's Eye), Bloodstained Tracker Boots, PDW90 Holographic Resonance (+20% Crit Rate vs Bull's Eye), AWS.338 Bullseye, DBSG Doombringer"
+      ],
+      "notes": "No combat_profile formulas in the game-client datamine. Manibus drop: Sigma (side boss).",
+      "sources": [
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://sportskeeda.com/mmo/once-human-best-combat-deviants-ranked",
+        "https://github.com/0x91CEA55/OnceHuman/blob/main/research/data/custom-datamine/raw.json",
+        "https://github.com/TeeReckzi/OHMM/blob/main/verified/INGAME_KNOWLEDGE_BIBLE.md"
+      ],
+      "name": "Mr. Wish"
+    },
+    {
+      "type": "Combat",
+      "grade": "B",
+      "ohdbRarityLabel": "common",
+      "gameId": "99000049",
+      "chineseName": "破碎少女",
+      "abilityNames": [
+        "Petrifying Gaze"
+      ],
+      "variants": [
+        {
+          "name": "Wandering Witch",
+          "kind": "variation",
+          "trait": "Max Deviant Power (Skill) +10% (Twitch drop)"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Moves and attacks autonomously; its attacks slow and root (immobilize) non-boss enemies in a frontal area, and affected enemies take +{0}% Explosion (Blast) DMG ({0}=30+10*deviation_degree). Wiki: 'fearing and freezing enemies'.",
+        "effects": [
+          {
+            "stat": "blastDmgTakenPct",
+            "value": 80,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "enemies hit by Petrifying Gaze; Skill Rating 5 shown; valueBySkillRating=[40,50,60,70,80]",
+            "valueBySkillRating": [
+              40,
+              50,
+              60,
+              70,
+              80
+            ],
+            "formula": "30 + 10 * deviation_degree"
+          },
+          {
+            "stat": "slowAndRoot",
+            "value": null,
+            "unit": "flag",
+            "target": "enemy",
+            "condition": "non-boss enemies in the frontal cone"
+          }
+        ],
+        "damage": {
+          "formula": null,
+          "scalesWith": []
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Unstable Bomber / Blast (explosion) builds - the +40-80% explosion-damage-taken debuff is the largest single deviation vulnerability in the datamine",
+        "Crowd control for Pro-mode"
+      ],
+      "notes": "Datamine behavior class: explosion_vulnerability. Note the datamine says Explosion/Blast damage, not Frost.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json"
+      ],
+      "name": "Shattered Maiden"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000003",
+      "chineseName": "极寒水母",
+      "abilityNames": [
+        "AoE Slowdown",
+        "Telekinetic Effects"
+      ],
+      "variants": [
+        {
+          "name": "Infrasonic Illusion",
+          "kind": "variation",
+          "trait": "Energy Recovery Speed +10%"
+        },
+        {
+          "name": "Radiant Variant",
+          "kind": "variation",
+          "trait": "Mood (Activity) Recovery Speed +20%"
+        },
+        {
+          "name": "Starfall Inversion",
+          "kind": "variation",
+          "trait": "Syncing grants +5% Frost Elemental DMG, 7.5% when airborne"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Deals Frost DMG to a large area and slows. Official Aug-28-2025 balance text (After): 'Attacks deal 800% Psi Intensity as Frost Status DMG and inflict 39.2% Frost Vulnerability on the target. If a Frost Vortex is generated within range, generate additional Ice Spikes that deal 250% Psi Intensity as Frost Status DMG.' (Before: 640% / 36% / 215%.)",
+        "effects": [
+          {
+            "stat": "frostVulnerabilityPct",
+            "value": 39.2,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "on hit; official value (assumed max Skill Rating); SR-scaling inferred from the step*(3+SR) pattern: [19.6,24.5,29.4,34.3,39.2] (LOW confidence)",
+            "valueBySkillRating": [
+              19.6,
+              24.5,
+              29.4,
+              34.3,
+              39.2
+            ],
+            "formula": "inferred: 14.7 + 4.9 * deviation_degree"
+          },
+          {
+            "stat": "slow",
+            "value": null,
+            "unit": "flag",
+            "target": "enemy",
+            "condition": "AoE slowdown"
+          }
+        ],
+        "damage": {
+          "formula": "attack = 8.00 x PsiIntensity as Frost Status DMG (official, Aug 28 2025; assumed at max Skill Rating; inferred SR1..5 = 400/500/600/700/800%); Ice Spikes = 2.50 x PsiIntensity when a Frost Vortex is generated in range (inferred SR1..5 = 125/156.25/187.5/218.75/250%). Pre-patch values 6.40x / 2.15x. Multiplied by Status DMG% and Frost Elemental DMG%.",
+          "scalesWith": [
+            "psiIntensity",
+            "statusDmgPct",
+            "frostElementalDmgPct"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Frost Vortex builds (Ice Spikes trigger when a Frost Vortex is generated in range); Frost Vortex keyword = 50% Psi Intensity Status DMG every 0.5 s for 4 s since Aug 28 2025",
+        "Starfall Inversion variant: +5% Frost Elemental DMG"
+      ],
+      "notes": "Only deviant with official Psi-Intensity coefficients in the captured patch notes. OHMM tags it keywordAssociations=[frostVortex].",
+      "sources": [
+        "https://github.com/DanII1Mg/Text_analysis_cw/blob/main/data/once_human_news.csv",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json"
+      ],
+      "name": "Polar Jelly"
+    },
+    {
+      "type": "Combat",
+      "grade": "A",
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000018",
+      "chineseName": "熊医生",
+      "abilityNames": [
+        "Healing Share",
+        "Support Summon"
+      ],
+      "variants": [
+        {
+          "name": "Aberrant Progeny",
+          "kind": "variation"
+        },
+        {
+          "name": "Block",
+          "kind": "variation"
+        },
+        {
+          "name": "Christmas Spirit",
+          "kind": "variation"
+        },
+        {
+          "name": "Infrasonic Illusion",
+          "kind": "variation",
+          "trait": "Energy (Skill) recovery speed +20%"
+        },
+        {
+          "name": "Morning Grump",
+          "kind": "skin"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Heals or rescues (revives) fallen Metas; periodically heals nearby damaged players (game-client behavior 'healing_support'). Tier lists: top PvP combat deviant.",
+        "effects": [
+          {
+            "stat": "healing",
+            "value": null,
+            "unit": "percent",
+            "target": "player",
+            "condition": "periodic heal of nearby damaged players; coefficient not published"
+          },
+          {
+            "stat": "revive",
+            "value": null,
+            "unit": "flag",
+            "target": "player",
+            "condition": "revives fallen nearby players"
+          }
+        ],
+        "damage": {
+          "formula": null,
+          "scalesWith": []
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Sustain/PvP; Healing Received mods (e.g. Critical Rescue +20% Healing Received below 30% HP)"
+      ],
+      "notes": "No numeric values recovered.",
+      "sources": [
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json",
+        "https://github.com/lReDragol/OnceHuman_Tools/blob/master/tools/extract_once_human_deviations.py",
+        "https://sportskeeda.com/mmo/once-human-best-combat-deviants-ranked"
+      ],
+      "name": "Dr. Teddy"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "epic",
+      "gameId": "99000025",
+      "chineseName": "凝视的黑猫",
+      "abilityNames": [
+        "Super Jump",
+        "Move Marker"
+      ],
+      "variants": [
+        {
+          "name": "Pharaoh",
+          "kind": "variation"
+        },
+        {
+          "name": "Starfall Inversion",
+          "kind": "variation",
+          "trait": "Syncing grants +5% Melee DMG, 7.5% when airborne"
+        },
+        {
+          "name": "Siamese",
+          "kind": "skin"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Increases its master's Melee DMG. Game-client string (black-cat form): follows the player; while following, the player's movement speed while holding a melee weapon is +{0}%, and melee hits restore {1}% of Max HP (values not captured). Arena/scenario text: 'Transforms into a Black Panther with unique skills'.",
+        "effects": [
+          {
+            "stat": "meleeDmgPct",
+            "value": null,
+            "unit": "percent",
+            "target": "player",
+            "condition": "while synced/present; coefficient not published"
+          },
+          {
+            "stat": "movementSpeedPct",
+            "value": null,
+            "unit": "percent",
+            "target": "player",
+            "condition": "while holding a melee weapon"
+          },
+          {
+            "stat": "hpOnMeleeHitPct",
+            "value": null,
+            "unit": "percent",
+            "target": "player",
+            "condition": "restore % Max HP on melee hit"
+          }
+        ],
+        "damage": {
+          "formula": null,
+          "scalesWith": []
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Melee builds (the only deviation with a direct Melee DMG buff)"
+      ],
+      "notes": "Datamine behavior class: melee_companion (no formulas captured). Manibus drop: Theta.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json",
+        "https://github.com/DanII1Mg/Text_analysis_cw/blob/main/data/once_human_news.csv"
+      ],
+      "name": "Enchanting Void"
+    },
+    {
+      "type": "Combat",
+      "grade": "A",
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000047",
+      "chineseName": "恶咒娃娃",
+      "abilityNames": [
+        "Enhance Vulnerability",
+        "Group Vulnerability"
+      ],
+      "variants": [
+        {
+          "name": "Fluffy Curse",
+          "kind": "variation",
+          "trait": "Energy (Skill) recovery speed +10%"
+        },
+        {
+          "name": "Starfall Inversion",
+          "kind": "variation",
+          "trait": "Syncing restores 1 point of Deviant Power every 8 s (1.5 while airborne)"
+        },
+        {
+          "name": "Thorny Wedding",
+          "kind": "skin"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Follows the player; half of the damage the player takes is borne by the deviation (game-client string). Alternatively possesses enemies so they share the damage its master receives. Fandom (post-overhaul): at Skill Rating 5 the Vulnerability effect intensity is 60%, the doll gains an additional 100% of the player's Max HP, and its ultimate deals Psi-Intensity-based PSI damage every second to the nearest 5 enemies within 20 m. Version 3.0.7 (Sep 28 2026) corrected the ultimate's description to 250% Psi Intensity at Skill Rating 5 (the text previously showed 500%).",
+        "effects": [
+          {
+            "stat": "damageSharePct",
+            "value": 50,
+            "unit": "percent",
+            "target": "player",
+            "condition": "half of player's incoming damage redirected to the doll"
+          },
+          {
+            "stat": "vulnerabilityPct",
+            "value": 60,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "Vulnerability effect intensity at Skill Rating 5 (fandom; lower ratings unknown)"
+          },
+          {
+            "stat": "dollBonusHpPctOfPlayerMaxHp",
+            "value": 100,
+            "unit": "percent",
+            "target": "player",
+            "condition": "doll gains +100% of player's Max HP at Skill Rating 5"
+          }
+        ],
+        "damage": {
+          "formula": "Ultimate: 2.50 x PsiIntensity PSI/Status DMG per second to the nearest 5 enemies within 20 m, at Skill Rating 5 (per Version 3.0.7 clarification; earlier tooltip said 5.00x). Lower-rating values unknown.",
+          "scalesWith": [
+            "psiIntensity",
+            "statusDmgPct"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Vulnerability stacking for single-target elite/boss damage",
+        "Starfall Inversion variant refunds Deviant Power - shortens ultimate uptime"
+      ],
+      "notes": "Datamine behavior class: damage_share. The 3.0.7 note was a description correction, 'no real power cut'.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://once-human.fandom.com/wiki/Voodoo_Doll",
+        "https://www.oncehuman.game/news/update/20260924/40780_1315053.html",
+        "https://allthings.how/once-human-patch-3-0-7-free-5-5-deviations-and-beastmaster-summon-buff/",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json"
+      ],
+      "name": "Voodoo Doll"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "epic",
+      "gameId": "99000038",
+      "chineseName": "皆斩",
+      "abilityNames": [
+        "Melee Amplifier",
+        "Battle Partner"
+      ],
+      "variants": [
+        {
+          "name": "Chaos",
+          "kind": "variation",
+          "trait": "Chaos variant with high Dex value"
+        },
+        {
+          "name": "Dusken of Evernight",
+          "kind": "variation"
+        },
+        {
+          "name": "Lunar Oracle",
+          "kind": "variation"
+        },
+        {
+          "name": "Tiger Slash",
+          "kind": "variation"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Teleports (blinks) to the target and performs melee strikes; grants its owner a blink strike / quick-draw attack with a shadowy blade. Tier lists: 'teleporting samurai whose katana strikes scale to your skill rating'.",
+        "effects": [
+          {
+            "stat": "meleeBlinkStrike",
+            "value": null,
+            "unit": "flag",
+            "target": "player",
+            "condition": "grants owner a blink strike; damage coefficient not published"
+          }
+        ],
+        "damage": {
+          "formula": "Melee strikes scaling with Skill Rating; coefficient not published.",
+          "scalesWith": [
+            "skillRating"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Melee builds"
+      ],
+      "notes": "Datamine behavior class: melee_blink. Note: the OHMM mapping file mislabels 迷你奇點 as Zeno-Purifier; the correct Chinese name is 皆斩.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://sportskeeda.com/mmo/once-human-best-combat-deviants-ranked"
+      ],
+      "name": "Zeno-Purifier"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "epic",
+      "gameId": "99000059",
+      "chineseName": "电蝾螈",
+      "abilityNames": [
+        "Sprint Boost",
+        "Silence Effect"
+      ],
+      "variants": [
+        {
+          "name": "Gravity Abyss",
+          "kind": "variation"
+        },
+        {
+          "name": "Pink Block",
+          "kind": "variation"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Summons thunderclouds to strike enemies and enhances electrical damage. Game-client string: autonomously attacks dealing Status DMG; on hit the target's subsequent Power Surge DMG taken is +{0}% (value not captured). Battle Skill (Dec-18-2025 dev blog): puts the character into a lightning-fast sprint state.",
+        "effects": [
+          {
+            "stat": "powerSurgeDmgTakenPct",
+            "value": null,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "after being hit by Zapamander; coefficient not captured"
+          },
+          {
+            "stat": "sprintState",
+            "value": null,
+            "unit": "flag",
+            "target": "player",
+            "condition": "Battle Skill: lightning-fast sprint"
+          }
+        ],
+        "damage": {
+          "formula": "Shock Status DMG scaled by Psi Intensity (coefficient unknown). Deviation attack/skill damage is Psi-Intensity-scaled Status/Elemental DMG (official Aug-28-2025 patch text for Polar Jelly: 'Attacks deal 800% Psi Intensity as Frost Status DMG'); community model (OHMM v2.3.8): damage = PsiIntensity x baseFactor, with Status DMG% and Elemental DMG% multipliers and no crit/weakspot by default. Not verified in-game for every deviant.",
+          "scalesWith": [
+            "psiIntensity",
+            "statusDmgPct",
+            "shockElementalDmgPct"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Power Surge / Shock builds (Power Surge proc = 50% Psi Intensity Shock DMG per community data; First Electrocution etc.)",
+        "Oct-30-2025 fix: 'effects of Corrosion and Zapamander did not function as described when used together' - implies a Corrosion interaction"
+      ],
+      "notes": "Added in Version 2.2.0 (Oct 29 2025). Datamine behavior class: shock_vulnerability. Replaced Pyro Dino in the Deviation Master championship roster.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/DanII1Mg/Text_analysis_cw/blob/main/data/once_human_news.csv",
+        "https://www.oncehuman.game/news/devBlog/20251218/40781_1277420.html",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json"
+      ],
+      "name": "Zapamander"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000032",
+      "chineseName": "空之子",
+      "abilityNames": [
+        "Protective Wind Wall",
+        "Aerial Platform"
+      ],
+      "variants": [
+        {
+          "name": "Bursting Magma",
+          "kind": "variation",
+          "trait": "Energy (Skill) Recovery Speed +10%"
+        },
+        {
+          "name": "Frigid Touch",
+          "kind": "variation",
+          "trait": "Energy (Skill) Recovery Speed +15%"
+        },
+        {
+          "name": "Infrasonic Illusion",
+          "kind": "variation"
+        },
+        {
+          "name": "Lunar Oracle",
+          "kind": "variation"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Continuously increases the character's action (movement/stamina) or creates an anti-gravity tower. Battle Skill (Dec-18-2025 dev blog): creates a one-way wind wall that blocks bullets.",
+        "effects": [
+          {
+            "stat": "oneWayBulletWall",
+            "value": null,
+            "unit": "flag",
+            "target": "player",
+            "condition": "Battle Skill"
+          },
+          {
+            "stat": "aerialPlatform",
+            "value": null,
+            "unit": "flag",
+            "target": "player",
+            "condition": "anti-gravity tower / aerial platform"
+          }
+        ],
+        "damage": {
+          "formula": null,
+          "scalesWith": []
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Airborne-conditional traits/cradles (Starfall Inversion traits +7.5% when airborne; cradle 'Energy Surge' airborne variant recovers 6 Deviant Power/s)"
+      ],
+      "notes": "Utility deviation; no damage numbers.",
+      "sources": [
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json",
+        "https://www.oncehuman.game/news/devBlog/20251218/40781_1277420.html"
+      ],
+      "name": "By-the-Wind"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "epic",
+      "gameId": "92000032",
+      "chineseName": "辉光 · 空之子",
+      "abilityNames": [
+        "Protective Wind Wall",
+        "Aerial Platform"
+      ],
+      "variants": [],
+      "traits": [],
+      "skill": {
+        "text": "Radiant upgrade of By-the-Wind with the same ability set (Protective Wind Wall, Aerial Platform) per OHDB.",
+        "effects": [],
+        "damage": {
+          "formula": null,
+          "scalesWith": []
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [],
+      "notes": "Listed separately on OHDB; treat as By-the-Wind variant.",
+      "sources": [
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json"
+      ],
+      "name": "Radiant One"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000035",
+      "chineseName": "恶臭球根",
+      "abilityNames": [
+        "Chaos Target",
+        "AoE Chaos"
+      ],
+      "variants": [
+        {
+          "name": "Violet Robe",
+          "kind": "variation",
+          "trait": "Max Energy (Skill) +40%"
+        },
+        {
+          "name": "Garlic Bird Dough",
+          "kind": "skin"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Disrupts enemy threat, making enemies attack each other (single-target and AoE confusion).",
+        "effects": [
+          {
+            "stat": "confusion",
+            "value": null,
+            "unit": "flag",
+            "target": "enemy",
+            "condition": "enemies attack each other"
+          }
+        ],
+        "damage": {
+          "formula": null,
+          "scalesWith": []
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [],
+      "notes": "Crowd control only.",
+      "sources": [
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json"
+      ],
+      "name": "Grumpy Bulb"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "epic",
+      "gameId": "99000053",
+      "chineseName": "迷你黄衣",
+      "abilityNames": [
+        "Battle Partner"
+      ],
+      "variants": [
+        {
+          "name": "Star Devourer",
+          "kind": "variation"
+        },
+        {
+          "name": "Starfall Inversion",
+          "kind": "variation",
+          "trait": "Syncing grants +5% Status DMG, 7.5% when airborne"
+        },
+        {
+          "name": "Stardust Lord",
+          "kind": "skin"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Follows the player; every {0}s it spawns {1} tentacle(s) around an enemy that slam the target for damage. Every {2} tentacle(s) spawned grants the player +{3}% Status DMG, capped at {4}% (game-client string; {0}=1.5, {1}=1, {2}=1, {3}=7.5+2.5*deviation_degree, {4}=30+10*deviation_degree). Also marks enemies.",
+        "effects": [
+          {
+            "stat": "statusDmgPct",
+            "value": 20,
+            "unit": "percent",
+            "target": "player",
+            "condition": "per tentacle spawned (one every 1.5 s); Skill Rating 5 shown; valueBySkillRating=[10,12.5,15,17.5,20]",
+            "valueBySkillRating": [
+              10,
+              12.5,
+              15,
+              17.5,
+              20
+            ],
+            "formula": "7.5 + 2.5 * deviation_degree"
+          },
+          {
+            "stat": "statusDmgPctCap",
+            "value": 80,
+            "unit": "percent",
+            "target": "player",
+            "condition": "stack cap of the Status DMG buff; valueBySkillRating=[40,50,60,70,80] (reached after 4 tentacles = 6 s at any rating)",
+            "valueBySkillRating": [
+              40,
+              50,
+              60,
+              70,
+              80
+            ],
+            "formula": "30 + 10 * deviation_degree"
+          }
+        ],
+        "damage": {
+          "formula": "Tentacle slam damage; coefficient not captured. Deviation attack/skill damage is Psi-Intensity-scaled Status/Elemental DMG (official Aug-28-2025 patch text for Polar Jelly: 'Attacks deal 800% Psi Intensity as Frost Status DMG'); community model (OHMM v2.3.8): damage = PsiIntensity x baseFactor, with Status DMG% and Elemental DMG% multipliers and no crit/weakspot by default. Not verified in-game for every deviant.",
+          "scalesWith": [
+            "psiIntensity",
+            "statusDmgPct"
+          ]
+        }
+      },
+      "cooldownSeconds": 1.5,
+      "durationSeconds": null,
+      "synergies": [
+        "Any Status-DMG build (Burn, Power Surge, Frost Vortex, Unstable Bomber): up to +80% Status DMG at Skill Rating 5 is the largest player-side buff among combat deviations",
+        "Starfall Inversion variant adds another +5% Status DMG"
+      ],
+      "notes": "Datamine behavior class: tentacle_status. How the buff decays/refreshes is not captured.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json"
+      ],
+      "name": "Mini Feaster"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "epic",
+      "gameId": "99000050",
+      "chineseName": "迷你奇点",
+      "abilityNames": [
+        "Bullet Immunity",
+        "Group Attraction"
+      ],
+      "variants": [
+        {
+          "name": "Bursting Magma",
+          "kind": "variation",
+          "trait": "Max Mood (Activity) +35%"
+        },
+        {
+          "name": "Chaos",
+          "kind": "variation",
+          "trait": "Chaos variant with high Dex value"
+        },
+        {
+          "name": "Starfall Inversion",
+          "kind": "variation",
+          "trait": "Syncing grants +5% head and torso DMG reduction, 7.5% when airborne"
+        },
+        {
+          "name": "Silver River",
+          "kind": "skin"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Absorbs bullets flying toward its owner (datamine behavior 'ammo_refill' keyed on bullet absorption); pulls groups of enemies. Chaos Mini Wonder: 'absorbing enemy gunfire and retaliating with high power'.",
+        "effects": [
+          {
+            "stat": "bulletAbsorption",
+            "value": null,
+            "unit": "flag",
+            "target": "player",
+            "condition": "absorbs incoming bullets"
+          },
+          {
+            "stat": "groupPull",
+            "value": null,
+            "unit": "flag",
+            "target": "enemy"
+          }
+        ],
+        "damage": {
+          "formula": null,
+          "scalesWith": []
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [],
+      "notes": "Defensive/utility.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json"
+      ],
+      "name": "Mini Wonder"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "epic",
+      "gameId": "99000058",
+      "chineseName": "冬灵",
+      "abilityNames": [
+        "Ice Crystal Detonation",
+        "Battle Partner"
+      ],
+      "variants": [
+        {
+          "name": "Chaos",
+          "kind": "variation",
+          "trait": "Chaos variant with high Dex value"
+        },
+        {
+          "name": "Lunar Oracle",
+          "kind": "variation"
+        },
+        {
+          "name": "Spring's Return",
+          "kind": "variation",
+          "trait": "Max Mood (Activity) +35%"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Every {0}s it generates ice crystals near the target; a crystal shatters when hit by a bullet, dealing {1}% Frost DMG to nearby targets. The attacked target takes +{2}% Frost DMG (game-client string; {0}=3, {1}=37.5+12.5*deviation_degree, {2}=18+6*deviation_degree). Wiki: 'Summons exploding crystals, +Frost DMG received by enemies'.",
+        "effects": [
+          {
+            "stat": "frostDmgTakenPct",
+            "value": 48,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "target attacked by Snowsprite; Skill Rating 5 shown; valueBySkillRating=[24,30,36,42,48]",
+            "valueBySkillRating": [
+              24,
+              30,
+              36,
+              42,
+              48
+            ],
+            "formula": "18 + 6 * deviation_degree"
+          },
+          {
+            "stat": "iceCrystalInterval",
+            "value": 3,
+            "unit": "seconds",
+            "target": "enemy",
+            "condition": "crystal generation interval"
+          }
+        ],
+        "damage": {
+          "formula": "crystal shatter = (37.5 + 12.5*SR)% of Psi Intensity as Frost DMG to nearby targets -> SR1..5 = 50/62.5/75/87.5/100% (the base stat is not explicit in the string; Psi Intensity assumed per the Frost Status DMG convention).",
+          "scalesWith": [
+            "psiIntensity",
+            "statusDmgPct",
+            "frostElementalDmgPct"
+          ]
+        }
+      },
+      "cooldownSeconds": 3,
+      "durationSeconds": null,
+      "synergies": [
+        "Frost builds; 'frost construct' mods (Cryo Catalyst: triggering an Ice Crystal grants Frost Vortex DMG +5% for 6 s; Silent Anabasis Ice Crystal stacks)",
+        "Sept-4-2025 bug fix: Snowsprite's Ice Crystals gained an extra damage bonus while wielding Raining Cash"
+      ],
+      "notes": "Datamine behavior class: ice_crystal_orbit. Way of Winter drop: Taurus.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json",
+        "https://github.com/DanII1Mg/Text_analysis_cw/blob/main/data/once_human_news.csv"
+      ],
+      "name": "Snowsprite"
+    },
+    {
+      "type": "Combat",
+      "grade": "A",
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000026",
+      "chineseName": "永恒烈阳",
+      "abilityNames": [
+        "Force Generation",
+        "Area Bombardment"
+      ],
+      "variants": [
+        {
+          "name": "Infrasonic Illusion",
+          "kind": "variation"
+        },
+        {
+          "name": "Malevolent Sun",
+          "kind": "variation",
+          "trait": "Mood (Activity) Recovery Speed +20%"
+        },
+        {
+          "name": "Starfall Inversion",
+          "kind": "variation",
+          "trait": "Syncing grants +5% Blaze Elemental DMG, 7.5% when airborne"
+        },
+        {
+          "name": "Inky Lotus",
+          "kind": "skin"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Periodically releases blazing energy rays that attack all nearby enemies, inflicting continuous Burn DMG. Game-client behavior 'burn_bombard' with parameters interval, burn damage %, burn trigger chance, per-stack damage bonus, burn bonus % (values not captured); when a target is burning Invincible Sun gains a Burn stack.",
+        "effects": [
+          {
+            "stat": "burnApplied",
+            "value": null,
+            "unit": "flag",
+            "target": "enemy",
+            "condition": "periodic AoE rays apply Burn"
+          },
+          {
+            "stat": "burnDmgBonusPct",
+            "value": null,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "coefficient not captured"
+          }
+        ],
+        "damage": {
+          "formula": "Burn Status DMG scaled by Psi Intensity; coefficients not captured. Deviation attack/skill damage is Psi-Intensity-scaled Status/Elemental DMG (official Aug-28-2025 patch text for Polar Jelly: 'Attacks deal 800% Psi Intensity as Frost Status DMG'); community model (OHMM v2.3.8): damage = PsiIntensity x baseFactor, with Status DMG% and Elemental DMG% multipliers and no crit/weakspot by default. Not verified in-game for every deviant.",
+          "scalesWith": [
+            "psiIntensity",
+            "statusDmgPct",
+            "blazeElementalDmgPct",
+            "burnDmgPct"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Burn builds; Starfall Inversion variant +5% Blaze Elemental DMG"
+      ],
+      "notes": "Way of Winter drop: Delta.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/lReDragol/OnceHuman_Tools/blob/master/tools/extract_once_human_deviations.py",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json"
+      ],
+      "name": "Invincible Sun"
+    },
+    {
+      "type": "Combat",
+      "grade": "A",
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000040",
+      "chineseName": "快照",
+      "abilityNames": [
+        "Vulnerability Mark",
+        "Locked Fire"
+      ],
+      "variants": [
+        {
+          "name": "Fools Memory",
+          "kind": "variation",
+          "trait": "Energy (Skill) recovery speed +10%"
+        },
+        {
+          "name": "Infrasonic Illusion",
+          "kind": "variation"
+        },
+        {
+          "name": "Lunar Oracle",
+          "kind": "variation"
+        },
+        {
+          "name": "Obituary Reporter",
+          "kind": "variation"
+        }
+      ],
+      "traits": [],
+      "skill": {
+        "text": "Constantly photographs nearby enemies, increasing the Weapon DMG they receive (OHDB/wiki). Community model (OHMM) carries a quarantined 8.0 x Psi Intensity burst entry for 'ZapCam / Lone Wolf'.",
+        "effects": [
+          {
+            "stat": "weaponDmgTakenPct",
+            "value": null,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "photographed enemies; coefficient not published"
+          }
+        ],
+        "damage": {
+          "formula": "OHMM quarantined entry: 8.0 x PsiIntensity single-hit burst (no verified game-data backing).",
+          "scalesWith": [
+            "psiIntensity"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Weapon-DMG builds"
+      ],
+      "notes": "Also called Snapshot in some lists.",
+      "sources": [
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json",
+        "https://github.com/TeeReckzi/OHMM/blob/main/src/ohai/src/engine/mechanicRegistry.ts"
+      ],
+      "name": "ZapCam"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000066",
+      "chineseName": "唤生灵",
+      "abilityNames": [
+        "Vulnerability Mark",
+        "Fire Boost"
+      ],
+      "variants": [],
+      "traits": [],
+      "skill": {
+        "text": "Weakens enemies with cursed arrows, increasing the Weapon DMG they receive. Game-client string: autonomously attacks dealing Status DMG; on hit the target's subsequent Weapon DMG taken is +{0}% (value not captured). Summon effect (Oct-22-2025 dev blog): fights by your side and grants the ability to call forth a phantom firebird that deals massive damage.",
+        "effects": [
+          {
+            "stat": "weaponDmgTakenPct",
+            "value": null,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "after cursed-arrow hit; coefficient not captured"
+          }
+        ],
+        "damage": {
+          "formula": "Phantom firebird: community model (OHMM v2.3.8) 6.0 x PsiIntensity (600%) single-hit burst - unverified. Version 3.0.7 (Sep 2026) changed Soul Summoner's combat effects (details not captured).",
+          "scalesWith": [
+            "psiIntensity",
+            "statusDmgPct"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Weapon-DMG builds; Dark Resonance set (Deviant-Power-consumption scaling) since its skills consume Deviant Power"
+      ],
+      "notes": "Added Version 2.2.0 (Oct 29 2025). Nov-2-2025 fix: 'Deviant Power was not consumed when the Soul Summoner used its skills'.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/DanII1Mg/Text_analysis_cw/blob/main/data/once_human_news.csv",
+        "https://github.com/TeeReckzi/OHMM/blob/main/src/ohai/src/engine/mechanicRegistry.ts",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://allthings.how/once-human-patch-3-0-7-free-5-5-deviations-and-beastmaster-summon-buff/"
+      ],
+      "name": "Soul Summoner"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000064",
+      "chineseName": "鲸狗",
+      "abilityNames": [
+        "Transformation Effect",
+        "Waterflow Restraint"
+      ],
+      "variants": [
+        {
+          "name": "Abyssal Whale Dream",
+          "kind": "skin"
+        }
+      ],
+      "traits": [
+        {
+          "name": "Don't Get Wet",
+          "text": "While equipped, the Player gains 10% DMG Reduction when Wet or in the Swimming status"
+        }
+      ],
+      "skill": {
+        "text": "Transforms the battlefield into an underwater world that drowns enemies and increases the Weapon DMG they receive. Game-client string: autonomously attacks dealing Status DMG; on hit the target's subsequent Weapon DMG taken is +{0}%; if the target is Drowning, an additional +{1}% Vulnerability ({0}=16.875+5.625*deviation_degree, {1}=15). Dev blog: inside the world both Metas and Whalepup deal increased damage and enemies hit by water currents are immobilized.",
+        "effects": [
+          {
+            "stat": "weaponDmgTakenPct",
+            "value": 45,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "after Whalepup's hit; Skill Rating 5 shown; valueBySkillRating=[22.5,28.125,33.75,39.375,45]",
+            "valueBySkillRating": [
+              22.5,
+              28.125,
+              33.75,
+              39.375,
+              45
+            ],
+            "formula": "16.875 + 5.625 * deviation_degree"
+          },
+          {
+            "stat": "vulnerabilityPct",
+            "value": 15,
+            "unit": "percent",
+            "target": "enemy",
+            "condition": "additional, only while the target is Drowning (flat, not rating-scaled)"
+          },
+          {
+            "stat": "immobilize",
+            "value": null,
+            "unit": "flag",
+            "target": "enemy",
+            "condition": "enemies hit by water currents"
+          }
+        ],
+        "damage": {
+          "formula": "Status DMG attacks scaled by Psi Intensity; coefficient not captured.",
+          "scalesWith": [
+            "psiIntensity",
+            "statusDmgPct"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [
+        "Weapon-DMG builds; combined +45% Weapon DMG taken +15% Vulnerability on drowning targets at Skill Rating 5"
+      ],
+      "notes": "Added Version 2.2.0 (Oct 29 2025); Version 3.0.7 changed its combat effects (details not captured). Datamine behavior class: weapon_vulnerability.",
+      "sources": [
+        "https://raw.githubusercontent.com/lReDragol/OnceHuman_Tools/master/portable_calc_v2/data/menu/calc/bd_json/deviations.json",
+        "https://github.com/DanII1Mg/Text_analysis_cw/blob/main/data/once_human_news.csv",
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/traits-fallback.json",
+        "https://allthings.how/once-human-patch-3-0-7-free-5-5-deviations-and-beastmaster-summon-buff/"
+      ],
+      "name": "Whalepup"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "epic",
+      "gameId": "99000067",
+      "chineseName": null,
+      "abilityNames": [],
+      "variants": [],
+      "traits": [],
+      "skill": {
+        "text": "'A loyal companion for Metas' - dog-type combat deviation (Beastmaster pet). A fan shop lists it as 'boosting player status effects and combat prowess' (unreliable).",
+        "effects": [],
+        "damage": {
+          "formula": null,
+          "scalesWith": []
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [],
+      "notes": "Monolith: Forsaken Giant. Patch 3.0.7 lets Beastmasters summon three pets at once and gave every player a free 5/5 dog deviation.",
+      "sources": [
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json",
+        "https://allthings.how/once-human-patch-3-0-7-free-5-5-deviations-and-beastmaster-summon-buff/"
+      ],
+      "name": "Brave George"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000069",
+      "chineseName": null,
+      "abilityNames": [],
+      "variants": [],
+      "traits": [],
+      "skill": {
+        "text": "Dog-type combat deviation (Beastmaster pet); wiki function text empty; drops from Rift Event.",
+        "effects": [],
+        "damage": {
+          "formula": null,
+          "scalesWith": []
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [],
+      "notes": "ohwikiguide lists it as legendary tier.",
+      "sources": [
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json",
+        "https://github.com/imb0n3s/ohdeviationhunt/blob/main/combat-fallback.json"
+      ],
+      "name": "Behemoth"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000068",
+      "chineseName": null,
+      "abilityNames": [],
+      "variants": [],
+      "traits": [],
+      "skill": {
+        "text": "'A loyal companion for Metas' - dog-type combat deviation (Beastmaster pet).",
+        "effects": [],
+        "damage": {
+          "formula": null,
+          "scalesWith": []
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [],
+      "notes": null,
+      "sources": [
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json"
+      ],
+      "name": "Chuckles"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "rare",
+      "gameId": "99000071",
+      "chineseName": null,
+      "abilityNames": [],
+      "variants": [],
+      "traits": [],
+      "skill": {
+        "text": "'A loyal companion for Metas' - dog-type combat deviation (Beastmaster pet).",
+        "effects": [],
+        "damage": {
+          "formula": null,
+          "scalesWith": []
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [],
+      "notes": null,
+      "sources": [
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json"
+      ],
+      "name": "Watcher"
+    },
+    {
+      "type": "Combat",
+      "grade": null,
+      "ohdbRarityLabel": "epic",
+      "gameId": "99200030",
+      "chineseName": null,
+      "abilityNames": [
+        "Straight-line Burn",
+        "Telekinetic Effects"
+      ],
+      "variants": [],
+      "traits": [],
+      "skill": {
+        "text": "Chaos variant of Pyro Dino: 'Prehistoric Chaos Deviation that participates in combat to breathe devastating fire'. Same ability names as Pyro Dino.",
+        "effects": [],
+        "damage": {
+          "formula": "See Pyro Dino.",
+          "scalesWith": [
+            "psiIntensity",
+            "statusDmgPct",
+            "blazeElementalDmgPct"
+          ]
+        }
+      },
+      "cooldownSeconds": null,
+      "durationSeconds": null,
+      "synergies": [],
+      "notes": "Chaos variants (Chaosaurus, Chaos Mr. Wish, Chaos Snowsprite, Chaos Mini Wonder, Chaos Zeno-Purifier) have separate OHDB ids 992xxxxx and 'high Dex value'.",
+      "sources": [
+        "https://github.com/saitoh183/once-human-build-planner/blob/main/data/deviations.json"
+      ],
+      "name": "Chaosaurus"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "facet": "existing Once Human community calculators / planners / stat spreadsheets and real in-game test vectors",
+  "dataFile": "/home/user/shared_workspace/once-human-build-planner/data/test_vectors.json",
+  "notesFile": "/home/user/shared_workspace/once-human-build-planner/research/calculators.md",
+  "gameVersionCovered": "In-game screenshots from 2026-03-02 (post v2.3.1 mod rework, pre-3.0); official runtime tables decoded June-July 2026; meta-builds export for game v3.0.5 (2026-09-25); calculator repos 2024-09 .. 2026-09-25",
+  "confidence": "medium",
+  "recordCount": 66,
+  "keyClaims": [
+    {
+      "claim": "In-game Tier V weapon card DMG = round(officialGunPresetAttack[artLevel 5] × presetAttackRatio[star]) with ratio = 1 + 0.05×(star−1) for epic/legendary blueprints (1★ 1.00 … 6★ 1.25); uncommon DE.50 ladder 1.0/1.0625/1.125; common AA12 1.0.",
+      "evidence": "33 card readings from three screenshots (stars verified at 3× zoom) all reproduce within ±0.5, e.g. Jaws 2★ 789 = 751×1.05, 6★ 939 = 751×1.25; Compound Bow 1★ 1812 → 6★ 2265; Little Jaws 3★ 184 = 167×1.10; ladder values from decoded script.npk tables weaponBlueprintCalibrations.presetAttackRatio and gunPresetStats.gunPresetAttack.",
+      "sources": [
+        "https://github.com/0x91CEA55/OnceHuman",
+        "https://github.com/TeeReckzi/OHMM"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "OHDB's listed 'Tier 5' damage (e.g. DE.50 Jaws 494, SOCR 174, Bullseye 1216) is the official artLevel-4 preset; the in-game endgame Tier V card uses artLevel 5, which is ~1.52× higher (751, 264, 1848) before star scaling. Any calculator seeded from OHDB (OHCalc examples, lReDragol, saitoh183, joseph) understates card DMG by ~34%.",
+      "evidence": "gunPresetStats ladder for Jaws artLevel 0..9 = 99,128,198,316,494,751,988…; OHDB mirror weapons.json damage 494; screenshot 1★/2★ cards 751-based.",
+      "sources": [
+        "https://github.com/TeeReckzi/OHMM",
+        "https://github.com/saitoh183/once-human-build-planner",
+        "https://www.oncehumandb.com/build"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Blueprint base Crit Rate / Crit DMG / Weakspot DMG come from the official blueprint-calibration table attrs E0100/E0200/E0300 and match the cards exactly (Jaws 6/25/60, Bullseye 2/26/95, Corrosion 8/27/15, Octopus 5/40/50, PDW90 8/45/30, Brahminy 2/30/80); fire rate = 60/autoTimeInterval (DE.50 0.315 s → 190.5 RPM, card 190); DE.50 falloff points [20 m, 1.0] and [32 m, 0.25].",
+      "evidence": "official-runtime-catalog.json weaponBlueprintCalibrations and gunRuntimeStats vs screenshot cards.",
+      "sources": [
+        "https://github.com/TeeReckzi/OHMM",
+        "https://github.com/0x91CEA55/OnceHuman"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Crit DMG and Weakspot DMG are additive inside one hit multiplier: hit = base × (1 + critDmg + weakspotDmg); this is the model used by KremaOps, OHCalc spec ('observed'), OHMM templates and the 0x91CEA55 HitAmplifier bucket, while getzity (2024) and lReDragol (2026) multiply them.",
+      "evidence": "Verbatim code: KremaOps `critHit = adjustedBase * (1 + effectiveCritDmg + totalWeakspotMult)`; OHCalc 05-validation-plan pass condition `weakspotCrit / body = 1 + critDamage + weakspotDamage`; lReDragol `damage *= (1+crit/100)` then `*= (1+weakspot/100)`.",
+      "sources": [
+        "https://github.com/KremaOps/once-human-calculator",
+        "https://github.com/TheDevilsKnock/OHCalc",
+        "https://github.com/lReDragol/OnceHuman_Tools",
+        "https://github.com/getzity/dmgcalculator_oh"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Keyword 'DMG Factor' and 'DMG Coefficient' bonuses add inside one multiplicative bucket (Factor bucket), separate from a 'Final DMG' bucket: 267 Psi × 0.5 × (1 + 0.15 − 0.30) = 113.475 → observed 113 (the '113 Test').",
+      "evidence": "INGAME_KNOWLEDGE_BIBLE.md and ADR-002 in 0x91CEA55/OnceHuman; restated in OHMM archive report.",
+      "sources": [
+        "https://github.com/0x91CEA55/OnceHuman",
+        "https://github.com/TeeReckzi/OHMM"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Recovered official damage formula terminal: final_attack = max(base_attack × final_attack_additional_rate × final_attack_ignore_dam_rate × final_special_regulate_factor, 0), with final_attack_additional_rate = 1 + gate × Σ(weapon/attack_type/gun_type/element_type/keyword_proc/species/debuff add rates); PvE defaults pvp_adjust_factor = special_regulate_factor = 1; crit/weakspot/anomaly rolls use PRD with speed factor 0.8.",
+      "evidence": "officialFormulaMetadata.ts and officialFormulaGraphRecipes.ts (soul_id 331, 'high' confidence for terminal, 'medium' for the additive sub-tree).",
+      "sources": [
+        "https://github.com/TeeReckzi/OHMM"
+      ],
+      "confidence": "medium"
+    },
+    {
+      "claim": "Community DPS conventions worth adopting: expected hit = Σ over {body/weakspot}×{crit/non-crit} weighted by pCrit and pWeakspot (OHCalc, 0x91CEA55); standard DPS = avgHit×mag/(mag/(RPM/60)+reload); burst DPS = avgHit×RPM/60; reload: final = base/(1+reloadEfficiency) is official (2025-05-21 patch note).",
+      "evidence": "KremaOps calculateDPS(); OHCalc 02-core-formulas.md.",
+      "sources": [
+        "https://github.com/KremaOps/once-human-calculator",
+        "https://github.com/TheDevilsKnock/OHCalc",
+        "https://www.oncehuman.game/news/update/20250521/40780_1235763.html"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "No public calculator ships validated in-game hit vectors: OHMM's 23 'observed cases' are synthetic placeholders, bramsey's engine is a placeholder score, joseph's optimizer is a weighted score, and meta-builds/OHDB/wikily/ohdex do not publish their formulas.",
+      "evidence": "formulaObservedCases.ts tags 'synthetic','placeholder'; bramsey app.js computeScore(); joseph README 'not the game's exact formula'.",
+      "sources": [
+        "https://github.com/TeeReckzi/OHMM",
+        "https://github.com/bramsey679/Once_Human_DPS_Calculator",
+        "https://github.com/josephfmmarzin-ai/ONCE_HUMAN"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Burn/Power Surge/Frost Vortex coefficients are NOT settled: Burn 0.12×Psi/stack (0x91CEA55, OHMM) vs 0.4×Psi per 1 s (lReDragol) vs in-game card text '10% Psi every 0.5 s for 6 s, up to 5 stacks' (KAM Crank); Power Surge pure DoT vs hybrid; Frost Vortex DoT vs single 0.6×Psi hit.",
+      "evidence": "keywords.ts, formulaTemplates.ts, context_module.py, lReDragol weapon_list.json effect text.",
+      "sources": [
+        "https://github.com/0x91CEA55/OnceHuman",
+        "https://github.com/TeeReckzi/OHMM",
+        "https://github.com/lReDragol/OnceHuman_Tools"
+      ],
+      "confidence": "low"
+    },
+    {
+      "claim": "Lunar suffix gold caps: Crit DMG +30%, Elemental +16%, Weapon/Status +12% (purple = 80% of gold); Crescent gold: Crit DMG +10% base +15% extra at 40% shield, Elemental +5%+8%, Weapon/Status +4%+6%.",
+      "evidence": "LunarCrescentSubstatPercents.png read directly.",
+      "sources": [
+        "https://github.com/0x91CEA55/OnceHuman"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "openQuestions": [
+    "What in-game state corresponds to official artLevel 4 vs 5 (gear level 40 vs 50? a hidden Tier VI?) — OHDB lists art4, cards show art5.",
+    "Do calibration perks (e.g. 'Precision Assault Rifle: Attack +25%') change the displayed card DMG? The 6★ 'FullCalibs' card equals art5×1.25 exactly.",
+    "How is the loadout-panel 'Primary Weapon Attack' (1011 / 902) derived from card DMG 589 and Weapon DMG Bonus 36% / 95.9% / 68%?",
+    "No raw hit-damage logs with full builds could be obtained (Reddit/Steam/YouTube/Google Sheets blocked); the crit+weakspot additive relation is unverified numerically.",
+    "Exact Burn / Power Surge / Frost Vortex / Unstable Bomber per-tick formulas and whether 'Status DMG' and 'Elemental DMG' are separate multiplicative buckets or one additive bucket.",
+    "Enemy mitigation and PvP factors (official leaves exist but no values recovered); hit-damage rounding rules.",
+    "Formulas used by meta-builds.net, oncehumandb.com, wikily.gg and ohdex.gg planners.",
+    "Per-level numeric values of post-2026-01-21 mod sub-stats (meta-builds export marks them unresolved)."
+  ]
+}

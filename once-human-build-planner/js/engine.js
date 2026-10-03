@@ -33,6 +33,8 @@
     statusDmgPct:     { label: 'Status DMG %',          unit: 'pct', bucket: 'statusDmg' },
     keywordDmgPct:    { label: 'Keyword DMG %',         unit: 'pct', bucket: 'statusDmg', keyed: 'keyword' },
     finalDmgPct:      { label: 'Final DMG %',           unit: 'pct', bucket: 'finalDmg', keyed: 'keyword' },
+    keywordCritDmgPct: { label: 'Keyword Crit DMG %',   unit: 'pct', bucket: 'crit', keyed: 'keyword' },
+    keywordWeakspotDmgPct: { label: 'Keyword Weakspot DMG %', unit: 'pct', bucket: 'weakspot', keyed: 'keyword' },
     critRatePct:      { label: 'Crit Rate %',           unit: 'pct', bucket: 'crit' },
     critDmgPct:       { label: 'Crit DMG %',            unit: 'pct', bucket: 'crit' },
     weakspotDmgPct:   { label: 'Weakspot DMG %',        unit: 'pct', bucket: 'weakspot' },
@@ -64,11 +66,14 @@
     burn: 'blaze', frostVortex: 'frost', powerSurge: 'shock', unstableBomber: 'blast',
     shrapnel: 'physical', bounce: 'physical', bullsEye: 'physical', fastGunner: 'physical', fortressWarfare: 'physical',
   };
-  const TARGET_TYPES = ['deviant', 'human', 'monster', 'elite', 'boss', 'player'];
+  const TARGET_FACTIONS = ['deviant', 'human', 'monster'];
+  const TARGET_TIERS = ['normal', 'elite', 'boss'];
+  const TARGET_TYPES = [...TARGET_FACTIONS, ...TARGET_TIERS, 'player', 'shield'];
 
   // Aliases accepted from data files (lower-cased, punctuation stripped) -> canonical stat id
   const ALIASES = {
-    attack: 'attackPct', attackpct: 'attackPct', atk: 'attackPct', dmg: 'attackPct', basedmg: 'attackPct', attackbonus: 'attackPct',
+    attack: 'attackPct', attackpct: 'attackPct', atk: 'attackPct', attackbonus: 'attackPct',
+    dmg: 'weaponDmgPct', damage: 'weaponDmgPct', dmgpct: 'weaponDmgPct',
     attackflat: 'attackFlat',
     weapondmg: 'weaponDmgPct', weapondmgpct: 'weaponDmgPct', weapondamage: 'weaponDmgPct', weapondmgbonus: 'weaponDmgPct',
     elementaldmg: 'elementalDmgPct', elementaldmgpct: 'elementalDmgPct', elementaldamage: 'elementalDmgPct',
@@ -82,7 +87,7 @@
     critdmg: 'critDmgPct', critdmgpct: 'critDmgPct', criticaldmg: 'critDmgPct', criticaldamage: 'critDmgPct',
     weakspotdmg: 'weakspotDmgPct', weakspotdmgpct: 'weakspotDmgPct', weakspotdamage: 'weakspotDmgPct', weakspot: 'weakspotDmgPct',
     dmgvs: 'dmgVsPct', dmgvspct: 'dmgVsPct', dmgvsdeviants: 'dmgVsPct:deviant', dmgvsdeviant: 'dmgVsPct:deviant', dmgvshumans: 'dmgVsPct:human', dmgvshuman: 'dmgVsPct:human',
-    dmgvsmonsters: 'dmgVsPct:monster', dmgvselites: 'dmgVsPct:elite', dmgvsbosses: 'dmgVsPct:boss', dmgvsplayers: 'dmgVsPct:player',
+    dmgvsmonsters: 'dmgVsPct:monster', dmgvsmonster: 'dmgVsPct:monster', dmgvselites: 'dmgVsPct:elite', dmgvselite: 'dmgVsPct:elite', dmgvsbosses: 'dmgVsPct:boss', dmgvsboss: 'dmgVsPct:boss', dmgvsgreatones: 'dmgVsPct:boss', dmgvsnormal: 'dmgVsPct:normal', dmgvsplayers: 'dmgVsPct:player', dmgvsshields: 'dmgVsPct:shield',
     vulnerability: 'weaponVulnPct', vulnerabilitypct: 'weaponVulnPct', weaponvulnerability: 'weaponVulnPct', weaponvuln: 'weaponVulnPct', weaponvulnpct: 'weaponVulnPct',
     statusvulnerability: 'statusVulnPct', statusvuln: 'statusVulnPct', statusvulnpct: 'statusVulnPct',
     alldmg: 'allDmgPct', alldmgpct: 'allDmgPct', alldamage: 'allDmgPct', damagebonus: 'allDmgPct',
@@ -90,7 +95,7 @@
     psiintensitypct: 'psiIntensityPct', psipct: 'psiIntensityPct',
     firerate: 'fireRatePct', fireratepct: 'fireRatePct', rpm: 'fireRatePct',
     reloadefficiency: 'reloadEfficiencyPct', reloadefficiencypct: 'reloadEfficiencyPct', reload: 'reloadEfficiencyPct',
-    reloadspeed: 'reloadSpeedPct', reloadspeedpct: 'reloadSpeedPct',
+    reloadspeed: 'reloadEfficiencyPct', reloadspeedpct: 'reloadEfficiencyPct', reloadspeedlegacy: 'reloadSpeedPct',
     magazine: 'magazinePct', magazinepct: 'magazinePct', magcapacity: 'magazinePct', magcapacitypct: 'magazinePct', mag: 'magazinePct', magazinecapacity: 'magazinePct',
     magazineflat: 'magazineFlat', magflat: 'magazineFlat',
     range: 'rangePct', rangepct: 'rangePct',
@@ -221,7 +226,8 @@
   function computeDamage(weapon, star, effects, ctx) {
     const opts = Object.assign({}, DEFAULT_OPTIONS, (ctx && ctx.options) || {});
     const { totals, sources } = aggregate(effects);
-    const targetType = (ctx && ctx.targetType) || 'deviant';
+    const targetKeys = Array.isArray(ctx && ctx.targetType) ? ctx.targetType : [(ctx && ctx.targetType) || 'deviant'];
+    const targetType = targetKeys.join('+');
 
     // --- base attack
     const attackBase = weaponAttackAtStar(weapon, star, ctx && ctx.starTable);
@@ -242,7 +248,7 @@
     // --- shared multipliers
     const element = weapon.element || KEYWORD_ELEMENT[weapon.keyword] || null;
     const elementalPct = element ? keyedSum(totals, 'elementalDmgPct', element) : 0;
-    const dmgVsPct = keyedSum(totals, 'dmgVsPct', targetType);
+    const dmgVsPct = (totals.dmgVsPct ? (totals.dmgVsPct.all || 0) : 0) + targetKeys.reduce((acc, k) => acc + ((totals.dmgVsPct && totals.dmgVsPct[k]) || 0), 0);
     const weaponVulnPct = flat(totals, 'weaponVulnPct');
     const statusVulnPct = flat(totals, 'statusVulnPct');
     const allDmgPct = flat(totals, 'allDmgPct');
@@ -298,10 +304,12 @@
         // bullet keyword: % of attack through the direct chain (can crit & weakspot)
         const f = factor != null ? factor : 0;
         const procBase = directBase * f * (1 + keywordPct / 100) * (1 + finalPct / 100);
+        const kwCritMult = 1 + (critDmgPct + keyedSum(totals, 'keywordCritDmgPct', keyword)) / 100;
+        const kwWeakMult = 1 + (weakspotPct + keyedSum(totals, 'keywordWeakspotDmgPct', keyword)) / 100;
         status = {
           keyword, model: 'attack', element: kwElement, factor: f, chancePct: chance,
-          perProc: procBase, perProcCrit: procBase * critMult, perProcWeakspot: procBase * weakMult,
-          expected: procBase * (1 - critRate) + procBase * critMult * critRate,
+          perProc: procBase, perProcCrit: procBase * kwCritMult, perProcWeakspot: procBase * kwWeakMult,
+          expected: procBase * (1 - critRate) + procBase * kwCritMult * critRate,
           canCrit: true, canWeakspot: true,
           tickSeconds: def.tickSeconds || null, durationSeconds: def.durationSeconds || null,
           note: def.notes || null,
@@ -385,7 +393,7 @@
   }
 
   global.Engine = {
-    STATS, ELEMENTS, KEYWORD_ELEMENT, TARGET_TYPES, DEFAULT_STAR_MULT, DEFAULT_OPTIONS,
+    STATS, ELEMENTS, KEYWORD_ELEMENT, TARGET_TYPES, TARGET_FACTIONS, TARGET_TIERS, DEFAULT_STAR_MULT, DEFAULT_OPTIONS,
     resolveStat, effect, aggregate, starMultiplier, weaponAttackAtStar, computeDamage, compare, legacyReloadToEfficiency, normKey,
   };
 })(typeof window !== 'undefined' ? window : globalThis);
