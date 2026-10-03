@@ -51,7 +51,9 @@ repositories {
 dependencies {
     implementation minecraft.dependency("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
     annotationProcessor "net.minecraftforge:eventbus-validator:${eventbus_version}"
-    annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
+    // No Mixin annotation processor: it only exists to produce obfuscation reference maps, and Forge 26.x runs
+    // Minecraft with its official names, so there is nothing to remap. With it enabled it rejects every target
+    // ("Unable to locate obfuscation mapping") because no mappings are configured.
 }
 
 tasks.withType(JavaCompile).configureEach {
