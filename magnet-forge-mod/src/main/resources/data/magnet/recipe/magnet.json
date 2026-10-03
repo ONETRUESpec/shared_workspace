@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "E": "minecraft:ender_pearl",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "I I",
+    "IEI",
+    " R "
+  ],
+  "result": {
+    "id": "magnet:magnet"
+  }
+}
