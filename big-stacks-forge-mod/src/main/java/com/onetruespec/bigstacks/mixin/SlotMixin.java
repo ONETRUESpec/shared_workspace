@@ -17,9 +17,9 @@ import net.minecraft.world.item.ItemStack;
 /**
  * Every menu (the inventory screen, chests, furnaces, villagers...) shows the player's inventory through
  * {@code Slot}s whose container is the player's {@code Inventory}. Vanilla limits such a slot to the smaller of the
- * container limit and the item's own stack size; for player inventory slots we use the configured limit instead.
- * Slots of chests and other containers are not touched, and slots that restrict themselves (armour slots report a
- * limit of one) keep their restriction.
+ * container limit and the item's own stack size; for player inventory slots we use the configured limit instead,
+ * the same one {@code Inventory#add} uses for pickups. Slots of chests and other containers are not touched, and
+ * slots that restrict themselves below their container's limit (armour slots report one) keep their restriction.
  */
 @Mixin(Slot.class)
 public abstract class SlotMixin {
@@ -32,11 +32,8 @@ public abstract class SlotMixin {
 
     @Inject(method = "getMaxStackSize(Lnet/minecraft/world/item/ItemStack;)I", at = @At("HEAD"), cancellable = true)
     private void bigstacks$playerInventoryLimit(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
-        if (this.container instanceof Inventory) {
-            int slotLimit = this.getMaxStackSize(); // subclasses such as armour slots override this with 1
-            if (slotLimit >= stack.getMaxStackSize()) {
-                cir.setReturnValue(Math.min(slotLimit, BigStacks.limitFor(stack)));
-            }
+        if (this.container instanceof Inventory inventory && this.getMaxStackSize() >= inventory.getMaxStackSize()) {
+            cir.setReturnValue(BigStacks.limitFor(stack));
         }
     }
 }

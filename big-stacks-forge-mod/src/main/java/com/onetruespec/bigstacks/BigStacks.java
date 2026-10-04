@@ -64,7 +64,7 @@ public final class BigStacks {
                 if (supported) {
                     LOGGER.info("Big Stacks: item save format accepts big stacks; inventory stacks go up to the configured limit.");
                 } else {
-                    LOGGER.error("Big Stacks: the item save format still rejects stacks above 99 (the ExtraCodecs mixin did not apply on this Minecraft version). Inventory stacks are limited to 99 so nothing can be lost on save.");
+                    LOGGER.error("Big Stacks: the item save format still rejects stacks above 99 (the ExtraCodecs mixin did not apply on this Minecraft version). New inventory stacks are limited to 99; stacks above 99 that were saved earlier cannot be read back by this version and would be dropped on load.");
                 }
                 return supported;
             } catch (RuntimeException e) {

@@ -32,12 +32,22 @@ applied when the game starts):
 | `InventoryMixin`               | The player inventory reports the configured limit instead of vanilla's 99     |
 | `SlotMixin`                    | Menu slots that belong to a player inventory accept that many; other slots unchanged |
 | `AbstractContainerMenuMixin`   | Shift-click merging may fill inventory stacks up to the limit                 |
+| `ServerGamePacketListenerImplMixin` | The server accepts big stacks edited in the creative inventory             |
 | `ExtraCodecsMixin`             | The item save format accepts counts above 99                                  |
 
 The last one is the only patch that could lose items if it ever stopped matching a future Minecraft version, so
-the mod checks, the first time an inventory is used, that a big stack survives a save/load round trip. If that
-check fails, it logs an error and limits inventory stacks to 99 (which vanilla can always save) instead of 500.
-Look for the log line starting with "Big Stacks:" after opening your inventory for the first time.
+the mod checks, the first time a stack limit is needed (your first pickup or click in an inventory; item data is
+not available during mod loading on 26.3, so it cannot run at startup), that a big stack survives a save/load
+round trip. If that check fails, it logs an error and limits new inventory stacks to 99 (which vanilla can always
+save) instead of 500. Look for the log line starting with "Big Stacks:" after you first pick up or move an item.
+
+### Before removing or updating the mod
+
+Stacks above 99 exist only while this mod's save-format patch is active. If a world is opened without Big Stacks
+(mod removed, world loaded in vanilla, or a Minecraft/Forge update on which the patch no longer applies and the
+log shows the "still rejects stacks above 99" error), every inventory stack and every dropped pile above 99 is
+dropped on load, with only a line in the log. Before removing or updating, split such stacks down to 99 or fewer
+(64 to be safe) and put them in chests.
 
 ## Building
 
@@ -58,10 +68,10 @@ The first build downloads Minecraft, Forge and the ForgeGradle toolchain, so it 
 ```
 build.gradle, settings.gradle, gradle.properties   Forge 26.3 MDK-style build plus the Mixin wiring from Forge's MDKExamples
 src/main/java/com/onetruespec/bigstacks/
-    BigStacksMod.java         mod entry point: server config, startup self-test of the save format
-    BigStacks.java            the limit rules used by the mixins (and the 99 fallback)
+    BigStacksMod.java         mod entry point: registers the per-world (server) config
+    BigStacks.java            the limit rules used by the mixins, the save-format self-test and the 99 fallback
     BigStacksConfig.java      inventoryStackSize setting
-    mixin/                    the four Mixins described above
+    mixin/                    the five Mixins described above
 src/main/resources/
     bigstacks.mixins.json     Mixin config (also named in the jar manifest)
     META-INF/mods.toml        mod metadata (placeholders expanded by Gradle)

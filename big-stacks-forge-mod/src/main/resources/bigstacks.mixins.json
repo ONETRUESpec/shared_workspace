@@ -6,6 +6,7 @@
     "InventoryMixin",
     "SlotMixin",
     "AbstractContainerMenuMixin",
+    "ServerGamePacketListenerImplMixin",
     "ExtraCodecsMixin"
   ],
   "injectors": {

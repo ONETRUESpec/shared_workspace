@@ -15,6 +15,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
  *       chests, hoppers, furnaces and so on are untouched; armour slots keep their limit of one.</li>
  *   <li>{@code AbstractContainerMenuMixin} lets shift-clicking fill inventory stacks up to the limit (Forge caps
  *       that path at the item's own stack size).</li>
+ *   <li>{@code ServerGamePacketListenerImplMixin} makes the server accept big stacks edited in the creative
+ *       inventory, which it would otherwise discard.</li>
  *   <li>{@code ExtraCodecsMixin} raises the "count must be between 1 and 99" limit of the item save format, so
  *       the big stacks survive saving and loading.</li>
  * </ul>
