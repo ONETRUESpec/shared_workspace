@@ -1,0 +1,2619 @@
+[
+ {
+  "id": "bullet-siphon-bottoms",
+  "name": "Bullet Siphon",
+  "category": "Armor Mod",
+  "slot": "Bottoms",
+  "rarity": "legendary",
+  "effect": "Weapon DMG +5%. Every 5 bullets consumed in the magazine grants +4% Weapon DMG, capped at 20%.",
+  "stats": {
+   "weaponDmg": 5.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Downstar",
+   "Resonance Deviant Energy",
+   "Downstar Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500059.png",
+  "url": "https://www.oncehumandb.com/mods/bullet-siphon-general"
+ },
+ {
+  "id": "critical-surge-bottoms",
+  "name": "Critical Surge",
+  "category": "Armor Mod",
+  "slot": "Bottoms",
+  "rarity": "legendary",
+  "effect": "When the magazine is empty, Crit DMG +15% for 12s. Stacks independently, up to 3 stack(s).",
+  "stats": {
+   "critDmg": 15.0
+  },
+  "conditional": true,
+  "maxStacks": 3,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Downstar",
+   "Resonance Deviant Energy",
+   "Downstar Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500066.png",
+  "url": "https://www.oncehumandb.com/mods/critical-surge-general"
+ },
+ {
+  "id": "deadshot-bottoms",
+  "name": "Deadshot",
+  "category": "Armor Mod",
+  "slot": "Bottoms",
+  "rarity": "legendary",
+  "effect": "Each Crit Hit by non-melee weapons grants +5% Crit DMG, up to 45%. The effect is removed upon the next reload.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Downstar",
+   "Resonance Deviant Energy",
+   "Downstar Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500060.png",
+  "url": "https://www.oncehumandb.com/mods/deadshot-general"
+ },
+ {
+  "id": "distant-strike-bottoms",
+  "name": "Distant Strike",
+  "category": "Armor Mod",
+  "slot": "Bottoms",
+  "rarity": "legendary",
+  "effect": "Weakspot DMG +20% when a bullet hits a target more than 20 meters away. For every additional 1 meter(s) away from the target, Weakspot DMG +1%, up to +20%.",
+  "stats": {
+   "weakspotDmg": 21.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Downstar",
+   "Resonance Deviant Energy",
+   "Downstar Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500063.png",
+  "url": "https://www.oncehumandb.com/mods/distant-strike-general"
+ },
+ {
+  "id": "elemental-resonance-bottoms",
+  "name": "Elemental Resonance",
+  "category": "Armor Mod",
+  "slot": "Bottoms",
+  "rarity": "legendary",
+  "effect": "For each instance of Elemental DMG dealt from the previous magazine, the next magazine gains Elemental DMG +1% for 15s upon reloading, up to +24%.",
+  "stats": {
+   "elementalAll": 1.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Downstar",
+   "Resonance Deviant Energy",
+   "Downstar Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500065.png",
+  "url": "https://www.oncehumandb.com/mods/elemental-resonance-general"
+ },
+ {
+  "id": "melee-momentum-bottoms",
+  "name": "Melee Momentum",
+  "category": "Armor Mod",
+  "slot": "Bottoms",
+  "rarity": "legendary",
+  "effect": "Melee DMG +20%. After a melee kill, recover 30% of max Stamina.",
+  "stats": {
+   "meleeDmg": 20.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "Melee Default",
+   "Resonance",
+   "Downstar",
+   "Resonance Deviant Energy",
+   "Downstar Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500062.png",
+  "url": "https://www.oncehumandb.com/mods/melee-momentum-melee-default"
+ },
+ {
+  "id": "precise-charge-bottoms",
+  "name": "Precise Charge",
+  "category": "Armor Mod",
+  "slot": "Bottoms",
+  "rarity": "legendary",
+  "effect": "For every 10% Weakspot hit rate of the previous magazine, Elemental DMG +4%, up to 24%, lasting for 10s. Reloading resets the calculation.",
+  "stats": {
+   "elementalAll": 4.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500064.png",
+  "url": "https://www.oncehumandb.com/mods/precise-charge-general"
+ },
+ {
+  "id": "precision-charge-bottoms",
+  "name": "Precision Charge",
+  "category": "Armor Mod",
+  "slot": "Bottoms",
+  "rarity": "legendary",
+  "effect": "For every 10% Weakspot hit rate of the previous magazine, Elemental DMG +4%, up to 24%, lasting for 10s. Reloading resets the calculation.",
+  "stats": {
+   "elementalAll": 4.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Downstar",
+   "Resonance Deviant Energy",
+   "Downstar Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500165.png",
+  "url": "https://www.oncehumandb.com/mods/precision-charge-violent"
+ },
+ {
+  "id": "reload-rampage-bottoms",
+  "name": "Reload Rampage",
+  "category": "Armor Mod",
+  "slot": "Bottoms",
+  "rarity": "legendary",
+  "effect": "After killing an enemy, refill 2 bullets from reserves (no more than 50% of the Magazine Capacity). Weapon DMG and Status DMG +10% until next reload.",
+  "stats": {
+   "weaponDmg": 10.0,
+   "statusDmg": 10.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Downstar",
+   "Resonance Deviant Energy",
+   "Downstar Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500057.png",
+  "url": "https://www.oncehumandb.com/mods/reload-rampage-general"
+ },
+ {
+  "id": "status-amplification-bottoms",
+  "name": "Status Amplification",
+  "category": "Armor Mod",
+  "slot": "Bottoms",
+  "rarity": "legendary",
+  "effect": "When the magazine is empty, Status DMG +10% for 12s. Effect can stack up to 3 times.",
+  "stats": {
+   "statusDmg": 10.0
+  },
+  "conditional": true,
+  "maxStacks": 3,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Downstar",
+   "Resonance Deviant Energy",
+   "Downstar Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500061.png",
+  "url": "https://www.oncehumandb.com/mods/status-amplification-general"
+ },
+ {
+  "id": "three-strikes-bottoms",
+  "name": "Three Strikes",
+  "category": "Armor Mod",
+  "slot": "Bottoms",
+  "rarity": "legendary",
+  "effect": "For the first three hits after reloading (not exceeding 50% of magazine capacity), Weakspot DMG +50%.",
+  "stats": {
+   "weakspotDmg": 50.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Downstar",
+   "Resonance Deviant Energy",
+   "Downstar Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500058.png",
+  "url": "https://www.oncehumandb.com/mods/three-strikes-general"
+ },
+ {
+  "id": "crit-amplifier-gloves",
+  "name": "Crit Amplifier",
+  "category": "Armor Mod",
+  "slot": "Gloves",
+  "rarity": "legendary",
+  "effect": "Crit Rate +10%, Crit DMG +15%.",
+  "stats": {
+   "critRate": 10.0,
+   "critDmg": 15.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Crescent",
+   "Resonance Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500077.png",
+  "url": "https://www.oncehumandb.com/mods/crit-amplifier-general"
+ },
+ {
+  "id": "crit-boost-gloves",
+  "name": "Crit Boost",
+  "category": "Armor Mod",
+  "slot": "Gloves",
+  "rarity": "legendary",
+  "effect": "Crit Rate +15%",
+  "stats": {
+   "critRate": 15.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Crescent",
+   "Resonant Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500076.png",
+  "url": "https://www.oncehumandb.com/mods/crit-boost-general"
+ },
+ {
+  "id": "elemental-overload-gloves",
+  "name": "Elemental Overload",
+  "category": "Armor Mod",
+  "slot": "Gloves",
+  "rarity": "legendary",
+  "effect": "Element DMG (Blaze, Frost, Shock, Blast) +18%.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Crescent",
+   "Resonance Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500083.png",
+  "url": "https://www.oncehumandb.com/mods/elemental-overload-general"
+ },
+ {
+  "id": "lifeforce-boost-gloves",
+  "name": "Lifeforce Boost",
+  "category": "Armor Mod",
+  "slot": "Gloves",
+  "rarity": "legendary",
+  "effect": "HP +12%",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Crescent",
+   "Resonance Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500079.png",
+  "url": "https://www.oncehumandb.com/mods/lifeforce-boost-general"
+ },
+ {
+  "id": "melee-amplifier-gloves",
+  "name": "Melee Amplifier",
+  "category": "Armor Mod",
+  "slot": "Gloves",
+  "rarity": "legendary",
+  "effect": "Melee DMG +20%",
+  "stats": {
+   "meleeDmg": 20.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "Melee Default",
+   "Resonance",
+   "Crescent",
+   "Resonance Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500082.png",
+  "url": "https://www.oncehumandb.com/mods/melee-amplifier-melee-default"
+ },
+ {
+  "id": "status-enhancement-gloves",
+  "name": "Status Enhancement",
+  "category": "Armor Mod",
+  "slot": "Gloves",
+  "rarity": "legendary",
+  "effect": "Status DMG +20%",
+  "stats": {
+   "statusDmg": 20.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Crescent",
+   "Resonance Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500080.png",
+  "url": "https://www.oncehumandb.com/mods/status-enhancement-general"
+ },
+ {
+  "id": "weakspot-dmg-boost-gloves",
+  "name": "Weakspot DMG Boost",
+  "category": "Armor Mod",
+  "slot": "Gloves",
+  "rarity": "legendary",
+  "effect": "Weakspot DMG +25%",
+  "stats": {
+   "weakspotDmg": 25.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Crescent",
+   "Resonance Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500078.png",
+  "url": "https://www.oncehumandb.com/mods/weakspot-dmg-boost-general"
+ },
+ {
+  "id": "weapon-amplifier-gloves",
+  "name": "Weapon Amplifier",
+  "category": "Armor Mod",
+  "slot": "Gloves",
+  "rarity": "legendary",
+  "effect": "Weapon DMG +15%",
+  "stats": {
+   "weaponDmg": 15.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Resonance",
+   "Crescent",
+   "Resonance Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500081.png",
+  "url": "https://www.oncehumandb.com/mods/weapon-amplifier-general"
+ },
+ {
+  "id": "deviation-expert-helmet",
+  "name": "Deviation Expert",
+  "category": "Armor Mod",
+  "slot": "Helmet",
+  "rarity": "legendary",
+  "effect": "Range -25%, Fire Rate +10%, Status DMG +20%",
+  "stats": {
+   "statusDmg": 20.0,
+   "fireRate": 10.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Lunar",
+   "Crescent",
+   "Lunar Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500038.png",
+  "url": "https://www.oncehumandb.com/mods/deviation-expert-general"
+ },
+ {
+  "id": "elemental-havoc-helmet",
+  "name": "Elemental Havoc",
+  "category": "Armor Mod",
+  "slot": "Helmet",
+  "rarity": "legendary",
+  "effect": "Elemental DMG +10%. When HP is above 90%, +10% additionally.",
+  "stats": {
+   "elementalAll": 10.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violence",
+   "Precision",
+   "Deviant Energy",
+   "Lunar",
+   "Crescent",
+   "Lunar Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500044.png",
+  "url": "https://www.oncehumandb.com/mods/elemental-havoc-general"
+ },
+ {
+  "id": "first-move-advantage-helmet",
+  "name": "First-Move Advantage",
+  "category": "Armor Mod",
+  "slot": "Helmet",
+  "rarity": "legendary",
+  "effect": "After reloading, Crit Rate +10%, Crit DMG +20% for 2s.",
+  "stats": {
+   "critRate": 10.0,
+   "critDmg": 20.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Lunar",
+   "Crescent",
+   "Lunar Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500039.png",
+  "url": "https://www.oncehumandb.com/mods/first-move-advantage-general"
+ },
+ {
+  "id": "fortunes-favor-helmet",
+  "name": "Fortune's Favor",
+  "category": "Armor Mod",
+  "slot": "Helmet",
+  "rarity": "legendary",
+  "effect": "Cannot deal Weakspot DMG. Crit Rate +10% and Crit DMG +30%.",
+  "stats": {
+   "critRate": 10.0,
+   "critDmg": 30.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Lunar",
+   "Crescent",
+   "Lunar Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500042.png",
+  "url": "https://www.oncehumandb.com/mods/fortunes-favor-general"
+ },
+ {
+  "id": "momentum-up-helmet",
+  "name": "Momentum Up",
+  "category": "Armor Mod",
+  "slot": "Helmet",
+  "rarity": "legendary",
+  "effect": "Fire Rate +10% for the first 50% of the magazine and Weapon DMG +30% for the next 50% of the magazine.",
+  "stats": {
+   "weaponDmg": 30.0,
+   "fireRate": 10.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Lunar",
+   "Crescent",
+   "Lunar Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500043.png",
+  "url": "https://www.oncehumandb.com/mods/momentum-up-general"
+ },
+ {
+  "id": "overflow-helmet",
+  "name": "Overflow",
+  "category": "Armor Mod",
+  "slot": "Helmet",
+  "rarity": "legendary",
+  "effect": "When reloading an empty magazine, Magazine Capacity +30%.",
+  "stats": {
+   "magazine": 30.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Lunar",
+   "Crescent",
+   "Lunar Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500040.png",
+  "url": "https://www.oncehumandb.com/mods/overflow-general"
+ },
+ {
+  "id": "precise-strike-helmet",
+  "name": "Precise Strike",
+  "category": "Armor Mod",
+  "slot": "Helmet",
+  "rarity": "legendary",
+  "effect": "Hitting a weakspot grants Weakspot DMG +12% for 3s. Effect can stack 3 times.",
+  "stats": {
+   "weakspotDmg": 12.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Lunar",
+   "Crescent",
+   "Lunar Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500037.png",
+  "url": "https://www.oncehumandb.com/mods/precise-strike-general"
+ },
+ {
+  "id": "quick-toss-helmet",
+  "name": "Quick Toss",
+  "category": "Armor Mod",
+  "slot": "Helmet",
+  "rarity": "legendary",
+  "effect": "After using a throwable, Fire Rate +15% for 8s; reload 50% of the magazine for the previously equipped weapon (triggered every 12s).",
+  "stats": {
+   "fireRate": 15.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Lunar",
+   "Crescent",
+   "Lunar Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500046.png",
+  "url": "https://www.oncehumandb.com/mods/quick-toss-general"
+ },
+ {
+  "id": "weapon-symphony-helmet",
+  "name": "Weapon Symphony",
+  "category": "Armor Mod",
+  "slot": "Helmet",
+  "rarity": "legendary",
+  "effect": "After switching weapons, Fire Rate +10% and Weapon DMG +25%. This effect decreases by 10% per second, up to a maximum decrease of 60%.",
+  "stats": {
+   "weaponDmg": 25.0,
+   "fireRate": 10.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Lunar",
+   "Crescent",
+   "Lunar Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500045.png",
+  "url": "https://www.oncehumandb.com/mods/weapon-symphony-general"
+ },
+ {
+  "id": "work-of-proficiency-helmet",
+  "name": "Work of Proficiency",
+  "category": "Armor Mod",
+  "slot": "Helmet",
+  "rarity": "legendary",
+  "effect": "When reloading with an empty magazine, Reload Efficiency +5%, Elemental DMG +20%. Resets with the next reload.",
+  "stats": {
+   "elementalAll": 20.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Lunar",
+   "Crescent",
+   "Lunar Deviant Energy",
+   "Crescent Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500041.png",
+  "url": "https://www.oncehumandb.com/mods/work-of-proficiency-general"
+ },
+ {
+  "id": "blaze-amplifier-mask",
+  "name": "Blaze Amplifier",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "Every stack of Burn grants +3% Psi Intensity DMG.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Burn",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Burn",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500084.png",
+  "url": "https://www.oncehumandb.com/mods/blaze-amplifier-general"
+ },
+ {
+  "id": "blitzkrieg-mask",
+  "name": "Blitzkrieg",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "Fast Gunner stacks +5 and additional Fire Rate +1% for each stack.",
+  "stats": {
+   "fireRate": 1.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fast Gunner",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Fast Gunner",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500100.png",
+  "url": "https://www.oncehumandb.com/mods/blitzkrieg-general"
+ },
+ {
+  "id": "break-bounce-mask",
+  "name": "Break Bounce",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "When a bullet hits an enemy above 50% HP, the bullet's final DMG +25%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Bounce",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500099.png",
+  "url": "https://www.oncehumandb.com/mods/break-bounce-general"
+ },
+ {
+  "id": "delayed-blast-mask",
+  "name": "Delayed Blast",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "Before the bomb explodes, for every 4 hits taken, the bomb's final DMG +25%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Unstable Bomber",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500101.png",
+  "url": "https://www.oncehumandb.com/mods/delayed-blast-general"
+ },
+ {
+  "id": "explosive-barrage-mask",
+  "name": "Explosive Barrage",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "When in Fast Gunner state, Crit Rate +10%, and Weapon DMG +10%.",
+  "stats": {
+   "weaponDmg": 10.0,
+   "critRate": 10.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fast Gunner",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Fast Gunner",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500088.png",
+  "url": "https://www.oncehumandb.com/mods/explosive-barrage-general"
+ },
+ {
+  "id": "explosive-shrapnel-mask",
+  "name": "Explosive Shrapnel",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "The 20th Shrapnel is explosive and deals \b+300%\b DMG as a critical hit.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Shrapnel",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Shrapnel",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500086.png",
+  "url": "https://www.oncehumandb.com/mods/explosive-shrapnel-general"
+ },
+ {
+  "id": "first-electrocution-mask",
+  "name": "First Electrocution",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "For enemies without Power Surge status, Power Surge's Ultimate DMG +35%.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Power Surge",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Power Surge",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500096.png",
+  "url": "https://www.oncehumandb.com/mods/first-electrocution-general"
+ },
+ {
+  "id": "frost-construct-mask",
+  "name": "Frost Construct",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "Frost Constructs (Ice Spikes, Ice Missiles, Ice Crystals) deal +10% damage; if the target is in Frost Vortex status, damage dealt +10%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Frost Vortex",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Frost Vortex",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500085.png",
+  "url": "https://www.oncehumandb.com/mods/frost-construct-general"
+ },
+ {
+  "id": "frostwave-wither-mask",
+  "name": "Frostwave Wither",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "Frost Vortex's final DMG +30%, decreasing by 8% per second over time.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Frost Vortex",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Frost Vortex",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500097.png",
+  "url": "https://www.oncehumandb.com/mods/frostwave-wither-general"
+ },
+ {
+  "id": "light-cannon-mask",
+  "name": "Light Cannon",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "No Super Armor inside Fortress Warfare. While in Fortress Warfare state, Attack +15%.",
+  "stats": {
+   "attackPct": 15.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fortress Warfare",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Fortress Warfare",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500092.png",
+  "url": "https://www.oncehumandb.com/mods/light-cannon-general"
+ },
+ {
+  "id": "most-wanted-mask",
+  "name": "Most Wanted",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "Every time an enemy is marked, Attack +5% for 8s. Effect can stack up to 3 times.",
+  "stats": {
+   "attackPct": 5.0
+  },
+  "conditional": true,
+  "maxStacks": 3,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "The Bull's Eye",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500098.png",
+  "url": "https://www.oncehumandb.com/mods/most-wanted-general"
+ },
+ {
+  "id": "pinpoint-strike-mask",
+  "name": "Pinpoint Strike",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "When Unstable Bomber hits only one enemy, Unstable Bomber final DMG +35%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Unstable Bomber",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Unstable Bomber",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500089.png",
+  "url": "https://www.oncehumandb.com/mods/pinpoint-strike-general"
+ },
+ {
+  "id": "precise-bounce-mask",
+  "name": "Precise Bounce",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "After triggering Bounce 6 times, the next bullet's Bounce DMG +125%.",
+  "stats": {
+   "keyword": {
+    "Bounce": 125.0
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Bounce",
+  "variants": [
+   "General"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500087.png",
+  "url": "https://www.oncehumandb.com/mods/precise-bounce-general"
+ },
+ {
+  "id": "precision-bounce-mask",
+  "name": "Precision Bounce",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "After triggering Bounce 6 times, the next bullet's Bounce DMG +125%.",
+  "stats": {
+   "keyword": {
+    "Bounce": 125.0
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Bounce",
+  "variants": [
+   "Violent",
+   "Precision",
+   "Bounce",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500188.png",
+  "url": "https://www.oncehumandb.com/mods/precision-bounce-violent"
+ },
+ {
+  "id": "retrusion-explosion-mask",
+  "name": "Retrusion Explosion",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "When hitting Burning enemies, Crit Rate +8%, and Crit DMG +20%.",
+  "stats": {
+   "critRate": 8.0,
+   "critDmg": 20.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Burn",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Burn",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500094.png",
+  "url": "https://www.oncehumandb.com/mods/retrusion-explosion-general"
+ },
+ {
+  "id": "shrapnel-carnage-mask",
+  "name": "Shrapnel Carnage",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "Shrapnel Weakspot Hit Weight +100%, Shrapnel Weakspot DMG +25%.",
+  "stats": {
+   "keywordStats": {
+    "Shrapnel": {
+     "weakspotDmg": 25.0
+    }
+   }
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Shrapnel",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Shrapnel",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500095.png",
+  "url": "https://www.oncehumandb.com/mods/shrapnel-carnage-general"
+ },
+ {
+  "id": "targeted-strike-mask",
+  "name": "Targeted Strike",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "When hitting marked enemies, Crit Rate +10%, and Crit DMG +25%.",
+  "stats": {
+   "critRate": 10.0,
+   "critDmg": 25.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "The Bull's Eye",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500090.png",
+  "url": "https://www.oncehumandb.com/mods/targeted-strike-general"
+ },
+ {
+  "id": "thunderclap-mask",
+  "name": "Thunderclap",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "After triggering Power Surge 20 times, the next hit summons Celestial Thunder (Shock DMG of 200% Psi Intensity).",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Power Surge",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Power Surge",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500091.png",
+  "url": "https://www.oncehumandb.com/mods/thunderclap-general"
+ },
+ {
+  "id": "unbreakable-mask",
+  "name": "Unbreakable",
+  "category": "Armor Mod",
+  "slot": "Mask",
+  "rarity": "legendary",
+  "effect": "Fortress Warfare Range -30%. While in Fortress Warfare state, Attack +15%.",
+  "stats": {
+   "attackPct": 15.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fortress Warfare",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Fortress Warfare",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500093.png",
+  "url": "https://www.oncehumandb.com/mods/unbreakable-general"
+ },
+ {
+  "id": "against-all-odds-shoes",
+  "name": "Against All Odds",
+  "category": "Armor Mod",
+  "slot": "Shoes",
+  "rarity": "legendary",
+  "effect": "Weapon and Status DMG +10%. For every +5% Max HP consumed, gains an additional +5%, lasting 5s, stacking up to 3 stack(s).",
+  "stats": {
+   "weaponDmg": 10.0,
+   "statusDmg": 10.0
+  },
+  "conditional": true,
+  "maxStacks": 3,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Downstar",
+   "Downstar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500074.png",
+  "url": "https://www.oncehumandb.com/mods/against-all-odds-general"
+ },
+ {
+  "id": "covered-advance-shoes",
+  "name": "Covered Advance",
+  "category": "Armor Mod",
+  "slot": "Shoes",
+  "rarity": "legendary",
+  "effect": "Taking no DMG within 4s grants +20% Melee, Weapon, and Status DMG for 30s. The effect resets when the duration ends.",
+  "stats": {
+   "meleeDmg": 20.0,
+   "weaponDmg": 20.0,
+   "statusDmg": 20.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Downstar",
+   "Downstar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500067.png",
+  "url": "https://www.oncehumandb.com/mods/covered-advance-general"
+ },
+ {
+  "id": "ferocious-charge-shoes",
+  "name": "Ferocious Charge",
+  "category": "Armor Mod",
+  "slot": "Shoes",
+  "rarity": "legendary",
+  "effect": "Killing enemies within 10 meters grants Melee, Weapon, Status DMG +20% for 8s.",
+  "stats": {
+   "meleeDmg": 20.0,
+   "weaponDmg": 20.0,
+   "statusDmg": 20.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Downstar",
+   "Downstar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500070.png",
+  "url": "https://www.oncehumandb.com/mods/ferocious-charge-general"
+ },
+ {
+  "id": "power-of-striving-shoes",
+  "name": "Power of Striving",
+  "category": "Armor Mod",
+  "slot": "Shoes",
+  "rarity": "legendary",
+  "effect": "Weapon and Status DMG +10%. Stamina loss grants an additional DMG boost, up to +20%.",
+  "stats": {
+   "weaponDmg": 10.0,
+   "statusDmg": 10.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Downstar",
+   "Downstar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500075.png",
+  "url": "https://www.oncehumandb.com/mods/power-of-striving-general"
+ },
+ {
+  "id": "rush-hour-shoes",
+  "name": "Rush Hour",
+  "category": "Armor Mod",
+  "slot": "Shoes",
+  "rarity": "legendary",
+  "effect": "Every 10% HP loss grants +4% Melee, Weapon, and Status DMG.",
+  "stats": {
+   "meleeDmg": 4.0,
+   "weaponDmg": 4.0,
+   "statusDmg": 4.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Downstar",
+   "Downstar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500069.png",
+  "url": "https://www.oncehumandb.com/mods/rush-hour-general"
+ },
+ {
+  "id": "ruthless-reaper-shoes",
+  "name": "Ruthless Reaper",
+  "category": "Armor Mod",
+  "slot": "Shoes",
+  "rarity": "legendary",
+  "effect": "After getting 2 kill(s), refill 100% of your magazine from your reserves.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Downstar",
+   "Downstar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500068.png",
+  "url": "https://www.oncehumandb.com/mods/ruthless-reaper-general"
+ },
+ {
+  "id": "secluded-strike-shoes",
+  "name": "Secluded Strike",
+  "category": "Armor Mod",
+  "slot": "Shoes",
+  "rarity": "legendary",
+  "effect": "Having no enemies within 7 meters around you grants +15% Weapon and Status DMG.",
+  "stats": {
+   "weaponDmg": 15.0,
+   "statusDmg": 15.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Downstar",
+   "Downstar Deviant Energy",
+   "Survival",
+   "Mrror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500071.png",
+  "url": "https://www.oncehumandb.com/mods/secluded-strike-general"
+ },
+ {
+  "id": "slow-and-steady-shoes",
+  "name": "Slow and Steady",
+  "category": "Armor Mod",
+  "slot": "Shoes",
+  "rarity": "legendary",
+  "effect": "Melee, Weapon, Status DMG +10%. When HP is above 90%, grants +10% additional DMG.",
+  "stats": {
+   "meleeDmg": 10.0,
+   "weaponDmg": 10.0,
+   "statusDmg": 10.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500072.png",
+  "url": "https://www.oncehumandb.com/mods/slow-and-steady-general"
+ },
+ {
+  "id": "steady-hand-shoes",
+  "name": "Steady Hand",
+  "category": "Armor Mod",
+  "slot": "Shoes",
+  "rarity": "legendary",
+  "effect": "Melee, Weapon, Status DMG +10%. When HP is above 90%, grants +10% additional DMG.",
+  "stats": {
+   "meleeDmg": 10.0,
+   "weaponDmg": 10.0,
+   "statusDmg": 10.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "Fury",
+   "Precision",
+   "Deviant Energy",
+   "Resistance",
+   "Downstar",
+   "Downstar Deviant Energy",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500173.png",
+  "url": "https://www.oncehumandb.com/mods/steady-hand-fury"
+ },
+ {
+  "id": "ardent-shield-top",
+  "name": "Ardent Shield",
+  "category": "Armor Mod",
+  "slot": "Top",
+  "rarity": "legendary",
+  "effect": "While the shield is active, you gain 15% DMG Reduction. When the shield exceeds 1,000, single instances of DMG will not penetrate the shield.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Lunar",
+   "Lunar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500056.png",
+  "url": "https://www.oncehumandb.com/mods/ardent-shield-general"
+ },
+ {
+  "id": "critical-rescue-top",
+  "name": "Critical Rescue",
+  "category": "Armor Mod",
+  "slot": "Top",
+  "rarity": "legendary",
+  "effect": "DMG Reduction +20% and Healing Received +20% when HP is below 30%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Lunar",
+   "Lunar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500051.png",
+  "url": "https://www.oncehumandb.com/mods/critical-rescue-general"
+ },
+ {
+  "id": "enduring-shield-top",
+  "name": "Enduring Shield",
+  "category": "Armor Mod",
+  "slot": "Top",
+  "rarity": "legendary",
+  "effect": "When out of combat, gain 1 stack of Safe Haven every 5s, stacking up to 5 times. For every 5 damage received, remove 1 stack of Safe Haven to gain 8% Shield for 3s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 5,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Lunar",
+   "Lunar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500049.png",
+  "url": "https://www.oncehumandb.com/mods/enduring-shield-general"
+ },
+ {
+  "id": "head-guard-top",
+  "name": "Head Guard",
+  "category": "Armor Mod",
+  "slot": "Top",
+  "rarity": "legendary",
+  "effect": "Weakspot DMG Reduction +15%; Weakspot DMG Reduction +15% further when HP is above 60%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Lunar",
+   "Lunar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500053.png",
+  "url": "https://www.oncehumandb.com/mods/head-guard-general"
+ },
+ {
+  "id": "head-on-conflict-top",
+  "name": "Head-on Conflict",
+  "category": "Armor Mod",
+  "slot": "Top",
+  "rarity": "legendary",
+  "effect": "Having enemies within 7 meters around you grants 10% DMG Reduction. Taking melee DMG from enemies grants an extra 10% DMG Reduction for 5 seconds.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Lunar",
+   "Lunar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500052.png",
+  "url": "https://www.oncehumandb.com/mods/head-on-conflict-general"
+ },
+ {
+  "id": "healing-fortification-top",
+  "name": "Healing Fortification",
+  "category": "Armor Mod",
+  "slot": "Top",
+  "rarity": "legendary",
+  "effect": "When using a healing shot, DMG Reduction +40% for 2s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Lunar",
+   "Lunar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500047.png",
+  "url": "https://www.oncehumandb.com/mods/healing-fortification-general"
+ },
+ {
+  "id": "quick-comeback-top",
+  "name": "Quick Comeback",
+  "category": "Armor Mod",
+  "slot": "Top",
+  "rarity": "legendary",
+  "effect": "When using a healing shot, Movement Speed +20% for 2s and refills the magazine from the inventory to 100%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Lunar",
+   "Lunar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500048.png",
+  "url": "https://www.oncehumandb.com/mods/quick-comeback-general"
+ },
+ {
+  "id": "rejuvenating-top",
+  "name": "Rejuvenating",
+  "category": "Armor Mod",
+  "slot": "Top",
+  "rarity": "legendary",
+  "effect": "When Shield is above 30% of Max HP, defeating an enemy recovers 20% of Max HP. Excess recovery is converted into Shield lasting 20s (Cooldown: 10s).",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Lunar",
+   "Lunar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500050.png",
+  "url": "https://www.oncehumandb.com/mods/rejuvenating-general"
+ },
+ {
+  "id": "resist-advantage-top",
+  "name": "Resist Advantage",
+  "category": "Armor Mod",
+  "slot": "Top",
+  "rarity": "legendary",
+  "effect": "When out of combat, gain 1 stack of 10% DMG Reduction every 5s. Effect can stack up to 5 times. 1 stack is removed when hit.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 5,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Lunar",
+   "Lunar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500054.png",
+  "url": "https://www.oncehumandb.com/mods/resist-advantage-general"
+ },
+ {
+  "id": "status-immune-top",
+  "name": "Status Immune",
+  "category": "Armor Mod",
+  "slot": "Top",
+  "rarity": "legendary",
+  "effect": "When HP is lower than 60%, purge all Deviated States (cooldown: 15s)",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Battle",
+   "Lunar",
+   "Lunar Deviant Energy",
+   "Survival",
+   "Mirror",
+   "Wild",
+   "Phantasmal",
+   "Mirror Deviant Energy",
+   "Wild Deviant Energy",
+   "Phantasmal Deviant Energy"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500055.png",
+  "url": "https://www.oncehumandb.com/mods/status-immune-general"
+ },
+ {
+  "id": "blaze-blessing-weapon",
+  "name": "Blaze Blessing",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When defeating an enemy affected by Burn, recover 5% HP.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Burn",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Burn",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500011.png",
+  "url": "https://www.oncehumandb.com/mods/blaze-blessing-general"
+ },
+ {
+  "id": "bombardier-souvenir-weapon",
+  "name": "Bombardier Souvenir",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When triggering Unstable Bomber, automatically refill 10% of your magazine.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Unstable Bomber",
+  "variants": [
+   "General",
+   "Violence",
+   "Precision",
+   "Deviant Energy",
+   "Unstable Bomber",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500023.png",
+  "url": "https://www.oncehumandb.com/mods/bombardier-souvenir-general"
+ },
+ {
+  "id": "boomerang-bullet-weapon",
+  "name": "Boomerang Bullet",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Each time Bounce is triggered, its trigger chance +2% (based on the weapon's trigger chance), lasting for 5s and stacking up to 10 time(s).",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 10,
+  "keyword": "Bounce",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Bounce",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500015.png",
+  "url": "https://www.oncehumandb.com/mods/boomerang-bullet-general"
+ },
+ {
+  "id": "bounce-rampage-weapon",
+  "name": "Bounce Rampage",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "The more selectable targets Bounce has, the higher the Bounce DMG, up to +45% (15% per target).",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Bounce",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Bounce",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500016.png",
+  "url": "https://www.oncehumandb.com/mods/bounce-rampage-general"
+ },
+ {
+  "id": "burning-wrath-weapon",
+  "name": "Burning Wrath",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Triggering Burn has a 25% chance to grant +1 Burn stack(s).",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Burn",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Burn",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500012.png",
+  "url": "https://www.oncehumandb.com/mods/burning-wrath-general"
+ },
+ {
+  "id": "cowboy-weapon",
+  "name": "Cowboy",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "After reloading an empty magazine, Fast Gunner trigger chance +100% (based on the weapon's Trigger Chance) for 5s. When Fast Gunner reaches max stacks, the duration is increased by 5s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fast Gunner",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Fast Gunner",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500020.png",
+  "url": "https://www.oncehumandb.com/mods/cowboy-general"
+ },
+ {
+  "id": "cryo-blast-weapon",
+  "name": "Cryo Blast",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "After triggering Frost Vortex, increases Frost Vortex DMG by +4%, up to 5 stacks, lasting 4s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 5,
+  "keyword": "Frost Vortex",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Frost Vortex",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500006.png",
+  "url": "https://www.oncehumandb.com/mods/cryo-blast-general"
+ },
+ {
+  "id": "cryo-catalyst-weapon",
+  "name": "Cryo Catalyst",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Frost Vortex DMG +10%. After triggering a frost construct (Ice Spikes, Ice Missiles, Ice Crystals), Frost Vortex DMG +5% for 6s.",
+  "stats": {
+   "keyword": {
+    "Frost Vortex": 15.0
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Frost Vortex",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Frost Vortex",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500007.png",
+  "url": "https://www.oncehumandb.com/mods/cryo-catalyst-general"
+ },
+ {
+  "id": "durable-territory-weapon",
+  "name": "Durable Territory",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Every hit landed while in Fortress Warfare state will extend the Fortress Warfare effect by 1s, up to 5s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fortress Warfare",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Fortress Warfare",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500034.png",
+  "url": "https://www.oncehumandb.com/mods/durable-territory-general"
+ },
+ {
+  "id": "embers-weapon",
+  "name": "Embers",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When Burn is removed, stacks only -50%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Burn",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Burn",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500010.png",
+  "url": "https://www.oncehumandb.com/mods/embers-general"
+ },
+ {
+  "id": "final-territory-weapon",
+  "name": "Final Territory",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When Fortress Warfare ends, Weapon DMG +10%, Movement Speed +10% for 10s.",
+  "stats": {
+   "weaponDmg": 10.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fortress Warfare",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Fortress Warfare",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500036.png",
+  "url": "https://www.oncehumandb.com/mods/final-territory-general"
+ },
+ {
+  "id": "flame-resonance-weapon",
+  "name": "Flame Resonance",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Max Burn stack +2, Burn duration -20%",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Burn",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Burn",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500009.png",
+  "url": "https://www.oncehumandb.com/mods/flame-resonance-general"
+ },
+ {
+  "id": "frosty-blessing-weapon",
+  "name": "Frosty Blessing",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When Frost Vortex disappears, restore 10% HP.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Frost Vortex",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Frost Vortex",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500008.png",
+  "url": "https://www.oncehumandb.com/mods/frosty-blessing-general"
+ },
+ {
+  "id": "heavy-explosives-weapon",
+  "name": "Heavy Explosives",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Unstable Bomber inflicts stagger on enemies and deals 40% less damage to you.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Unstable Bomber",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Unstable Bomber",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500024.png",
+  "url": "https://www.oncehumandb.com/mods/heavy-explosives-general"
+ },
+ {
+  "id": "hunters-perk-weapon",
+  "name": "Hunter's Perk",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Marked enemies DMG vs. Metas -20%.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "The Bull's Eye",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500026.png",
+  "url": "https://www.oncehumandb.com/mods/hunters-perk-general"
+ },
+ {
+  "id": "multi-bounce-weapon",
+  "name": "Multi-Bounce",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "The more Bounces, the higher the damage, up to +45% (7.5% per Bounce).",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Bounce",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Bounce",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500014.png",
+  "url": "https://www.oncehumandb.com/mods/multi-bounce-general"
+ },
+ {
+  "id": "portable-territory-weapon",
+  "name": "Portable Territory",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "After leaving Fortress Warfare, the status will remain for 2s.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fortress Warfare",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Fortress Warfare",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500035.png",
+  "url": "https://www.oncehumandb.com/mods/portable-territory-general"
+ },
+ {
+  "id": "precise-rush-weapon",
+  "name": "Precise Rush",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When Fast Gunner is active, increase Weakspot DMG for 3s, up to +45%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fast Gunner",
+  "variants": [
+   "General"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500018.png",
+  "url": "https://www.oncehumandb.com/mods/precise-rush-general"
+ },
+ {
+  "id": "precision-rush-weapon",
+  "name": "Precision Rush",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When Fast Gunner is active, increase Weakspot DMG for 3s, up to +45%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fast Gunner",
+  "variants": [
+   "Violent",
+   "Precision",
+   "Fast Gunner",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500119.png",
+  "url": "https://www.oncehumandb.com/mods/precision-rush-violent"
+ },
+ {
+  "id": "reckless-bomber-weapon",
+  "name": "Reckless Bomber",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "For every 1% Crit Rate, Unstable Bomber DMG +0.5%.",
+  "stats": {
+   "keyword": {
+    "Unstable Bomber": 0.5
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Unstable Bomber",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Unstable Bomber",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500022.png",
+  "url": "https://www.oncehumandb.com/mods/reckless-bomber-general"
+ },
+ {
+  "id": "recover-mark-weapon",
+  "name": "Recover Mark",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When defeating marked enemies, recover 15% HP and 25% Stamina.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": null,
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "The Bull's Eye",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500025.png",
+  "url": "https://www.oncehumandb.com/mods/recover-mark-general"
+ },
+ {
+  "id": "shatter-them-all-weapon",
+  "name": "Shatter Them All",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "The more parts Shrapnel hits, the higher the Shrapnel DMG. Each part +15%, up to 45%.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Shrapnel",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Shrapnel",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500001.png",
+  "url": "https://www.oncehumandb.com/mods/shatter-them-all-general"
+ },
+ {
+  "id": "shattering-ice-weapon",
+  "name": "Shattering Ice",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When an enemy at the center of the Frost Vortex is defeated, deal 50% Psi Intensity Ice DMG to enemies within 1m once.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Frost Vortex",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Frost Vortex",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500005.png",
+  "url": "https://www.oncehumandb.com/mods/shattering-ice-general"
+ },
+ {
+  "id": "shield-breaker-weapon",
+  "name": "Shield Breaker",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When hitting a shielded enemy, Shrapnel DMG +60% for 1s.",
+  "stats": {
+   "keyword": {
+    "Shrapnel": 60.0
+   }
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Shrapnel",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Shrapnel",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500004.png",
+  "url": "https://www.oncehumandb.com/mods/shield-breaker-general"
+ },
+ {
+  "id": "shock-diffusion-weapon",
+  "name": "Shock Diffusion",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When triggering Power Surge, apply the Power Surge Status to 1 enemy(s) within 10m of the target (prioritizes enemies that are not affected by Power Surge Status).",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Power Surge",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Power Surge",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500030.png",
+  "url": "https://www.oncehumandb.com/mods/shock-diffusion-general"
+ },
+ {
+  "id": "shock-rampage-weapon",
+  "name": "Shock Rampage",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Inflicting Power Surge grants +5% Power Surge Trigger Chance (based on weapon's Trigger Chance) for 5s, up to 4 stack(s).",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 4,
+  "keyword": "Power Surge",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Power Surge",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500029.png",
+  "url": "https://www.oncehumandb.com/mods/shock-rampage-general"
+ },
+ {
+  "id": "shoot-out-weapon",
+  "name": "Shoot Out",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When triggering Fast Gunner, Weapon DMG +1.5% for 10s, up to 20 stack(s).",
+  "stats": {
+   "weaponDmg": 1.5
+  },
+  "conditional": true,
+  "maxStacks": 20,
+  "keyword": "Fast Gunner",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Fast Gunner",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500017.png",
+  "url": "https://www.oncehumandb.com/mods/shoot-out-general"
+ },
+ {
+  "id": "shooting-blitz-weapon",
+  "name": "Shooting Blitz",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Fast Gunner duration +4s. When Fast Gunner is active, Weapon DMG +15%.",
+  "stats": {
+   "weaponDmg": 15.0
+  },
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Fast Gunner",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Fast Gunner",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500019.png",
+  "url": "https://www.oncehumandb.com/mods/shooting-blitz-general"
+ },
+ {
+  "id": "shrapnel-loot-weapon",
+  "name": "Shrapnel Loot",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When Shrapnel hits a Weakspot, automatically refills 1 bullet(s) from inventory.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Shrapnel",
+  "variants": [
+   "General"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500002.png",
+  "url": "https://www.oncehumandb.com/mods/shrapnel-loot-general"
+ },
+ {
+  "id": "shrapnel-smash-weapon",
+  "name": "Shrapnel Smash",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Triggering Shrapnel grants Shrapnel Crit Rate +2% for 2s. Effect can stack up to 15 time(s).",
+  "stats": {
+   "keywordStats": {
+    "Shrapnel": {
+     "critRate": 2.0
+    }
+   }
+  },
+  "conditional": true,
+  "maxStacks": 15,
+  "keyword": "Shrapnel",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Shrapnel",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500003.png",
+  "url": "https://www.oncehumandb.com/mods/shrapnel-smash-general"
+ },
+ {
+  "id": "shrapnel-souvenir-weapon",
+  "name": "Shrapnel Souvenir",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When Shrapnel hits a Weakspot, automatically refills 1 bullet(s) from inventory.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "Shrapnel",
+  "variants": [
+   "Violent",
+   "Precision",
+   "Shrapnel",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500103.png",
+  "url": "https://www.oncehumandb.com/mods/shrapnel-souvenir-violent"
+ },
+ {
+  "id": "spreading-marks-weapon",
+  "name": "Spreading Marks",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "When a marked enemy is defeated, The Bull's Eye will spread to 1 enemy(s) within 15m.",
+  "stats": {},
+  "conditional": true,
+  "maxStacks": 1,
+  "keyword": "The Bull's Eye",
+  "variants": [
+   "Common",
+   "Violent",
+   "Precision",
+   "The Bull's Eye",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500027.png",
+  "url": "https://www.oncehumandb.com/mods/spreading-marks-common"
+ },
+ {
+  "id": "static-shock-weapon",
+  "name": "Static Shock",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Power Surge Status duration -50%, and Power Surge DMG +20%.",
+  "stats": {
+   "keyword": {
+    "Power Surge": 20.0
+   }
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Power Surge",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Power Surge",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500031.png",
+  "url": "https://www.oncehumandb.com/mods/static-shock-general"
+ },
+ {
+  "id": "super-bullet-weapon",
+  "name": "Super Bullet",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Bounce Crit Rate +10%, Bounce Crit DMG +25%.",
+  "stats": {
+   "keywordStats": {
+    "Bounce": {
+     "critRate": 10.0,
+     "critDmg": 25.0
+    }
+   }
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Bounce",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Bounce",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500013.png",
+  "url": "https://www.oncehumandb.com/mods/super-bullet-general"
+ },
+ {
+  "id": "super-charged-weapon",
+  "name": "Super Charged",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Triggering Unstable Bomber grants Unstable Bomber DMG +5% for 3s. Effect can stack up to 6 times.",
+  "stats": {
+   "keyword": {
+    "Unstable Bomber": 5.0
+   }
+  },
+  "conditional": true,
+  "maxStacks": 6,
+  "keyword": "Unstable Bomber",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Deviant Energy",
+   "Unstable Bomber",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500021.png",
+  "url": "https://www.oncehumandb.com/mods/super-charged-general"
+ },
+ {
+  "id": "surge-amplifier-weapon",
+  "name": "Surge Amplifier",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "Inflicting Power Surge grants Power Surge DMG +5% for 3s, up to 4 stack(s).",
+  "stats": {
+   "keyword": {
+    "Power Surge": 5.0
+   }
+  },
+  "conditional": true,
+  "maxStacks": 4,
+  "keyword": "Power Surge",
+  "variants": [
+   "General",
+   "Violent",
+   "Deviant Energy",
+   "Power Surge",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500032.png",
+  "url": "https://www.oncehumandb.com/mods/surge-amplifier-general"
+ },
+ {
+  "id": "united-we-stand-weapon",
+  "name": "United We Stand",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "The more players inside Fortress Warfare, the greater the Weapon DMG bonus, up to 40%.",
+  "stats": {},
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "Fortress Warfare",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "Fortress Warfare",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500033.png",
+  "url": "https://www.oncehumandb.com/mods/united-we-stand-general"
+ },
+ {
+  "id": "vulnerability-amplifier-weapon",
+  "name": "Vulnerability Amplifier",
+  "category": "Weapon Mod",
+  "slot": "Weapon",
+  "rarity": "legendary",
+  "effect": "The Bull's Eye adds Vulnerability +8%.",
+  "stats": {
+   "vulnerability": 8.0
+  },
+  "conditional": false,
+  "maxStacks": 1,
+  "keyword": "The Bull's Eye",
+  "variants": [
+   "General",
+   "Violent",
+   "Precision",
+   "The Bull's Eye",
+   "Survival"
+  ],
+  "image": "https://dxouo2ijk4yg2kj7.public.blob.vercel-storage.com/images/entities/19500028.png",
+  "url": "https://www.oncehumandb.com/mods/vulnerability-amplifier-general"
+ }
+]

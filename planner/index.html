@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Once Human Build-Planer</title>
+<meta name="description" content="Build-Rechner für Once Human: Waffen und Rüstung mit 1 bis 6 Sternen, Set-Boni, Mods, Kalibrierung, Essen-Buffs, Deviants und Cradle-Overrides.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Once Human Build-Planer</h1>
+    <div id="meta" class="muted">Lade Daten …</div>
+  </div>
+  <div class="actions">
+    <button type="button" id="btn-sections" class="btn ghost">Alle Abschnitte auf/zu</button>
+    <button type="button" id="btn-link" class="btn">Link kopieren</button>
+    <button type="button" id="btn-export" class="btn ghost">JSON exportieren</button>
+    <button type="button" id="btn-reset" class="btn ghost">Zurücksetzen</button>
+  </div>
+</header>
+
+<main class="layout">
+  <form id="form" class="inputs" onsubmit="return false">
+    <details class="sec" id="sec-weapon" open>
+      <summary>1 · Waffe</summary>
+      <div class="body"></div>
+    </details>
+
+    <details class="sec" id="sec-armor" open>
+      <summary>2 · Rüstung <span class="summary-actions">Alle Teile auf <button type="button" class="mini" data-all-stars="1">1★</button><button type="button" class="mini" data-all-stars="3">3★</button><button type="button" class="mini" data-all-stars="5">5★</button><button type="button" class="mini" data-all-stars="6">6★</button></span></summary>
+      <div class="body"></div>
+    </details>
+
+    <details class="sec" id="sec-sets" open>
+      <summary>3 · Set-Boni</summary>
+      <div class="body"></div>
+    </details>
+
+    <details class="sec" id="sec-food" open>
+      <summary>4 · Essen &amp; Getränke</summary>
+      <div class="body"></div>
+    </details>
+
+    <details class="sec" id="sec-deviant" open>
+      <summary>5 · Deviant</summary>
+      <div class="body"></div>
+    </details>
+
+    <details class="sec" id="sec-cradle">
+      <summary>6 · Cradle Overrides</summary>
+      <div class="body"></div>
+    </details>
+
+    <details class="sec" id="sec-manual">
+      <summary>7 · Manuelle Boni</summary>
+      <div class="body"></div>
+    </details>
+
+    <details class="sec" id="sec-target" open>
+      <summary>8 · Ziel &amp; Formel</summary>
+      <div class="body"></div>
+    </details>
+  </form>
+
+  <aside id="results" class="results"></aside>
+</main>
+
+<footer class="foot">
+  <p>Inoffizielles Fan-Projekt. Once Human ist eine Marke von Starry Studio / NetEase. Spielwerte aus öffentlichen Datenbanken (oncehumandb.com, meta-builds.net, once-human.fandom.com); Details und Verifizierungsstatus siehe <a href="README.md">README</a> und <code>data/formulas.json</code>.</p>
+</footer>
+<div id="toast" class="toast"></div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

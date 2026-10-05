@@ -1,0 +1,182 @@
+{
+ "keywords": {
+  "Power Surge": {
+   "base": "psi",
+   "ratio": 0.5,
+   "ticks": 1,
+   "damageType": "status",
+   "element": "Shock",
+   "desc": "Pro Auslösung 50% Psi Intensity als Status DMG (Shock)."
+  },
+  "Burn": {
+   "base": "psi",
+   "ratio": 0.1,
+   "ticks": 12,
+   "damageType": "status",
+   "element": "Blaze",
+   "desc": "Je Stack 10% Psi Intensity alle 0.5 s über 6 s (12 Ticks), bis 5 Stacks."
+  },
+  "Frost Vortex": {
+   "base": "psi",
+   "ratio": 0.5,
+   "ticks": 8,
+   "damageType": "status",
+   "element": "Frost",
+   "desc": "50% Psi Intensity alle 0.5 s über 4 s (8 Ticks) im Wirbel."
+  },
+  "Unstable Bomber": {
+   "base": "psi",
+   "ratio": 1.2,
+   "ticks": 1,
+   "damageType": "status",
+   "element": "Blast",
+   "desc": "Explosion mit 120% Psi Intensity als Status DMG (Fandom; andere Quellen nennen 100% oder 50%), kein Crit/Weakspot."
+  },
+  "Bounce": {
+   "base": "attack",
+   "ratio": 0.4,
+   "ticks": 1,
+   "damageType": "weapon",
+   "element": null,
+   "desc": "Jeder Bounce trifft mit 40% Attack als Weapon DMG (Dev-Blog 23.11.2024)."
+  },
+  "Shrapnel": {
+   "base": "attack",
+   "ratio": 0.6,
+   "ticks": 1,
+   "damageType": "weapon",
+   "element": null,
+   "desc": "Shrapnel trifft ein anderes Körperteil mit 60% Attack (kann Crit/Weakspot)."
+  },
+  "The Bull's Eye": {
+   "base": null,
+   "desc": "Markierung: erhöht Weakspot-/DMG-Boni, kein eigener Schaden."
+  },
+  "Fortress Warfare": {
+   "base": null,
+   "desc": "Bonus bei stehendem Feuern; Werte stehen im Waffen-/Modtext."
+  },
+  "Fast Gunner": {
+   "base": null,
+   "desc": "Feuerraten-Stacks; Werte stehen im Waffen-/Modtext."
+  }
+ },
+ "modSuffixes": {
+  "General": {
+   "weaponDmg": 2.4,
+   "reload": 2
+  },
+  "Violent": {
+   "critDmg": 12
+  },
+  "Precision": {
+   "weakspotDmg": 7.2
+  },
+  "Deviant Energy": {
+   "statusDmg": 8
+  },
+  "Survival": {
+   "hpPct": 4.8
+  },
+  "Fury": {
+   "weaponDmg": 5,
+   "critDmg": 5
+  },
+  "Resistance": {
+   "dmgReduction": 6
+  },
+  "Battle": {
+   "weaponDmg": 4,
+   "critDmg": 4
+  },
+  "Mirror": {
+   "weaponDmg": 4,
+   "critDmg": 4
+  },
+  "Wild": {
+   "weaponDmg": 4,
+   "critDmg": 4
+  },
+  "Downstar": {
+   "weaponDmg": 3,
+   "critDmg": 3
+  },
+  "Aero": {
+   "weaponDmg": 2,
+   "critDmg": 2
+  },
+  "Resonance": {
+   "statusDmg": 6
+  },
+  "Resonance Deviant Energy": {
+   "statusDmg": 8
+  },
+  "Mirror Deviant Energy": {
+   "statusDmg": 6
+  },
+  "Wild Deviant Energy": {
+   "statusDmg": 6
+  },
+  "Downstar Deviant Energy": {
+   "statusDmg": 5
+  },
+  "Aero Deviant Energy": {
+   "statusDmg": 3
+  },
+  "Lunar": {
+   "critDmg": 8,
+   "weaponDmg": 2
+  },
+  "Lunar Deviant Energy": {
+   "statusDmg": 6
+  },
+  "Crescent": {
+   "critDmg": 6,
+   "weaponDmg": 3
+  },
+  "Crescent Deviant Energy": {
+   "statusDmg": 5
+  },
+  "Phantasmal": {
+   "weaponDmg": 4,
+   "critDmg": 4
+  },
+  "Phantasmal Deviant Energy": {
+   "statusDmg": 6
+  },
+  "Shrapnel": {
+   "keywordDmg": 8
+  },
+  "Bounce": {
+   "keywordDmg": 8
+  },
+  "The Bull's Eye": {
+   "keywordDmg": 8
+  },
+  "Fast Gunner": {
+   "keywordDmg": 8
+  },
+  "Fortress Warfare": {
+   "keywordDmg": 8
+  },
+  "Burn": {
+   "keywordDmg": 8
+  },
+  "Power Surge": {
+   "keywordDmg": 8
+  },
+  "Frost Vortex": {
+   "keywordDmg": 8
+  },
+  "Unstable Bomber": {
+   "keywordDmg": 8
+  }
+ },
+ "critWeakspotDefault": "additive",
+ "notes": [
+  "Attack = Tier-IV-Attack × Tierfaktor × Sternfaktor × (1 + Attack%)",
+  "Treffer = Attack × (1 + Weapon DMG%) × Crit/Weakspot-Faktor × (1 + Elemental%) × (1 + DMG vs Zieltyp%) × (1 + Keyword DMG% bei Keyword-Schaden)",
+  "Crit/Weakspot-Faktor additiv: 1 + CritDMG% (bei Crit) + WeakspotDMG% (bei Weakspot). Multiplikativ: (1 + CritDMG%) × (1 + WeakspotDMG%). Umschaltbar.",
+  "Status-DMG = Psi Intensity × Keyword-Faktor × (1 + Status DMG%) × (1 + Elemental%) × (1 + Keyword DMG%)."
+ ]
+}

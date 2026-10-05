@@ -1,0 +1,56 @@
+{
+ "curves": {
+  "legendary": [
+   1.0,
+   1.05,
+   1.1,
+   1.15,
+   1.2,
+   1.25
+  ],
+  "epic": [
+   1.0,
+   1.06,
+   1.11,
+   1.17,
+   1.22
+  ],
+  "rare": [
+   1.0,
+   1.06,
+   1.13,
+   1.19
+  ],
+  "uncommon": [
+   1.0,
+   1.07,
+   1.13
+  ],
+  "common": [
+   1.0
+  ]
+ },
+ "status": {
+  "legendary": "verified-wiki",
+  "epic": "verified-wiki (HP), Psi-Spalte weicht bei Stern 4 um 2 Punkte ab",
+  "rare": "verified-wiki",
+  "uncommon": "estimated",
+  "common": "n/a"
+ },
+ "maxStars": {
+  "common": 1,
+  "uncommon": 3,
+  "rare": 4,
+  "epic": 5,
+  "legendary": 6
+ },
+ "tierCurve": [
+  0.26,
+  0.4,
+  0.64,
+  1.0,
+  1.52
+ ],
+ "tierStatus": "Tier IV = Datenbasis (OHDB). Tier V = ×1.52 (±1 Attack, drei Waffen geprüft), Tier I–III gerundet.",
+ "weaponDataTier": 4
+}

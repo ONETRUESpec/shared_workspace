@@ -1,0 +1,209 @@
+[
+ {
+  "id": "shattered-bread",
+  "name": "Shattered Bread",
+  "kind": "food",
+  "effect": "Weapon Pro: Weapon DMG +25%",
+  "stats": {
+   "weaponDmg": 25
+  },
+  "status": "verified"
+ },
+ {
+  "id": "stargazy-pie",
+  "name": "Stargazy Pie",
+  "kind": "food",
+  "effect": "Full Stomach: Crit DMG +25% solange Energie voll",
+  "stats": {
+   "critDmg": 25
+  },
+  "cond": "Energie voll",
+  "status": "verified"
+ },
+ {
+  "id": "assorted-canned-fruit",
+  "name": "Assorted Canned Fruit",
+  "kind": "food",
+  "effect": "Cool Head: Weakspot DMG +25% solange Sanity > 80%",
+  "stats": {
+   "weakspotDmg": 25
+  },
+  "cond": "Sanity über 80%",
+  "status": "verified"
+ },
+ {
+  "id": "whimsical-drink",
+  "name": "Whimsical Drink",
+  "kind": "drink",
+  "effect": "Status Enhancement: Status DMG +25% (eine Quelle nennt stattdessen Psi Intensity +30%)",
+  "stats": {
+   "statusDmg": 25
+  },
+  "status": "verified"
+ },
+ {
+  "id": "shellfish-dish",
+  "name": "Gericht mit Shellfish Meat",
+  "kind": "food",
+  "effect": "Getroffene Ziele erhalten 10 s lang +5% Schaden (Verwundbarkeit)",
+  "stats": {
+   "vulnerability": 5
+  },
+  "status": "community"
+ },
+ {
+  "id": "honey-glazed-meat",
+  "name": "Honey Glazed Meat",
+  "kind": "food",
+  "effect": "Chillbreaker: Crit Rate +15% gegen Ziele im Frost Vortex",
+  "stats": {
+   "critRate": 15
+  },
+  "cond": "Ziel im Frost Vortex",
+  "status": "verified"
+ },
+ {
+  "id": "stardust-pumpkin-salad",
+  "name": "Stardust Pumpkin Salad",
+  "kind": "food",
+  "effect": "Crit DMG +15% (laut Fandom-Wiki stattdessen Swiftfooted / Bewegung – unsicher)",
+  "stats": {
+   "critDmg": 15
+  },
+  "status": "estimated"
+ },
+ {
+  "id": "bone-in-deviated-sausage",
+  "name": "Bone-in Deviated Sausage",
+  "kind": "food",
+  "effect": "DMG gegen Bosse +15%",
+  "stats": {
+   "dmgVsBoss": 15
+  },
+  "status": "community"
+ },
+ {
+  "id": "french-fries",
+  "name": "French Fries",
+  "kind": "food",
+  "effect": "Weapon DMG +20% während Fortress Warfare",
+  "stats": {
+   "weaponDmg": 20
+  },
+  "cond": "Fortress Warfare aktiv",
+  "keyword": "Fortress Warfare",
+  "status": "community"
+ },
+ {
+  "id": "mixed-fried-hot-dog",
+  "name": "Mixed Fried Hot Dog",
+  "kind": "food",
+  "effect": "DMG +20% gegen Ziele mit The Bull's Eye",
+  "stats": {
+   "dmgVsMarked": 20
+  },
+  "cond": "Ziel mit Bull's Eye markiert",
+  "keyword": "The Bull's Eye",
+  "status": "community"
+ },
+ {
+  "id": "canned-meat",
+  "name": "Canned Meat / Ginger Poppers",
+  "kind": "food",
+  "effect": "Shrapnel DMG +10%",
+  "stats": {
+   "keywordDmg": 10
+  },
+  "keyword": "Shrapnel",
+  "status": "community"
+ },
+ {
+  "id": "sparkling-pumpkin-soup",
+  "name": "Sparkling Pumpkin Soup",
+  "kind": "food",
+  "effect": "Power Surge DMG +10%",
+  "stats": {
+   "keywordDmg": 10
+  },
+  "keyword": "Power Surge",
+  "status": "community"
+ },
+ {
+  "id": "pure-meat-dish",
+  "name": "Reines Fleisch (Pure Meat, je Keyword)",
+  "kind": "food",
+  "effect": "Keyword DMG +3% (Pure Bear = Shrapnel, Pure Poultry = Bounce, Venison = Bull's Eye, Hare = Fast Gunner, Fine Turtle = Fortress Warfare, Pure Goat = Burn, Pure Crocodile = Power Surge, Pure Beef = Frost Vortex, Pure Pork = Unstable Bomber)",
+  "stats": {
+   "keywordDmg": 3
+  },
+  "status": "community"
+ },
+ {
+  "id": "borscht-deluxe",
+  "name": "Borscht Deluxe",
+  "kind": "food",
+  "effect": "Max HP +10%",
+  "stats": {
+   "hpPct": 10
+  },
+  "status": "community"
+ },
+ {
+  "id": "taco-bear",
+  "name": "Taco (Bear Meat)",
+  "kind": "food",
+  "effect": "Max HP +100",
+  "stats": {
+   "hpFlat": 100
+  },
+  "status": "community"
+ },
+ {
+  "id": "pristine-pork",
+  "name": "Gericht mit Pristine Pork",
+  "kind": "food",
+  "effect": "Max HP +15%",
+  "stats": {
+   "hpPct": 15
+  },
+  "status": "community"
+ },
+ {
+  "id": "barracuda",
+  "name": "Gericht mit Barracuda",
+  "kind": "food",
+  "effect": "Psi Intensity +5%",
+  "stats": {
+   "psiPct": 5
+  },
+  "status": "community"
+ },
+ {
+  "id": "signature-ice-brew",
+  "name": "Signature Ice Brew",
+  "kind": "drink",
+  "effect": "Pollution Resist +30%",
+  "stats": {
+   "pollutionPct": 30
+  },
+  "status": "community"
+ },
+ {
+  "id": "chilled-icemelon-soup",
+  "name": "Chilled Icemelon Soup",
+  "kind": "food",
+  "effect": "Pollution Resist +20%",
+  "stats": {
+   "pollutionPct": 20
+  },
+  "status": "community"
+ },
+ {
+  "id": "malt-ale",
+  "name": "Malt Ale",
+  "kind": "drink",
+  "effect": "Sanity-Regeneration, Pollution-Immunität 30 min (kein Statwert)",
+  "stats": {},
+  "status": "community"
+ }
+]
