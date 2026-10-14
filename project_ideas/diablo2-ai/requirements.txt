@@ -1,0 +1,5 @@
+mss>=9.0
+Pillow>=10.1
+psutil>=5.9
+# Only needed for autopilot mode:
+anthropic>=1.14
